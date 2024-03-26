@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68ff3896313a82147b1b593b223ef96f, type: 3}
+  m_Name: 2_m16
+  m_EditorClassIdentifier: 
+  ORIGINAL_DATA:
+    eWeapon: 5
+    eLevel: 0
+    bUnlocked: 0
+    bEquiped: 0
+    iCurrentAmmo: 0
+    iCurrentAmmoInMagazin: 0
+    bIsDefaultGun: 0
+  strNAME: M-16
+  objPrefabHand: {fileID: 3186503679435992372, guid: 982b6933d8cf53f4ebb97aaf9dd6b684,
+    type: 3}
+  sprIcon: {fileID: 6820856509940793013, guid: 90895a96a334bf741a0d0006a325a7b3, type: 3}
+  sprIcon_gray: {fileID: 4217250947356738432, guid: 8ba17bfddc7c1cd44a1c4c38f382f5fc,
+    type: 3}
+  spriteOfWeaponShell: {fileID: -5410530031656172504, guid: 6fd35cf7420972f4aba0947584d7b7d6,
+    type: 3}
+  sprBullet: {fileID: -5420378987345995553, guid: 6fd35cf7420972f4aba0947584d7b7d6,
+    type: 3}
+  vScaleOfBullet: {x: 1.5, y: 1.5}
+  fRangeOfBullet: 1
+  fTimeloadOrBullet: 0.03
+  LIST_DAMAGE: 190000001e00000023000000280000002d0000003200000037000000
+  iBulletInEachGroup: 30
+  iMaxAmmo: 600
+  iAmmoToBuy: 90
+  iAmmoInMagazine: 30
+  iPriceToBuyAmmo: 60
+  bIsOnlyCoinUnlock: 0
+  iLevelToUnlock: 5
+  iPriceToUnlock: 2000
+  LIST_UPGRADE_PRICE: 78000000aa000000dc0000000e0100004001000072010000

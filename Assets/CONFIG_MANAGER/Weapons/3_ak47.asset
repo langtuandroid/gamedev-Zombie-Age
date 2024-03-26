@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68ff3896313a82147b1b593b223ef96f, type: 3}
+  m_Name: 3_ak47
+  m_EditorClassIdentifier: 
+  ORIGINAL_DATA:
+    eWeapon: 4
+    eLevel: 0
+    bUnlocked: 0
+    bEquiped: 0
+    iCurrentAmmo: 0
+    iCurrentAmmoInMagazin: 0
+    bIsDefaultGun: 0
+  strNAME: AK
+  objPrefabHand: {fileID: 1148754464577812910, guid: f893f78d96c8e964f8b641f3c60239af,
+    type: 3}
+  sprIcon: {fileID: -7426417008130601713, guid: 90895a96a334bf741a0d0006a325a7b3,
+    type: 3}
+  sprIcon_gray: {fileID: 3795371734383318294, guid: 8ba17bfddc7c1cd44a1c4c38f382f5fc,
+    type: 3}
+  spriteOfWeaponShell: {fileID: -5410530031656172504, guid: 6fd35cf7420972f4aba0947584d7b7d6,
+    type: 3}
+  sprBullet: {fileID: 5563026456298364823, guid: 6fd35cf7420972f4aba0947584d7b7d6,
+    type: 3}
+  vScaleOfBullet: {x: 1.5, y: 1.5}
+  fRangeOfBullet: 1
+  fTimeloadOrBullet: 0.03
+  LIST_DAMAGE: 1e00000023000000280000002d00000032000000370000003c000000
+  iBulletInEachGroup: 30
+  iMaxAmmo: 630
+  iAmmoToBuy: 90
+  iAmmoInMagazine: 30
+  iPriceToBuyAmmo: 50
+  bIsOnlyCoinUnlock: 0
+  iLevelToUnlock: 9
+  iPriceToUnlock: 3000
+  LIST_UPGRADE_PRICE: 78000000be000000040100004a01000090010000d6010000

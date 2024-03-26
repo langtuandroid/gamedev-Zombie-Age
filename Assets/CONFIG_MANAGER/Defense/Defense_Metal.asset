@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab9e6b13948f56d4c86782f8ab6db1b3, type: 3}
+  m_Name: Defense_Metal
+  m_EditorClassIdentifier: 
+  ORIGINAL_DATA:
+    eDefense: 1
+    eLevel: 0
+    bDefault: 0
+    bUnlocked: 0
+    bEquiped: 0
+  strName: METAL DEFENSE
+  bjPrefab: {fileID: 8166080892566182096, guid: 226aa094f66b4c04aa7e215e6cb8d1e6,
+    type: 3}
+  sprIcon: {fileID: 9175826136709969822, guid: 18b605eebed2d954ab3ae314b9026f0c, type: 3}
+  iBaseDefense: 130
+  bIsOnlyCoinUnlock: 1
+  iLevelToUnlock: 0
+  iPriteToUnlock: 5000

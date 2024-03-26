@@ -1,0 +1,1304 @@
+fileFormatVersion: 2
+guid: 18b605eebed2d954ab3ae314b9026f0c
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8276579369159629942
+    second: UI for ZombieGame2_0
+  - first:
+      213: -4425485974655718608
+    second: UI for ZombieGame2_1
+  - first:
+      213: -8813524418302206453
+    second: UI for ZombieGame2_2
+  - first:
+      213: -3120748077109317174
+    second: UI for ZombieGame2_3
+  - first:
+      213: 7322139787921028990
+    second: UI for ZombieGame2_4
+  - first:
+      213: -8980717324293938750
+    second: UI for ZombieGame2_5
+  - first:
+      213: -8008543411198716031
+    second: UI for ZombieGame2_6
+  - first:
+      213: 5604189529702713103
+    second: UI for ZombieGame2_7
+  - first:
+      213: 390150717197737827
+    second: UI for ZombieGame2_8
+  - first:
+      213: -196747500616578388
+    second: UI for ZombieGame2_9
+  - first:
+      213: -2842139313934170445
+    second: UI for ZombieGame2_10
+  - first:
+      213: 4460854201591120003
+    second: UI for ZombieGame2_11
+  - first:
+      213: -7786899553862320211
+    second: UI for ZombieGame2_12
+  - first:
+      213: -6515365018859233593
+    second: UI for ZombieGame2_13
+  - first:
+      213: -652552134379735347
+    second: UI for ZombieGame2_14
+  - first:
+      213: 6720955124001792478
+    second: UI for ZombieGame2_15
+  - first:
+      213: -4784421088245577226
+    second: UI for ZombieGame2_16
+  - first:
+      213: 9175826136709969822
+    second: UI for ZombieGame2_17
+  - first:
+      213: -3877945718437749332
+    second: UI for ZombieGame2_18
+  - first:
+      213: -2896144411941027499
+    second: UI for ZombieGame2_19
+  - first:
+      213: -5362205009770475774
+    second: UI for ZombieGame2_20
+  - first:
+      213: 8162665446527304085
+    second: UI for ZombieGame2_21
+  - first:
+      213: 8447908627947811143
+    second: UI for ZombieGame2_22
+  - first:
+      213: 4032009834157415031
+    second: UI for ZombieGame2_23
+  - first:
+      213: 7616472661406217194
+    second: UI for ZombieGame2_24
+  - first:
+      213: 6805241991466161704
+    second: UI for ZombieGame2_25
+  - first:
+      213: 2831623268682530260
+    second: UI for ZombieGame2_26
+  - first:
+      213: -69566167278518322
+    second: UI for ZombieGame2_27
+  - first:
+      213: 2583835572641722868
+    second: UI for ZombieGame2_28
+  - first:
+      213: -4216118286574725365
+    second: UI for ZombieGame2_29
+  - first:
+      213: -5125179392811956579
+    second: UI for ZombieGame2_30
+  - first:
+      213: -1953304090600543512
+    second: UI for ZombieGame2_31
+  - first:
+      213: 2941533603194259495
+    second: UI for ZombieGame2_32
+  - first:
+      213: -1724172393919781586
+    second: UI for ZombieGame2_33
+  - first:
+      213: -2614201435270855773
+    second: UI for ZombieGame2_34
+  - first:
+      213: 3016190613646615086
+    second: UI for ZombieGame2_35
+  - first:
+      213: 7084089507247568309
+    second: UI for ZombieGame2_36
+  - first:
+      213: -816564621995261751
+    second: UI for ZombieGame2_37
+  - first:
+      213: 4786541317287298955
+    second: UI for ZombieGame2_38
+  - first:
+      213: -7951080965945051034
+    second: UI for ZombieGame2_39
+  - first:
+      213: 4745323718437305766
+    second: UI for ZombieGame2_40
+  - first:
+      213: -9105811413198253889
+    second: UI for ZombieGame2_41
+  - first:
+      213: 3731771380081667482
+    second: UI for ZombieGame2_42
+  - first:
+      213: 4222028827937670866
+    second: UI for ZombieGame2_43
+  - first:
+      213: -7073762608838645396
+    second: UI for ZombieGame2_44
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 0
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
+  swizzle: 50462976
+  cookieLightType: 1
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: UI for ZombieGame2_0
+      rect:
+        serializedVersion: 2
+        x: 531
+        y: 896
+        width: 118
+        height: 118
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f15c045fce3f1914b9cd360495024088
+      internalID: -8276579369159629942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI for ZombieGame2_1
+      rect:
+        serializedVersion: 2
+        x: 651
+        y: 896
+        width: 117
+        height: 118
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 263090f89ef0c614e80569022d7cb5b0
+      internalID: -4425485974655718608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI for ZombieGame2_2
+      rect:
+        serializedVersion: 2
+        x: 773
+        y: 896
+        width: 119
+        height: 118
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d41cd25d639bafb458ec7447eb3edff3
+      internalID: -8813524418302206453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI for ZombieGame2_3
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 896
+        width: 117
+        height: 118
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 186fd2c1beb82814f8437fbe92ee58bf
+      internalID: -3120748077109317174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI for ZombieGame2_4
+      rect:
+        serializedVersion: 2
+        x: 531
+        y: 767
+        width: 118
+        height: 119
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 75f1549da22b30946922ee803135219d
+      internalID: 7322139787921028990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI for ZombieGame2_5
+      rect:
+        serializedVersion: 2
+        x: 651
+        y: 767
+        width: 117
+        height: 119
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 298171c3d0b0e3f4ba6d253b640a2cb4
+      internalID: -8980717324293938750
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI for ZombieGame2_6
+      rect:
+        serializedVersion: 2
+        x: 772
+        y: 767
+        width: 118
+        height: 121
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8158c653aae463148a3f6c60ea4c5573
+      internalID: -8008543411198716031
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI for ZombieGame2_7
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 767
+        width: 117
+        height: 119
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b88d81e0b7d04ad47b97e56747c59c59
+      internalID: 5604189529702713103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI for ZombieGame2_8
+      rect:
+        serializedVersion: 2
+        x: 531
+        y: 639
+        width: 118
+        height: 119
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a267b9f41e24a374c9405ebd099f8543
+      internalID: 390150717197737827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI for ZombieGame2_9
+      rect:
+        serializedVersion: 2
+        x: 651
+        y: 639
+        width: 117
+        height: 119
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7139487c43e92ee4d9f24603e1285151
+      internalID: -196747500616578388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI for ZombieGame2_10
+      rect:
+        serializedVersion: 2
+        x: 772
+        y: 639
+        width: 118
+        height: 119
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9bbd0456f8949214a9a192c24a5599ad
+      internalID: -2842139313934170445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI for ZombieGame2_11
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 639
+        width: 117
+        height: 119
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ac10a648aaa47d43baff1ebcf888428
+      internalID: 4460854201591120003
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI for ZombieGame2_12
+      rect:
+        serializedVersion: 2
+        x: 531
+        y: 511
+        width: 118
+        height: 118
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 165e141f520fb904ab01e14ffa23b60b
+      internalID: -7786899553862320211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI for ZombieGame2_13
+      rect:
+        serializedVersion: 2
+        x: 651
+        y: 511
+        width: 117
+        height: 118
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a557e315e7919f34e988343f3b747f82
+      internalID: -6515365018859233593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI for ZombieGame2_14
+      rect:
+        serializedVersion: 2
+        x: 773
+        y: 511
+        width: 117
+        height: 118
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c64b75ba5f9813544a8b1ecedd2a0cfe
+      internalID: -652552134379735347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI for ZombieGame2_15
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 511
+        width: 117
+        height: 118
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f54aa61b9193844f85fff2182a9f507
+      internalID: 6720955124001792478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI for ZombieGame2_16
+      rect:
+        serializedVersion: 2
+        x: 907
+        y: 388
+        width: 117
+        height: 119
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be0101aeed9b1ae41a5292b4df103d18
+      internalID: -4784421088245577226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI for ZombieGame2_17
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 720
+        width: 152
+        height: 152
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a70eb5b59787f0e4d8ca294c12e5dcde
+      internalID: 9175826136709969822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI for ZombieGame2_18
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 720
+        width: 151
+        height: 150
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e755a2406892d3a44b5f8774ba2043b6
+      internalID: -3877945718437749332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI for ZombieGame2_19
+      rect:
+        serializedVersion: 2
+        x: 760
+        y: 22
+        width: 258
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07403dc058066d04da19f8dbf38fe21f
+      internalID: -2896144411941027499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI for ZombieGame2_20
+      rect:
+        serializedVersion: 2
+        x: 323
+        y: 956
+        width: 62
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f920f977393fbf749a927aa124a6399c
+      internalID: -5362205009770475774
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI for ZombieGame2_21
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 613
+        width: 220
+        height: 99
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f47b0f9d44e4ea4290bd9a67545ed60
+      internalID: 8162665446527304085
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI for ZombieGame2_22
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 471
+        width: 423
+        height: 137
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2bf530b21d7cd12478ce4a2f678d36c9
+      internalID: 8447908627947811143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI for ZombieGame2_23
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 412
+        width: 251
+        height: 53
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30d784c3dd7d42c4da8c0d4d972309e6
+      internalID: 4032009834157415031
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI for ZombieGame2_24
+      rect:
+        serializedVersion: 2
+        x: 392
+        y: 979
+        width: 37
+        height: 39
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0249d6802ea0fc3469652d23542c7169
+      internalID: 7616472661406217194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI for ZombieGame2_25
+      rect:
+        serializedVersion: 2
+        x: 686
+        y: 265
+        width: 117
+        height: 119
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f88a5c3b43a43d34fb6e6223ae25e20c
+      internalID: 6805241991466161704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI for ZombieGame2_26
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 284
+        width: 119
+        height: 119
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c711e7c315bd73547b8d98dfa2964366
+      internalID: 2831623268682530260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI for ZombieGame2_27
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 284
+        width: 118
+        height: 119
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7eeadc219e533c4fa9ee2bc11e289dc
+      internalID: -69566167278518322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI for ZombieGame2_28
+      rect:
+        serializedVersion: 2
+        x: 248
+        y: 278
+        width: 128
+        height: 130
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d681cf2295af7e469c8cc62c115c903
+      internalID: 2583835572641722868
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI for ZombieGame2_29
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 298
+        width: 211
+        height: 94
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f01bdff01931cb4282b0c22f2340a7d
+      internalID: -4216118286574725365
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI for ZombieGame2_30
+      rect:
+        serializedVersion: 2
+        x: 381
+        y: 198
+        width: 212
+        height: 94
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c33dbc03eb212c4fbb530e370db38e6
+      internalID: -5125179392811956579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI for ZombieGame2_31
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 98
+        width: 211
+        height: 94
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c97f0a8a04027f4799bfc1604de154c
+      internalID: -1953304090600543512
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI for ZombieGame2_32
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 166
+        width: 347
+        height: 112
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2c9a703e12b8574cab05ad6969d7c57
+      internalID: 2941533603194259495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI for ZombieGame2_33
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 61
+        width: 215
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22444baa39e86824dbed77339751393f
+      internalID: -1724172393919781586
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI for ZombieGame2_34
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 28
+        width: 129
+        height: 136
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 514fa96fc058123498a38cae5af31de6
+      internalID: -2614201435270855773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI for ZombieGame2_35
+      rect:
+        serializedVersion: 2
+        x: 356
+        y: 6
+        width: 91
+        height: 88
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8284502b4013ac74e86adc9452c807a0
+      internalID: 3016190613646615086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI for ZombieGame2_36
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 5
+        width: 90
+        height: 91
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 62ae4b90661fded41a94ca4c84413417
+      internalID: 7084089507247568309
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI for ZombieGame2_37
+      rect:
+        serializedVersion: 2
+        x: 542
+        y: 5
+        width: 90
+        height: 91
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f19cb889a7047c04299fce345c4264cf
+      internalID: -816564621995261751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI for ZombieGame2_38
+      rect:
+        serializedVersion: 2
+        x: 636
+        y: 6
+        width: 90
+        height: 91
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 976ed83918368974c817b3866d932c06
+      internalID: 4786541317287298955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI for ZombieGame2_39
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 414
+        width: 317
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c7fa2e6337865d42a89b5d4cf70c289
+      internalID: -7951080965945051034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI for ZombieGame2_40
+      rect:
+        serializedVersion: 2
+        x: 599
+        y: 191
+        width: 169
+        height: 75
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a755bed0cb3087c4d88cce50ef74bccc
+      internalID: 4745323718437305766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI for ZombieGame2_41
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 881
+        width: 139
+        height: 140
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5a96e9d2b4a5a7409acd33bbd4b13b6
+      internalID: -9105811413198253889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI for ZombieGame2_42
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 880
+        width: 135
+        height: 137
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be85fcd9fe565f84bbb9d98ea7d7cdd0
+      internalID: 3731771380081667482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI for ZombieGame2_43
+      rect:
+        serializedVersion: 2
+        x: 232
+        y: 611
+        width: 92
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af6e75cba7c99164683d253bbfe983a8
+      internalID: 4222028827937670866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI for ZombieGame2_44
+      rect:
+        serializedVersion: 2
+        x: 431
+        y: 491
+        width: 90
+        height: 89
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5421945}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0d3b8894eadd1f4aa6ad924d4dc3c1d
+      internalID: -7073762608838645396
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      UI for ZombieGame2_0: -8276579369159629942
+      UI for ZombieGame2_1: -4425485974655718608
+      UI for ZombieGame2_10: -2842139313934170445
+      UI for ZombieGame2_11: 4460854201591120003
+      UI for ZombieGame2_12: -7786899553862320211
+      UI for ZombieGame2_13: -6515365018859233593
+      UI for ZombieGame2_14: -652552134379735347
+      UI for ZombieGame2_15: 6720955124001792478
+      UI for ZombieGame2_16: -4784421088245577226
+      UI for ZombieGame2_17: 9175826136709969822
+      UI for ZombieGame2_18: -3877945718437749332
+      UI for ZombieGame2_19: -2896144411941027499
+      UI for ZombieGame2_2: -8813524418302206453
+      UI for ZombieGame2_20: -5362205009770475774
+      UI for ZombieGame2_21: 8162665446527304085
+      UI for ZombieGame2_22: 8447908627947811143
+      UI for ZombieGame2_23: 4032009834157415031
+      UI for ZombieGame2_24: 7616472661406217194
+      UI for ZombieGame2_25: 6805241991466161704
+      UI for ZombieGame2_26: 2831623268682530260
+      UI for ZombieGame2_27: -69566167278518322
+      UI for ZombieGame2_28: 2583835572641722868
+      UI for ZombieGame2_29: -4216118286574725365
+      UI for ZombieGame2_3: -3120748077109317174
+      UI for ZombieGame2_30: -5125179392811956579
+      UI for ZombieGame2_31: -1953304090600543512
+      UI for ZombieGame2_32: 2941533603194259495
+      UI for ZombieGame2_33: -1724172393919781586
+      UI for ZombieGame2_34: -2614201435270855773
+      UI for ZombieGame2_35: 3016190613646615086
+      UI for ZombieGame2_36: 7084089507247568309
+      UI for ZombieGame2_37: -816564621995261751
+      UI for ZombieGame2_38: 4786541317287298955
+      UI for ZombieGame2_39: -7951080965945051034
+      UI for ZombieGame2_4: 7322139787921028990
+      UI for ZombieGame2_40: 4745323718437305766
+      UI for ZombieGame2_41: -9105811413198253889
+      UI for ZombieGame2_42: 3731771380081667482
+      UI for ZombieGame2_43: 4222028827937670866
+      UI for ZombieGame2_44: -7073762608838645396
+      UI for ZombieGame2_5: -8980717324293938750
+      UI for ZombieGame2_6: -8008543411198716031
+      UI for ZombieGame2_7: 5604189529702713103
+      UI for ZombieGame2_8: 390150717197737827
+      UI for ZombieGame2_9: -196747500616578388
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3491596308983267886
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3491596308983267884}
+  - component: {fileID: 3491596308983267885}
+  m_Layer: 0
+  m_Name: THE_WEAPON_MANAGER
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3491596308983267884
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3491596308983267886}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3491596308983267885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3491596308983267886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 173ad52b561e7e046b0fcb7e236c6504, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LIST_WEAPON:
+  - {fileID: 11400000, guid: 384d674a3d28f22439ea572097db15ae, type: 2}
+  - {fileID: 11400000, guid: 747e480f08057ed4e9936a17d588b1a2, type: 2}
+  - {fileID: 11400000, guid: acfa7277e6c81a746b43f414d95a9b05, type: 2}
+  - {fileID: 11400000, guid: c3b91e86e8a0a78419b3aca7a83582b9, type: 2}
+  - {fileID: 11400000, guid: 54e0bb4173c12c64aacc43632a420803, type: 2}
+  - {fileID: 11400000, guid: 21449f0ac9de2dd4c949d6dab98458e2, type: 2}
+  - {fileID: 11400000, guid: da79e9983336dd34ca540259ed011dc2, type: 2}
+  - {fileID: 11400000, guid: 09cfe86af81f1df4c8d331554418ead6, type: 2}
+  - {fileID: 11400000, guid: ea8616e09676e5b4aa0745d8f1ba8302, type: 2}
+  - {fileID: 11400000, guid: 40a2ac9adbc91dd45a8688be6dc6a64a, type: 2}
+  LIST_EQUIPED_WEAPON: []
+  LIST_DEFENSE:
+  - {fileID: 11400000, guid: b03117f06f03aea458f5b3773daa7ca4, type: 2}
+  - {fileID: 11400000, guid: 11fd0e14e53a3744fa7462ff8b9e1195, type: 2}
+  - {fileID: 11400000, guid: ebf6856d0f36a7e48a6b12e476dedb29, type: 2}
+  LIST_SUPPORT:
+  - {fileID: 11400000, guid: c3be0ea857a99f742b8b835f6e95a300, type: 2}
+  - {fileID: 11400000, guid: 295e74f47492a4147bc11cd8ccfa157e, type: 2}
+  - {fileID: 11400000, guid: 776a72c3832d16e4a98e77b15e710c45, type: 2}
+  - {fileID: 11400000, guid: 08d9103cbf5edb8479dbbed2ca8d6919, type: 2}

@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68ff3896313a82147b1b593b223ef96f, type: 3}
+  m_Name: 1_fn_p90
+  m_EditorClassIdentifier: 
+  ORIGINAL_DATA:
+    eWeapon: 3
+    eLevel: 0
+    bUnlocked: 0
+    bEquiped: 0
+    iCurrentAmmo: 0
+    iCurrentAmmoInMagazin: 0
+    bIsDefaultGun: 0
+  strNAME: FN P90
+  objPrefabHand: {fileID: 6286403274743636432, guid: 92434d1cc84d94542b9ae087f16be9ef,
+    type: 3}
+  sprIcon: {fileID: -7900295659209866551, guid: 90895a96a334bf741a0d0006a325a7b3,
+    type: 3}
+  sprIcon_gray: {fileID: -6277322102244649203, guid: 8ba17bfddc7c1cd44a1c4c38f382f5fc,
+    type: 3}
+  spriteOfWeaponShell: {fileID: -5410530031656172504, guid: 6fd35cf7420972f4aba0947584d7b7d6,
+    type: 3}
+  sprBullet: {fileID: -7216864773785896916, guid: 6fd35cf7420972f4aba0947584d7b7d6,
+    type: 3}
+  vScaleOfBullet: {x: 1.5, y: 1.5}
+  fRangeOfBullet: 1
+  fTimeloadOrBullet: 0.02
+  LIST_DAMAGE: 0f00000014000000190000001e00000023000000280000002d000000
+  iBulletInEachGroup: 30
+  iMaxAmmo: 750
+  iAmmoToBuy: 90
+  iAmmoInMagazine: 30
+  iPriceToBuyAmmo: 50
+  bIsOnlyCoinUnlock: 0
+  iLevelToUnlock: 1
+  iPriceToUnlock: 1200
+  LIST_UPGRADE_PRICE: 6400000096000000c8000000fa0000002c0100005e010000

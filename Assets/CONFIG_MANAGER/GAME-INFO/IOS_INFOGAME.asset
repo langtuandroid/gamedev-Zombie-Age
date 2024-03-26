@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 913cdcdb6feb23e418613a2f72dac9eb, type: 3}
+  m_Name: IOS_INFOGAME
+  m_EditorClassIdentifier: 
+  ePlatform: 1
+  NAME_GAME: YOUR GAME
+  strLinkMoreGame: www.your_link.com
+  strLinkLike: www.your_link.com
+  strFacebook: www.your_link.com
+  sprLogoPNG: {fileID: 1404028623067837608, guid: 9d3574d1ab247fb47b4a1614b5e181ab,
+    type: 3}
+  strAddress: Your address
+  strEmailReport: your_email@gmail.com
+  strEmailUser: your_email@gmail.com
+  strAdmob_IdPublisher: ca-app-pub-8037566411252072~2336528007
+  strAdmob_Id_Banner: ca-app-pub-8037566411252072/6512336176
+  strAdmob_Id_Interstitital: ca-app-pub-8037566411252072/6512336176
+  strAdmob_Id_VideoReward: ca-app-pub-8037566411252072/6512336176
+  strTestDevicesId: your_id
+  strUnityAds_Id: your_id

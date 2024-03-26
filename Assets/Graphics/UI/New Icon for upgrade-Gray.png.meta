@@ -1,0 +1,1066 @@
+fileFormatVersion: 2
+guid: 839985c07250e654180c360948a693cc
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4602251447587539950
+    second: New Icon for upgrade-Gray_0
+  - first:
+      213: 5170011776775692647
+    second: New Icon for upgrade-Gray_1
+  - first:
+      213: 1866523745112014115
+    second: New Icon for upgrade-Gray_2
+  - first:
+      213: -3027766827356419075
+    second: New Icon for upgrade-Gray_3
+  - first:
+      213: 319348611740468148
+    second: New Icon for upgrade-Gray_4
+  - first:
+      213: 1857733045509978318
+    second: New Icon for upgrade-Gray_5
+  - first:
+      213: -7968522793425606891
+    second: New Icon for upgrade-Gray_6
+  - first:
+      213: 3817779110654416963
+    second: New Icon for upgrade-Gray_7
+  - first:
+      213: 8535268346643035130
+    second: New Icon for upgrade-Gray_8
+  - first:
+      213: 8705328593446399207
+    second: New Icon for upgrade-Gray_9
+  - first:
+      213: 3806190052815669211
+    second: New Icon for upgrade-Gray_10
+  - first:
+      213: -4464564644337144452
+    second: New Icon for upgrade-Gray_11
+  - first:
+      213: 7891795953033381647
+    second: New Icon for upgrade-Gray_12
+  - first:
+      213: -6626985973175557687
+    second: New Icon for upgrade-Gray_13
+  - first:
+      213: 7016734414332700057
+    second: New Icon for upgrade-Gray_14
+  - first:
+      213: 8794051999848033426
+    second: New Icon for upgrade-Gray_15
+  - first:
+      213: 5059548468922348696
+    second: New Icon for upgrade-Gray_16
+  - first:
+      213: 3416342925591799063
+    second: New Icon for upgrade-Gray_17
+  - first:
+      213: 624710825194264960
+    second: New Icon for upgrade-Gray_18
+  - first:
+      213: 2593540071649152219
+    second: New Icon for upgrade-Gray_19
+  - first:
+      213: -5427057694409641163
+    second: New Icon for upgrade-Gray_20
+  - first:
+      213: 713409509364041162
+    second: New Icon for upgrade-Gray_21
+  - first:
+      213: 8909649990056881334
+    second: New Icon for upgrade-Gray_22
+  - first:
+      213: 5758599506913170788
+    second: New Icon for upgrade-Gray_23
+  - first:
+      213: 4582977260944181560
+    second: New Icon for upgrade-Gray_24
+  - first:
+      213: 909920221334522651
+    second: New Icon for upgrade-Gray_25
+  - first:
+      213: 1008498305311994073
+    second: New Icon for upgrade-Gray_26
+  - first:
+      213: -7579970107314662948
+    second: New Icon for upgrade-Gray_27
+  - first:
+      213: 1497057796383792555
+    second: New Icon for upgrade-Gray_28
+  - first:
+      213: 8284109288621707078
+    second: New Icon for upgrade-Gray_29
+  - first:
+      213: 6160346271185931680
+    second: New Icon for upgrade-Gray_30
+  - first:
+      213: 335042220229321074
+    second: New Icon for upgrade-Gray_31
+  - first:
+      213: -6730181668993890756
+    second: New Icon for upgrade-Gray_32
+  - first:
+      213: -3793333861025167323
+    second: New Icon for upgrade-Gray_33
+  - first:
+      213: 3984748071888325606
+    second: New Icon for upgrade-Gray_34
+  - first:
+      213: -8207838620481070251
+    second: New Icon for upgrade-Gray_35
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
+  swizzle: 50462976
+  cookieLightType: 1
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: New Icon for upgrade-Gray_0
+      rect:
+        serializedVersion: 2
+        x: 784
+        y: 2040
+        width: 64
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a241816790e9833459f8c54417dd6946
+      internalID: -4602251447587539950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: New Icon for upgrade-Gray_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1776
+        width: 264
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da267a4a2cab35b4a8cea2757cfaf0c0
+      internalID: 5170011776775692647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: New Icon for upgrade-Gray_2
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 1776
+        width: 257
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1de30085dc902b54286dd3eb009d5196
+      internalID: 1866523745112014115
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: New Icon for upgrade-Gray_3
+      rect:
+        serializedVersion: 2
+        x: 575
+        y: 1776
+        width: 258
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0da82ac53dfac1a45b94244269ca3372
+      internalID: -3027766827356419075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: New Icon for upgrade-Gray_4
+      rect:
+        serializedVersion: 2
+        x: 863
+        y: 1776
+        width: 257
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b3d35006660d50479a15db58e87d7ce
+      internalID: 319348611740468148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: New Icon for upgrade-Gray_5
+      rect:
+        serializedVersion: 2
+        x: 1144
+        y: 1776
+        width: 264
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a1c6a65ff00c4d4ea6de51dd9939311
+      internalID: 1857733045509978318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: New Icon for upgrade-Gray_6
+      rect:
+        serializedVersion: 2
+        x: 1447
+        y: 1776
+        width: 257
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc100040bd3f77c458a090877f301fc9
+      internalID: -7968522793425606891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: New Icon for upgrade-Gray_7
+      rect:
+        serializedVersion: 2
+        x: 1752
+        y: 1776
+        width: 264
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b23818f56473e7418140d280738b0fe
+      internalID: 3817779110654416963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: New Icon for upgrade-Gray_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1472
+        width: 264
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 92aadb34bf80ed94184c5256278d7015
+      internalID: 8535268346643035130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: New Icon for upgrade-Gray_9
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 1472
+        width: 257
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47d646b0abf37f844be9c3ad88175846
+      internalID: 8705328593446399207
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: New Icon for upgrade-Gray_10
+      rect:
+        serializedVersion: 2
+        x: 592
+        y: 1472
+        width: 264
+        height: 259
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4807648d63b6bc54590eafde603e86c7
+      internalID: 3806190052815669211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: New Icon for upgrade-Gray_11
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 1472
+        width: 264
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8776203e20145234e8767715bfd77811
+      internalID: -4464564644337144452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: New Icon for upgrade-Gray_12
+      rect:
+        serializedVersion: 2
+        x: 1168
+        y: 1472
+        width: 264
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4f945f86ec1ef94cbc77201f0711000
+      internalID: 7891795953033381647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: New Icon for upgrade-Gray_13
+      rect:
+        serializedVersion: 2
+        x: 1463
+        y: 1472
+        width: 257
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf6da44c964042d4fb59d2ce130c4636
+      internalID: -6626985973175557687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: New Icon for upgrade-Gray_14
+      rect:
+        serializedVersion: 2
+        x: 1752
+        y: 1472
+        width: 264
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b3195ce8e5dc1e4eaf9a97db0fc19a8
+      internalID: 7016734414332700057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: New Icon for upgrade-Gray_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1168
+        width: 264
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3951c79dae00064a97f08a28b83d3f1
+      internalID: 8794051999848033426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: New Icon for upgrade-Gray_16
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 1168
+        width: 257
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ed12d6588518da44954b4327b805382
+      internalID: 5059548468922348696
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: New Icon for upgrade-Gray_17
+      rect:
+        serializedVersion: 2
+        x: 592
+        y: 1168
+        width: 264
+        height: 259
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0d51843c86d47a4ea69cf6e0753ad5d
+      internalID: 3416342925591799063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: New Icon for upgrade-Gray_18
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 1168
+        width: 264
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d8b73df4f82b364baa03b66c1bec006
+      internalID: 624710825194264960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: New Icon for upgrade-Gray_19
+      rect:
+        serializedVersion: 2
+        x: 1186
+        y: 1183
+        width: 262
+        height: 258
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0bb48b788a933c44a97f20b556f52c8f
+      internalID: 2593540071649152219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: New Icon for upgrade-Gray_20
+      rect:
+        serializedVersion: 2
+        x: 1488
+        y: 1168
+        width: 264
+        height: 272
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fdb52f9b37b6a094e82ac81c11289e41
+      internalID: -5427057694409641163
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: New Icon for upgrade-Gray_21
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 864
+        width: 264
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b62a024e1083b04bae409590eeccbdb
+      internalID: 713409509364041162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: New Icon for upgrade-Gray_22
+      rect:
+        serializedVersion: 2
+        x: 296
+        y: 864
+        width: 264
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65a4afe46250b6944ba59119abfc7651
+      internalID: 8909649990056881334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: New Icon for upgrade-Gray_23
+      rect:
+        serializedVersion: 2
+        x: 592
+        y: 864
+        width: 264
+        height: 259
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a426cfb6659ab104380b722f73d02d4f
+      internalID: 5758599506913170788
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: New Icon for upgrade-Gray_24
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 872
+        width: 264
+        height: 263
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38997a646d8436140b167bed970ff32d
+      internalID: 4582977260944181560
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: New Icon for upgrade-Gray_25
+      rect:
+        serializedVersion: 2
+        x: 1168
+        y: 872
+        width: 264
+        height: 263
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3502a78ff6a7bb449936d97e44f4d165
+      internalID: 909920221334522651
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: New Icon for upgrade-Gray_26
+      rect:
+        serializedVersion: 2
+        x: 1456
+        y: 872
+        width: 264
+        height: 263
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f55d76fe71b5e1e4c9defed32e78cb91
+      internalID: 1008498305311994073
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: New Icon for upgrade-Gray_27
+      rect:
+        serializedVersion: 2
+        x: 1744
+        y: 872
+        width: 264
+        height: 264
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9950506db96af1a48a5748bef0fe694b
+      internalID: -7579970107314662948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: New Icon for upgrade-Gray_28
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 591
+        width: 257
+        height: 258
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: abb00858340d2e449935ad62fec5934f
+      internalID: 1497057796383792555
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: New Icon for upgrade-Gray_29
+      rect:
+        serializedVersion: 2
+        x: 351
+        y: 591
+        width: 258
+        height: 258
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 091b6fddae35a5646bce8fb17b353c74
+      internalID: 8284109288621707078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: New Icon for upgrade-Gray_30
+      rect:
+        serializedVersion: 2
+        x: 615
+        y: 591
+        width: 258
+        height: 258
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5dae709609f482e44981124ba97ceabd
+      internalID: 6160346271185931680
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: New Icon for upgrade-Gray_31
+      rect:
+        serializedVersion: 2
+        x: 895
+        y: 591
+        width: 258
+        height: 258
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 630815db9160f53419290634e82487eb
+      internalID: 335042220229321074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: New Icon for upgrade-Gray_32
+      rect:
+        serializedVersion: 2
+        x: 1168
+        y: 591
+        width: 264
+        height: 258
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 766af99458f2020479934586974b30c4
+      internalID: -6730181668993890756
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: New Icon for upgrade-Gray_33
+      rect:
+        serializedVersion: 2
+        x: 1463
+        y: 591
+        width: 257
+        height: 258
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed121144ec4aec14eb4161a9a64f4974
+      internalID: -3793333861025167323
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: New Icon for upgrade-Gray_34
+      rect:
+        serializedVersion: 2
+        x: 1776
+        y: 591
+        width: 264
+        height: 258
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01b6c3227e1e0b143b6cb90965a6c597
+      internalID: 3984748071888325606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: New Icon for upgrade-Gray_35
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 304
+        width: 257
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10e37ae7efc8c1849bb577f9779ee3c9
+      internalID: -8207838620481070251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      New Icon for upgrade-Gray_0: -4602251447587539950
+      New Icon for upgrade-Gray_1: 5170011776775692647
+      New Icon for upgrade-Gray_10: 3806190052815669211
+      New Icon for upgrade-Gray_11: -4464564644337144452
+      New Icon for upgrade-Gray_12: 7891795953033381647
+      New Icon for upgrade-Gray_13: -6626985973175557687
+      New Icon for upgrade-Gray_14: 7016734414332700057
+      New Icon for upgrade-Gray_15: 8794051999848033426
+      New Icon for upgrade-Gray_16: 5059548468922348696
+      New Icon for upgrade-Gray_17: 3416342925591799063
+      New Icon for upgrade-Gray_18: 624710825194264960
+      New Icon for upgrade-Gray_19: 2593540071649152219
+      New Icon for upgrade-Gray_2: 1866523745112014115
+      New Icon for upgrade-Gray_20: -5427057694409641163
+      New Icon for upgrade-Gray_21: 713409509364041162
+      New Icon for upgrade-Gray_22: 8909649990056881334
+      New Icon for upgrade-Gray_23: 5758599506913170788
+      New Icon for upgrade-Gray_24: 4582977260944181560
+      New Icon for upgrade-Gray_25: 909920221334522651
+      New Icon for upgrade-Gray_26: 1008498305311994073
+      New Icon for upgrade-Gray_27: -7579970107314662948
+      New Icon for upgrade-Gray_28: 1497057796383792555
+      New Icon for upgrade-Gray_29: 8284109288621707078
+      New Icon for upgrade-Gray_3: -3027766827356419075
+      New Icon for upgrade-Gray_30: 6160346271185931680
+      New Icon for upgrade-Gray_31: 335042220229321074
+      New Icon for upgrade-Gray_32: -6730181668993890756
+      New Icon for upgrade-Gray_33: -3793333861025167323
+      New Icon for upgrade-Gray_34: 3984748071888325606
+      New Icon for upgrade-Gray_35: -8207838620481070251
+      New Icon for upgrade-Gray_4: 319348611740468148
+      New Icon for upgrade-Gray_5: 1857733045509978318
+      New Icon for upgrade-Gray_6: -7968522793425606891
+      New Icon for upgrade-Gray_7: 3817779110654416963
+      New Icon for upgrade-Gray_8: 8535268346643035130
+      New Icon for upgrade-Gray_9: 8705328593446399207
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca3ba501a546a1d469088974d4c1d9d7, type: 3}
+  m_Name: poison
+  m_EditorClassIdentifier: 
+  ORIGINAL_DATA:
+    _support: 2
+    iCurrentValue: 2
+  strName: POISON
+  strContent: Makes zombies feel tired.
+  iPrice: 50
+  sprIcon: {fileID: 4144071923073322, guid: 6fd35cf7420972f4aba0947584d7b7d6, type: 3}
+  iMaxValue: 20
+  fEffectTime: 10
+  fRange: 2.5
+  iDamage: 30

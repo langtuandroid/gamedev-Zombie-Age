@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1cc1bf7bd645ab45b1c0750d35f3b22, type: 3}
+  m_Name: GemPack_1
+  m_EditorClassIdentifier: 
+  eKindOfIap: 0
+  strProductName: PACK 1
+  strIdOfStore: com.gem_pack_1
+  fPriceDollar: 0.99
+  iValueToAdd: 1000
+  iPrecentSale: 0

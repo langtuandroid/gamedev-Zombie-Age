@@ -1,0 +1,353 @@
+fileFormatVersion: 2
+guid: f51c6036f4dbd6a4ead330dfdca5b931
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6174308369552579358
+    second: Exploision sheet 07_0
+  - first:
+      213: 1062013074073050771
+    second: Exploision sheet 07_1
+  - first:
+      213: 6856051729974538170
+    second: Exploision sheet 07_2
+  - first:
+      213: -7333860915146202922
+    second: Exploision sheet 07_3
+  - first:
+      213: -7965188599171440492
+    second: Exploision sheet 07_4
+  - first:
+      213: 6189792675750766516
+    second: Exploision sheet 07_5
+  - first:
+      213: 7230907976285066953
+    second: Exploision sheet 07_6
+  - first:
+      213: -8216784061693367360
+    second: Exploision sheet 07_7
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 300
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
+  swizzle: 50462976
+  cookieLightType: 1
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 512
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 512
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 512
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 512
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 512
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Exploision sheet 07_0
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 1543
+        width: 72
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5891fd583973c34ea26df536660dbf1
+      internalID: -6174308369552579358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Exploision sheet 07_1
+      rect:
+        serializedVersion: 2
+        x: 758
+        y: 1530
+        width: 104
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 745a8295978570d4a9254358df9439af
+      internalID: 1062013074073050771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Exploision sheet 07_2
+      rect:
+        serializedVersion: 2
+        x: 1157
+        y: 1351
+        width: 285
+        height: 462
+      alignment: 9
+      pivot: {x: 0.48063108, y: 0.5716912}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac4b35862345435479ffdc5ce6d34db2
+      internalID: 6856051729974538170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Exploision sheet 07_3
+      rect:
+        serializedVersion: 2
+        x: 1622
+        y: 1338
+        width: 388
+        height: 500
+      alignment: 9
+      pivot: {x: 0.47510237, y: 0.574523}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8dfa8bcaa61f9364ea4bd7f7c96fda2c
+      internalID: -7333860915146202922
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Exploision sheet 07_4
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 770
+        width: 430
+        height: 512
+      alignment: 9
+      pivot: {x: 0.5096283, y: 0.559299}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc4e9bb31a659a64f9a550181939b60b
+      internalID: -7965188599171440492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Exploision sheet 07_5
+      rect:
+        serializedVersion: 2
+        x: 622
+        y: 826
+        width: 387
+        height: 411
+      alignment: 9
+      pivot: {x: 0.5142642, y: 0.56044024}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c940535ab6a0ee43b9b2bfde668dad2
+      internalID: 6189792675750766516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Exploision sheet 07_6
+      rect:
+        serializedVersion: 2
+        x: 1090
+        y: 830
+        width: 404
+        height: 420
+      alignment: 9
+      pivot: {x: 0.5, y: 0.53943014}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d8691ee4ebb8d94c801baf75d2a507d
+      internalID: 7230907976285066953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Exploision sheet 07_7
+      rect:
+        serializedVersion: 2
+        x: 1574
+        y: 830
+        width: 416
+        height: 424
+      alignment: 9
+      pivot: {x: 0.5000003, y: 0.5292937}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce2a56afd5577cb45b22796df948b62f
+      internalID: -8216784061693367360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Exploision sheet 07_0: -6174308369552579358
+      Exploision sheet 07_1: 1062013074073050771
+      Exploision sheet 07_2: 6856051729974538170
+      Exploision sheet 07_3: -7333860915146202922
+      Exploision sheet 07_4: -7965188599171440492
+      Exploision sheet 07_5: 6189792675750766516
+      Exploision sheet 07_6: 7230907976285066953
+      Exploision sheet 07_7: -8216784061693367360
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

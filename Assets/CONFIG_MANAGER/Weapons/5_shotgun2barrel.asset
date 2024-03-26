@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68ff3896313a82147b1b593b223ef96f, type: 3}
+  m_Name: 5_shotgun2barrel
+  m_EditorClassIdentifier: 
+  ORIGINAL_DATA:
+    eWeapon: 2
+    eLevel: 0
+    bUnlocked: 0
+    bEquiped: 0
+    iCurrentAmmo: 0
+    iCurrentAmmoInMagazin: 0
+    bIsDefaultGun: 0
+  strNAME: 2B SHOTGUN
+  objPrefabHand: {fileID: 3482201178322616483, guid: 1aa9f49a26074af41a08ccd19e17db28,
+    type: 3}
+  sprIcon: {fileID: -4583253144846247162, guid: 90895a96a334bf741a0d0006a325a7b3,
+    type: 3}
+  sprIcon_gray: {fileID: -7025396521548526917, guid: 8ba17bfddc7c1cd44a1c4c38f382f5fc,
+    type: 3}
+  spriteOfWeaponShell: {fileID: -3509767603877776075, guid: 6fd35cf7420972f4aba0947584d7b7d6,
+    type: 3}
+  sprBullet: {fileID: 1775996024042159457, guid: 6fd35cf7420972f4aba0947584d7b7d6,
+    type: 3}
+  vScaleOfBullet: {x: 2, y: 2}
+  fRangeOfBullet: 2.5
+  fTimeloadOrBullet: 0.35
+  LIST_DAMAGE: 3c00000046000000500000005a000000640000006e00000078000000
+  iBulletInEachGroup: 0
+  iMaxAmmo: 80
+  iAmmoToBuy: 10
+  iAmmoInMagazine: 10
+  iPriceToBuyAmmo: 30
+  bIsOnlyCoinUnlock: 0
+  iLevelToUnlock: 19
+  iPriceToUnlock: 5000
+  LIST_UPGRADE_PRICE: 78000000c80000001801000068010000b801000008020000

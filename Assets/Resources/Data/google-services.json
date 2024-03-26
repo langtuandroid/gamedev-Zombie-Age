@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "12533121498",
+    "firebase_url": "https://zombe-and-shooter.firebaseio.com",
+    "project_id": "zombe-and-shooter",
+    "storage_bucket": "zombe-and-shooter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:12533121498:android:aa7f6fb778aea411cf80e3",
+        "android_client_info": {
+          "package_name": "com.bamgru.zombie"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "12533121498-8u3ks2qadpnm6en059ao6j8u1bagrnq7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDchXAC9H1UHRHVBpwA1nL60QP6Zdunhd0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "12533121498-8u3ks2qadpnm6en059ao6j8u1bagrnq7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

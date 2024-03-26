@@ -1,0 +1,1478 @@
+fileFormatVersion: 2
+guid: 6fd35cf7420972f4aba0947584d7b7d6
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4973757109666674726
+    second: InGP_0
+  - first:
+      213: 4157028586774688789
+    second: InGP_1
+  - first:
+      213: -2659609889818336967
+    second: InGP_2
+  - first:
+      213: 4144071923073322
+    second: InGP_3
+  - first:
+      213: 1712673955840032579
+    second: InGP_4
+  - first:
+      213: -5929005573822248441
+    second: InGP_5
+  - first:
+      213: -980466019345154580
+    second: InGP_6
+  - first:
+      213: 9017300373674842893
+    second: InGP_7
+  - first:
+      213: -8232570196160551519
+    second: InGP_8
+  - first:
+      213: 1775996024042159457
+    second: InGP_9
+  - first:
+      213: 5223164410259424518
+    second: InGP_10
+  - first:
+      213: -5901041611541316101
+    second: InGP_11
+  - first:
+      213: 6840883707074008714
+    second: InGP_12
+  - first:
+      213: -883985426220778741
+    second: InGP_13
+  - first:
+      213: 1036424161813156829
+    second: InGP_14
+  - first:
+      213: 5443083455145917700
+    second: InGP_15
+  - first:
+      213: 1083317415169121469
+    second: InGP_16
+  - first:
+      213: 5929871247316034687
+    second: InGP_17
+  - first:
+      213: -6702683988343135575
+    second: InGP_18
+  - first:
+      213: 8506767954407898267
+    second: InGP_19
+  - first:
+      213: -1672317446132099877
+    second: InGP_20
+  - first:
+      213: -5522951574487078977
+    second: InGP_21
+  - first:
+      213: 8881598109892829438
+    second: InGP_22
+  - first:
+      213: -933206021046179713
+    second: InGP_23
+  - first:
+      213: 1298915393756283136
+    second: InGP_24
+  - first:
+      213: 6155549381520841601
+    second: InGP_25
+  - first:
+      213: 5641652193060497269
+    second: InGP_26
+  - first:
+      213: -4340150615532603664
+    second: InGP_27
+  - first:
+      213: 7892128595264369221
+    second: InGP_28
+  - first:
+      213: -7294278270038442881
+    second: InGP_29
+  - first:
+      213: -7502509609273629251
+    second: InGP_30
+  - first:
+      213: 8208726635507708095
+    second: InGP_31
+  - first:
+      213: -8806509505003011939
+    second: InGP_32
+  - first:
+      213: -5410530031656172504
+    second: InGP_33
+  - first:
+      213: 6516996912291466346
+    second: InGP_34
+  - first:
+      213: -3509767603877776075
+    second: InGP_35
+  - first:
+      213: -8554738716665328790
+    second: InGP_36
+  - first:
+      213: 4627213968861153397
+    second: InGP_37
+  - first:
+      213: -459664864096799112
+    second: InGP_38
+  - first:
+      213: 561046508033787781
+    second: InGP_39
+  - first:
+      213: 8036393049360157593
+    second: InGP_40
+  - first:
+      213: 2267516940074707041
+    second: InGP_41
+  - first:
+      213: 3649035083237216123
+    second: InGP_42
+  - first:
+      213: -5420378987345995553
+    second: InGP_43
+  - first:
+      213: 5563026456298364823
+    second: InGP_44
+  - first:
+      213: 2714523485537745356
+    second: InGP_45
+  - first:
+      213: -7216864773785896916
+    second: InGP_46
+  - first:
+      213: 7370836183260613571
+    second: InGP_47
+  - first:
+      213: -6032463606726039808
+    second: InGP_48
+  - first:
+      213: 8196828602480150108
+    second: InGP_49
+  - first:
+      213: 4893768382248302464
+    second: InGP_50
+  - first:
+      213: -5343341666682052701
+    second: InGP_51
+  - first:
+      213: -2043631706736905010
+    second: InGP_52
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
+  swizzle: 50462976
+  cookieLightType: 1
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: InGP_1
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 938
+        width: 178
+        height: 78
+      alignment: 9
+      pivot: {x: 0.5164492, y: 0.48753005}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e549ac76fc1cde14fbf7e2f4d896d41d
+      internalID: 4157028586774688789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InGP_2
+      rect:
+        serializedVersion: 2
+        x: 388
+        y: 961
+        width: 97
+        height: 57
+      alignment: 9
+      pivot: {x: 0.18939713, y: 0.43554044}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d5edec67b2cd2a14383f7fa761aad065
+      internalID: -2659609889818336967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InGP_6
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 991
+        width: 47
+        height: 33
+      alignment: 9
+      pivot: {x: 0.59864485, y: 0.51755965}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce61ec3b066cc0248a312a0d80e2e962
+      internalID: -980466019345154580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InGP_7
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 997
+        width: 140
+        height: 21
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1c592b489d0b7b4e81a47fd1ddbbbb9
+      internalID: 9017300373674842893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InGP_8
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 972
+        width: 140
+        height: 21
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 671f06a004d57344e96404eccd239c8c
+      internalID: -8232570196160551519
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InGP_0
+      rect:
+        serializedVersion: 2
+        x: 560
+        y: 841
+        width: 113
+        height: 116
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7de096268a9b2b844b5dc31c491f6d6a
+      internalID: -4973757109666674726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InGP_3
+      rect:
+        serializedVersion: 2
+        x: 676
+        y: 841
+        width: 110
+        height: 116
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bdbb11d8ec0af0c40bead3bdbcdf0a26
+      internalID: 4144071923073322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InGP_4
+      rect:
+        serializedVersion: 2
+        x: 787
+        y: 840
+        width: 113
+        height: 117
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e688552dce41fff438564ba49c80e353
+      internalID: 1712673955840032579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InGP_5
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 840
+        width: 113
+        height: 117
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 923761e4f405d3c418b5ae01017fc4bd
+      internalID: -5929005573822248441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InGP_9
+      rect:
+        serializedVersion: 2
+        x: 381
+        y: 870
+        width: 168
+        height: 82
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d93f1f66b0c2ab48b4ccf012225e0b0
+      internalID: 1775996024042159457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InGP_10
+      rect:
+        serializedVersion: 2
+        x: 839
+        y: 438
+        width: 185
+        height: 95
+      alignment: 9
+      pivot: {x: 0.47253188, y: 0.53657675}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82f77b306ee4a6340bf730e484fb6572
+      internalID: 5223164410259424518
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InGP_11
+      rect:
+        serializedVersion: 2
+        x: 692
+        y: 688
+        width: 76
+        height: 138
+      alignment: 9
+      pivot: {x: 0.5093014, y: 0.37640336}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec3b3aa3b112ac146aa71a155c9e8f81
+      internalID: -5901041611541316101
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InGP_12
+      rect:
+        serializedVersion: 2
+        x: 862
+        y: 743
+        width: 70
+        height: 86
+      alignment: 9
+      pivot: {x: 0.4527265, y: 0.31615785}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8308401e37851d478ce47d7ddf4dd58
+      internalID: 6840883707074008714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InGP_13
+      rect:
+        serializedVersion: 2
+        x: 946
+        y: 742
+        width: 54
+        height: 87
+      alignment: 9
+      pivot: {x: 0.52042645, y: 0.2633295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f10bdaedfb87ac5499a7e258a59d7e9b
+      internalID: -883985426220778741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InGP_14
+      rect:
+        serializedVersion: 2
+        x: 759
+        y: 405
+        width: 83
+        height: 85
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf77627844b7fee46b26ef58e0ef7a9b
+      internalID: 1036424161813156829
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InGP_15
+      rect:
+        serializedVersion: 2
+        x: 982
+        y: 535
+        width: 38
+        height: 37
+      alignment: 9
+      pivot: {x: 0.46959966, y: 0.48438984}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6fb111d78c9d9414fa5dfa14dd2364dd
+      internalID: 5443083455145917700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InGP_17
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 142
+        width: 120
+        height: 127
+      alignment: 9
+      pivot: {x: 0.51289433, y: 0.22667184}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6c7540549e41ca4688e7287844a64fc
+      internalID: 5929871247316034687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InGP_18
+      rect:
+        serializedVersion: 2
+        x: 814
+        y: 1
+        width: 75
+        height: 175
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44d9a1b325a15944086316163a3a1bd5
+      internalID: -6702683988343135575
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InGP_19
+      rect:
+        serializedVersion: 2
+        x: 760
+        y: 6
+        width: 48
+        height: 208
+      alignment: 9
+      pivot: {x: 0.7144855, y: 0.09088062}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d3eb2a1bfc19ec43812946cb1921b98
+      internalID: 8506767954407898267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InGP_20
+      rect:
+        serializedVersion: 2
+        x: 533
+        y: 4
+        width: 219
+        height: 139
+      alignment: 9
+      pivot: {x: 0.5099279, y: 0.56103003}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 642c480930596ab498c7f05ee8a0ec14
+      internalID: -1672317446132099877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InGP_21
+      rect:
+        serializedVersion: 2
+        x: 489
+        y: 144
+        width: 263
+        height: 172
+      alignment: 9
+      pivot: {x: 0.49667764, y: 0.12375707}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b31b038db386194eb6f41bfa5b59898
+      internalID: -5522951574487078977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InGP_22
+      rect:
+        serializedVersion: 2
+        x: 854
+        y: 232
+        width: 51
+        height: 206
+      alignment: 9
+      pivot: {x: 0.5846378, y: 0.12582293}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 66f7cb215eb1d084d908f4bad9bc3ee8
+      internalID: 8881598109892829438
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InGP_23
+      rect:
+        serializedVersion: 2
+        x: 911
+        y: 286
+        width: 52
+        height: 148
+      alignment: 9
+      pivot: {x: 0.48412782, y: 0.16198373}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7a58f4e6d1dea447a53f94f6b0b1481
+      internalID: -933206021046179713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InGP_24
+      rect:
+        serializedVersion: 2
+        x: 965
+        y: 277
+        width: 57
+        height: 161
+      alignment: 9
+      pivot: {x: 0.53642195, y: 0.171182}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb68be9c22d08f1499ad2be32e3ba18c
+      internalID: 1298915393756283136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InGP_25
+      rect:
+        serializedVersion: 2
+        x: 622
+        y: 321
+        width: 135
+        height: 143
+      alignment: 9
+      pivot: {x: 0.5137777, y: 0.8399419}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15854ad7c21e7f640b2ca2d2ec01b465
+      internalID: 6155549381520841601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InGP_26
+      rect:
+        serializedVersion: 2
+        x: 494
+        y: 322
+        width: 120
+        height: 102
+      alignment: 9
+      pivot: {x: 0.52294976, y: 0.6335242}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 846c728d24d31524e8c06ee944aacea3
+      internalID: 5641652193060497269
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InGP_27
+      rect:
+        serializedVersion: 2
+        x: 346
+        y: 291
+        width: 147
+        height: 128
+      alignment: 9
+      pivot: {x: 0.43755397, y: 0.73142624}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4e403d5029bbbd44adb3cb3d2fee513
+      internalID: -4340150615532603664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InGP_28
+      rect:
+        serializedVersion: 2
+        x: 232
+        y: 279
+        width: 111
+        height: 129
+      alignment: 9
+      pivot: {x: 0.73633796, y: 0.55702543}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da1eeb413ea8f5c45a7efbbbee642a0f
+      internalID: 7892128595264369221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InGP_29
+      rect:
+        serializedVersion: 2
+        x: 893
+        y: 0
+        width: 130
+        height: 134
+      alignment: 9
+      pivot: {x: 0.5544605, y: 0.5743769}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 555d7e2c44c132842b61b9b22c4db7c5
+      internalID: -7294278270038442881
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InGP_30
+      rect:
+        serializedVersion: 2
+        x: 760
+        y: 220
+        width: 91
+        height: 184
+      alignment: 9
+      pivot: {x: 0.42043096, y: 0.4996308}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 819b30e83aba62042a4ae59ca6abc130
+      internalID: -7502509609273629251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InGP_16
+      rect:
+        serializedVersion: 2
+        x: 316
+        y: 8
+        width: 163
+        height: 276
+      alignment: 9
+      pivot: {x: 0.44936413, y: 0.56809413}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22a886710d1b0d44cbec41b3d84af361
+      internalID: 1083317415169121469
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InGP_31
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 800
+        width: 64
+        height: 28
+      alignment: 9
+      pivot: {x: 0.5527934, y: 0.5459191}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d694cb853833304da933343231bd7b6
+      internalID: 8208726635507708095
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InGP_32
+      rect:
+        serializedVersion: 2
+        x: 617
+        y: 727
+        width: 68
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc41ce2c638bbb34994c29f668cce12b
+      internalID: -8806509505003011939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InGP_33
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 8
+        width: 284
+        height: 46
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 716ac79eafdca924b94ac5c74e20506e
+      internalID: -5410530031656172504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InGP_34
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 57
+        width: 138
+        height: 48
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 28b038392ddd7b648b5d51226ca6dfe2
+      internalID: 6516996912291466346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InGP_35
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 56
+        width: 144
+        height: 56
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7590258408e31be4baf8982606a5f588
+      internalID: -3509767603877776075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InGP_36
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 174
+        width: 247
+        height: 61
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f81b8b5fa3ece54498decd74ddb4944
+      internalID: -8554738716665328790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InGP_37
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 236
+        width: 114
+        height: 52
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 520844ece4c74594683ac4292a196fac
+      internalID: 4627213968861153397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InGP_38
+      rect:
+        serializedVersion: 2
+        x: 624
+        y: 576
+        width: 398
+        height: 74
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 24045401b453f494f97f21240481d6a9
+      internalID: -459664864096799112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InGP_39
+      rect:
+        serializedVersion: 2
+        x: 538
+        y: 734
+        width: 60
+        height: 101
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3eb309c334e22364fb983c644ca2d7b6
+      internalID: 561046508033787781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InGP_40
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 296
+        width: 203
+        height: 26
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4eb376d33147cca4f9ea96c174ed0f63
+      internalID: 8036393049360157593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InGP_41
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 346
+        width: 86
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f30c20b73b8020c498735324b6bca2ff
+      internalID: 2267516940074707041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InGP_42
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 420
+        width: 144
+        height: 149
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03ae1fd1aeeee724e9d007f8426da231
+      internalID: 3649035083237216123
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InGP_43
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 953
+        width: 122
+        height: 36
+      alignment: 9
+      pivot: {x: 0.77896774, y: 0.5540195}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c705baf83573a242bdc83e3b9eb88e0
+      internalID: -5420378987345995553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InGP_44
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 908
+        width: 134
+        height: 39
+      alignment: 9
+      pivot: {x: 0.69230336, y: 0.43766433}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cae62af3aac8a9c458cbcc6c98dea113
+      internalID: 5563026456298364823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InGP_45
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 883
+        width: 47
+        height: 21
+      alignment: 9
+      pivot: {x: 0.66551507, y: 0.52314687}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47c462339472b5642b21038c4362b6f6
+      internalID: 2714523485537745356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InGP_46
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 866
+        width: 64
+        height: 31
+      alignment: 9
+      pivot: {x: 0.69751894, y: 0.43726176}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f2d598f580abfb4bb27662c27fac309
+      internalID: -7216864773785896916
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InGP_47
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 839
+        width: 53
+        height: 30
+      alignment: 9
+      pivot: {x: 0.7385136, y: 0.5162028}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf6af8b82adb9704ca60e3f0717750fd
+      internalID: 7370836183260613571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InGP_48
+      rect:
+        serializedVersion: 2
+        x: 61
+        y: 823
+        width: 69
+        height: 37
+      alignment: 9
+      pivot: {x: 0.74662364, y: 0.46057624}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7bda2f9a8a4aca44b6a9c90317ccc09
+      internalID: -6032463606726039808
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InGP_49
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 802
+        width: 54
+        height: 29
+      alignment: 9
+      pivot: {x: 0.68007433, y: 0.48323005}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78d713c18e5582f47ae9add3cd912c5b
+      internalID: 8196828602480150108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InGP_50
+      rect:
+        serializedVersion: 2
+        x: 653
+        y: 992
+        width: 67
+        height: 32
+      alignment: 9
+      pivot: {x: 0.3308415, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b1a1b317fd0d474ea67155396efd1a4
+      internalID: 4893768382248302464
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InGP_51
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 689
+        width: 449
+        height: 111
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6eb317d5de920442a0f110f9824078f
+      internalID: -5343341666682052701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InGP_52
+      rect:
+        serializedVersion: 2
+        x: 115
+        y: 346
+        width: 62
+        height: 63
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: adcf6afdcf72381428931dc17f41b374
+      internalID: -2043631706736905010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      InGP_0: -4973757109666674726
+      InGP_1: 4157028586774688789
+      InGP_10: 5223164410259424518
+      InGP_11: -5901041611541316101
+      InGP_12: 6840883707074008714
+      InGP_13: -883985426220778741
+      InGP_14: 1036424161813156829
+      InGP_15: 5443083455145917700
+      InGP_16: 1083317415169121469
+      InGP_17: 5929871247316034687
+      InGP_18: -6702683988343135575
+      InGP_19: 8506767954407898267
+      InGP_2: -2659609889818336967
+      InGP_20: -1672317446132099877
+      InGP_21: -5522951574487078977
+      InGP_22: 8881598109892829438
+      InGP_23: -933206021046179713
+      InGP_24: 1298915393756283136
+      InGP_25: 6155549381520841601
+      InGP_26: 5641652193060497269
+      InGP_27: -4340150615532603664
+      InGP_28: 7892128595264369221
+      InGP_29: -7294278270038442881
+      InGP_3: 4144071923073322
+      InGP_30: -7502509609273629251
+      InGP_31: 8208726635507708095
+      InGP_32: -8806509505003011939
+      InGP_33: -5410530031656172504
+      InGP_34: 6516996912291466346
+      InGP_35: -3509767603877776075
+      InGP_36: -8554738716665328790
+      InGP_37: 4627213968861153397
+      InGP_38: -459664864096799112
+      InGP_39: 561046508033787781
+      InGP_4: 1712673955840032579
+      InGP_40: 8036393049360157593
+      InGP_41: 2267516940074707041
+      InGP_42: 3649035083237216123
+      InGP_43: -5420378987345995553
+      InGP_44: 5563026456298364823
+      InGP_45: 2714523485537745356
+      InGP_46: -7216864773785896916
+      InGP_47: 7370836183260613571
+      InGP_48: -6032463606726039808
+      InGP_49: 8196828602480150108
+      InGP_5: -5929005573822248441
+      InGP_50: 4893768382248302464
+      InGP_51: -5343341666682052701
+      InGP_52: -2043631706736905010
+      InGP_6: -980466019345154580
+      InGP_7: 9017300373674842893
+      InGP_8: -8232570196160551519
+      InGP_9: 1775996024042159457
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

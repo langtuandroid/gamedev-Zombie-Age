@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d815e16e94f90645b81345cbd5ff5c4, type: 3}
+  m_Name: Level_22
+  m_EditorClassIdentifier: 
+  sprBackgroundFrame: {fileID: 5363415115856624179, guid: 33abe643089c25046aa71b82973cefbc,
+    type: 3}
+  sprBackground: {fileID: 21300000, guid: 7d9c400eeeae60741af19e0fe8d2287c, type: 3}
+  iTotalWave: 9
+  prefabBoss: {fileID: 0}
+  LIST_ZOMBIE_IN_LEVEL:
+  - ZOMBIE: 2
+    eHat: 2
+    fPercent_HasHat: 0.678
+    eWeapon: 4
+    fPercent_HasWeapon: 0.646
+    eShield: 0
+    fPercent_HasShield: 0.788
+    bSpace: 0
+  - ZOMBIE: 4
+    eHat: 2
+    fPercent_HasHat: 0.694
+    eWeapon: 2
+    fPercent_HasWeapon: 0.744
+    eShield: 1
+    fPercent_HasShield: 0.733
+    bSpace: 0
+  - ZOMBIE: 1
+    eHat: 2
+    fPercent_HasHat: 0.75
+    eWeapon: 2
+    fPercent_HasWeapon: 0.683
+    eShield: 1
+    fPercent_HasShield: 0.422
+    bSpace: 0
+  - ZOMBIE: 6
+    eHat: 2
+    fPercent_HasHat: 0.484
+    eWeapon: 1
+    fPercent_HasWeapon: 0.47
+    eShield: 0
+    fPercent_HasShield: 0.508
+    bSpace: 0
+  - ZOMBIE: 8
+    eHat: 0
+    fPercent_HasHat: 0.512
+    eWeapon: 0
+    fPercent_HasWeapon: 0.494
+    eShield: 0
+    fPercent_HasShield: 0.484
+    bSpace: 0
+  - ZOMBIE: 10
+    eHat: 0
+    fPercent_HasHat: 0.461
+    eWeapon: 0
+    fPercent_HasWeapon: 0.456
+    eShield: 0
+    fPercent_HasShield: 0.465
+    bSpace: 0
+  iConfigSpecialStatus: 8
