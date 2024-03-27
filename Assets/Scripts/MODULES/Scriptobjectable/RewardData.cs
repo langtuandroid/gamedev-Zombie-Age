@@ -16,7 +16,7 @@ namespace MODULES.Scriptobjectable
         //Công thức tính gem thưởng khi kết thúc game
         public int GetVictoryGem()
         {
-            float _factorFloat = Soldier.Instance.DEFENSE_MANAGER.GetFactorDefense();
+            float _factorFloat = Soldier.Instance._defenceManager.GetFactorDefense();
             int _gem = (int)(_factorFloat * iValue);
             if (_gem <= 10) _gem = 10;
             return _gem;

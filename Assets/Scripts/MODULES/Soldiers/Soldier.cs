@@ -4,238 +4,180 @@ using _4_Gameplay;
 using MANAGERS;
 using MODULES.Scriptobjectable;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace MODULES.Soldiers
 {
     public class Soldier : MonoBehaviour
     {
         public static Soldier Instance;
-        [SerializeField] private GameObject objHandToThrow;
-        [SerializeField] private Animator m_Animator;
+        [FormerlySerializedAs("objHandToThrow")] [SerializeField] private GameObject _throwObject;
+        [FormerlySerializedAs("m_Animator")] [SerializeField] private Animator _animator;
         private const int IDIE = 3, MOVE = 2, SHAKE = 1;
-        public AnimationClip aniIdie, aniMove, aniShake;
-
+        [FormerlySerializedAs("aniShake")] public AnimationClip _shake;
         public bool IsMoving;
-
         [Space(30)]
-        public WeaponSystems WEAPON_MANAGER;
-        public DefenseSystems DEFENSE_MANAGER;
-
-
+        [FormerlySerializedAs("WEAPON_MANAGER")] public WeaponSystems _weaponManager;
+        [FormerlySerializedAs("DEFENSE_MANAGER")] public Defense _defenceManager;
+        
         private void Awake()
         {
             if (Instance == null)
                 Instance = this;
-
         }
 
         private void Start()
         {
-            //contractor
-            WEAPON_MANAGER.Init(WeaponController.Instance.equipedWeaponList);
-            DEFENSE_MANAGER.Init();
+            _weaponManager.Construct(WeaponController.Instance.equipedWeaponList);
+            _defenceManager.Construct();
+            
+            _throwObject.SetActive(false);
 
-
-            objHandToThrow.SetActive(false);
-
-            EventController.OnWeaponNoBullet += HandleNoBullet;
-            EventController.OnZombieAttack += DEFENSE_MANAGER.HandleZombieAttack;
-
+            EventController.OnWeaponNoBullet += NoBullet;
+            EventController.OnZombieAttack += _defenceManager.HandleZombieAttack;
         }
-
-
-
+        
         private void Update()
         {
             if (IsMoving)
             {
-                PlayAnimator(EnumController.SOLDIER_STATUS.walk);
+                PlayAnimations(EnumController.SOLDIER_STATUS.walk);
             }
 
         }
 
-        [Space(30)]
-        public Transform _tranOfSoldier;
-        public Transform _tranOfBody;
+        [FormerlySerializedAs("_tranOfSoldier")] [Space(30)]
+        public Transform _soldierTransform;
+        [FormerlySerializedAs("_tranOfBody")] public Transform _bodyTransform;
 
-        // [HideInInspector]
-        private HandOfWeapon m_HandOfWeapon;
+        private HandWeapon _hands;
 
-        //public SpriteRenderer renWeapon;
-        // Start is called before the first frame update
-
-        public Vector2 GetCurrentPos()
-        {
-            return _tranOfSoldier.position;
-        }
-
-        //animator
-        public void PlayAnimator(EnumController.SOLDIER_STATUS _status)
+        public void PlayAnimations(EnumController.SOLDIER_STATUS _status)
         {
             switch (_status)
             {
                 case EnumController.SOLDIER_STATUS.idie:
                     // m_Animator.Play(aniIdie.name, -1, 0);
-                    m_Animator.SetInteger("AnimationState", IDIE);
+                    _animator.SetInteger("AnimationState", IDIE);
                     break;
                 case EnumController.SOLDIER_STATUS.shooting:
-                    m_Animator.Play(aniShake.name, -1, 0);
-                    m_Animator.SetInteger("AnimationState", SHAKE);
+                    _animator.Play(_shake.name, -1, 0);
+                    _animator.SetInteger("AnimationState", SHAKE);
                     break;
                 case EnumController.SOLDIER_STATUS.walk:
                     // m_Animator.Play(aniMove.name, -1, 0);
-                    m_Animator.SetInteger("AnimationState", MOVE);
+                    _animator.SetInteger("AnimationState", MOVE);
                     break;
 
             }
 
         }
 
-
-
-
-
-        //CHANGE WEAPON
-        public void SetPosForHandGun(GameObject _handgun)
+        public void SetHandPositions(GameObject _handgun)
         {
-            _handgun.transform.SetParent(_tranOfBody);
+            _handgun.transform.SetParent(_bodyTransform);
             _handgun.transform.localPosition = new Vector3(-0.847f, 1.696f, 0);
         }
 
-
-
-
-
-        //Animation throw
-        [SerializeField] private SpriteRenderer sprSpriteOfItemsSupport;
-        public void PlayerAnimationThrow(EnumController.SUPPORT _support)
+        [FormerlySerializedAs("sprSpriteOfItemsSupport")] [SerializeField] private SpriteRenderer _supportSpriteRenderer;
+        public void PlayerThrow(EnumController.SUPPORT _support)
         {
-            sprSpriteOfItemsSupport.sprite = SpriteController.Instance.GetSupportSprite(_support)._sprite;
-            StartCoroutine(IePlayerAnimationThrow());
+            _supportSpriteRenderer.sprite = SpriteController.Instance.GetSupportSprite(_support)._sprite;
+            StartCoroutine(PlayerThrowRoutine());
         }
-        private IEnumerator IePlayerAnimationThrow()
+        private IEnumerator PlayerThrowRoutine()
         {
             SoundController.Instance.Play(SoundController.SOUND.sfx_throw);//sound
-            objHandToThrow.SetActive(true);
-            WEAPON_MANAGER.CURRENT_WEAPON.gameObject.SetActive(false);
+            _throwObject.SetActive(true);
+            _weaponManager._thisWeapon.gameObject.SetActive(false);
             yield return new WaitForSeconds(0.2f);
-            objHandToThrow.SetActive(false);
-            WEAPON_MANAGER.CURRENT_WEAPON.gameObject.SetActive(true);
+            _throwObject.SetActive(false);
+            _weaponManager._thisWeapon.gameObject.SetActive(true);
 
         }
 
-
-        //CHANGE WEAPON
-        private void HandleNoBullet(GunData _gundata)
+        private void NoBullet(GunData _gundata)
         {
-            WEAPON_MANAGER.ChooseWeapon(WeaponController.Instance.equipedWeaponList[0].DATA.eWeapon);//cho khau dau tien
+            _weaponManager.WeaponChoose(WeaponController.Instance.equipedWeaponList[0].DATA.eWeapon);//cho khau dau tien
         }
-
-
-
-
         private void OnDisable()
         {
-            // DEFENSE_MANAGER.Save();
-            EventController.OnWeaponNoBullet -= HandleNoBullet;
-            EventController.OnZombieAttack -= DEFENSE_MANAGER.HandleZombieAttack;
+            EventController.OnWeaponNoBullet -= NoBullet;
+            EventController.OnZombieAttack -= _defenceManager.HandleZombieAttack;
         }
 
     }
 
-
-
-//EDUIPED WEAPON FOR SOLDIER
     [System.Serializable]
     public class WeaponSystems
     {
-        public GunData CURRENT_GUN_DATA;
-        public HandOfWeapon CURRENT_WEAPON;
+        [FormerlySerializedAs("CURRENT_GUN_DATA")] public GunData _gunData;
+        [FormerlySerializedAs("CURRENT_WEAPON")] public HandWeapon _thisWeapon;
 
-        //INIT
-        public void Init(List<GunData> _list)
+        public void Construct(List<GunData> _list)
         {
             int _total = _list.Count;
             for (int i = 0; i < _total; i++)
             {
                 Weapon _new = new Weapon(_list[i]);
-                LIST_WEAPON.Add(_new);
+                _weaponList.Add(_new);
             }
-
         }
-
-
 
         #region WEAPON
         [System.Serializable]
         public class Weapon
         {
-            public GunData GUN_DATA;
-            public GameObject objHandWeapon;
+            [FormerlySerializedAs("GUN_DATA")] public GunData _gunData;
+            [FormerlySerializedAs("objHandWeapon")] public GameObject _weaponPrefab;
 
-
-            //init
             public Weapon(GunData _gundata)
             {
-                GUN_DATA = _gundata;
-                Init();
+                _gunData = _gundata;
+                Construct();
             }
-
-
-            public void Init()
+            
+            public void Construct()
             {
-                objHandWeapon = Soldier.Instantiate(GUN_DATA.objPrefabHand);
-                objHandWeapon.SetActive(false);
-                Soldier.Instance.SetPosForHandGun(objHandWeapon);//set pos
+                _weaponPrefab = Soldier.Instantiate(_gunData.objPrefabHand);
+                _weaponPrefab.SetActive(false);
+                Soldier.Instance.SetHandPositions(_weaponPrefab);//set pos
             }
         }
 
-        public List<Weapon> LIST_WEAPON = new List<Weapon>();
-
-
-        //Get weapon
-        public void ChooseWeapon(EnumController.WEAPON _weapon)
+        [FormerlySerializedAs("LIST_WEAPON")] public List<Weapon> _weaponList = new List<Weapon>();
+        
+        public void WeaponChoose(EnumController.WEAPON _weapon)
         {
-            int _total = LIST_WEAPON.Count;
+            int _total = _weaponList.Count;
             for (int i = 0; i < _total; i++)
             {
-                if (LIST_WEAPON[i].GUN_DATA.DATA.eWeapon == _weapon)
+                if (_weaponList[i]._gunData.DATA.eWeapon == _weapon)
                 {
-                    LIST_WEAPON[i].objHandWeapon.SetActive(true);
-                    CURRENT_WEAPON = LIST_WEAPON[i].objHandWeapon.GetComponent<HandOfWeapon>();
-                    CURRENT_GUN_DATA = LIST_WEAPON[i].GUN_DATA;
+                    _weaponList[i]._weaponPrefab.SetActive(true);
+                    _thisWeapon = _weaponList[i]._weaponPrefab.GetComponent<HandWeapon>();
+                    _gunData = _weaponList[i]._gunData;
 
-
-                    //changed gun
-                    EventController.OnChangedWeaponInvoke(CURRENT_GUN_DATA);
-
-
-
-                    //get data               
-                    CURRENT_WEAPON.fTimeloadOfBullet = CURRENT_GUN_DATA.fTimeloadOrBullet;
-                    CURRENT_WEAPON.iDamageOfGun = CURRENT_GUN_DATA.GetDamage(CURRENT_GUN_DATA.DATA.eLevel);
-                    CURRENT_WEAPON.fRangeOfGBullet = CURRENT_GUN_DATA.fRangeOfBullet;
-                    CURRENT_WEAPON.sprBullet = CURRENT_GUN_DATA.sprBullet;
-                    CURRENT_WEAPON.vScaleOfBullet = CURRENT_GUN_DATA.vScaleOfBullet;
+                    EventController.OnChangedWeaponInvoke(_gunData);
+            
+                    _thisWeapon._loadTine = _gunData.fTimeloadOrBullet;
+                    _thisWeapon._damage = _gunData.GetDamage(_gunData.DATA.eLevel);
+                    _thisWeapon._bulletRange = _gunData.fRangeOfBullet;
+                    _thisWeapon._bulletSprite = _gunData.sprBullet;
+                    _thisWeapon._bulletScale = _gunData.vScaleOfBullet;
                 
                 }
                 else
                 {
-                    LIST_WEAPON[i].objHandWeapon.SetActive(false);
+                    _weaponList[i]._weaponPrefab.SetActive(false);
                 }
             }
         }
-
         #endregion
-
-
-
     }
 
-
-//DEFENSE SYSTEM
     [System.Serializable]
-    public class DefenseSystems
+    public class Defense
     {
         [System.Serializable]
         public class UnitDefense
@@ -244,41 +186,37 @@ namespace MODULES.Soldiers
             public float fDefenseValue;
             public GameObject objDefense;
         }
-        private int iTotalDefenseUnit;
+        private int _defaultUnit;
 
-        public List<UnitDefense> LIST_DEFENSE = new List<UnitDefense>();
-        public UnitDefense GetDefense(EnumController.DEFENSE _defense)
+        [FormerlySerializedAs("LIST_DEFENSE")] public List<UnitDefense> _defenceList = new List<UnitDefense>();
+        public UnitDefense TakeDefense(EnumController.DEFENSE _defense)
         {
-
-            for (int i = 0; i < iTotalDefenseUnit; i++)
+            for (int i = 0; i < _defaultUnit; i++)
             {
-                if (_defense == LIST_DEFENSE[i]._defense)
+                if (_defense == _defenceList[i]._defense)
                 {
-                    return LIST_DEFENSE[i];
+                    return _defenceList[i];
                 }
             }
             return null;
         }
-        private int iIndexOfFireOfHome = 1;
-        // total current defense
-        private float GetCurrentDefense()
+        private int homeIndex = 1;
+
+        private float CurrDefence()
         {
-            fCurrentDefense = 0;
-            for (int i = 0; i < iTotalDefenseUnit; i++)
+            _currentDefence = 0;
+            for (int i = 0; i < _defaultUnit; i++)
             {
-                fCurrentDefense += LIST_DEFENSE[i].fDefenseValue;
+                _currentDefence += _defenceList[i].fDefenseValue;
             }
 
-            return fCurrentDefense;
+            return _currentDefence;
         }
 
-        private float fTotalDefense;
-        private float fCurrentDefense;
-
-
-
-
-        public void Init()
+        private float _defenceTotal;
+        private float _currentDefence;
+        
+        public void Construct()
         {
 
             int _total = WeaponController.Instance._defenceList.Count;
@@ -292,34 +230,34 @@ namespace MODULES.Soldiers
 
                     if (!WeaponController.Instance._defenceList[i].DATA.bDefault)
                         _unit.objDefense = Soldier.Instantiate(WeaponController.Instance._defenceList[i].bjPrefab);
-                    LIST_DEFENSE.Add(_unit);
+                    _defenceList.Add(_unit);
                 }
             }
 
-            iTotalDefenseUnit = LIST_DEFENSE.Count;
-            fTotalDefense = GetCurrentDefense();
+            _defaultUnit = _defenceList.Count;
+            _defenceTotal = CurrDefence();
 
-            GameplayController.Instance.ShowHpBar(1.0f, (int)fCurrentDefense + "/" + (int)fTotalDefense);
+            GameplayController.Instance.ShowHpBar(1.0f, (int)_currentDefence + "/" + (int)_defenceTotal);
         }
 
 
 
         //REDUCE 
-        public void Reduce(float _damage)
+        public void RemoveDamage(float _damage)
         {
-            for (int i = 0; i < iTotalDefenseUnit; i++)
+            for (int i = 0; i < _defaultUnit; i++)
             {
-                if (LIST_DEFENSE[i].fDefenseValue >= _damage)
+                if (_defenceList[i].fDefenseValue >= _damage)
                 {
-                    LIST_DEFENSE[i].fDefenseValue -= _damage;
+                    _defenceList[i].fDefenseValue -= _damage;
                     _damage = 0;
 
 
                 }
-                else if (LIST_DEFENSE[i].fDefenseValue > 0 && LIST_DEFENSE[i].fDefenseValue < _damage)
+                else if (_defenceList[i].fDefenseValue > 0 && _defenceList[i].fDefenseValue < _damage)
                 {
-                    _damage -= LIST_DEFENSE[i].fDefenseValue;
-                    LIST_DEFENSE[i].fDefenseValue = 0;
+                    _damage -= _defenceList[i].fDefenseValue;
+                    _defenceList[i].fDefenseValue = 0;
                     //  LIST_DEFENSE[i].objDefense.SetActive(false);
                 }
             }
@@ -327,57 +265,41 @@ namespace MODULES.Soldiers
 
 
             //show bar
-            fCurrentDefense = GetCurrentDefense();
-            if (fCurrentDefense <= 0)
+            _currentDefence = CurrDefence();
+            if (_currentDefence <= 0)
             {
-                fCurrentDefense = 0;
+                _currentDefence = 0;
                 GameplayController.Instance.SetStatusOfGame(GameplayController.GAME_STATUS.gameover);//game over
             }
-            GameplayController.Instance.ShowHpBar(GetFactorDefense(), (int)fCurrentDefense + "/" + (int)fTotalDefense);//show bar
+            GameplayController.Instance.ShowHpBar(GetFactorDefense(), (int)_currentDefence + "/" + (int)_defenceTotal);//show bar
 
 
             //FIRE
-            if (GetFactorDefense() < 0.6f && iIndexOfFireOfHome == 1)
+            if (GetFactorDefense() < 0.6f && homeIndex == 1)
             {
                 Soldier.Instantiate(ObjectPoolController.Instance._fireOnHomeLevel1);//fire of home
-                iIndexOfFireOfHome = 2;
+                homeIndex = 2;
             }
-            if (GetFactorDefense() < 0.4f && iIndexOfFireOfHome == 2)
+            if (GetFactorDefense() < 0.4f && homeIndex == 2)
             {
                 Soldier.Instantiate(ObjectPoolController.Instance._fireOnHomeLevel2);//fire of home
-                iIndexOfFireOfHome = 3;
+                homeIndex = 3;
             }
-            if (GetFactorDefense() < 0.3f && iIndexOfFireOfHome == 3)
+            if (GetFactorDefense() < 0.3f && homeIndex == 3)
             {
                 Soldier.Instantiate(ObjectPoolController.Instance._fireOnHomeLevel3);//fire of home
-                iIndexOfFireOfHome = 4;
+                homeIndex = 4;
             }
         }
-
-
-        ////save Current defense value
-        ////public void Save()
-        ////{
-        ////    for (int i = 0; i < iTotalDefenseUnit; i++)
-        ////    {
-        ////        TheDataManager.Instance.THE_DATA_PLAYER.GetDefense(LIST_DEFENSE[i]._defense).iCurrentDefenseValue
-        ////            = LIST_DEFENSE[i].iDefenseValue;
-        ////    }
-        ////}
-
-
-        //Facor of defense
+        
         public float GetFactorDefense()
         {
-            return fCurrentDefense / fTotalDefense;
+            return _currentDefence / _defenceTotal;
         }
 
-        //ZOMBIE ATTACK
         public void HandleZombieAttack(float _damage)
         {
-            Soldier.Instance.DEFENSE_MANAGER.Reduce(_damage);
+            Soldier.Instance._defenceManager.RemoveDamage(_damage);
         }
-
-
     }
 }

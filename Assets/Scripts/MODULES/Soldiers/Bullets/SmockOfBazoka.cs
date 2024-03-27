@@ -4,50 +4,48 @@ namespace MODULES.Soldiers.Bullets
 {
     public class SmockOfBazoka : MonoBehaviour
     {
-        private GameObject m_gameobject;
-        public SpriteRenderer m_SpriteRenderder;
-        private Transform m_tranform;
-        Vector2 vCurrentPos;
-        private Color m_Color;
-        Vector3 vOriginalScale;
-        Vector3 vCurrentScale;
-        Vector3 _temp = new Vector2(0.01f, 0.01f);
+        private GameObject _gameobject;
+        private SpriteRenderer _spriteRenderder;
+        private Transform _transform;
+        private Vector2 _currentPos;
+        private Color _color;
+        private Vector3 _startScale;
+        private Vector3 _currentScale;
+        private readonly Vector3 _temp = new Vector2(0.01f, 0.01f);
 
-        // Start is called before the first frame update
-        void Awake()
+        private void Awake()
         {
-            m_SpriteRenderder = GetComponent<SpriteRenderer>();
-            m_gameobject = gameObject;
-            m_tranform = transform;
-            vOriginalScale = m_tranform.localScale;
+            _spriteRenderder = GetComponent<SpriteRenderer>();
+            _gameobject = gameObject;
+            _transform = transform;
+            _startScale = _transform.localScale;
 
         }
 
-        // Update is called once per frame
-        void Update()
+        private void Update()
         {
             //debug
             if (Time.timeScale != 1.0f) return;
 
-            m_Color.a -= 0.008f;
-            m_SpriteRenderder.color = m_Color;
-            if (m_Color.a <= 0)
+            _color.a -= 0.008f;
+            _spriteRenderder.color = _color;
+            if (_color.a <= 0)
             {
-                m_gameobject.SetActive(false);
+                _gameobject.SetActive(false);
             }
 
-            vCurrentPos.y += 0.01f;
-            m_tranform.position = vCurrentPos;
-            vCurrentScale -= _temp;
-            m_tranform.localScale = vCurrentScale;
+            _currentPos.y += 0.01f;
+            _transform.position = _currentPos;
+            _currentScale -= _temp;
+            _transform.localScale = _currentScale;
         }
 
         private void OnEnable()
         {
-            m_tranform.eulerAngles = new Vector3(0, 0, Random.Range(0, 360));
-            vCurrentScale = vOriginalScale;
-            vCurrentPos = m_tranform.position;
-            m_Color = Color.white;
+            _transform.eulerAngles = new Vector3(0, 0, Random.Range(0, 360));
+            _currentScale = _startScale;
+            _currentPos = _transform.position;
+            _color = Color.white;
         }
 
     }

@@ -316,7 +316,7 @@ namespace _4_Gameplay
             if (_gundata.DATA.iCurrentAmmo <= 0)
                 _weaponShell.Show(0.0f);
             else
-                _weaponShell.Show(Soldier.Instance.WEAPON_MANAGER.CURRENT_WEAPON.GetFactorBullet());
+                _weaponShell.Show(Soldier.Instance._weaponManager._thisWeapon.GetFactorBullet());
 
         }
         

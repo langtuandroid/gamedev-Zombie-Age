@@ -144,7 +144,7 @@ namespace _4_Gameplay
         private IEnumerator StartSupportRoutine(EnumController.SUPPORT _support)
         {
             _isSupport = true;
-            _mainSoldier.PlayerAnimationThrow(_support);
+            _mainSoldier.PlayerThrow(_support);
             yield return _wait;
 
             GameObject _item = null;

@@ -7,63 +7,62 @@ namespace MODULES.Soldiers.Bullets
 {
     public class BulletBazoka : MonoBehaviour
     {
-        private GameObject m_gameobject;
-        private Transform m_tranform;
-        private List<Vector2> PATH=new List<Vector2>();
-        private int iTotalPoinOnPath;
+        private GameObject _gameobject;
+        private Transform _transform;
+        private List<Vector2> _path = new();
+        private int _pointOnPath;
 
-        private int iIndexOfPath;
+        private int _pathIndex;
 
-        private bool bAllowMove = false;
-        public int iDamage;
-        private float fRange;
+        private bool _allowMove = false;
+        private int _damage;
+        private float _rang;
 
         float _timeToMove;
-        Vector2 vCurrentPos;
-        Vector2 vTargetPos;
+        Vector2 _currentPos;
+        Vector2 _targetPos;
 
-
-
+        
         private void Awake()
         {
-            m_gameobject = gameObject;
-            m_tranform = transform;
+            _gameobject = gameObject;
+            _transform = transform;
         }
-        public void Setup(List<Vector2> _list,float _range, int _damage)
+        public void SetupBullet(List<Vector2> _list,float _range, int _damage)
         {      
-            CopyList(_list, PATH);
-            iDamage = _damage;
-            iIndexOfPath = 0;
-            vCurrentPos = PATH[0];
-            vTargetPos = vCurrentPos;
-            m_tranform.position = vCurrentPos;
-            fRange = _range;
-            bAllowMove = true;
+            CopyList(_list, _path);
+            this._damage = _damage;
+            _pathIndex = 0;
+            _currentPos = _path[0];
+            _targetPos = _currentPos;
+            _transform.position = _currentPos;
+            _rang = _range;
+            _allowMove = true;
         }
 
-        // Update is called once per frame
-        void Update()
+
+        private void Update()
         {
             if (Time.timeScale != 1.0f) return; //for debug
             if (GameplayController.Instance.GameStatus != GameplayController.GAME_STATUS.playing) return;
-            if (!bAllowMove) return;
+            if (!_allowMove) return;
 
             Smock();//smock
-            vCurrentPos = Vector2.MoveTowards(vCurrentPos, vTargetPos, 0.5f);
-            m_tranform.position = vCurrentPos;
-            if (vCurrentPos==vTargetPos)
+            _currentPos = Vector2.MoveTowards(_currentPos, _targetPos, 0.5f);
+            _transform.position = _currentPos;
+            if (_currentPos==_targetPos)
             {
-                iIndexOfPath ++;
-                if(iIndexOfPath>=iTotalPoinOnPath)
+                _pathIndex ++;
+                if(_pathIndex>=_pointOnPath)
                 {
-                    bAllowMove = false;
-                    EventController.OnBulletCompletedInvoke(EnumController.WEAPON.bazoka, vCurrentPos,fRange, iDamage);//event
-                    m_gameobject.SetActive(false);
+                    _allowMove = false;
+                    EventController.OnBulletCompletedInvoke(EnumController.WEAPON.bazoka, _currentPos,_rang, _damage);//event
+                    _gameobject.SetActive(false);
                 }
                 else
                 {
-                    vTargetPos = PATH[iIndexOfPath];
-                    Rotation(vTargetPos);
+                    _targetPos = _path[_pathIndex];
+                    Rotation(_targetPos);
                 }
             }
        
@@ -78,10 +77,10 @@ namespace MODULES.Soldiers.Bullets
         float angle;
         private void Rotation(Vector2 _targetpos)
         {
-            moveDirection = _targetpos - vCurrentPos;
+            moveDirection = _targetpos - _currentPos;
             angle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
             m_quaGoalDirection = Quaternion.AngleAxis(angle, Vector3.forward);
-            m_tranform.rotation = Quaternion.RotateTowards(m_tranform.rotation, m_quaGoalDirection, 30.0f);
+            _transform.rotation = Quaternion.RotateTowards(_transform.rotation, m_quaGoalDirection, 30.0f);
 
         }
 
@@ -90,8 +89,8 @@ namespace MODULES.Soldiers.Bullets
         private void CopyList(List<Vector2> _from, List<Vector2> _to)
         {
             _to.Clear();
-            iTotalPoinOnPath = _from.Count;
-            for (int i = 0; i < iTotalPoinOnPath; i++)
+            _pointOnPath = _from.Count;
+            for (int i = 0; i < _pointOnPath; i++)
             {
                 _to.Add(_from[i]);
             }
@@ -106,7 +105,7 @@ namespace MODULES.Soldiers.Bullets
             if (_time <= 0)
             {
                 _smock = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.smock_of_bazoka).Get();
-                _smock.transform.position = vCurrentPos;
+                _smock.transform.position = _currentPos;
                 _smock.SetActive(true);
                 _time = 0.03f;
             }

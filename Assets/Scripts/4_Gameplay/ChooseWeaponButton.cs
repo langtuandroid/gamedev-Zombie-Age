@@ -48,7 +48,7 @@ namespace _4_Gameplay
         private void Take()
         {
             SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
-            Soldier.Instance.WEAPON_MANAGER.ChooseWeapon(_gunData.DATA.eWeapon);
+            Soldier.Instance._weaponManager.WeaponChoose(_gunData.DATA.eWeapon);
         }
         
         private void Shoot(GunData gundata)
