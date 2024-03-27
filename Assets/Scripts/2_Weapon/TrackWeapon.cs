@@ -36,7 +36,8 @@ public class TrackWeapon : MonoBehaviour
         buEquip.image.sprite = sprButtonGray;
 
         //UNLOCK
-        if (GUN_DATA.bUNLOCKED)
+        //if (GUN_DATA.bUNLOCKED) 
+        if(true) //TODO Remove test only
         {
             imaLock.color = Color.white * 0.0f;
             imaIcon.sprite = GUN_DATA.sprIcon;

@@ -96,7 +96,7 @@ public class ButtonLevel : MonoBehaviour
                     else
                     {
                         buButtonLevel.image.sprite = MainCode_LevelSelection.Instance.sprLockedLevelSprite;
-                        Unlock = false;
+                        Unlock = true; //TODO Remove for test only
                         txtLevel.color = Color.white * 0.75f;
                     }
 
