@@ -9,8 +9,8 @@ namespace SCREENS
         public Button buClose;
         public Button buWacthAds1, buWacthAds2, buWacthAds3, buWacthAds4;
         public static int iIndex = 1;
-        // Start is called before the first frame update
-        void Start()
+
+        private void Start()
         {
             buClose.onClick.AddListener(() => SetButton(buClose));
 

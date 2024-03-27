@@ -4,11 +4,12 @@ using MANAGERS;
 using MODULES.Scriptobjectable;
 using SCREENS;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace _3_LevelSelection
 {
-    public class MainCode_LevelSelection : MonoBehaviour
+    public class LevelSelectionController : MonoBehaviour
     {
         [System.Serializable]
         public class DifficuftPopup
@@ -141,7 +142,7 @@ namespace _3_LevelSelection
                 if (_bu == buClose)
                 {
                     TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_back);//sound
-                    MainCode_LevelSelection.Instance.SetActiveDifficuftPopup(false);
+                    LevelSelectionController.Instance.SetDifficultPopUp(false);
                 }
                 else if (_bu == buEasy)
                 {
@@ -204,81 +205,80 @@ namespace _3_LevelSelection
 
             }
         }
+        
+        public static LevelSelectionController Instance;
 
+        [FormerlySerializedAs("POPUP_DIFFICUFT")] [SerializeField] private GameObject _popupDifficult;
+        [FormerlySerializedAs("m_DifficuftPopup")] [SerializeField] private DifficuftPopup _difficultPopup;
+        [FormerlySerializedAs("m_animatorOfLevelBoard")] [SerializeField] private Animator _animatorOfLevelBoard;
 
-
-        public static MainCode_LevelSelection Instance;
-
-        public GameObject POPUP_DIFFICUFT;
-        //public Transform m_tranOfRay;
-        public DifficuftPopup m_DifficuftPopup;
-        [SerializeField] Animator m_animatorOfLevelBoard;
-
+        
         [Space(30)]
-        [SerializeField] Button buMapNext;
-        [SerializeField] Button buMapBack;
-        [SerializeField] Button buShop;
-        [SerializeField] Button buVideoReward;
-        [SerializeField] Button buSetting;
-        [SerializeField] Button buUpgrade;
-        [SerializeField] Button buBugReport;
+        [FormerlySerializedAs("buMapNext")] [SerializeField] private Button _mapNextButton;
+        [FormerlySerializedAs("buMapBack")] [SerializeField] private Button _backMapButton;
+        [FormerlySerializedAs("buShop")] [SerializeField] private Button _shopButton;
+        [FormerlySerializedAs("buVideoReward")] [SerializeField] private Button _vireoRevardButton;
+        [FormerlySerializedAs("buSetting")] [SerializeField] private Button _settingsButton;
+        [FormerlySerializedAs("buUpgrade")] [SerializeField] private Button _upgradeButton;
+        [FormerlySerializedAs("buBugReport")] [SerializeField] private Button _bugSupportButton;
 
 
+        
         [Space(20)]
-        [SerializeField] Text txtCountMap;
-        [SerializeField] Text txtTotalStar;
+        [FormerlySerializedAs("txtCountMap")] [SerializeField] private Text _countMapText;
+        [FormerlySerializedAs("txtTotalStar")] [SerializeField] private Text _totalStarText;
 
 
+        
         [Header("*** CONFIG SPRITE ***")]
         [Space(30)]
-        public Transform GROUP_LEVEL_BUTTONS;
-        public Sprite sprCurrentLevelSprite;
-        public Sprite sprLockedLevelSprite;
-        public List<Sprite> SPRITE_OF_LEVEL;
+        [FormerlySerializedAs("GROUP_LEVEL_BUTTONS")][SerializeField] private Transform _levelButtonGroup;
+        [FormerlySerializedAs("sprCurrentLevelSprite")] [SerializeField] private Sprite _levelSprites;
+        [FormerlySerializedAs("sprLockedLevelSprite")] [SerializeField] private Sprite _lockedLevelSprite;
+        [FormerlySerializedAs("SPRITE_OF_LEVEL")] [SerializeField] private List<Sprite> _spriteOfLevel;
 
         [Space(20)]
-        public Transform tranRay;
+        [SerializeField] private Transform tranRay;
+        
         private Vector3 vEuler;
-
-
         private int iIndexOfMap;
         private int iTotalLevelButton;
         private int iTotalMap = 3;
 
+        public Sprite LevelCurrSprite => _levelSprites;
+        public Sprite LockedSprite => _lockedLevelSprite;
+        public List<Sprite> SpriteOfLevels => _spriteOfLevel;
         private void Awake()
         {
             if (Instance == null)
                 Instance = this;
             TheUiManager.Instance.SetCameraForPopupCanvas(Camera.main);//set camera
 
-            //----------
             iTotalMap = Mathf.CeilToInt(TheDataManager.Instance.TOTAL_LEVEL_IN_GAME / 15.0f);
             iIndexOfMap = (int)(TheDataManager.Instance.THE_DATA_PLAYER.LIST_STAR.Count / 15.0f);
         }
-
-        // Start is called before the first frame update
-        void Start()
+        
+        private void Start()
         {
-            buMapNext.onClick.AddListener(() => SetButton(buMapNext));
-            buMapBack.onClick.AddListener(() => SetButton(buMapBack));
+            _mapNextButton.onClick.AddListener(() => AssignButtons(_mapNextButton));
+            _backMapButton.onClick.AddListener(() => AssignButtons(_backMapButton));
 
-            buSetting.onClick.AddListener(() => SetButton(buSetting));
-            buShop.onClick.AddListener(() => SetButton(buShop));
-            buVideoReward.onClick.AddListener(() => SetButton(buVideoReward));
-            buBugReport.onClick.AddListener(() => SetButton(buBugReport));
-            buUpgrade.onClick.AddListener(() => SetButton(buUpgrade));
-
-
-
-            iTotalLevelButton = GROUP_LEVEL_BUTTONS.childCount;
-            InitMap(iIndexOfMap);
-            txtTotalStar.text = TheDataManager.Instance.THE_DATA_PLAYER.GetTotalStar().ToString();
+            _settingsButton.onClick.AddListener(() => AssignButtons(_settingsButton));
+            _shopButton.onClick.AddListener(() => AssignButtons(_shopButton));
+            _vireoRevardButton.onClick.AddListener(() => AssignButtons(_vireoRevardButton));
+            _bugSupportButton.onClick.AddListener(() => AssignButtons(_bugSupportButton));
+            _upgradeButton.onClick.AddListener(() => AssignButtons(_upgradeButton));
 
 
-            m_DifficuftPopup.Init();
 
-            //CHECK IN
-            CheckIn(0.5f);
+            iTotalLevelButton = _levelButtonGroup.childCount;
+            ConstructMap(iIndexOfMap);
+            _totalStarText.text = TheDataManager.Instance.THE_DATA_PLAYER.GetTotalStar().ToString();
+
+
+            _difficultPopup.Init();
+
+            Check(0.5f);
         }
 
 
@@ -287,9 +287,8 @@ namespace _3_LevelSelection
             vEuler.z -= 0.2f;
             tranRay.eulerAngles = vEuler;
         }
-
-        //SET BUTTON FUNCTION
-        private void SetButton(Button _bu)
+        
+        private void AssignButtons(Button button)
         {
             //for tutorial
             if (TheTutorialManager.Instance)
@@ -297,7 +296,7 @@ namespace _3_LevelSelection
                 if (!TheTutorialManager.Instance.IsCheckRightInput()) return;
             }
 
-            if (_bu == buMapNext)
+            if (button == _mapNextButton)
             {
 
                 TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound
@@ -305,97 +304,83 @@ namespace _3_LevelSelection
                 if (iIndexOfMap == iTotalMap)
                     iIndexOfMap = 0;
 
-                InitMap(iIndexOfMap);
+                ConstructMap(iIndexOfMap);
             }
-            else if (_bu == buMapBack)
+            else if (button == _backMapButton)
             {
                 TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_back);//sound
                 iIndexOfMap--;
                 if (iIndexOfMap < 0)
                     iIndexOfMap = iTotalMap - 1;
 
-                InitMap(iIndexOfMap);
+                ConstructMap(iIndexOfMap);
             }
-            else if (_bu == buShop)
+            else if (button == _shopButton)
             {
                 TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound
                 TheUiManager.Instance.ShowPopup(TheUiManager.POP_UP.shop);
             }
-            else if (_bu == buVideoReward)
+            else if (button == _vireoRevardButton)
             {
                 TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);
                 TheUiManager.Instance.ShowPopup(TheUiManager.POP_UP.video_reward);
             }
-            else if (_bu == buSetting)
+            else if (button == _settingsButton)
             {
                 TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);
                 TheUiManager.Instance.ShowPopup(TheUiManager.POP_UP.setting);
             }
-            else if (_bu == buUpgrade)
+            else if (button == _upgradeButton)
             {
                 TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);
                 TheUiManager.Instance.LoadScene(TheUiManager.SCENE.Upgrade);
             }
-            else if (_bu == buBugReport)
+            else if (button == _bugSupportButton)
             {
                 TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);
                 TheUiManager.Instance.ReportEmail();
             }
         }
-
-
-
-
-
-
-
-
+        
         //SHOT INDEX LEVEL BUTTON
-        private void InitMap(int _index)
+        private void ConstructMap(int _index)
         {
             tranRay.position = Vector3.one * 1000;
-            StartCoroutine(IeInitMap(_index));
+            StartCoroutine(InitMapRoutine(_index));
 
         }
-        private IEnumerator IeInitMap(int _index)
+        private IEnumerator InitMapRoutine(int _index)
         {
             yield return new WaitForSecondsRealtime(0.02f);
             Transform _child;
             for (int i = 0; i < iTotalLevelButton; i++)
             {
-                _child = GROUP_LEVEL_BUTTONS.GetChild(i);
-                _child.GetComponent<ButtonLevel>().Init(i + _index * iTotalLevelButton);
+                _child = _levelButtonGroup.GetChild(i);
+                _child.GetComponent<LvlButton>().Consruct(i + _index * iTotalLevelButton);
 
-                //ray
-                if (_child.GetComponent<ButtonLevel>().Unlock && _child.GetComponent<ButtonLevel>().iStar <= 0)
+                if (_child.GetComponent<LvlButton>().Unlock && _child.GetComponent<LvlButton>().IStar <= 0)
                     tranRay.position = _child.position;
             }
 
 
-            txtCountMap.text = (_index + 1) + "/" + (iTotalMap);
-            m_animatorOfLevelBoard.Play(0);
+            _countMapText.text = (_index + 1) + "/" + (iTotalMap);
+            _animatorOfLevelBoard.Play(0);
         }
-
-
-
-        //SHOW / HDE POPUP DIFFICUFT
-        public void SetActiveDifficuftPopup(bool _active)
+        
+        public void SetDifficultPopUp(bool _active)
         {
-            POPUP_DIFFICUFT.SetActive(_active);
+            _popupDifficult.SetActive(_active);
             if (_active)
-                m_DifficuftPopup.ShowInfo();
+                _difficultPopup.ShowInfo();
         }
-
-
-
-        //CHECK IN
-        public void CheckIn(float _timedelay)
+        
+        public void Check(float delay)
         {
-            StartCoroutine(IeShowCheckIn(_timedelay));
+            StartCoroutine(CheckRoutine(delay));
         }
-        private IEnumerator IeShowCheckIn(float _timedelay)
+        private IEnumerator CheckRoutine(float Delay)
         {
-            yield return new WaitForSecondsRealtime(_timedelay);
+            yield return new WaitForSecondsRealtime(Delay);
 
             if (TheDataManager.Instance.THE_DATA_PLAYER.IsReadyToGetCheckIn())
             {
