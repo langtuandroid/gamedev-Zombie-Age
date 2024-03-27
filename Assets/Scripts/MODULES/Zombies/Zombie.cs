@@ -3,185 +3,165 @@ using _4_Gameplay;
 using MANAGERS;
 using MODULES.Scriptobjectable;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace MODULES.Zombies
 {
     public class Zombie : MonoBehaviour
     {
-        public EnumController.ZOMBIE_STATUS eStatus;
-        public ZombieData DATA;
-        public ItemsSystem ITEM_SYSTEM;
-        public ZombieHealth HEALTH;
-
-
-
+        [FormerlySerializedAs("eStatus")] public EnumController.ZOMBIE_STATUS _zombieStatus;
+        [FormerlySerializedAs("DATA")] public ZombieData _zombieData;
+        [FormerlySerializedAs("ITEM_SYSTEM")] public ItemsSystem _itemsSystem;
+        [FormerlySerializedAs("HEALTH")] public ZombieHealth _health;
+        
         private GameObject _gameobject;
-        protected Transform _tranOfThis;
-        public Transform _tranOfHpBar;
-        public Transform _tranOfCenter;
-        public Transform _tranOfFreeze;
-        public Animator m_animator;
+        protected Transform _Transform;
+        [FormerlySerializedAs("_tranOfHpBar")] public Transform _transformHPBar;
+        [FormerlySerializedAs("_tranOfCenter")] public Transform _transformCenter;
+        [FormerlySerializedAs("_tranOfFreeze")] public Transform _transformFreeze;
+        [FormerlySerializedAs("m_animator")] public Animator Animator;
+        
+        [FormerlySerializedAs("ALIVE")] public bool _isAlive;
+        [FormerlySerializedAs("SPECIAL_STATUS")] public bool _isSpecial;
+        protected bool IsFreezing;
 
-        //Info-----------------------------------
-        public bool ALIVE = false;
-        public bool SPECIAL_STATUS = false;
-        protected bool IsFreezing; //dang bi dong băng
 
+        private float _moveSpeed;
 
-        private float fSpeedMove;
-        public float fCURRENT_SPEED
+        protected float Speed
         {
-            get { return fSpeedMove; }
-            set { fSpeedMove = value; }
+            get => _moveSpeed;
+            set => _moveSpeed = value;
         }
-        private float fReloadAttackTime;
+        
 
-
-        [Space(30)]
-        public SpriteRenderer sprItem_Hat;
-        public SpriteRenderer sprItem_Shield;
-        public SpriteRenderer sprItem_Weapon;
+        [Space(30)] 
+        [FormerlySerializedAs("sprItem_Hat")]public SpriteRenderer _hatSprite;
+        [FormerlySerializedAs("sprItem_Shield")] public SpriteRenderer _shieldSprite;
+        [FormerlySerializedAs("sprItem_Weapon")] public SpriteRenderer _weaponSprite;
 
 
         [Header("_____ TINH CHINH______")]
-        public Vector3 vScaleOfFree;
-        public Vector3 vScaleOfFire;
+        [FormerlySerializedAs("vScaleOfFree")] public Vector3 _scaleFree;
+        [FormerlySerializedAs("vScaleOfFire")] public Vector3 _scaleFire;
 
 
         private void Awake()
         {
-            _tranOfThis = transform;
+            _Transform = transform;
             _gameobject = gameObject;
 
-            ITEM_SYSTEM = new ItemsSystem(this);
+            _itemsSystem = new ItemsSystem(this);
         }
 
 
-        public virtual void Init()
+        protected virtual void Construct()
         {
 
         }
 
 
-        public void Init(Vector2 _startingPos, bool _specialStatus = false)
+        public void Constuct(Vector2 _startingPos, bool _specialStatus = false)
         {
 
             int _randSound = Random.Range(0, 100);
             if (_randSound < 50) SoundController.Instance.ZombieGruzz();//sound
 
             EventController.ZombieEvent_Born(this);//event
-            ALIVE = true;
-            SPECIAL_STATUS = _specialStatus;
+            _isAlive = true;
+            _isSpecial = _specialStatus;
             bMoveBack = false;
-
-            //Get data config
-            fSpeedMove = DATA.GetSpeed() * Random.Range(0.5f, 1.5f);
-            fReloadAttackTime = DATA.fReloadAttackTime;
-            _tranOfThis.position = _startingPos;
-            _tranOfThis.localScale = Vector3.one;
-            m_animator.speed = 1;
+            
+            _moveSpeed = _zombieData.GetSpeed() * Random.Range(0.5f, 1.5f);
+            _Transform.position = _startingPos;
+            _Transform.localScale = Vector3.one;
+            Animator.speed = 1;
             vTargetPos = new Vector2(-20, _startingPos.y);
 
-            if (!DATA.bIsBoss && SPECIAL_STATUS)//Trạng thái đặc biệt: di chuyển nhanh hơn, to hơn
+            if (!_zombieData.bIsBoss && _isSpecial)
             {
-                _tranOfThis.localScale = Vector3.one * 1.5f;
-                m_animator.speed = 2.5f;
+                _Transform.localScale = Vector3.one * 1.5f;
+                Animator.speed = 2.5f;
 
-                if (DATA.bIsFlying) fSpeedMove = DATA.GetSpeed() * 2.5f;
-                else fSpeedMove = DATA.GetSpeed() * 4.0f;
+                if (_zombieData.bIsFlying) _moveSpeed = _zombieData.GetSpeed() * 2.5f;
+                else _moveSpeed = _zombieData.GetSpeed() * 4.0f;
 
             }
-            //-------------
-            Init();
 
-            SetStatus(EnumController.ZOMBIE_STATUS.moving);
+            Construct();
+
+            ChangeStatus(EnumController.ZOMBIE_STATUS.moving);
 
         }
 
-
-        // Update is called once per frame
-        void Update()
+        private void Update()
         {
-            if (!ALIVE) return;
-            if (eStatus == EnumController.ZOMBIE_STATUS.moving)
+            if (!_isAlive) return;
+            if (_zombieStatus == EnumController.ZOMBIE_STATUS.moving)
                 Move();
         }
 
-
-
-        //SET STATUS
-        GameObject _effBlood;
-        public void SetStatus(EnumController.ZOMBIE_STATUS _status)
+        private GameObject _bloodEffect;
+        public void ChangeStatus(EnumController.ZOMBIE_STATUS _status)
         {
-            if (!ALIVE) return;
-            eStatus = _status;
+            if (!_isAlive) return;
+            _zombieStatus = _status;
             switch (_status)
             {
                 case EnumController.ZOMBIE_STATUS.moving:
-                    AnimatorPlay(EnumController.ZOMBIE_STATUS.moving);
+                    PlayAnimator(EnumController.ZOMBIE_STATUS.moving);
                     break;
                 case EnumController.ZOMBIE_STATUS.die:
-                    ALIVE = false;
+                    _isAlive = false;
                     StopAllCoroutines();
                     CancelInvoke();
-                    AnimatorPlay(EnumController.ZOMBIE_STATUS.die);
+                    PlayAnimator(EnumController.ZOMBIE_STATUS.die);
 
-                    if (!DATA.bIsFlying)
+                    if (!_zombieData.bIsFlying)
                     {
                         //blood
-                        _effBlood = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.blood_of_zombie).Get();
-                        _effBlood.transform.position = _tranOfThis.position;
-                        _effBlood.SetActive(true);
+                        _bloodEffect = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.blood_of_zombie).Get();
+                        _bloodEffect.transform.position = _Transform.position;
+                        _bloodEffect.SetActive(true);
 
                     }
 
-
-                    //Blood Exploison
-                    _effBlood = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.zombie_blood_exploison).Get();
-                    _effBlood.transform.position = _tranOfCenter.position;
-                    _effBlood.SetActive(true);
+                    _bloodEffect = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.zombie_blood_exploison).Get();
+                    _bloodEffect.transform.position = _transformCenter.position;
+                    _bloodEffect.SetActive(true);
 
                     SoundController.Instance.ZombieExplosion();//sound
 
-                    //remove freeze
                     RemoveObjFreeze();
 
                     //BOSS
-                    if (DATA.bIsBoss)
+                    if (_zombieData.bIsBoss)
                     {
-                        m_animator.speed = 0.0f;
-                        Instantiate(ObjectPoolController.Instance._bigBloodPrefab, _tranOfCenter.position, Quaternion.identity);//eff blood    
-                        SetBossActive(_gameobject, false, 3.0f);
+                        Animator.speed = 0.0f;
+                        Instantiate(ObjectPoolController.Instance._bigBloodPrefab, _transformCenter.position, Quaternion.identity);//eff blood    
+                        ActivateBoss(_gameobject, false, 3.0f);
                         return;
                     }
-                    else
-                    {
-                        EventController.ZombieEvent_Die(this);//event
-                        _tranOfThis.position = new Vector2(100, 100);
-                        _gameobject.SetActive(false);
 
-                    }
+                    EventController.ZombieEvent_Die(this);//event
+                    _Transform.position = new Vector2(100, 100);
+                    _gameobject.SetActive(false);
                     break;
                 case EnumController.ZOMBIE_STATUS.attack:
                     CancelInvoke("Attack");
-                    InvokeRepeating("Attack", DATA.fReloadAttackTime, DATA.fReloadAttackTime);
-                    AnimatorPlay(EnumController.ZOMBIE_STATUS.attack);
+                    InvokeRepeating("Attack", _zombieData.fReloadAttackTime, _zombieData.fReloadAttackTime);
+                    PlayAnimator(EnumController.ZOMBIE_STATUS.attack);
                     break;
 
             }
         }
 
-
-        //PLAY ANIMATOWR
-        protected virtual void AnimatorPlay(EnumController.ZOMBIE_STATUS _status)
+        protected virtual void PlayAnimator(EnumController.ZOMBIE_STATUS _status)
         {
 
         }
 
-
-
-        //SET ACTIVE
-        public void SetBossActive(GameObject _object, bool _active, float _timedelay)
+        private void ActivateBoss(GameObject _object, bool _active, float _timedelay)
         {
             StartCoroutine(IeSetBossActive(_object, _active, _timedelay));
         }
@@ -189,7 +169,7 @@ namespace MODULES.Zombies
         {
             yield return new WaitForSeconds(_timedelay);
 
-            Instantiate(ObjectPoolController.Instance._explosionBossPrefab, _tranOfCenter.position, Quaternion.identity);//explosion
+            Instantiate(ObjectPoolController.Instance._explosionBossPrefab, _transformCenter.position, Quaternion.identity);//explosion
             Instantiate(ObjectPoolController.Instance._bossBloodPrefab, vCURRENT_POS, Quaternion.identity);//bloss
             SoundController.Instance.Play(SoundController.SOUND.sfx_zombie_gruzz_boss);//sound
             EventController.ZombieEvent_Die(this);//event
@@ -210,21 +190,21 @@ namespace MODULES.Zombies
 
         public virtual void Move()
         {
-            vCurrentPos = _tranOfThis.position;
+            vCurrentPos = _Transform.position;
             if (!bMoveBack)
-                vCurrentPos = Vector2.MoveTowards(vCurrentPos, vTargetPos, fSpeedMove * Time.deltaTime);
+                vCurrentPos = Vector2.MoveTowards(vCurrentPos, vTargetPos, _moveSpeed * Time.deltaTime);
             else
-                vCurrentPos = Vector2.MoveTowards(vCurrentPos, -vTargetPos, 3 * fSpeedMove * Time.deltaTime);
+                vCurrentPos = Vector2.MoveTowards(vCurrentPos, -vTargetPos, 3 * _moveSpeed * Time.deltaTime);
 
             vCurrentPos.z = vCurrentPos.y;
-            _tranOfThis.position = vCurrentPos;
+            _Transform.position = vCurrentPos;
         }
 
 
         WaitForSeconds _waitmoveback = new WaitForSeconds(0.1f);
         private IEnumerator IeMoveBack()
         {
-            if (eStatus == EnumController.ZOMBIE_STATUS.moving)
+            if (_zombieStatus == EnumController.ZOMBIE_STATUS.moving)
             {
                 bMoveBack = true;
                 yield return _waitmoveback;
@@ -241,8 +221,8 @@ namespace MODULES.Zombies
             if (IsFreezing) return;
 
             //play sound
-            if (!DATA.bIsFlying) SoundController.Instance.ZombieAttack();//sound
-            EventController.ZombieEvent_OnZombieAttack(HEALTH.GetDamage());
+            if (!_zombieData.bIsFlying) SoundController.Instance.ZombieAttack();//sound
+            EventController.ZombieEvent_OnZombieAttack(_health.GetDamage());
         }
 
 
@@ -259,16 +239,16 @@ namespace MODULES.Zombies
         private float _disToGetDamage;// khoan cach de dinh dan
         public void HitBullet(EnumController.WEAPON _weapon, Vector2 _posOfBullet, float _range, int _damage)
         {
-            if (!ALIVE) return;
-            _disFromBullet = Vector2.Distance(_tranOfCenter.position, _posOfBullet);
+            if (!_isAlive) return;
+            _disFromBullet = Vector2.Distance(_transformCenter.position, _posOfBullet);
             //for boss
-            if (DATA.bIsBoss && _disFromBullet > _range * 1.5f) return;
-            if (!DATA.bIsBoss && _disFromBullet > _range) return;
+            if (_zombieData.bIsBoss && _disFromBullet > _range * 1.5f) return;
+            if (!_zombieData.bIsBoss && _disFromBullet > _range) return;
 
             if (_weapon != EnumController.WEAPON.firegun)
             {
                 StartCoroutine(IeMoveBack());
-                HEALTH.ReduceHp(_damage); //trừ máu     
+                _health.ReduceHp(_damage); //trừ máu     
             }
             else // fire gun: Trừ theo thời gian.
             {
@@ -289,16 +269,16 @@ namespace MODULES.Zombies
 
             //EFFECT
             _fire = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.fire_of_enemies).Get();
-            _fire.transform.localScale = vScaleOfFire;
-            if (SPECIAL_STATUS)
+            _fire.transform.localScale = _scaleFire;
+            if (_isSpecial)
                 _fire.transform.localScale *= 1.3f;
 
-            _fire.transform.SetParent(_tranOfCenter);
+            _fire.transform.SetParent(_transformCenter);
             _fire.transform.localPosition = Vector3.zero;
             _fire.SetActive(true);
             for (int i = 0; i < 15; i++)
             {
-                HEALTH.ReduceHp(_damage / 15);
+                _health.ReduceHp(_damage / 15);
                 yield return _delay;
             }
             RemoveFireOfFiregun();
@@ -322,11 +302,11 @@ namespace MODULES.Zombies
         Vector3 vHpScale = new Vector3(1, 0.9f, 1);
         public void ShowHpBar(float _factor)
         {
-            if (!DATA.bIsBoss)
+            if (!_zombieData.bIsBoss)
             {
-                if (_tranOfHpBar == null) return;
+                if (_transformHPBar == null) return;
                 vHpScale.x = _factor;
-                _tranOfHpBar.localScale = vHpScale;
+                _transformHPBar.localScale = vHpScale;
             }
             else
             {
@@ -384,7 +364,7 @@ namespace MODULES.Zombies
             switch (_support)
             {
                 case EnumController.SUPPORT.grenade:
-                    HEALTH.ReduceHp(_supportdata.GetDamage());
+                    _health.ReduceHp(_supportdata.GetDamage());
                     break;
 
                 case EnumController.SUPPORT.freeze:
@@ -397,7 +377,7 @@ namespace MODULES.Zombies
 
                     break;
                 case EnumController.SUPPORT.big_bomb:
-                    HEALTH.ReduceHp(_supportdata.GetDamage());
+                    _health.ReduceHp(_supportdata.GetDamage());
 
                     break;
             }
@@ -407,11 +387,11 @@ namespace MODULES.Zombies
         WaitForSeconds _wait = new WaitForSeconds(0.8f);
         private IEnumerator IeGetPoison(float _time, int _basedamage)
         {
-            float _unitdamage = HEALTH.iOriginalHp * 0.01f+_basedamage; // đốt 1% sau 1 giây
+            float _unitdamage = _health.iOriginalHp * 0.01f+_basedamage; // đốt 1% sau 1 giây
             for (int i = 0; i < _time; i++)
             {
                 yield return _wait;
-                HEALTH.ReduceHp(_unitdamage);
+                _health.ReduceHp(_unitdamage);
             }
         }
 
@@ -420,32 +400,32 @@ namespace MODULES.Zombies
         GameObject _effectFreeze = null;
         private IEnumerator IeGetFreeze(float _time)
         {
-            if (fCURRENT_SPEED != 0)
+            if (Speed != 0)
             {
                 IsFreezing = true;
 
                 //EFFECT
                 _effectFreeze = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.effect_freeze).Get();
-                _effectFreeze.transform.localScale = vScaleOfFree;
+                _effectFreeze.transform.localScale = _scaleFree;
 
-                if (SPECIAL_STATUS)
+                if (_isSpecial)
                     _effectFreeze.transform.localScale *= 1.3f;
 
-                _effectFreeze.transform.position = _tranOfFreeze.position;
-                _effectFreeze.transform.SetParent(_tranOfFreeze);
+                _effectFreeze.transform.position = _transformFreeze.position;
+                _effectFreeze.transform.SetParent(_transformFreeze);
                 _effectFreeze.SetActive(true);
 
-                float _curentspeed = fCURRENT_SPEED;
-                fCURRENT_SPEED = 0;
-                m_animator.speed = 0;
+                float _curentspeed = Speed;
+                Speed = 0;
+                Animator.speed = 0;
 
 
                 yield return new WaitForSeconds(_time);
 
                 RemoveObjFreeze();
 
-                fCURRENT_SPEED = _curentspeed;
-                m_animator.speed = 1;
+                Speed = _curentspeed;
+                Animator.speed = 1;
                 IsFreezing = false;
             }
         }
@@ -493,17 +473,17 @@ namespace MODULES.Zombies
         {
             if (_zombie == null) return;
             ZOMBIE = _zombie;
-            fDamage = _zombie.DATA.GetDamage();
+            fDamage = _zombie._zombieData.GetDamage();
 
 
 
-            iHP = _zombie.DATA.GetHp(DataController.Instance.playerData.CurrentLevel + 1, TheLevel.Instance.iCurrentWave);
+            iHP = _zombie._zombieData.GetHp(DataController.Instance.playerData.CurrentLevel + 1, TheLevel.Instance.iCurrentWave);
             // if (_zombie.SPECIAL_STATUS) iHP = (int)(iHP * 0.5f);//Nếu ở trạng thái special, thì hp giảm 1 nửa
 
 
-            if (_zombie.ITEM_SYSTEM.eHat != EnumController.HAT_OF_ZOMBIE.NO_HAT) iItemHat_Hp = (int)(iHP * 0.3f);
-            if (_zombie.ITEM_SYSTEM.eShield != EnumController.SHIELD_OF_ZOMBIE.NO_SHIELD) iItemShield_Hp = (int)(iHP * 0.5f);
-            if (_zombie.ITEM_SYSTEM.eWeapon != EnumController.WEAPON_OF_ZOMBIE.NO_WEAPON) fDamage += fDamage * 0.5f;
+            if (_zombie._itemsSystem.eHat != EnumController.HAT_OF_ZOMBIE.NO_HAT) iItemHat_Hp = (int)(iHP * 0.3f);
+            if (_zombie._itemsSystem.eShield != EnumController.SHIELD_OF_ZOMBIE.NO_SHIELD) iItemShield_Hp = (int)(iHP * 0.5f);
+            if (_zombie._itemsSystem.eWeapon != EnumController.WEAPON_OF_ZOMBIE.NO_WEAPON) fDamage += fDamage * 0.5f;
 
             //total
             iCurrentTotalHeath = iHP + iItemHat_Hp + iItemShield_Hp;
@@ -530,7 +510,7 @@ namespace MODULES.Zombies
             //show text
             _textBlood = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.text_blood).Get();
             _textBlood.GetComponent<TextValue>().SetValue((int)_value);
-            _textBlood.transform.position = ZOMBIE._tranOfCenter.position;
+            _textBlood.transform.position = ZOMBIE._transformCenter.position;
             _textBlood.SetActive(true);
 
             //shield
@@ -540,7 +520,7 @@ namespace MODULES.Zombies
                 {
                     _value -= iItemShield_Hp;
                     iItemShield_Hp = 0;
-                    ZOMBIE.ITEM_SYSTEM.RemoveShield();
+                    ZOMBIE._itemsSystem.RemoveShield();
                 }
                 else
                 {
@@ -557,7 +537,7 @@ namespace MODULES.Zombies
                 {
                     _value -= iItemHat_Hp;
                     iItemHat_Hp = 0;
-                    ZOMBIE.ITEM_SYSTEM.RemoveHat();
+                    ZOMBIE._itemsSystem.RemoveHat();
                 }
                 else
                 {
@@ -571,7 +551,7 @@ namespace MODULES.Zombies
             if (_value >= iHP)
             {
                 iHP = 0;
-                ZOMBIE.SetStatus(EnumController.ZOMBIE_STATUS.die);
+                ZOMBIE.ChangeStatus(EnumController.ZOMBIE_STATUS.die);
             }
             else
             {
@@ -610,9 +590,9 @@ namespace MODULES.Zombies
         {
             ZOMBIE = _zombie;
 
-            sprItem_Hat = ZOMBIE.sprItem_Hat;
-            sprItem_Shield = ZOMBIE.sprItem_Shield;
-            sprItem_Weapon = ZOMBIE.sprItem_Weapon;
+            sprItem_Hat = ZOMBIE._hatSprite;
+            sprItem_Shield = ZOMBIE._shieldSprite;
+            sprItem_Weapon = ZOMBIE._weaponSprite;
         }
 
         private Zombie ZOMBIE;

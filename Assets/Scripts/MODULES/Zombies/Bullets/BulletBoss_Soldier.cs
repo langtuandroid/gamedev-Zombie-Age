@@ -5,44 +5,41 @@ namespace MODULES.Zombies.Bullets
 {
     public class BulletBoss_Soldier : MonoBehaviour
     {
+        private EnumController.ZOMBIE _zombieType;
 
-        private EnumController.ZOMBIE eZombie;
-
-        private Transform _tranOfThis;
+        private Transform _transform;
         private GameObject _gameobject;
 
-        private Vector2 vTargetPos;
-        private Vector2 vCurrentPos;
-        public float fSpeed;
-        public int iDamage;
+        private Vector2 _targetPos;
+        private Vector2 _currentPos;
+        private readonly float _speed = 20;
+        private readonly int _damage = 20;
 
-        // Start is called before the first frame update
-        void Awake()
+        private void Awake()
         {
-            _tranOfThis = transform;
+            _transform = transform;
             _gameobject = gameObject;
-            vCurrentPos = _tranOfThis.position;
+            _currentPos = _transform.position;
         }
 
         private void Start()
         {
-            vTargetPos = vCurrentPos;
-            vTargetPos.x = Random.Range(-8.5f, -6.5f);
+            _targetPos = _currentPos;
+            _targetPos.x = Random.Range(-8.5f, -6.5f);
         }
 
-        // Update is called once per frame
-        GameObject _effect = null;
+        private GameObject _effect;
         public virtual void Update() //Bay thang
         {
-            vCurrentPos = _tranOfThis.position;
-            vCurrentPos = Vector2.MoveTowards(vCurrentPos, vTargetPos, Time.deltaTime * fSpeed);
+            _currentPos = _transform.position;
+            _currentPos = Vector2.MoveTowards(_currentPos, _targetPos, Time.deltaTime * _speed);
             Smock();
-            if (vCurrentPos == vTargetPos)
+            if (_currentPos == _targetPos)
             {
-                EventController.ZombieEvent_OnZombieAttack(iDamage);//attack
+                EventController.ZombieEvent_OnZombieAttack(_damage);//attack
                 //effect
                 _effect = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.main_exploison).Get();
-                _effect.transform.position = vTargetPos;
+                _effect.transform.position = _targetPos;
                 _effect.SetActive(true);
 
                 //sound
@@ -51,29 +48,23 @@ namespace MODULES.Zombies.Bullets
 
                 Destroy(_gameobject);
             }
-            _tranOfThis.position = vCurrentPos;
+            _transform.position = _currentPos;
         }
 
-
-
-
-
-
-        //SMOCK
-        GameObject _smock;
-        private float _time = 0.03f;
+        private GameObject _smockEffect;
+        private float _timeDelay = 0.03f;
         private void Smock()
         {
-            if (_time <= 0)
+            if (_timeDelay <= 0)
             {
-                _smock = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.smock_of_bazoka).Get();
-                _smock.transform.position = vCurrentPos;
-                _smock.SetActive(true);
-                _time = 0.03f;
+                _smockEffect = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.smock_of_bazoka).Get();
+                _smockEffect.transform.position = _currentPos;
+                _smockEffect.SetActive(true);
+                _timeDelay = 0.03f;
             }
             else
             {
-                _time -= Time.deltaTime;
+                _timeDelay -= Time.deltaTime;
             }
         }
 

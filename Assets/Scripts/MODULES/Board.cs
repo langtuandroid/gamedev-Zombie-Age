@@ -14,9 +14,7 @@ namespace MODULES
 
         private Button buButtonThis;
         private Text txtValue;
-
-        // Start is called before the first frame update
-
+        
         private void Awake()
         {
 

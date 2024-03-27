@@ -1,40 +1,35 @@
 ﻿using MANAGERS;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace MODULES.Zombies
 {
     public class NormalZombie : Zombie
     {
+        [FormerlySerializedAs("aniMove")]
         [Header("*** ANIMATION ****")]
         [Space(30)]
-        [SerializeField]
-        private AnimationClip aniMove;
-
-        [SerializeField]
-        private AnimationClip aniAttack;
-        [SerializeField]
-        private AnimationClip aniDie;
-
-
-
-        protected override void AnimatorPlay(EnumController.ZOMBIE_STATUS _status)
+        [SerializeField] private AnimationClip _animator;
+        [FormerlySerializedAs("aniAttack")] [SerializeField] private AnimationClip _attackAnimation;
+        [FormerlySerializedAs("aniDie")] [SerializeField] private AnimationClip _dieAnimation;
+        
+        protected override void PlayAnimator(EnumController.ZOMBIE_STATUS _status)
         {
-
             switch (_status)
             {
                 case EnumController.ZOMBIE_STATUS.moving:
-                    if (aniMove)
+                    if (_animator)
                     {
-                        m_animator.Play(aniMove.name, -1, Random.Range(0f, 1f));
+                        Animator.Play(_animator.name, -1, Random.Range(0f, 1f));
                     }
                     break;
                 case EnumController.ZOMBIE_STATUS.die:
-                    if (aniDie)
-                        m_animator.Play(aniDie.name);
+                    if (_dieAnimation)
+                        Animator.Play(_dieAnimation.name);
                     break;
                 case EnumController.ZOMBIE_STATUS.attack:
-                    if (aniAttack)
-                        m_animator.Play(aniAttack.name);
+                    if (_attackAnimation)
+                        Animator.Play(_attackAnimation.name);
                     break;
 
             }

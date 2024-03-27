@@ -1,49 +1,51 @@
 ﻿using System.Collections;
 using MANAGERS;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace MODULES.Zombies
 {
     public class ZombieBoss : Zombie
     {
-        public enum Status
+        private enum Status
         {
             walk,
             idie,
             attack,
         }
-        [SerializeField] Status ebossStatus = Status.walk;
+        [FormerlySerializedAs("ebossStatus")] [SerializeField] Status _boosState = Status.walk;
 
-        [SerializeField] GameObject prefabBossBullet;
-        [SerializeField] Transform m_TranOfOriginalBulletPos;
+        [FormerlySerializedAs("prefabBossBullet")] [SerializeField] GameObject _bulletPrefab;
+        [FormerlySerializedAs("m_TranOfOriginalBulletPos")] [SerializeField] Transform _originalBulletPos;
+        
         [Space(30)]
-        [SerializeField] AnimationClip aniIdie;
-        [SerializeField] AnimationClip aniAttack, aniWalk;
+        [FormerlySerializedAs("aniIdie")] [SerializeField] AnimationClip _idleAnimation;
+        [FormerlySerializedAs("aniAttack")] [SerializeField] AnimationClip _atackAnimation;
+        [FormerlySerializedAs("aniWalk")] [SerializeField] AnimationClip _walkAnimation;
 
-        // private Vector3 vThisTargetPos;
-        public override void Init()
+        protected override void Construct()
         {        
-            vCurrentPos = _tranOfThis.position;
+            vCurrentPos = _Transform.position;
             vTargetPos = GetTargetPos();
-            m_animator.Play(aniWalk.name);
+            Animator.Play(_walkAnimation.name);
         }
 
         public override void Move()
         {
-            if (ebossStatus != Status.walk) return;
+            if (_boosState != Status.walk) return;
             if (!IsFreezing)
-                m_animator.Play(aniWalk.name);
+                Animator.Play(_walkAnimation.name);
 
-            vCurrentPos = Vector2.MoveTowards(vCurrentPos, vTargetPos, fCURRENT_SPEED * Time.deltaTime);
+            vCurrentPos = Vector2.MoveTowards(vCurrentPos, vTargetPos, Speed * Time.deltaTime);
             if (vCurrentPos == vTargetPos)
             {
                 vTargetPos = GetTargetPos();
-                ebossStatus = Status.idie;
-                m_animator.Play(aniIdie.name);
-                StartCoroutine(IeShot());
+                _boosState = Status.idie;
+                Animator.Play(_idleAnimation.name);
+                StartCoroutine(ShootCoroutine());
             }
             vCurrentPos.z = vCurrentPos.y;
-            _tranOfThis.position = vCurrentPos;
+            _Transform.position = vCurrentPos;
         }
 
 
@@ -56,30 +58,24 @@ namespace MODULES.Zombies
 
         //SHOT
         GameObject _bullet = null;
-        Vector2 _targetposofbullet;
+
+        private WaitForSeconds _attackTime = new(2.0f);
+        private WaitForSeconds _waitToShootTime = new(0.3f);
+        private WaitForSeconds _shootCooldown = new(0.1f);
+        private WaitForSeconds _idleCooldown = new(0.5f);
+        private WaitForSeconds _waitToWalk = new(2.0f);
 
 
-        WaitForSeconds _waitToAttack = new WaitForSeconds(2.0f);
-        WaitForSeconds _waitToShot = new WaitForSeconds(0.3f);
-        WaitForSeconds _waitToShot2 = new WaitForSeconds(0.1f);
-        WaitForSeconds _waitToIdie = new WaitForSeconds(0.5f);
-        WaitForSeconds _waitToWalk = new WaitForSeconds(2.0f);
-
-
-        private IEnumerator IeShot()
+        private IEnumerator ShootCoroutine()
         {
-            if (!ALIVE) yield break;
-            yield return _waitToAttack;
+            if (!_isAlive) yield break;
+            yield return _attackTime;
             if (IsFreezing) goto RESET;
 
-            ebossStatus = Status.attack;
-            m_animator.Play(aniAttack.name);//player animation;
-            _targetposofbullet.x = Random.Range(-8.0f, -5.0f);
-            //_targetposofbullet.y = Random.Range(-3.0f, 3.0f);
-            _targetposofbullet.y = m_TranOfOriginalBulletPos.position.y;
-
-            //sound shot
-            switch (DATA.eZombie)
+            _boosState = Status.attack;
+            Animator.Play(_atackAnimation.name);
+    
+            switch (_zombieData.eZombie)
             {
                 case EnumController.ZOMBIE.boss_mug:
                     SoundController.Instance.Play(SoundController.SOUND.sfx_zom_bullet_explosion);
@@ -93,50 +89,54 @@ namespace MODULES.Zombies
             }
 
 
-            yield return _waitToShot;
+            yield return _waitToShootTime;
             if (IsFreezing) goto RESET;
 
        
-            if(DATA.eZombie== EnumController.ZOMBIE.boss_frog)
+            switch (_zombieData.eZombie)
             {
-                /// yield return _waitToShot;
-                if (IsFreezing) goto RESET;
-                Instantiate(prefabBossBullet, m_TranOfOriginalBulletPos.position, Quaternion.identity);
+                case EnumController.ZOMBIE.boss_frog:
+                {
+                    if (IsFreezing) goto RESET;
+                    Instantiate(_bulletPrefab, _originalBulletPos.position, Quaternion.identity);
 
-                yield return _waitToShot2;
-                if (IsFreezing) goto RESET;
-                Instantiate(prefabBossBullet, m_TranOfOriginalBulletPos.position, Quaternion.identity);
+                    yield return _shootCooldown;
+                    if (IsFreezing) goto RESET;
+                    Instantiate(_bulletPrefab, _originalBulletPos.position, Quaternion.identity);
 
-                yield return _waitToShot2;
-                if (IsFreezing) goto RESET;
-                Instantiate(prefabBossBullet, m_TranOfOriginalBulletPos.position, Quaternion.identity);
+                    yield return _shootCooldown;
+                    if (IsFreezing) goto RESET;
+                    Instantiate(_bulletPrefab, _originalBulletPos.position, Quaternion.identity);
+                    break;
+                }
+                case EnumController.ZOMBIE.boss_mug:
+                {
+                    // yield return _waitToShot;
+                    if (IsFreezing) goto RESET;
+                    Instantiate(_bulletPrefab, _originalBulletPos.position, Quaternion.identity);
+
+                    yield return _shootCooldown;
+                    if (IsFreezing) goto RESET;
+                    Instantiate(_bulletPrefab, _originalBulletPos.position, Quaternion.identity);
+                    break;
+                }
+                case EnumController.ZOMBIE.boss_soldier:
+                {
+                    //yield return _waitToShot;
+                    if (IsFreezing) goto RESET;
+                    Instantiate(_bulletPrefab, _originalBulletPos.position, Quaternion.identity);
+                    break;
+                }
             }
-            else if ( DATA.eZombie== EnumController.ZOMBIE.boss_mug)
-            {
-                // yield return _waitToShot;
-                if (IsFreezing) goto RESET;
-                Instantiate(prefabBossBullet, m_TranOfOriginalBulletPos.position, Quaternion.identity);
-
-                yield return _waitToShot2;
-                if (IsFreezing) goto RESET;
-                Instantiate(prefabBossBullet, m_TranOfOriginalBulletPos.position, Quaternion.identity);
-
-            }
-            else if (DATA.eZombie == EnumController.ZOMBIE.boss_soldier)
-            {
-                //yield return _waitToShot;
-                if (IsFreezing) goto RESET;
-                Instantiate(prefabBossBullet, m_TranOfOriginalBulletPos.position, Quaternion.identity);
-            }
 
 
-            yield return _waitToIdie;
+            yield return _idleCooldown;
             if (IsFreezing) goto RESET;
-            m_animator.Play(aniIdie.name);//player animation;
+            Animator.Play(_idleAnimation.name);//player animation;
 
             yield return _waitToWalk;
             RESET:
-            ebossStatus = Status.walk;
+            _boosState = Status.walk;
 
         }
     }

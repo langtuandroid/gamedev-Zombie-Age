@@ -5,66 +5,59 @@ namespace MODULES.Zombies.Bullets
 {
     public class ZombieBullet : MonoBehaviour
     {
+        private EnumController.ZOMBIE _zombieType;
 
-        private EnumController.ZOMBIE eZombie;
-
-        private SpriteRenderer m_SpriteRenderer;
-        private Transform _tranOfThis;
+        private SpriteRenderer _spriteRenderer;
+        private Transform _transform;
         private GameObject _gameobject;
 
-        private Vector2 vTargetPos;
-        private Vector2 vCurrentPos;
-        public float fSpeed;
+        private Vector2 _targetPos;
+        private Vector2 _currentPos;
+        private float _speed = 15;
 
-        private float fDamage;
-        // Start is called before the first frame update
-        void Awake()
+        private float _damage;
+
+        private void Awake()
         {
-            m_SpriteRenderer = GetComponent<SpriteRenderer>();
-            _tranOfThis = transform;
+            _spriteRenderer = GetComponent<SpriteRenderer>();
+            _transform = transform;
             _gameobject = gameObject;
         }
 
-        // Update is called once per frame
-        public virtual void Update() //Bay thang
+        public virtual void Update() 
         {
-            vCurrentPos = _tranOfThis.position;
-            vCurrentPos = Vector2.MoveTowards(vCurrentPos, vTargetPos, Time.deltaTime * fSpeed);
-            if (vCurrentPos == vTargetPos)
+            _currentPos = _transform.position;
+            _currentPos = Vector2.MoveTowards(_currentPos, _targetPos, Time.deltaTime * _speed);
+            if (_currentPos == _targetPos)
             {
-                BulletComplete();
+                BulletDone();
                 _gameobject.SetActive(false);
             }
-            _tranOfThis.position = vCurrentPos;
+            _transform.position = _currentPos;
         }
 
-
-
-
-
-        //Setup
-        public void SetBullet(EnumController.ZOMBIE _zombie, float  _damage, Vector2 _to, Vector3 _scale, Sprite _sprite)
+        
+        public void ConstructBullet(EnumController.ZOMBIE _zombie, float  _damage, Vector2 _to, Vector3 _scale, Sprite _sprite)
         {
-            m_SpriteRenderer.sprite = _sprite;
-            vTargetPos = _to;
-            eZombie = _zombie;
-            fDamage = _damage;
-            _tranOfThis.localScale = _scale;
+            _spriteRenderer.sprite = _sprite;
+            _targetPos = _to;
+            _zombieType = _zombie;
+            this._damage = _damage;
+            _transform.localScale = _scale;
         }
 
-        //bullet complete
-        public virtual void BulletComplete()
+        protected virtual void BulletDone()
         {
 
-            EventController.OnZombieBulletCompletedInvoke(eZombie, vTargetPos);
-            EventController.ZombieEvent_OnZombieAttack(fDamage);//attack
+            EventController.OnZombieBulletCompletedInvoke(_zombieType, _targetPos);
+            EventController.ZombieEvent_OnZombieAttack(_damage);//attack
 
         }
 
 
         private void OnDisable()
         {
-            _tranOfThis.position = new Vector2(100, 100);
+            _transform.position = new Vector2(100, 100);
         }
     }
 }

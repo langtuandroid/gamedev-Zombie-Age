@@ -55,7 +55,7 @@ namespace MANAGERS
             {
                 for (int i = 0; i < _zombieNum; i++)
                 {
-                    if (!_zombiesList[i].ALIVE)
+                    if (!_zombiesList[i]._isAlive)
                     {
                         return _zombiesList[i];
                     }

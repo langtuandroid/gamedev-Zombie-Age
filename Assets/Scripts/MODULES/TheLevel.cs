@@ -227,8 +227,8 @@ namespace MODULES
                             ZombieController.Instance._zombiesInWave++;
                             GameObject _boss = Instantiate(LEVEL_DATA.prefabBoss, _tempPos, Quaternion.identity);//boss
                             Zombie _Boss = _boss.GetComponent<Zombie>();
-                            _Boss.Init(_tempPos);
-                            _Boss.HEALTH = new ZombieHealth(_Boss);
+                            _Boss.Constuct(_tempPos);
+                            _Boss._health = new ZombieHealth(_Boss);
                         }
                         #endregion
 
@@ -238,27 +238,27 @@ namespace MODULES
 
                         _specialStatusForZombie = Random.Range(0, 100);
                         if (_specialStatusForZombie <= LEVEL_DATA.iConfigSpecialStatus)
-                            _tempZombie.Init(_tempPos, true); //zombie o trang thai dac biet
+                            _tempZombie.Constuct(_tempPos, true); //zombie o trang thai dac biet
                         else
-                            _tempZombie.Init(_tempPos);
+                            _tempZombie.Constuct(_tempPos);
 
 
                         //-------------- items-------------------
-                        if (_unitWave._ZombieDataConfig.IsHat()) _tempZombie.ITEM_SYSTEM.SetItem(_unitWave._ZombieDataConfig.eHat);
-                        else _tempZombie.ITEM_SYSTEM.SetItem(EnumController.HAT_OF_ZOMBIE.NO_HAT);
+                        if (_unitWave._ZombieDataConfig.IsHat()) _tempZombie._itemsSystem.SetItem(_unitWave._ZombieDataConfig.eHat);
+                        else _tempZombie._itemsSystem.SetItem(EnumController.HAT_OF_ZOMBIE.NO_HAT);
 
-                        if (_unitWave._ZombieDataConfig.IsWeapon()) _tempZombie.ITEM_SYSTEM.SetItem(_unitWave._ZombieDataConfig.eWeapon);
-                        else _tempZombie.ITEM_SYSTEM.SetItem(EnumController.WEAPON_OF_ZOMBIE.NO_WEAPON);
+                        if (_unitWave._ZombieDataConfig.IsWeapon()) _tempZombie._itemsSystem.SetItem(_unitWave._ZombieDataConfig.eWeapon);
+                        else _tempZombie._itemsSystem.SetItem(EnumController.WEAPON_OF_ZOMBIE.NO_WEAPON);
 
 
-                        if (_unitWave._ZombieDataConfig.IsShield()) _tempZombie.ITEM_SYSTEM.SetItem(_unitWave._ZombieDataConfig.eShield);
-                        else _tempZombie.ITEM_SYSTEM.SetItem(EnumController.SHIELD_OF_ZOMBIE.NO_SHIELD);
+                        if (_unitWave._ZombieDataConfig.IsShield()) _tempZombie._itemsSystem.SetItem(_unitWave._ZombieDataConfig.eShield);
+                        else _tempZombie._itemsSystem.SetItem(EnumController.SHIELD_OF_ZOMBIE.NO_SHIELD);
 
 
 
 
                         //-------------- health -----------------
-                        _tempZombie.HEALTH = new ZombieHealth(_tempZombie);
+                        _tempZombie._health = new ZombieHealth(_tempZombie);
 
                         //-------------- update zombie wave bar -----------
                         iCountZombie++;
@@ -283,7 +283,7 @@ namespace MODULES
         {
             if (collision)
             {
-                collision.GetComponent<Zombie>().SetStatus(EnumController.ZOMBIE_STATUS.attack);
+                collision.GetComponent<Zombie>().ChangeStatus(EnumController.ZOMBIE_STATUS.attack);
             }
         }
 

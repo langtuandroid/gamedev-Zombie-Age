@@ -1,79 +1,69 @@
 ﻿using MANAGERS;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace MODULES.Zombies.Bullets
 {
     public class BulletBossFrog : MonoBehaviour
     {
-        public EnumController.ZOMBIE eZombie;
-        public int iDamage;
+        [FormerlySerializedAs("iDamage")] public int _damage;
+        private Bezier _bezier = new ();
+        private Transform _transform;
+        private GameObject _gameobject;
 
+        private float _speed = 1.0f;
 
-        private Bezier m_Bezier = new Bezier();
-        private Transform m_tranform;
-        private GameObject m_gameobject;
+        private Vector2 _tagetPos;
+        private Vector2 _currentPos;
+        private Vector2 _originalPos;
+        
+        private float _timeBezier;
 
-        private float fSpeed = 1.0f;
-
-        private Vector2 vTagetPos = new Vector2();
-        private Vector2 vCurrentPos;
-        private Vector2 vOriginalPos;
-
-
-        private float fTimeBezier = 0.0f;
-        // Start is called before the first frame update
         void Start()
         {
-            m_gameobject = gameObject;
-            m_tranform = transform;
+            _gameobject = gameObject;
+            _transform = transform;
 
-            vTagetPos.x = Random.Range(-8.5f, -6.6f);
-            vTagetPos.y = Random.Range(-1.0f, 4.0f);
-
-            // vCurrentPos = m_tranform.position;
-            vOriginalPos = m_tranform.position;
+            _tagetPos.x = Random.Range(-8.5f, -6.6f);
+            _tagetPos.y = Random.Range(-1.0f, 4.0f);
+            
+            _originalPos = _transform.position;
         }
 
-
-        GameObject _effect = null;
+        private GameObject _effect;
         private void Update()
         {
-            fTimeBezier += Time.deltaTime * fSpeed;
-            vCurrentPos = m_Bezier.Get(vOriginalPos, vTagetPos, 5.0f, fTimeBezier);
-            m_tranform.position = vCurrentPos;
+            _timeBezier += Time.deltaTime * _speed;
+            _currentPos = _bezier.Get(_originalPos, _tagetPos, 5.0f, _timeBezier);
+            _transform.position = _currentPos;
 
-            Smock();//smock
+            Smock();
 
-
-            if (fTimeBezier >= 0.95f)
+            if (_timeBezier >= 0.95f)
             {
 
-                EventController.ZombieEvent_OnZombieAttack(iDamage);//attack
-                //effect
+                EventController.ZombieEvent_OnZombieAttack(_damage);//attack
                 _effect = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.main_exploison).Get();
-                _effect.transform.position = vCurrentPos;
+                _effect.transform.position = _currentPos;
                 _effect.SetActive(true);
-
-                //sound
+                
                 SoundController.Instance.Play(SoundController.SOUND.sfx_explosion_grenade);
 
 
-                Destroy(m_gameobject);
+                Destroy(_gameobject);
             }
         }
 
 
-
-        //SMOCK
-        GameObject _smock;
+        private GameObject _smockEffect;
         private float _time = 0.03f;
         private void Smock()
         {
             if (_time <= 0)
             {
-                _smock = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.smock_of_bazoka).Get();
-                _smock.transform.position = vCurrentPos;
-                _smock.SetActive(true);
+                _smockEffect = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.smock_of_bazoka).Get();
+                _smockEffect.transform.position = _currentPos;
+                _smockEffect.SetActive(true);
                 _time = 0.03f;
             }
             else

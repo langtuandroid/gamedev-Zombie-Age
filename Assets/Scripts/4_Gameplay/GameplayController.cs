@@ -322,7 +322,7 @@ namespace _4_Gameplay
         
         private void HandleZombieBorn(Zombie _zombie)
         {
-            if (_zombie.DATA.bIsBoss)
+            if (_zombie._zombieData.bIsBoss)
             {
                 _bossHpBar.Activate(true);
             }
@@ -330,7 +330,7 @@ namespace _4_Gameplay
         
         private void HandleZombieDie(Zombie _zombie)
         {
-            if (_zombie.DATA.bIsBoss)
+            if (_zombie._zombieData.bIsBoss)
             {
                 _bossHpBar.Activate(false);
             }
