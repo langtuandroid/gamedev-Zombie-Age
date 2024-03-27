@@ -138,11 +138,11 @@ namespace MODULES.Scriptobjectable
 
             int _damage = LIST_DAMAGE[(int)_level];
 
-            if (TheUpgradeManager.Instance.GetUpgrade(TheEnumManager.KIND_OF_UPGRADE.weapon_damage5).bEQUIPED)
+            if (TheUpgradeManager.Instance.GetUpgrade(TheEnumManager.UpgradeType.weapon_damage5).bEQUIPED)
             {
                 _damage = (int)(_damage * 1.05f);
             }
-            if (TheUpgradeManager.Instance.GetUpgrade(TheEnumManager.KIND_OF_UPGRADE.weapon_damage_10).bEQUIPED)
+            if (TheUpgradeManager.Instance.GetUpgrade(TheEnumManager.UpgradeType.weapon_damage_10).bEQUIPED)
             {
                 _damage = (int)(_damage * 1.1f);
             }

@@ -80,21 +80,21 @@ namespace MODULES.Scriptobjectable
         public float GetSpeed()
         {
             float _tempSpeed = fSpeed;
-            if (TheUpgradeManager.Instance.GetUpgrade(TheEnumManager.KIND_OF_UPGRADE.zombie_all_speed10).bEQUIPED)
+            if (TheUpgradeManager.Instance.GetUpgrade(TheEnumManager.UpgradeType.zombie_all_speed10).bEQUIPED)
             {
                 _tempSpeed = _tempSpeed * 0.9f;
             }
 
             if (bIsFlying)
             {
-                if (TheUpgradeManager.Instance.GetUpgrade(TheEnumManager.KIND_OF_UPGRADE.zombie_airforce_speed20).bEQUIPED)
+                if (TheUpgradeManager.Instance.GetUpgrade(TheEnumManager.UpgradeType.zombie_airforce_speed20).bEQUIPED)
                 {
                     _tempSpeed = _tempSpeed * 0.8f;
                 }
             }
             else
             {
-                if (TheUpgradeManager.Instance.GetUpgrade(TheEnumManager.KIND_OF_UPGRADE.zombie_infantry_speed20).bEQUIPED)
+                if (TheUpgradeManager.Instance.GetUpgrade(TheEnumManager.UpgradeType.zombie_infantry_speed20).bEQUIPED)
                 {
                     _tempSpeed = _tempSpeed * 0.8f;
                 }
@@ -106,7 +106,7 @@ namespace MODULES.Scriptobjectable
 
         public float GetDamage()
         {
-            if (TheUpgradeManager.Instance.GetUpgrade(TheEnumManager.KIND_OF_UPGRADE.zombie_damage20).bEQUIPED)
+            if (TheUpgradeManager.Instance.GetUpgrade(TheEnumManager.UpgradeType.zombie_damage20).bEQUIPED)
             {
                 return fDamage * 0.8f;
             }

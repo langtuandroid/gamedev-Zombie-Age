@@ -12,7 +12,7 @@ namespace _5_Upgrade
         public class BoardInfo
         {
             [SerializeField] UpgradeData DATA;
-            [SerializeField] ButtonUpgrade m_ButtonUpgrade;
+            [SerializeField] UpgradeButton m_ButtonUpgrade;
 
 
 
@@ -33,14 +33,14 @@ namespace _5_Upgrade
 
             }
 
-            public void Show(ButtonUpgrade _ButtonUpgrade)
+            public void Show(UpgradeButton _ButtonUpgrade)
             {
                 m_ButtonUpgrade = _ButtonUpgrade;
 
                 buReset.onClick.RemoveAllListeners();
                 buUpgrade.onClick.RemoveAllListeners();
 
-                DATA = TheUpgradeManager.Instance.GetUpgrade(m_ButtonUpgrade.eUpgrade);
+                DATA = TheUpgradeManager.Instance.GetUpgrade(m_ButtonUpgrade._upgradeType);
                 buReset.onClick.AddListener(() => SetButton(buReset));
                 buUpgrade.onClick.AddListener(() => SetButton(buUpgrade));
 
@@ -82,7 +82,7 @@ namespace _5_Upgrade
                         TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//s
                         DATA.Remove();
                         Show(m_ButtonUpgrade);
-                        m_ButtonUpgrade.Init();
+                        m_ButtonUpgrade.Construct();
                         Instance.UpdateTextStar();
 
                         TheDataManager.Instance.SaveDataPlayer();//save
@@ -114,7 +114,7 @@ namespace _5_Upgrade
                         TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//s
                         DATA.Upgrade();
                         Show(m_ButtonUpgrade);
-                        m_ButtonUpgrade.Init();
+                        m_ButtonUpgrade.Construct();
                         Instance.UpdateTextStar();
 
                         TheDataManager.Instance.SaveDataPlayer();//save

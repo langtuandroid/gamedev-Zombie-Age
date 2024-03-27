@@ -29,7 +29,7 @@ namespace MANAGERS
             }
         }
 
-        public UpgradeData GetUpgrade(TheEnumManager.KIND_OF_UPGRADE _upgrade)
+        public UpgradeData GetUpgrade(TheEnumManager.UpgradeType _upgrade)
         {
             int length = LIST_UPGRADE_IN_GAME.Count;
             for (int i = 0; i < length; i++)

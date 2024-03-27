@@ -338,7 +338,7 @@ namespace _3_LevelSelection
             else if (button == _bugSupportButton)
             {
                 TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);
-                TheUiManager.Instance.ReportEmail();
+                
             }
         }
         
@@ -378,9 +378,9 @@ namespace _3_LevelSelection
         {
             StartCoroutine(CheckRoutine(delay));
         }
-        private IEnumerator CheckRoutine(float Delay)
+        private IEnumerator CheckRoutine(float delay)
         {
-            yield return new WaitForSecondsRealtime(Delay);
+            yield return new WaitForSecondsRealtime(delay);
 
             if (TheDataManager.Instance.THE_DATA_PLAYER.IsReadyToGetCheckIn())
             {

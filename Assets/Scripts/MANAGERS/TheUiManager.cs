@@ -195,24 +195,7 @@ namespace MANAGERS
         {
             Application.OpenURL(_link);
         }
-
-        //EMAIL
-        public void ReportEmail()
-        {
-            string email = TheDataManager.Instance.GAME_INFO.strEmailReport;
-            string _platform = "[Android]";
-
-#if UNITY_IOS || UNITY_IPHONE
-            _platform = "[iOS]";
-#elif UNITY_EDITOR
-        _platform = "[Editor]";
-#endif
-
-            string subject = _platform + "-" + TheDataManager.Instance.GAME_INFO.NAME_GAME + "[-ver" + Application.version + "]  Bug Report";
-            string body = "Hi Bamgru, \n ...";
-            Application.OpenURL("mailto:" + email + "?subject=" + subject + "&body=" + body);
-        }
-
+        
         //CAMẺA
         public void SetCameraForPopupCanvas(Camera _cam)
         {

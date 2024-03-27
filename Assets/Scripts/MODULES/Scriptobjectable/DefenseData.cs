@@ -100,11 +100,11 @@ namespace MODULES.Scriptobjectable
                 case TheEnumManager.DEFENSE.home:
                     _defense = (20 * (int)_level) + iBaseDefense;
                
-                    if (TheUpgradeManager.Instance.GetUpgrade(TheEnumManager.KIND_OF_UPGRADE.home_defense15).bEQUIPED)
+                    if (TheUpgradeManager.Instance.GetUpgrade(TheEnumManager.UpgradeType.home_defense15).bEQUIPED)
                     {
                         _defense = _defense * 1.15f;
                     }
-                    if (TheUpgradeManager.Instance.GetUpgrade(TheEnumManager.KIND_OF_UPGRADE.home_defense25).bEQUIPED)
+                    if (TheUpgradeManager.Instance.GetUpgrade(TheEnumManager.UpgradeType.home_defense25).bEQUIPED)
                     {
                         _defense = _defense * 1.25f;
                     }
@@ -113,11 +113,11 @@ namespace MODULES.Scriptobjectable
 
                 case TheEnumManager.DEFENSE.metal:
                     _defense = 35 * (int)_level + iBaseDefense;
-                    if (TheUpgradeManager.Instance.GetUpgrade(TheEnumManager.KIND_OF_UPGRADE.metal_defense15).bEQUIPED)
+                    if (TheUpgradeManager.Instance.GetUpgrade(TheEnumManager.UpgradeType.metal_defense15).bEQUIPED)
                     {
                         _defense = _defense * 1.15f;
                     }
-                    if (TheUpgradeManager.Instance.GetUpgrade(TheEnumManager.KIND_OF_UPGRADE.metal_defense25).bEQUIPED)
+                    if (TheUpgradeManager.Instance.GetUpgrade(TheEnumManager.UpgradeType.metal_defense25).bEQUIPED)
                     {
                         _defense = _defense * 1.25f;
                     }
@@ -126,11 +126,11 @@ namespace MODULES.Scriptobjectable
 
                 case TheEnumManager.DEFENSE.thorn:
                     _defense = 30 * (int)_level + iBaseDefense;
-                    if (TheUpgradeManager.Instance.GetUpgrade(TheEnumManager.KIND_OF_UPGRADE.thorn_defense15).bEQUIPED)
+                    if (TheUpgradeManager.Instance.GetUpgrade(TheEnumManager.UpgradeType.thorn_defense15).bEQUIPED)
                     {
                         _defense = _defense * 1.15f;
                     }
-                    if (TheUpgradeManager.Instance.GetUpgrade(TheEnumManager.KIND_OF_UPGRADE.thorn_defense25).bEQUIPED)
+                    if (TheUpgradeManager.Instance.GetUpgrade(TheEnumManager.UpgradeType.thorn_defense25).bEQUIPED)
                     {
                         _defense = _defense * 1.25f;
                     }

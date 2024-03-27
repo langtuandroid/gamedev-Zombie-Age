@@ -75,8 +75,6 @@ namespace SCREENS
             else if (_bu == buRate)
             {
                 TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound
-                TheUiManager.Instance.LoadLink(TheDataManager.Instance.GAME_INFO.strLinkLike);
-
             }
         }
 

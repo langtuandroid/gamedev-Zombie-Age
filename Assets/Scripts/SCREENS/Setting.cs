@@ -72,18 +72,18 @@ namespace SCREENS
             else if (_bu == buFacebook)
             {
                 TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound
-                TheUiManager.Instance.LoadLink(TheDataManager.Instance.GAME_INFO.strFacebook);
+                
             }
 
             else if (_bu == buLikeUs)
             {
                 TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound
-                TheUiManager.Instance.LoadLink(TheDataManager.Instance.GAME_INFO.strLinkLike);
+                
             }
             else if (_bu == buReport)
             {
                 TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound
-                TheUiManager.Instance.ReportEmail();
+                
             }
             else if (_bu == buAbout)
             {
@@ -93,7 +93,7 @@ namespace SCREENS
             else if (_bu == buMoregame)
             {
                 TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound
-                TheUiManager.Instance.LoadLink(TheDataManager.Instance.GAME_INFO.strLinkMoreGame);
+                
             }
         }
 

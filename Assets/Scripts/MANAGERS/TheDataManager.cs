@@ -151,7 +151,7 @@ namespace MANAGERS
 
             #region UPGRADE
             public List<UpgradeData.Updata> LIST_UPGRADE = new List<UpgradeData.Updata>();
-            public UpgradeData.Updata GetUpgarde(TheEnumManager.KIND_OF_UPGRADE _upgrade)
+            public UpgradeData.Updata GetUpgarde(TheEnumManager.UpgradeType _upgrade)
             {
                 int _total = LIST_UPGRADE.Count;
                 for (int i = 0; i < _total; i++)
@@ -256,27 +256,8 @@ namespace MANAGERS
         public static TheDataManager Instance;
         public MODE eMode;
 
-        [Space(30)]
-        [SerializeField] List<InfoGame> LIST_INFO_GAME;
-        private InfoGame _mainGameInfo;
-        public InfoGame GAME_INFO
-        {
-            get
-            {
-                return _mainGameInfo;
-            }
-        }
-        private InfoGame GetInfoGame(TheEnumManager.PLATFROM _platform)
-        {
-            foreach (var item in LIST_INFO_GAME)
-            {
-                if (item.ePlatform == _platform) return item;
-            }
-            return null;
-        }
-
-
-
+       
+        
         [Space(20)]
         public PriceUnitConfig PRICE_CONFIG;
         [SerializeField] GameObject prefabTUTORIAL_SYSTEM;
@@ -351,15 +332,6 @@ namespace MANAGERS
                 Destroy(gameObject);
 
             DontDestroyOnLoad(this);
-
-#if UNITY_ANDROID
-        _mainGameInfo = GetInfoGame(TheEnumManager.PLATFROM.android);
-#elif UNITY_IOS || UNITY_IPHONE
-            _mainGameInfo = GetInfoGame(TheEnumManager.PLATFROM.ios);
-#else
-        _mainGameInfo = GetInfoGame(TheEnumManager.PLATFROM.info_default);
-#endif
-
         }
 
 

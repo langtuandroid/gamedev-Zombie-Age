@@ -201,7 +201,7 @@
 
         #region UPGRADE
 
-        public enum KIND_OF_UPGRADE
+        public enum UpgradeType
         {
             freeze_time50,//Tăng thời gian đóng băng lênn 50%
             freeze_range25,//Tăng phạm vi sát thương lên 25%

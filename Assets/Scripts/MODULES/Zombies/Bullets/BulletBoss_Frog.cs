@@ -39,7 +39,7 @@ namespace MODULES.Zombies.Bullets
         private void Update()
         {
             fTimeBezier += Time.deltaTime * fSpeed;
-            vCurrentPos = m_Bezier.GetBezier(vOriginalPos, vTagetPos, 5.0f, fTimeBezier);
+            vCurrentPos = m_Bezier.Get(vOriginalPos, vTagetPos, 5.0f, fTimeBezier);
             m_tranform.position = vCurrentPos;
 
             Smock();//smock

@@ -10,7 +10,7 @@ namespace MODULES.Scriptobjectable
         [System.Serializable]
         public class Updata
         {
-            public TheEnumManager.KIND_OF_UPGRADE eUpgrade; //save
+            public TheEnumManager.UpgradeType eUpgrade; //save
             public bool bEquiped; //save
         }
 

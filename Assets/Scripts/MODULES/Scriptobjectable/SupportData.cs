@@ -72,12 +72,12 @@ namespace MODULES.Scriptobjectable
             {
                 //freeze
                 case TheEnumManager.SUPPORT.freeze:
-                    if (TheUpgradeManager.Instance.GetUpgrade(TheEnumManager.KIND_OF_UPGRADE.freeze_time50).bEQUIPED) return fEffectTime * 1.5f;
+                    if (TheUpgradeManager.Instance.GetUpgrade(TheEnumManager.UpgradeType.freeze_time50).bEQUIPED) return fEffectTime * 1.5f;
                     break;
 
                 //poison
                 case TheEnumManager.SUPPORT.poison:
-                    if (TheUpgradeManager.Instance.GetUpgrade(TheEnumManager.KIND_OF_UPGRADE.poision_time25).bEQUIPED) return fEffectTime * 1.25f;
+                    if (TheUpgradeManager.Instance.GetUpgrade(TheEnumManager.UpgradeType.poision_time25).bEQUIPED) return fEffectTime * 1.25f;
                     break;
             }
             return fEffectTime;
@@ -91,13 +91,13 @@ namespace MODULES.Scriptobjectable
             switch (DATA._support)
             {
                 case TheEnumManager.SUPPORT.grenade:
-                    if (TheUpgradeManager.Instance.GetUpgrade(TheEnumManager.KIND_OF_UPGRADE.grenade_range25).bEQUIPED) return fRange * 1.25f;
+                    if (TheUpgradeManager.Instance.GetUpgrade(TheEnumManager.UpgradeType.grenade_range25).bEQUIPED) return fRange * 1.25f;
                     break;
                 case TheEnumManager.SUPPORT.freeze:
-                    if (TheUpgradeManager.Instance.GetUpgrade(TheEnumManager.KIND_OF_UPGRADE.freeze_range25).bEQUIPED) return fRange * 1.25f;
+                    if (TheUpgradeManager.Instance.GetUpgrade(TheEnumManager.UpgradeType.freeze_range25).bEQUIPED) return fRange * 1.25f;
                     break;
                 case TheEnumManager.SUPPORT.poison:
-                    if (TheUpgradeManager.Instance.GetUpgrade(TheEnumManager.KIND_OF_UPGRADE.posion_range25).bEQUIPED) return fRange * 1.25f;
+                    if (TheUpgradeManager.Instance.GetUpgrade(TheEnumManager.UpgradeType.posion_range25).bEQUIPED) return fRange * 1.25f;
                     break;
                 case TheEnumManager.SUPPORT.big_bomb:
                     break;
@@ -112,15 +112,15 @@ namespace MODULES.Scriptobjectable
             switch (DATA._support)
             {
                 case TheEnumManager.SUPPORT.grenade:
-                    if (TheUpgradeManager.Instance.GetUpgrade(TheEnumManager.KIND_OF_UPGRADE.grenade_damage25).bEQUIPED) return (int)(iDamage * 1.25f);
+                    if (TheUpgradeManager.Instance.GetUpgrade(TheEnumManager.UpgradeType.grenade_damage25).bEQUIPED) return (int)(iDamage * 1.25f);
                     break;
                 case TheEnumManager.SUPPORT.freeze:
                     break;
                 case TheEnumManager.SUPPORT.poison:
-                    if (TheUpgradeManager.Instance.GetUpgrade(TheEnumManager.KIND_OF_UPGRADE.posion_damage50).bEQUIPED) return (int)(iDamage * 1.5f);
+                    if (TheUpgradeManager.Instance.GetUpgrade(TheEnumManager.UpgradeType.posion_damage50).bEQUIPED) return (int)(iDamage * 1.5f);
                     break;
                 case TheEnumManager.SUPPORT.big_bomb:
-                    if (TheUpgradeManager.Instance.GetUpgrade(TheEnumManager.KIND_OF_UPGRADE.bigbom_damage25).bEQUIPED) return (int)(iDamage * 1.25f);
+                    if (TheUpgradeManager.Instance.GetUpgrade(TheEnumManager.UpgradeType.bigbom_damage25).bEQUIPED) return (int)(iDamage * 1.25f);
                     break;
             }
             return iDamage;

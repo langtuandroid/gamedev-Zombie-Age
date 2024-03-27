@@ -30,7 +30,7 @@ namespace MANAGERS
             vEuler.z -= 5.0f;
 
             _time += Time.deltaTime * fSpeed;
-            vCurrentPos = m_bezier.GetBezier(vFrom, vTo, fHigh, _time);
+            vCurrentPos = m_bezier.Get(vFrom, vTo, fHigh, _time);
             m_tranform.position = vCurrentPos;
             m_tranform.eulerAngles = vEuler;
             if (_time >= 1)
