@@ -6,7 +6,7 @@ namespace MODULES.Zombies.Bullets
     public class BulletBoss_Soldier : MonoBehaviour
     {
 
-        private TheEnumManager.ZOMBIE eZombie;
+        private EnumController.ZOMBIE eZombie;
 
         private Transform _tranOfThis;
         private GameObject _gameobject;
@@ -39,14 +39,14 @@ namespace MODULES.Zombies.Bullets
             Smock();
             if (vCurrentPos == vTargetPos)
             {
-                TheEventManager.ZombieEvent_OnZombieAttack(iDamage);//attack
+                EventController.ZombieEvent_OnZombieAttack(iDamage);//attack
                 //effect
-                _effect = TheObjectPoolingManager.Instance.GetObjectPooling(TheEnumManager.POOLING_OBJECT.main_exploison).GetObject();
+                _effect = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.main_exploison).Get();
                 _effect.transform.position = vTargetPos;
                 _effect.SetActive(true);
 
                 //sound
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.sfx_explosion_grenade);
+                SoundController.Instance.Play(SoundController.SOUND.sfx_explosion_grenade);
 
 
                 Destroy(_gameobject);
@@ -66,7 +66,7 @@ namespace MODULES.Zombies.Bullets
         {
             if (_time <= 0)
             {
-                _smock = TheObjectPoolingManager.Instance.GetObjectPooling(TheEnumManager.POOLING_OBJECT.smock_of_bazoka).GetObject();
+                _smock = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.smock_of_bazoka).Get();
                 _smock.transform.position = vCurrentPos;
                 _smock.SetActive(true);
                 _time = 0.03f;

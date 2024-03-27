@@ -25,8 +25,8 @@ namespace SCREENS
         {
             if (_bu == buBack)
             {
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_back);//sound
-                TheUiManager.Instance.HidePopup(TheUiManager.POP_UP.shop);
+                SoundController.Instance.Play(SoundController.SOUND.ui_click_back);//sound
+                UIController.Instance.HidePopup(UIController.POP_UP.shop);
             }
 
         }
@@ -60,11 +60,11 @@ namespace SCREENS
 
             private void Buy()
             {
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_purchase);//sound
+                SoundController.Instance.Play(SoundController.SOUND.ui_purchase);//sound
 
-                TheDataManager.Instance.THE_DATA_PLAYER.iGem += DATA.iValueToAdd;
-                TheDataManager.Instance.SaveDataPlayer(); //save                                                       
-                TheEventManager.PostEvent_OnUpdatedBoard();  //update board
+                DataController.Instance.playerData.Gem += DATA.iValueToAdd;
+                DataController.Instance.SaveData(); //save                                                       
+                EventController.OnUpdatedBoardInvoke();  //update board
 
             }
 

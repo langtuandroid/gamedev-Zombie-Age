@@ -32,16 +32,16 @@ namespace MODULES
         private void SetButton()
         {
             //for tutorial
-            if (TheTutorialManager.Instance)
+            if (TutorialController.Instance)
             {
-                if (!TheTutorialManager.Instance.IsCheckRightInput()) return;
+                if (!TutorialController.Instance.IsRightInput()) return;
             }
 
-            TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound
+            SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
             switch (eType)
             {
                 case TYPE.gem:
-                    TheUiManager.Instance.ShowPopup(TheUiManager.POP_UP.shop);//
+                    UIController.Instance.PopUpShow(UIController.POP_UP.shop);//
                     break;
 
             }
@@ -53,7 +53,7 @@ namespace MODULES
             switch (eType)
             {
                 case TYPE.gem:
-                    txtValue.text = TheDataManager.Instance.THE_DATA_PLAYER.iGem.ToString();
+                    txtValue.text = DataController.Instance.playerData.Gem.ToString();
                     break;
 
             }
@@ -62,12 +62,12 @@ namespace MODULES
         private void OnEnable()
         {
             ShowValue();
-            TheEventManager.OnUpdatedBoard += ShowValue;
+            EventController.OnUpdatedBoard += ShowValue;
 
         }
         private void OnDisable()
         {
-            TheEventManager.OnUpdatedBoard -= ShowValue;
+            EventController.OnUpdatedBoard -= ShowValue;
         }
     }
 }

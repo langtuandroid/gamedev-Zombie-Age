@@ -39,23 +39,23 @@ namespace SCREENS
         {
             if (_bu == buBack)
             {
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_back);//sound
-                TheUiManager.Instance.HidePopup(TheUiManager.POP_UP.note);
+                SoundController.Instance.Play(SoundController.SOUND.ui_click_back);//sound
+                UIController.Instance.HidePopup(UIController.POP_UP.note);
             }
             if (_bu == buDone)
             {
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound
+                SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
 
                 if (NOTE_CONTENT.Equals(NOTE.no_gem.ToString()))
                 {
-                    TheUiManager.Instance.ShowPopup(TheUiManager.POP_UP.shop);
+                    UIController.Instance.PopUpShow(UIController.POP_UP.shop);
                 }
                 else if (NOTE_CONTENT.Equals(NOTE.reset_game.ToString()))
                 {
-                    TheDataManager.Instance.ResetGame();
+                    DataController.Instance.ResetAll();
                 }
 
-                TheUiManager.Instance.HidePopup(TheUiManager.POP_UP.note);
+                UIController.Instance.HidePopup(UIController.POP_UP.note);
             }
         }
 

@@ -47,13 +47,13 @@ namespace MODULES.Zombies
         {
             if (fCURRENT_SPEED == 0) return;//khi bị đóng băng thì k đc bắn
 
-            if (DATA.eZombie == TheEnumManager.ZOMBIE.ruoi) TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.sfx_zombie_ruoi_shot);//sound
-            if (DATA.eZombie == TheEnumManager.ZOMBIE.muoi) TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.sfx_zombie_ruoi_shot);//sound
+            if (DATA.eZombie == EnumController.ZOMBIE.ruoi) SoundController.Instance.Play(SoundController.SOUND.sfx_zombie_ruoi_shot);//sound
+            if (DATA.eZombie == EnumController.ZOMBIE.muoi) SoundController.Instance.Play(SoundController.SOUND.sfx_zombie_ruoi_shot);//sound
 
             _targetposofbullet.x = Random.Range(-8.0f, -5.0f);
             _targetposofbullet.y = m_TranOfOriginalBulletPos.position.y;
 
-            _bullet = TheObjectPoolingManager.Instance.GetObjectPooling(TheEnumManager.POOLING_OBJECT.bullet_of_zombie).GetObject();
+            _bullet = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.bullet_of_zombie).Get();
             _bullet.transform.position = m_TranOfOriginalBulletPos.position;
             _bullet.GetComponent<ZombieBullet>().SetBullet(DATA.eZombie, DATA.GetDamage(), _targetposofbullet, vScaleOfBullet,sprBullet);     
             _bullet.SetActive(true);

@@ -18,7 +18,7 @@ namespace _1_Menu
         {
             _playButton.onClick.AddListener(() => AssignButton(_playButton));
             MusicManager.Instance.Play();
-            TheUiManager.Instance.SetCameraForPopupCanvas(Camera.main);//set camera       
+            UIController.Instance.SetCameraPopup(Camera.main);//set camera       
             _gameLogo.SetActive(false);
         }
 
@@ -26,8 +26,8 @@ namespace _1_Menu
         {
             if (_button == _playButton)
             {
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound
-                TheUiManager.Instance.LoadScene(TheUiManager.SCENE.LevelSelection);
+                SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
+                UIController.Instance.LoadScene(UIController.SCENE.LevelSelection);
             }
         }
         private void Update()

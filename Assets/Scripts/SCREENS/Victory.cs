@@ -43,18 +43,18 @@ namespace SCREENS
                 if (buContinue.image.color != Color.white) return;
 
                 MusicManager.Instance.Play();
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound         
+                SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound         
              
                 //============================
 
                 #region RATE
-                if (TheDataManager.Instance.THE_DATA_PLAYER.iCurrentLevel > 0
-                    && (TheDataManager.Instance.THE_DATA_PLAYER.iCurrentLevel + 1) % 4 == 0)
+                if (DataController.Instance.playerData.CurrentLevel > 0
+                    && (DataController.Instance.playerData.CurrentLevel + 1) % 4 == 0)
                 {
                     if (!bShowRate)
                     {
                         bShowRate = true;
-                        TheUiManager.Instance.ShowPopup(TheUiManager.POP_UP.rate);
+                        UIController.Instance.PopUpShow(UIController.POP_UP.rate);
                         return;
                     }
                     else
@@ -68,13 +68,13 @@ namespace SCREENS
 
 
 
-                TheUiManager.Instance.LoadScene(TheUiManager.SCENE.LevelSelection);
+                UIController.Instance.LoadScene(UIController.SCENE.LevelSelection);
 
             }
 
             else if (_bu == buRate)
             {
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound
+                SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
             }
         }
 
@@ -82,14 +82,14 @@ namespace SCREENS
         private IEnumerator IeWin()
         {
             buContinue.image.color = Color.gray;
-            int _star = TheDataManager.Instance.CalculateStar();//get star
-            int _level = TheDataManager.Instance.THE_DATA_PLAYER.iCurrentLevel;
+            int _star = DataController.Instance.GetStars();//get star
+            int _level = DataController.Instance.playerData.CurrentLevel;
             txtLevel.text = "LEVEL " + (_level + 1).ToString();
 
-            if (TheDataManager.Instance.eMode == TheDataManager.MODE.Release)
+            if (DataController.Instance.mode == DataController.Mode.Release)
             {
                 //save star        
-                TheDataManager.Instance.THE_DATA_PLAYER.SetStar(_level, _star);
+                DataController.Instance.playerData.SetStar(_level, _star);
 
             }
 
@@ -103,17 +103,17 @@ namespace SCREENS
 
 
 
-            if (TheDataManager.Instance.THE_DATA_PLAYER.CURRENT_DIFFICUFT == TheEnumManager.DIFFICUFT.easy)
+            if (DataController.Instance.playerData.Difficuft == EnumController.DIFFICUFT.easy)
             {          
-                _reward = TheDataManager.Instance.GetReward(TheEnumManager.REWARD.victory_gem_easy);//
+                _reward = DataController.Instance.GetReward(EnumController.REWARD.victory_gem_easy);//
             }
-            else if (TheDataManager.Instance.THE_DATA_PLAYER.CURRENT_DIFFICUFT == TheEnumManager.DIFFICUFT.normal)
+            else if (DataController.Instance.playerData.Difficuft == EnumController.DIFFICUFT.normal)
             {
-                _reward = TheDataManager.Instance.GetReward(TheEnumManager.REWARD.victory_gem_normal);//
+                _reward = DataController.Instance.GetReward(EnumController.REWARD.victory_gem_normal);//
             }
-            else if (TheDataManager.Instance.THE_DATA_PLAYER.CURRENT_DIFFICUFT == TheEnumManager.DIFFICUFT.nightmare)
+            else if (DataController.Instance.playerData.Difficuft == EnumController.DIFFICUFT.nightmare)
             {         
-                _reward = TheDataManager.Instance.GetReward(TheEnumManager.REWARD.victory_gem_nightmate);//
+                _reward = DataController.Instance.GetReward(EnumController.REWARD.victory_gem_nightmate);//
             }
 
 
@@ -124,16 +124,16 @@ namespace SCREENS
                     yield return new WaitForSecondsRealtime(0.5f);             
                     LIST_STAR[0].gameObject.SetActive(true);
 
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.sfx_gun_ak);//sound
+                    SoundController.Instance.Play(SoundController.SOUND.sfx_gun_ak);//sound
                     break;
                 case 2:
                     yield return new WaitForSecondsRealtime(0.5f);
                     LIST_STAR[0].gameObject.SetActive(true);
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.sfx_gun_ak);//sound
+                    SoundController.Instance.Play(SoundController.SOUND.sfx_gun_ak);//sound
 
                     yield return new WaitForSecondsRealtime(0.5f);
                     LIST_STAR[1].gameObject.SetActive(true);
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.sfx_gun_ar15);//sound
+                    SoundController.Instance.Play(SoundController.SOUND.sfx_gun_ar15);//sound
 
 
 
@@ -141,15 +141,15 @@ namespace SCREENS
                 case 3:
                     yield return new WaitForSecondsRealtime(0.5f);
                     LIST_STAR[0].gameObject.SetActive(true);
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.sfx_gun_ak);//sound
+                    SoundController.Instance.Play(SoundController.SOUND.sfx_gun_ak);//sound
 
                     yield return new WaitForSecondsRealtime(0.5f);
                     LIST_STAR[1].gameObject.SetActive(true);
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.sfx_gun_ar15);//sound
+                    SoundController.Instance.Play(SoundController.SOUND.sfx_gun_ar15);//sound
 
                     yield return new WaitForSecondsRealtime(0.5f);
                     LIST_STAR[2].gameObject.SetActive(true);
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.sfx_gun_shotgun);//sound
+                    SoundController.Instance.Play(SoundController.SOUND.sfx_gun_shotgun);//sound
                     break;
 
             }
@@ -159,8 +159,8 @@ namespace SCREENS
             yield return new WaitForSecondsRealtime(1.2f);
             buContinue.image.color = Color.white;
 
-            TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_wood_board);//sound
-            TheUiManager.Instance.ShowPopup(TheUiManager.POP_UP.reward);
+            SoundController.Instance.Play(SoundController.SOUND.ui_wood_board);//sound
+            UIController.Instance.PopUpShow(UIController.POP_UP.reward);
             VictoryReward.SetReward(_reward);
 
 
@@ -171,16 +171,16 @@ namespace SCREENS
         private void OnEnable()
         {
             bShowRate = false;
-            TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_wood_board);//sound
+            SoundController.Instance.Play(SoundController.SOUND.ui_wood_board);//sound
             MusicManager.Instance.Stop();
-            TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_victory);//sound
+            SoundController.Instance.Play(SoundController.SOUND.ui_victory);//sound
             StartCoroutine(IeWin());
 
         }
 
         private void OnDisable()
         {
-            TheDataManager.Instance.SaveDataPlayer();//save
+            DataController.Instance.SaveData();//save
             StopAllCoroutines();
         }
     }

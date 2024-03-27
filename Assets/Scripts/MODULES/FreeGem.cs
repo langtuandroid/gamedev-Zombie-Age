@@ -13,7 +13,7 @@ namespace MODULES
         // Start is called before the first frame update
         void Start()
         {
-            RewardData _reward = TheDataManager.Instance.GetReward(TheEnumManager.REWARD.ads_free_gem);
+            RewardData _reward = DataController.Instance.GetReward(EnumController.REWARD.ads_free_gem);
 
             buThis = GetComponent<Button>();
 
@@ -29,9 +29,9 @@ namespace MODULES
         private void SetButton(Button _bu)
         {
             //for tutorial
-            if (TheTutorialManager.Instance)
+            if (TutorialController.Instance)
             {
-                if (!TheTutorialManager.Instance.IsCheckRightInput()) return;
+                if (!TutorialController.Instance.IsRightInput()) return;
             }
 
 

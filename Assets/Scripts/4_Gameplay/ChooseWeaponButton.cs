@@ -19,12 +19,12 @@ namespace _4_Gameplay
         private void Start()
         {
             _transform = transform;
-            if (_weaponIndex >= TheWeaponManager.Instance.LIST_EQUIPED_WEAPON.Count)
+            if (_weaponIndex >= WeaponController.Instance.equipedWeaponList.Count)
             {
                 gameObject.SetActive(false);
                 return;
             }
-            _gunData = TheWeaponManager.Instance.LIST_EQUIPED_WEAPON[_weaponIndex];
+            _gunData = WeaponController.Instance.equipedWeaponList[_weaponIndex];
             _chooseButton = GetComponent<Button>();
             _chooseButton.onClick.AddListener(() => Take());
 
@@ -47,7 +47,7 @@ namespace _4_Gameplay
 
         private void Take()
         {
-            TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound
+            SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
             Soldier.Instance.WEAPON_MANAGER.ChooseWeapon(_gunData.DATA.eWeapon);
         }
         
@@ -79,15 +79,15 @@ namespace _4_Gameplay
 
         private void OnEnable()
         {
-            TheEventManager.OnWeaponShot += Shoot;
-            TheEventManager.OnChangedWeapon += ChangeWeapon;
+            EventController.OnWeaponShot += Shoot;
+            EventController.OnChangedWeapon += ChangeWeapon;
         }
 
 
         private void OnDisable()
         {
-            TheEventManager.OnWeaponShot -= Shoot;
-            TheEventManager.OnChangedWeapon -= ChangeWeapon;
+            EventController.OnWeaponShot -= Shoot;
+            EventController.OnChangedWeapon -= ChangeWeapon;
         }
 
     }

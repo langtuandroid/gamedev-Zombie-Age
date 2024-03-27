@@ -11,10 +11,10 @@ namespace MODULES.Scriptobjectable
         [System.Serializable]
         public class Zombie
         {
-            public TheEnumManager.ZOMBIE ZOMBIE;
+            public EnumController.ZOMBIE ZOMBIE;
 
             [Space(20)]
-            public TheEnumManager.HAT_OF_ZOMBIE eHat;
+            public EnumController.HAT_OF_ZOMBIE eHat;
 
 
        
@@ -25,7 +25,7 @@ namespace MODULES.Scriptobjectable
 
 
             [Space(10)]
-            public TheEnumManager.WEAPON_OF_ZOMBIE eWeapon;
+            public EnumController.WEAPON_OF_ZOMBIE eWeapon;
             [Tooltip("Tỉ lệ cầm vũ khí")]
             [Range(0, 1)]
             public float fPercent_HasWeapon;
@@ -33,7 +33,7 @@ namespace MODULES.Scriptobjectable
 
 
             [Space(10)]
-            public TheEnumManager.SHIELD_OF_ZOMBIE eShield;
+            public EnumController.SHIELD_OF_ZOMBIE eShield;
             [Tooltip("Tỉ lệ có khiêng")]
             [Range(0, 1)]
             public float fPercent_HasShield;
@@ -43,7 +43,7 @@ namespace MODULES.Scriptobjectable
             float _randomValue = 0;
             public bool IsHat()
             {
-                if (eHat == TheEnumManager.HAT_OF_ZOMBIE.NO_HAT) return false;
+                if (eHat == EnumController.HAT_OF_ZOMBIE.NO_HAT) return false;
                 if (fPercent_HasHat ==1.0f) return true;
                 _randomValue = Random.Range(0, 1.0f);
                 if (_randomValue <= fPercent_HasHat) return true;
@@ -52,7 +52,7 @@ namespace MODULES.Scriptobjectable
             }
             public bool IsWeapon()
             {
-                if (eWeapon== TheEnumManager.WEAPON_OF_ZOMBIE.NO_WEAPON) return false;
+                if (eWeapon== EnumController.WEAPON_OF_ZOMBIE.NO_WEAPON) return false;
                 if (fPercent_HasWeapon == 1.0f) return true;
                 _randomValue = Random.Range(0, 1.0f);
                 if (_randomValue <= fPercent_HasWeapon) return true;
@@ -61,7 +61,7 @@ namespace MODULES.Scriptobjectable
             }
             public bool IsShield()
             {
-                if (eShield == TheEnumManager.SHIELD_OF_ZOMBIE.NO_SHIELD) return false;
+                if (eShield == EnumController.SHIELD_OF_ZOMBIE.NO_SHIELD) return false;
                 if (fPercent_HasShield == 1.0f) return true;
                 _randomValue = Random.Range(0, 1.0f);
                 if (_randomValue <= fPercent_HasShield) return true;
@@ -100,7 +100,7 @@ namespace MODULES.Scriptobjectable
         public float iConfigSpecialStatus;
 
 
-        public Zombie GetZombie(TheEnumManager.ZOMBIE _zombie)
+        public Zombie GetZombie(EnumController.ZOMBIE _zombie)
         {
             int length = LIST_ZOMBIE_IN_LEVEL.Count;
             for (int i = 0; i < length; i++)

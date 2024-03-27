@@ -28,7 +28,7 @@ namespace _2_Weapon
 
             public void Assign()
             {
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound
+                SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
                 int temp = Instance._listPanelManager.Count;
                 for (int i = 0; i < temp; i++)
                 {
@@ -95,12 +95,12 @@ namespace _2_Weapon
 
             public void Construct()
             {
-                int length = TheWeaponManager.Instance.LIST_WEAPON.Count;
+                int length = MANAGERS.WeaponController.Instance._weaponList.Count;
                 for (int i = 0; i < length; i++)
                 {
                     GameObject weaponnctance = Instantiate(_weaponPrefab);
                     _trackWeapons.Add(weaponnctance.GetComponent<Weapon>());
-                    weaponnctance.GetComponent<Weapon>().Construct(TheWeaponManager.Instance.LIST_WEAPON[i]);
+                    weaponnctance.GetComponent<Weapon>().Construct(MANAGERS.WeaponController.Instance._weaponList[i]);
                     weaponnctance.transform.SetParent(_groupContain);
                     weaponnctance.transform.localScale = Vector3.one;
 
@@ -109,7 +109,7 @@ namespace _2_Weapon
                 VisualiseTrack(_trackWeapons[0]);
                 _groupContain.parent.GetComponent<ScrollRect>().verticalNormalizedPosition = 1.0f;
                 
-                if (TheTutorialManager.Instance && !TheTutorialManager.Instance.GetTutorial(TheTutorialManager.TUTORIAL.weapon).bCompleted)
+                if (TutorialController.Instance && !TutorialController.Instance.GetTutorial(TutorialController.TUTORIAL.weapon)._isCompleted)
                 {
                     UnlockScrollRect(false);
                 }
@@ -177,9 +177,9 @@ namespace _2_Weapon
 
 
 
-                TheEnumManager.ITEM_LEVEL _currentLevel = _currentTrack.GunData.DATA.eLevel;
+                EnumController.ITEM_LEVEL _currentLevel = _currentTrack.GunData.DATA.eLevel;
                 _damageBar.fillAmount = _currentTrack.GunData.GetDamage(_currentLevel) * 1.0f / 420;
-                if (_currentLevel != TheEnumManager.ITEM_LEVEL.level_7)
+                if (_currentLevel != EnumController.ITEM_LEVEL.level_7)
                     _damageBarNextLvl.fillAmount = _currentTrack.GunData.GetDamage(_currentLevel + 1) * 1.0f / 420;
                 else _damageBarNextLvl.fillAmount = 0.0f;
 
@@ -199,7 +199,7 @@ namespace _2_Weapon
             {
                 if (_currentTrack.GunData.bUNLOCKED)
                 {
-                    if (_track.GunData.DATA.eLevel == TheEnumManager.ITEM_LEVEL.level_7)
+                    if (_track.GunData.DATA.eLevel == EnumController.ITEM_LEVEL.level_7)
                     {
                         _upgradeButton.GetComponentInChildren<Text>().text = "MAX LEVEL";
                         _upgradeButton.image.color = Color.gray;
@@ -238,43 +238,43 @@ namespace _2_Weapon
             private void UpgradeWeapon()
             {
                 //for tutorial
-                if (TheTutorialManager.Instance)
+                if (TutorialController.Instance)
                 {
-                    if (!TheTutorialManager.Instance.IsCheckRightInput()) return;
+                    if (!TutorialController.Instance.IsRightInput()) return;
                 }
 
                 if (!_currentTrack.GunData.bUNLOCKED)
                 {
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_cannot);//sound
+                    SoundController.Instance.Play(SoundController.SOUND.ui_cannot);//sound
                     return;
                 }
-                if (_currentTrack.GunData.DATA.eLevel == TheEnumManager.ITEM_LEVEL.level_7)
+                if (_currentTrack.GunData.DATA.eLevel == EnumController.ITEM_LEVEL.level_7)
                 {
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_cannot);//sound
+                    SoundController.Instance.Play(SoundController.SOUND.ui_cannot);//sound
                     return;
                 }
 
                 //main
                 int _price = _currentTrack.GunData.GetPriceToUpgrade(_currentTrack.GunData.DATA.eLevel);
-                if (TheDataManager.Instance.THE_DATA_PLAYER.iGem >= _price)
+                if (DataController.Instance.playerData.Gem >= _price)
                 {
-                    TheDataManager.Instance.THE_DATA_PLAYER.iGem -= _price;//GEM
-                    TheEventManager.PostEvent_OnUpdatedBoard();//event--
+                    DataController.Instance.playerData.Gem -= _price;//GEM
+                    EventController.OnUpdatedBoardInvoke();//event--
 
 
                     _currentTrack.GunData.DATA.eLevel++;
-                    TheDataManager.Instance.THE_DATA_PLAYER.GetWeapon(_currentTrack.GunData.DATA.eWeapon).eLevel = _currentTrack.GunData.DATA.eLevel;
+                    DataController.Instance.playerData.TakeWeapon(_currentTrack.GunData.DATA.eWeapon).eLevel = _currentTrack.GunData.DATA.eLevel;
                     // TheDataManager.Instance.SaveDataPlayer();//save
                     VisualiseTrack(_currentTrack);
                 }
                 else
                 {
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound
-                    TheUiManager.Instance.ShowPopup(TheUiManager.POP_UP.note);
+                    SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
+                    UIController.Instance.PopUpShow(UIController.POP_UP.note);
                     Note.SetNote(Note.NOTE.no_gem.ToString());
                     return;
                 }
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_upgrade);//sound
+                SoundController.Instance.Play(SoundController.SOUND.ui_upgrade);//sound
 
 
                 ButtonStates(_currentTrack);
@@ -285,24 +285,24 @@ namespace _2_Weapon
             private void BuyAmmo()
             {
                 //for tutorial
-                if (TheTutorialManager.Instance)
+                if (TutorialController.Instance)
                 {
-                    if (!TheTutorialManager.Instance.IsCheckRightInput()) return;
+                    if (!TutorialController.Instance.IsRightInput()) return;
                 }
 
                 if (!_currentTrack.GunData.bUNLOCKED)
                 {
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_cannot);//sound
+                    SoundController.Instance.Play(SoundController.SOUND.ui_cannot);//sound
                     return;
                 }
                 if (_currentTrack.GunData.iMaxAmmo == _currentTrack.GunData.DATA.iCurrentAmmo)
                 {
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_cannot);//sound
+                    SoundController.Instance.Play(SoundController.SOUND.ui_cannot);//sound
                     return;
                 }
                 if (_currentTrack.GunData.DATA.bIsDefaultGun)
                 {
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_cannot);//sound
+                    SoundController.Instance.Play(SoundController.SOUND.ui_cannot);//sound
                     return;
 
                 }
@@ -312,21 +312,21 @@ namespace _2_Weapon
                 if (_dis >= _currentTrack.GunData.iAmmoToBuy)
                 {
                     int _price = _currentTrack.GunData.iPriceToBuyAmmo;
-                    if (TheDataManager.Instance.THE_DATA_PLAYER.iGem >= _price)
+                    if (DataController.Instance.playerData.Gem >= _price)
                     {
-                        TheDataManager.Instance.THE_DATA_PLAYER.iGem -= _price;
-                        TheEventManager.PostEvent_OnUpdatedBoard();
+                        DataController.Instance.playerData.Gem -= _price;
+                        EventController.OnUpdatedBoardInvoke();
 
                         //content
                         _currentTrack.GunData.DATA.iCurrentAmmo += _currentTrack.GunData.iAmmoToBuy;
                         _ammoText.text = _currentTrack.GunData.DATA.iCurrentAmmo.ToString();
-                        TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_purchase);//sound
+                        SoundController.Instance.Play(SoundController.SOUND.ui_purchase);//sound
                     }
                     else
                     {
-                        TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound
+                        SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
                         //khong du tien
-                        TheUiManager.Instance.ShowPopup(TheUiManager.POP_UP.note);
+                        UIController.Instance.PopUpShow(UIController.POP_UP.note);
                         Note.SetNote(Note.NOTE.no_gem.ToString());
                     }
 
@@ -336,21 +336,21 @@ namespace _2_Weapon
                     float _UnitPrice = _currentTrack.GunData.iPriceToBuyAmmo * 1.0f / _currentTrack.GunData.iAmmoToBuy; // giá tiền cho mỗi viên đạn.
                     int _price = Mathf.CeilToInt(_dis * _UnitPrice);
 
-                    if (TheDataManager.Instance.THE_DATA_PLAYER.iGem >= _price)
+                    if (DataController.Instance.playerData.Gem >= _price)
                     {
-                        TheDataManager.Instance.THE_DATA_PLAYER.iGem -= _price;
-                        TheEventManager.PostEvent_OnUpdatedBoard();
+                        DataController.Instance.playerData.Gem -= _price;
+                        EventController.OnUpdatedBoardInvoke();
 
                         //content
                         _currentTrack.GunData.DATA.iCurrentAmmo += _dis;
                         _ammoText.text = _currentTrack.GunData.DATA.iCurrentAmmo.ToString();
-                        TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_purchase);//sound
+                        SoundController.Instance.Play(SoundController.SOUND.ui_purchase);//sound
                     }
                     else
                     {
-                        TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound
+                        SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
                         //khong du tien
-                        TheUiManager.Instance.ShowPopup(TheUiManager.POP_UP.note);
+                        UIController.Instance.PopUpShow(UIController.POP_UP.note);
                         Note.SetNote(Note.NOTE.no_gem.ToString());
                     }
 
@@ -363,7 +363,7 @@ namespace _2_Weapon
 
 
                 //--------------------------
-                TheDataManager.Instance.THE_DATA_PLAYER.GetWeapon(_currentTrack.GunData.DATA.eWeapon).iCurrentAmmo = _currentTrack.GunData.DATA.iCurrentAmmo;
+                DataController.Instance.playerData.TakeWeapon(_currentTrack.GunData.DATA.eWeapon).iCurrentAmmo = _currentTrack.GunData.DATA.iCurrentAmmo;
                 // TheDataManager.Instance.SaveDataPlayer();//save
 
                 ButtonStates(_currentTrack);
@@ -409,12 +409,12 @@ namespace _2_Weapon
             //INIT
             public void Construct()
             {
-                int length = TheWeaponManager.Instance.LIST_DEFENSE.Count;
+                int length = MANAGERS.WeaponController.Instance._defenceList.Count;
                 for (int i = 0; i < length; i++)
                 {
                     GameObject _new = Instantiate(_defencePrefab);
                     _trackList.Add(_new.GetComponent<Defense>());
-                    _new.GetComponent<Defense>().Construct(TheWeaponManager.Instance.LIST_DEFENSE[i]);
+                    _new.GetComponent<Defense>().Construct(MANAGERS.WeaponController.Instance._defenceList[i]);
                     _new.transform.SetParent(_groupContain);
                     _new.transform.localScale = Vector3.one;
                     _new.SetActive(true);
@@ -474,11 +474,11 @@ namespace _2_Weapon
                 _icon.sprite = _currentTrack.DefenseData.sprIcon;
 
 
-                TheEnumManager.ITEM_LEVEL _currentLevel = _currentTrack.DefenseData.DATA.eLevel;
+                EnumController.ITEM_LEVEL _currentLevel = _currentTrack.DefenseData.DATA.eLevel;
 
 
                 _defenceBar.fillAmount = _currentTrack.DefenseData.GetDefense(_currentLevel) * 1.0f / 400;
-                if (_currentLevel != TheEnumManager.ITEM_LEVEL.level_7)
+                if (_currentLevel != EnumController.ITEM_LEVEL.level_7)
                     _nextLevelBar.fillAmount = _currentTrack.DefenseData.GetDefense(_currentLevel + 1) * 1.0f / 400;
                 else
                     _nextLevelBar.fillAmount = 0;
@@ -495,9 +495,9 @@ namespace _2_Weapon
             //UNLOCK NOW
             private void Unlock()
             { //for tutorial
-                if (TheTutorialManager.Instance)
+                if (TutorialController.Instance)
                 {
-                    if (!TheTutorialManager.Instance.IsCheckRightInput()) return;
+                    if (!TutorialController.Instance.IsRightInput()) return;
                 }
 
                 _currentTrack.Unlock();
@@ -519,7 +519,7 @@ namespace _2_Weapon
                     _upgradeButton.gameObject.SetActive(true);
                 }
 
-                if (_track.DefenseData.DATA.eLevel == TheEnumManager.ITEM_LEVEL.level_7)
+                if (_track.DefenseData.DATA.eLevel == EnumController.ITEM_LEVEL.level_7)
                 {
                     _upgradeButton.GetComponentInChildren<Text>().text = "MAX";
                     _upgradeButton.image.color = Color.gray;
@@ -533,42 +533,42 @@ namespace _2_Weapon
             }
             private void Upgrade()
             { //for tutorial
-                if (TheTutorialManager.Instance)
+                if (TutorialController.Instance)
                 {
-                    if (!TheTutorialManager.Instance.IsCheckRightInput()) return;
+                    if (!TutorialController.Instance.IsRightInput()) return;
                 }
 
 
                 if (!_currentTrack.DefenseData.bUNLOCKED)
                 {
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_cannot);//sound
+                    SoundController.Instance.Play(SoundController.SOUND.ui_cannot);//sound
                     return;
                 }
-                if (_currentTrack.DefenseData.DATA.eLevel == TheEnumManager.ITEM_LEVEL.level_7)
+                if (_currentTrack.DefenseData.DATA.eLevel == EnumController.ITEM_LEVEL.level_7)
                 {
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_cannot);//sound
+                    SoundController.Instance.Play(SoundController.SOUND.ui_cannot);//sound
                     return;
                 }
 
 
 
                 int _price = _currentTrack.DefenseData.GetPriceToUpgrade(_currentTrack.DefenseData.DATA.eLevel);
-                if (TheDataManager.Instance.THE_DATA_PLAYER.iGem >= _price)
+                if (DataController.Instance.playerData.Gem >= _price)
                 {
-                    TheDataManager.Instance.THE_DATA_PLAYER.iGem -= _price;
-                    TheEventManager.PostEvent_OnUpdatedBoard();//event
+                    DataController.Instance.playerData.Gem -= _price;
+                    EventController.OnUpdatedBoardInvoke();//event
 
                     //content
                     _currentTrack.DefenseData.DATA.eLevel++;
-                    TheDataManager.Instance.THE_DATA_PLAYER.GetDefense(_currentTrack.DefenseData.DATA.eDefense).eLevel = _currentTrack.DefenseData.DATA.eLevel;
+                    DataController.Instance.playerData.TakeDefense(_currentTrack.DefenseData.DATA.eDefense).eLevel = _currentTrack.DefenseData.DATA.eLevel;
 
                     ViewTrack(_currentTrack);
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_upgrade);//sound
+                    SoundController.Instance.Play(SoundController.SOUND.ui_upgrade);//sound
                 }
                 else
                 {
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound
-                    TheUiManager.Instance.ShowPopup(TheUiManager.POP_UP.note);
+                    SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
+                    UIController.Instance.PopUpShow(UIController.POP_UP.note);
                     Note.SetNote(Note.NOTE.no_gem.ToString());
 
                 }
@@ -583,9 +583,9 @@ namespace _2_Weapon
             private void Fix()
             {
                 //for tutorial
-                if (TheTutorialManager.Instance)
+                if (TutorialController.Instance)
                 {
-                    if (!TheTutorialManager.Instance.IsCheckRightInput()) return;
+                    if (!TutorialController.Instance.IsRightInput()) return;
                 }
 
             }
@@ -675,48 +675,48 @@ namespace _2_Weapon
             public void Upgrade()
             {
                 //for tutorial
-                if (TheTutorialManager.Instance)
+                if (TutorialController.Instance)
                 {
-                    if (!TheTutorialManager.Instance.IsCheckRightInput()) return;
+                    if (!TutorialController.Instance.IsRightInput()) return;
                 }
 
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound
+                SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
             }
 
             //BUY
             private void Buy()
             {
                 //for tutorial
-                if (TheTutorialManager.Instance)
+                if (TutorialController.Instance)
                 {
-                    if (!TheTutorialManager.Instance.IsCheckRightInput()) return;
+                    if (!TutorialController.Instance.IsRightInput()) return;
                 }
 
                 if (_currentTrack.SupportData.DATA.iCurrentValue >= _currentTrack.SupportData.iMaxValue)
                 {
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_cannot);//sound
+                    SoundController.Instance.Play(SoundController.SOUND.ui_cannot);//sound
                     return;
                 }
 
 
                 int _price = _currentTrack.SupportData.iPrice;
-                if (TheDataManager.Instance.THE_DATA_PLAYER.iGem >= _price)
+                if (DataController.Instance.playerData.Gem >= _price)
                 {
 
-                    TheDataManager.Instance.THE_DATA_PLAYER.iGem -= _price;
-                    TheEventManager.PostEvent_OnUpdatedBoard();//event 
+                    DataController.Instance.playerData.Gem -= _price;
+                    EventController.OnUpdatedBoardInvoke();//event 
 
                     //content
                     _currentTrack.SupportData.DATA.iCurrentValue++;
                     _valueText.text = _currentTrack.SupportData.DATA.iCurrentValue + "+1";
                     _currentTrack.ShowData();
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_purchase);//sound
+                    SoundController.Instance.Play(SoundController.SOUND.ui_purchase);//sound
                
                 }
                 else
                 {
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound
-                    TheUiManager.Instance.ShowPopup(TheUiManager.POP_UP.note);
+                    SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
+                    UIController.Instance.PopUpShow(UIController.POP_UP.note);
                     Note.SetNote(Note.NOTE.no_gem.ToString());
                 }
                 ButtonStates(_currentTrack);
@@ -741,19 +741,19 @@ namespace _2_Weapon
                 private void Remove()
                 {
                     //for tutorial
-                    if (TheTutorialManager.Instance)
+                    if (TutorialController.Instance)
                     {
-                        if (!TheTutorialManager.Instance.IsCheckRightInput()) return;
+                        if (!TutorialController.Instance.IsRightInput()) return;
                     }
 
                     if (_gunData.DATA.bIsDefaultGun) return;
 
-                    TheEventManager.Weapon_OnRemoveFromEquipedWeaponList(_gunData);//event
+                    EventController.OnUnEquipedWeaponInvoke(_gunData);//event
                     _gunData = null;
                     _button.transform.Find("Icon").GetComponent<Image>().color = Color.white * 0.0f;
                     _button.transform.Find("Close").GetComponent<Image>().color = Color.white * 0.0f;
                     _ammoText.text = "";
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_cannot);//sound
+                    SoundController.Instance.Play(SoundController.SOUND.ui_cannot);//sound
                 }
 
                 public void Construct(GunData _gun)
@@ -806,7 +806,7 @@ namespace _2_Weapon
                     return;
                 }
 
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_equiped);//sound
+                SoundController.Instance.Play(SoundController.SOUND.ui_equiped);//sound
                 //---------------------
                 int _totalTrack = LIST_BUTTON_WEAPON_EQUITPED.Count;
                 for (int i = 0; i < _totalTrack; i++)
@@ -814,7 +814,7 @@ namespace _2_Weapon
                     if (LIST_BUTTON_WEAPON_EQUITPED[i].GunData == null)
                     {
                         LIST_BUTTON_WEAPON_EQUITPED[i].Construct(gundata);
-                        TheEventManager.Weapon_OnAddToEquipedWeaponList(gundata);//event
+                        EventController.OnoEquipedWeaponInvoke(gundata);//event
 
                         return;
                     }
@@ -840,21 +840,21 @@ namespace _2_Weapon
                 {
                     if (_data == null)
                     {
-                        TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_cannot);//sound
+                        SoundController.Instance.Play(SoundController.SOUND.ui_cannot);//sound
                         return;
                     }
                     if (_data.DATA.bDefault)
                     {
-                        TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_cannot);//sound
+                        SoundController.Instance.Play(SoundController.SOUND.ui_cannot);//sound
                         return;
                     }
 
                     _button.image.sprite = Instance._defencePicked._emptySprite;
-                    TheEventManager.Defense_OnRemoveToEquipedDefenseList(_data);//event
+                    EventController.OnRemoveDefenseInvoke(_data);//event
                     _data = null;
                     _button.transform.Find("Icon").GetComponent<Image>().color = Color.white * 0.0f;
                     _button.transform.Find("Close").GetComponent<Image>().color = Color.white * 0.0f;
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_cannot);//sound
+                    SoundController.Instance.Play(SoundController.SOUND.ui_cannot);//sound
                 }
 
                 public void Construct(DefenseData _defense)
@@ -936,7 +936,7 @@ namespace _2_Weapon
             _listPanelManager[0].Assign();
 
             //for tutorial
-            if (TheTutorialManager.Instance && !TheTutorialManager.Instance.GetTutorial(TheTutorialManager.TUTORIAL.weapon).bCompleted)
+            if (TutorialController.Instance && !TutorialController.Instance.GetTutorial(TutorialController.TUTORIAL.weapon)._isCompleted)
             {
                 _listPanelManager[1].PanelButton.enabled = false;
                 _listPanelManager[2].PanelButton.enabled = false;
@@ -971,7 +971,7 @@ namespace _2_Weapon
         {
             if (Instance == null) Instance = this;
 
-            TheUiManager.Instance.SetCameraForPopupCanvas(Camera.main);//set camera
+            UIController.Instance.SetCameraPopup(Camera.main);//set camera
         }
 
 
@@ -994,22 +994,22 @@ namespace _2_Weapon
         
         private void ButtonInit(Button button)
         {   //for tutorial
-            if (TheTutorialManager.Instance)
+            if (TutorialController.Instance)
             {
-                if (!TheTutorialManager.Instance.IsCheckRightInput()) return;
+                if (!TutorialController.Instance.IsRightInput()) return;
             }
 
 
             if (button == _backButton)
             {
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_back);//sound
-                TheUiManager.Instance.LoadScene(TheUiManager.SCENE.LevelSelection);
+                SoundController.Instance.Play(SoundController.SOUND.ui_click_back);//sound
+                UIController.Instance.LoadScene(UIController.SCENE.LevelSelection);
             }
             else if (button == _startButton)
             {
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.sfx_zombie_gruzz_boss);
-                TheUiManager.Instance.LoadScene(TheUiManager.SCENE.Gameplay);
+                SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
+                SoundController.Instance.Play(SoundController.SOUND.sfx_zombie_gruzz_boss);
+                UIController.Instance.LoadScene(UIController.SCENE.Gameplay);
             }
         }
 
@@ -1017,17 +1017,17 @@ namespace _2_Weapon
         private void EqupList()
         {
 
-            int total = TheWeaponManager.Instance.LIST_EQUIPED_WEAPON.Count;
+            int total = MANAGERS.WeaponController.Instance.equipedWeaponList.Count;
             for (int i = 0; i < total; i++)
             {
-                _weaponPicked.AddTakenWeapon(TheWeaponManager.Instance.LIST_EQUIPED_WEAPON[i]);
+                _weaponPicked.AddTakenWeapon(MANAGERS.WeaponController.Instance.equipedWeaponList[i]);
             }
 
-            total = TheWeaponManager.Instance.LIST_DEFENSE.Count;
+            total = MANAGERS.WeaponController.Instance._defenceList.Count;
             for (int i = 0; i < total; i++)
             {
-                if (TheWeaponManager.Instance.LIST_DEFENSE[i].DATA.bEquiped)
-                    _defencePicked.AddTakenDefense(TheWeaponManager.Instance.LIST_DEFENSE[i]);
+                if (MANAGERS.WeaponController.Instance._defenceList[i].DATA.bEquiped)
+                    _defencePicked.AddTakenDefense(MANAGERS.WeaponController.Instance._defenceList[i]);
             }
 
         }
@@ -1035,7 +1035,7 @@ namespace _2_Weapon
 
         private void OnDisable()
         {
-            TheDataManager.Instance.SaveDataPlayer();//save
+            DataController.Instance.SaveData();//save
         }
     }
 }

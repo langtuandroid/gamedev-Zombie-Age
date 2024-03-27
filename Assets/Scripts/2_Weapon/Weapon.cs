@@ -63,14 +63,14 @@ namespace _2_Weapon
         
         private void ButtonSet(Button _button)
         {
-            if (TheTutorialManager.Instance)
+            if (TutorialController.Instance)
             {
-                if (!TheTutorialManager.Instance.IsCheckRightInput()) return;
+                if (!TutorialController.Instance.IsRightInput()) return;
             }
 
             if (_button == _thisButton)
             {
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_wood_board);//sound
+                SoundController.Instance.Play(SoundController.SOUND.ui_wood_board);//sound
                 WeaponController.Instance.weaponPanel.VisualiseTrack(this);
             }
             else if (_button == _equipButton)
@@ -78,12 +78,12 @@ namespace _2_Weapon
                 WeaponController.Instance.weaponPanel.VisualiseTrack(this);
                 if (!_gunData.DATA.bEquiped)
                 {
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_cannot);//sound
+                    SoundController.Instance.Play(SoundController.SOUND.ui_cannot);//sound
                     // GUN_DATA.DATA.bEquiped = true;
                     WeaponController.Instance.weaponPicked.AddTakenWeapon(_gunData);
                 }
                 else
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_cannot);//sound
+                    SoundController.Instance.Play(SoundController.SOUND.ui_cannot);//sound
             }
 
         }
@@ -91,21 +91,21 @@ namespace _2_Weapon
         public void Unlock()
         {
             int price = _gunData.iPriceToUnlock;
-            if (TheDataManager.Instance.THE_DATA_PLAYER.iGem >= price)
+            if (DataController.Instance.playerData.Gem >= price)
             {
-                TheDataManager.Instance.THE_DATA_PLAYER.iGem -= price;
-                TheDataManager.Instance.SaveDataPlayer();//save
-                TheEventManager.PostEvent_OnUpdatedBoard();
+                DataController.Instance.playerData.Gem -= price;
+                DataController.Instance.SaveData();//save
+                EventController.OnUpdatedBoardInvoke();
 
                 _gunData.bUNLOCKED = true;
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_purchase);//sound
+                SoundController.Instance.Play(SoundController.SOUND.ui_purchase);//sound
            
             }
             else
             {
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound
+                SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
                 //khong du tien
-                TheUiManager.Instance.ShowPopup(TheUiManager.POP_UP.note);
+                UIController.Instance.PopUpShow(UIController.POP_UP.note);
                 Note.SetNote(Note.NOTE.no_gem.ToString());
             }
 
@@ -120,8 +120,8 @@ namespace _2_Weapon
         {
             if (_gun != _gunData) return;
             _gunData.DATA.bEquiped = true;
-            if (!TheWeaponManager.Instance.LIST_EQUIPED_WEAPON.Contains(_gunData))
-                TheWeaponManager.Instance.LIST_EQUIPED_WEAPON.Add(_gunData);
+            if (!MANAGERS.WeaponController.Instance.equipedWeaponList.Contains(_gunData))
+                MANAGERS.WeaponController.Instance.equipedWeaponList.Add(_gunData);
 
             Construct(_gunData);
         }
@@ -129,8 +129,8 @@ namespace _2_Weapon
         {
             if (_gun != _gunData) return;
 
-            if (TheWeaponManager.Instance.LIST_EQUIPED_WEAPON.Contains(_gunData))
-                TheWeaponManager.Instance.LIST_EQUIPED_WEAPON.Remove(_gunData);
+            if (MANAGERS.WeaponController.Instance.equipedWeaponList.Contains(_gunData))
+                MANAGERS.WeaponController.Instance.equipedWeaponList.Remove(_gunData);
             _gunData.DATA.bEquiped = false;
 
             Construct(_gunData);
@@ -138,13 +138,13 @@ namespace _2_Weapon
 
         private void OnEnable()
         {
-            TheEventManager.OnAddToEquipedWeaponList += Equip;
-            TheEventManager.OnRemoveFromEquipedWeaponList += UpEquip;
+            EventController.OnAddToEquipedWeaponList += Equip;
+            EventController.OnRemoveFromEquipedWeaponList += UpEquip;
         }
         private void OnDisable()
         {
-            TheEventManager.OnAddToEquipedWeaponList -= Equip;
-            TheEventManager.OnRemoveFromEquipedWeaponList -= UpEquip;
+            EventController.OnAddToEquipedWeaponList -= Equip;
+            EventController.OnRemoveFromEquipedWeaponList -= UpEquip;
         }
 
     }

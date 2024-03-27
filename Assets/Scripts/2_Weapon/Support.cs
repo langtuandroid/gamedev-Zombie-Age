@@ -9,7 +9,7 @@ namespace _2_Weapon
     public class Support : MonoBehaviour
     {
          
-        [FormerlySerializedAs("eSupport")] [SerializeField] private TheEnumManager.SUPPORT _eSupport;
+        [FormerlySerializedAs("eSupport")] [SerializeField] private EnumController.SUPPORT _eSupport;
         [FormerlySerializedAs("SUPPORT_DATA")] [SerializeField] private SupportData _supportData;
 
         [FormerlySerializedAs("txtName")] [SerializeField] private Text _nameText;
@@ -22,23 +22,23 @@ namespace _2_Weapon
             _thisButton = GetComponent<Button>();
             _thisButton.onClick.AddListener(() => ButtonAssign());
 
-            _supportData = TheWeaponManager.Instance.GetSupport(_eSupport);
+            _supportData = MANAGERS.WeaponController.Instance.Support(_eSupport);
             _nameText.text = _supportData.name;
 
             ShowData();
-            if (_supportData.DATA._support == TheEnumManager.SUPPORT.big_bomb)
+            if (_supportData.DATA._support == EnumController.SUPPORT.big_bomb)
                 WeaponController.Instance.supportPanel.ViewTrack(this);
         }
 
 
         private void ButtonAssign()
         { 
-            if (TheTutorialManager.Instance)
+            if (TutorialController.Instance)
             {
-                if (!TheTutorialManager.Instance.IsCheckRightInput()) return;
+                if (!TutorialController.Instance.IsRightInput()) return;
             }
 
-            TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_wood_board);//sound
+            SoundController.Instance.Play(SoundController.SOUND.ui_wood_board);//sound
             WeaponController.Instance.supportPanel.ViewTrack(this);
         }
 

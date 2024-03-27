@@ -54,15 +54,15 @@ namespace SCREENS
             private void GetReward()
             {
                 //tutorial
-                if (TheTutorialManager.Instance)
+                if (TutorialController.Instance)
                 {                
-                    if (!TheTutorialManager.Instance.IsCheckRightInput()) return;
+                    if (!TutorialController.Instance.IsRightInput()) return;
                 }
 
 
                 if (Instance.iCurrentDay != iDay) return;
 
-                TheUiManager.Instance.ShowPopup(TheUiManager.POP_UP.reward);
+                UIController.Instance.PopUpShow(UIController.POP_UP.reward);
                 VictoryReward.SetReward(m_reward);
                 Instance.gameObject.SetActive(false);
                 Debug.Log("Get reward me!");
@@ -101,7 +101,7 @@ namespace SCREENS
         void OnEnable()
         {
        
-            iCurrentDay = TheDataManager.Instance.THE_DATA_PLAYER.iCurrentDay;
+            iCurrentDay = DataController.Instance.playerData._day;
             iCurrentPage = (int)(iCurrentDay / 4.0f);
             ShowTrack(iCurrentPage);
         }
@@ -119,9 +119,9 @@ namespace SCREENS
         private void SetButton(Button _bu)
         {
             //for tutorial
-            if (TheTutorialManager.Instance)
+            if (TutorialController.Instance)
             {
-                if (!TheTutorialManager.Instance.IsCheckRightInput()) return;
+                if (!TutorialController.Instance.IsRightInput()) return;
             }
 
 
@@ -144,7 +144,7 @@ namespace SCREENS
             }
             else if (_bu == buClose)
             {
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_back);//sound
+                SoundController.Instance.Play(SoundController.SOUND.ui_click_back);//sound
                 gameObject.SetActive(false);
             }
         }

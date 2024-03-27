@@ -1,17 +1,7 @@
 ﻿namespace MANAGERS
 {
-    public class TheEnumManager
+    public class EnumController
     {
-
-        public enum PLATFROM
-        {
-            android,
-            ios,
-            facebook,
-            info_default,
-        }
-
-
         #region DIFFICUFT
         public enum DIFFICUFT
         {
@@ -55,15 +45,7 @@
             die,
             attack,
         }
-
-        public enum KIND_OF_ITEM_FOR_ZOMBIE
-        {
-            not,
-            hat,
-            weapon,
-            shield,
-
-        }
+        
         public enum HAT_OF_ZOMBIE
         {
             NO_HAT,
@@ -91,9 +73,6 @@
             shield_steel,
 
         }
-
-
-
         #endregion
 
 
@@ -164,22 +143,7 @@
 
         }
         #endregion
-
-
-        #region IAP
-        public enum KIND_OF_IAP
-        {
-            pack_1,
-            pack_2,
-            pack_3,
-            pack_4,
-            pack_5,
-            pack_6,
-            watch_ad_to_free_gem,
-        }
-        #endregion
-
-
+        
         #region DEFENSE
         public enum DEFENSE
         {

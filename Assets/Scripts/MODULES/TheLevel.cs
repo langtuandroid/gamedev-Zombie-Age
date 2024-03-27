@@ -93,14 +93,14 @@ namespace MODULES
         private void Awake()
         {
 
-            TheEventManager.PostEvent_OnStartLevel(); //event firebase
+            EventController.OnStartLevelInvoke(); //event firebase
 
 
             if (Instance == null)
                 Instance = this;
 
             #region LOAD DATA
-            LevelData _data = Resources.Load<LevelData>("Levels/Configs/Level_" + (TheDataManager.Instance.THE_DATA_PLAYER.iCurrentLevel + 1).ToString());
+            LevelData _data = Resources.Load<LevelData>("Levels/Configs/Level_" + (DataController.Instance.playerData.CurrentLevel + 1).ToString());
             if (_data == null) _data = Resources.Load<LevelData>("Levels/Configs/Level_default");
             LEVEL_DATA = _data;
             BACKGROUND_FRAME.sprite = LEVEL_DATA.sprBackgroundFrame;
@@ -110,7 +110,7 @@ namespace MODULES
         private void Start()
         {
             SetZombieInLevel();
-            TheZombieManager.Instance.InitPool(LIST_ZOMBIE_IN_LEVEL);
+            ZombieController.Instance.ConstructPool(LIST_ZOMBIE_IN_LEVEL);
             ConfigWave();
         }
         private void OnDisable()
@@ -126,8 +126,8 @@ namespace MODULES
             int _total = LEVEL_DATA.LIST_ZOMBIE_IN_LEVEL.Count;
             for (int i = 0; i < _total; i++)
             {
-                if (!TheZombieManager.Instance.GetZombie(LEVEL_DATA.LIST_ZOMBIE_IN_LEVEL[i].ZOMBIE).bIsBoss)
-                    LIST_ZOMBIE_IN_LEVEL.Add(TheZombieManager.Instance.GetZombie(LEVEL_DATA.LIST_ZOMBIE_IN_LEVEL[i].ZOMBIE));
+                if (!ZombieController.Instance.GetZombie(LEVEL_DATA.LIST_ZOMBIE_IN_LEVEL[i].ZOMBIE).bIsBoss)
+                    LIST_ZOMBIE_IN_LEVEL.Add(ZombieController.Instance.GetZombie(LEVEL_DATA.LIST_ZOMBIE_IN_LEVEL[i].ZOMBIE));
             }
 
         }
@@ -193,11 +193,11 @@ namespace MODULES
 
 
                 //-------------------------------------------
-                TheEventManager.PostEvent_OnStartNewWave();//event
+                EventController.OnStartNewWaveInvoke();//event
 
                 Wave _wave = LIST_WAVE[iCurrentWave];
                 int _totalGroup = _wave.GetTotalGroupZombie();
-                TheZombieManager.Instance.iTotalZombieInWave = _wave.GetTotalZombie();
+                ZombieController.Instance._zombiesInWave = _wave.GetTotalZombie();
                 Vector3 _tempPos = new Vector3();
 
                 float _specialStatusForZombie = 0;//random special zombie
@@ -208,7 +208,7 @@ namespace MODULES
                     UnitWave _unitWave = _wave.LIST_UNIT_WAVE[i];
                     yield return _wait;
                     int _totalZombieInGroup = _unitWave.iNumber;
-                    TheEnumManager.ZOMBIE _zombie = _unitWave._ZombieData.eZombie;
+                    EnumController.ZOMBIE _zombie = _unitWave._ZombieData.eZombie;
 
 
                     for (int j = 0; j < _totalZombieInGroup; j++)
@@ -224,7 +224,7 @@ namespace MODULES
                             && _wave == LIST_WAVE[LIST_WAVE.Count - 1])//WAVE CUOI CUNG
                         {
                             IsBossComming = true;
-                            TheZombieManager.Instance.iTotalZombieInWave++;
+                            ZombieController.Instance._zombiesInWave++;
                             GameObject _boss = Instantiate(LEVEL_DATA.prefabBoss, _tempPos, Quaternion.identity);//boss
                             Zombie _Boss = _boss.GetComponent<Zombie>();
                             _Boss.Init(_tempPos);
@@ -234,7 +234,7 @@ namespace MODULES
 
 
                         //ZOMBIE
-                        _tempZombie = TheZombieManager.Instance.GetZombieInPool(_zombie);
+                        _tempZombie = ZombieController.Instance.GetZombieInPool(_zombie);
 
                         _specialStatusForZombie = Random.Range(0, 100);
                         if (_specialStatusForZombie <= LEVEL_DATA.iConfigSpecialStatus)
@@ -245,14 +245,14 @@ namespace MODULES
 
                         //-------------- items-------------------
                         if (_unitWave._ZombieDataConfig.IsHat()) _tempZombie.ITEM_SYSTEM.SetItem(_unitWave._ZombieDataConfig.eHat);
-                        else _tempZombie.ITEM_SYSTEM.SetItem(TheEnumManager.HAT_OF_ZOMBIE.NO_HAT);
+                        else _tempZombie.ITEM_SYSTEM.SetItem(EnumController.HAT_OF_ZOMBIE.NO_HAT);
 
                         if (_unitWave._ZombieDataConfig.IsWeapon()) _tempZombie.ITEM_SYSTEM.SetItem(_unitWave._ZombieDataConfig.eWeapon);
-                        else _tempZombie.ITEM_SYSTEM.SetItem(TheEnumManager.WEAPON_OF_ZOMBIE.NO_WEAPON);
+                        else _tempZombie.ITEM_SYSTEM.SetItem(EnumController.WEAPON_OF_ZOMBIE.NO_WEAPON);
 
 
                         if (_unitWave._ZombieDataConfig.IsShield()) _tempZombie.ITEM_SYSTEM.SetItem(_unitWave._ZombieDataConfig.eShield);
-                        else _tempZombie.ITEM_SYSTEM.SetItem(TheEnumManager.SHIELD_OF_ZOMBIE.NO_SHIELD);
+                        else _tempZombie.ITEM_SYSTEM.SetItem(EnumController.SHIELD_OF_ZOMBIE.NO_SHIELD);
 
 
 
@@ -283,7 +283,7 @@ namespace MODULES
         {
             if (collision)
             {
-                collision.GetComponent<Zombie>().SetStatus(TheEnumManager.ZOMBIE_STATUS.attack);
+                collision.GetComponent<Zombie>().SetStatus(EnumController.ZOMBIE_STATUS.attack);
             }
         }
 
@@ -317,8 +317,8 @@ namespace MODULES
                 int _length = LIST_WAVE[i].LIST_UNIT_WAVE.Count;
                 for (int j = 0; j < _length; j++)
                 {
-                    _totalHp += LIST_WAVE[i].LIST_UNIT_WAVE[j].iNumber * TheZombieManager.Instance.GetZombie(LIST_WAVE[i].LIST_UNIT_WAVE[j]._ZombieData.eZombie).GetHp(
-                        TheDataManager.Instance.THE_DATA_PLAYER.iCurrentLevel + 1, i + 1
+                    _totalHp += LIST_WAVE[i].LIST_UNIT_WAVE[j].iNumber * ZombieController.Instance.GetZombie(LIST_WAVE[i].LIST_UNIT_WAVE[j]._ZombieData.eZombie).GetHp(
+                        DataController.Instance.playerData.CurrentLevel + 1, i + 1
                     );
                 }
 

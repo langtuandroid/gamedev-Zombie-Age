@@ -8,7 +8,7 @@ namespace MODULES.Zombies
 {
     public class Zombie : MonoBehaviour
     {
-        public TheEnumManager.ZOMBIE_STATUS eStatus;
+        public EnumController.ZOMBIE_STATUS eStatus;
         public ZombieData DATA;
         public ItemsSystem ITEM_SYSTEM;
         public ZombieHealth HEALTH;
@@ -67,9 +67,9 @@ namespace MODULES.Zombies
         {
 
             int _randSound = Random.Range(0, 100);
-            if (_randSound < 50) TheSoundManager.Instance.ZombieGruzz();//sound
+            if (_randSound < 50) SoundController.Instance.ZombieGruzz();//sound
 
-            TheEventManager.ZombieEvent_Born(this);//event
+            EventController.ZombieEvent_Born(this);//event
             ALIVE = true;
             SPECIAL_STATUS = _specialStatus;
             bMoveBack = false;
@@ -94,7 +94,7 @@ namespace MODULES.Zombies
             //-------------
             Init();
 
-            SetStatus(TheEnumManager.ZOMBIE_STATUS.moving);
+            SetStatus(EnumController.ZOMBIE_STATUS.moving);
 
         }
 
@@ -103,7 +103,7 @@ namespace MODULES.Zombies
         void Update()
         {
             if (!ALIVE) return;
-            if (eStatus == TheEnumManager.ZOMBIE_STATUS.moving)
+            if (eStatus == EnumController.ZOMBIE_STATUS.moving)
                 Move();
         }
 
@@ -111,25 +111,25 @@ namespace MODULES.Zombies
 
         //SET STATUS
         GameObject _effBlood;
-        public void SetStatus(TheEnumManager.ZOMBIE_STATUS _status)
+        public void SetStatus(EnumController.ZOMBIE_STATUS _status)
         {
             if (!ALIVE) return;
             eStatus = _status;
             switch (_status)
             {
-                case TheEnumManager.ZOMBIE_STATUS.moving:
-                    AnimatorPlay(TheEnumManager.ZOMBIE_STATUS.moving);
+                case EnumController.ZOMBIE_STATUS.moving:
+                    AnimatorPlay(EnumController.ZOMBIE_STATUS.moving);
                     break;
-                case TheEnumManager.ZOMBIE_STATUS.die:
+                case EnumController.ZOMBIE_STATUS.die:
                     ALIVE = false;
                     StopAllCoroutines();
                     CancelInvoke();
-                    AnimatorPlay(TheEnumManager.ZOMBIE_STATUS.die);
+                    AnimatorPlay(EnumController.ZOMBIE_STATUS.die);
 
                     if (!DATA.bIsFlying)
                     {
                         //blood
-                        _effBlood = TheObjectPoolingManager.Instance.GetObjectPooling(TheEnumManager.POOLING_OBJECT.blood_of_zombie).GetObject();
+                        _effBlood = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.blood_of_zombie).Get();
                         _effBlood.transform.position = _tranOfThis.position;
                         _effBlood.SetActive(true);
 
@@ -137,11 +137,11 @@ namespace MODULES.Zombies
 
 
                     //Blood Exploison
-                    _effBlood = TheObjectPoolingManager.Instance.GetObjectPooling(TheEnumManager.POOLING_OBJECT.zombie_blood_exploison).GetObject();
+                    _effBlood = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.zombie_blood_exploison).Get();
                     _effBlood.transform.position = _tranOfCenter.position;
                     _effBlood.SetActive(true);
 
-                    TheSoundManager.Instance.ZombieExplosion();//sound
+                    SoundController.Instance.ZombieExplosion();//sound
 
                     //remove freeze
                     RemoveObjFreeze();
@@ -150,22 +150,22 @@ namespace MODULES.Zombies
                     if (DATA.bIsBoss)
                     {
                         m_animator.speed = 0.0f;
-                        Instantiate(TheObjectPoolingManager.Instance.prefabBigBlood, _tranOfCenter.position, Quaternion.identity);//eff blood    
+                        Instantiate(ObjectPoolController.Instance._bigBloodPrefab, _tranOfCenter.position, Quaternion.identity);//eff blood    
                         SetBossActive(_gameobject, false, 3.0f);
                         return;
                     }
                     else
                     {
-                        TheEventManager.ZombieEvent_Die(this);//event
+                        EventController.ZombieEvent_Die(this);//event
                         _tranOfThis.position = new Vector2(100, 100);
                         _gameobject.SetActive(false);
 
                     }
                     break;
-                case TheEnumManager.ZOMBIE_STATUS.attack:
+                case EnumController.ZOMBIE_STATUS.attack:
                     CancelInvoke("Attack");
                     InvokeRepeating("Attack", DATA.fReloadAttackTime, DATA.fReloadAttackTime);
-                    AnimatorPlay(TheEnumManager.ZOMBIE_STATUS.attack);
+                    AnimatorPlay(EnumController.ZOMBIE_STATUS.attack);
                     break;
 
             }
@@ -173,7 +173,7 @@ namespace MODULES.Zombies
 
 
         //PLAY ANIMATOWR
-        protected virtual void AnimatorPlay(TheEnumManager.ZOMBIE_STATUS _status)
+        protected virtual void AnimatorPlay(EnumController.ZOMBIE_STATUS _status)
         {
 
         }
@@ -189,10 +189,10 @@ namespace MODULES.Zombies
         {
             yield return new WaitForSeconds(_timedelay);
 
-            Instantiate(TheObjectPoolingManager.Instance.prefabExplosionBoss, _tranOfCenter.position, Quaternion.identity);//explosion
-            Instantiate(TheObjectPoolingManager.Instance.prefabBloodBoss, vCURRENT_POS, Quaternion.identity);//bloss
-            TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.sfx_zombie_gruzz_boss);//sound
-            TheEventManager.ZombieEvent_Die(this);//event
+            Instantiate(ObjectPoolController.Instance._explosionBossPrefab, _tranOfCenter.position, Quaternion.identity);//explosion
+            Instantiate(ObjectPoolController.Instance._bossBloodPrefab, vCURRENT_POS, Quaternion.identity);//bloss
+            SoundController.Instance.Play(SoundController.SOUND.sfx_zombie_gruzz_boss);//sound
+            EventController.ZombieEvent_Die(this);//event
             _object.SetActive(_active);
         }
 
@@ -224,7 +224,7 @@ namespace MODULES.Zombies
         WaitForSeconds _waitmoveback = new WaitForSeconds(0.1f);
         private IEnumerator IeMoveBack()
         {
-            if (eStatus == TheEnumManager.ZOMBIE_STATUS.moving)
+            if (eStatus == EnumController.ZOMBIE_STATUS.moving)
             {
                 bMoveBack = true;
                 yield return _waitmoveback;
@@ -241,8 +241,8 @@ namespace MODULES.Zombies
             if (IsFreezing) return;
 
             //play sound
-            if (!DATA.bIsFlying) TheSoundManager.Instance.ZombieAttack();//sound
-            TheEventManager.ZombieEvent_OnZombieAttack(HEALTH.GetDamage());
+            if (!DATA.bIsFlying) SoundController.Instance.ZombieAttack();//sound
+            EventController.ZombieEvent_OnZombieAttack(HEALTH.GetDamage());
         }
 
 
@@ -257,7 +257,7 @@ namespace MODULES.Zombies
         #region  HIT BULLET
         private float _disFromBullet;
         private float _disToGetDamage;// khoan cach de dinh dan
-        public void HitBullet(TheEnumManager.WEAPON _weapon, Vector2 _posOfBullet, float _range, int _damage)
+        public void HitBullet(EnumController.WEAPON _weapon, Vector2 _posOfBullet, float _range, int _damage)
         {
             if (!ALIVE) return;
             _disFromBullet = Vector2.Distance(_tranOfCenter.position, _posOfBullet);
@@ -265,7 +265,7 @@ namespace MODULES.Zombies
             if (DATA.bIsBoss && _disFromBullet > _range * 1.5f) return;
             if (!DATA.bIsBoss && _disFromBullet > _range) return;
 
-            if (_weapon != TheEnumManager.WEAPON.firegun)
+            if (_weapon != EnumController.WEAPON.firegun)
             {
                 StartCoroutine(IeMoveBack());
                 HEALTH.ReduceHp(_damage); //trừ máu     
@@ -288,7 +288,7 @@ namespace MODULES.Zombies
             _hitFire = true;
 
             //EFFECT
-            _fire = TheObjectPoolingManager.Instance.GetObjectPooling(TheEnumManager.POOLING_OBJECT.fire_of_enemies).GetObject();
+            _fire = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.fire_of_enemies).Get();
             _fire.transform.localScale = vScaleOfFire;
             if (SPECIAL_STATUS)
                 _fire.transform.localScale *= 1.3f;
@@ -349,13 +349,13 @@ namespace MODULES.Zombies
         private void OnEnable()
         {
             //  Init(transform.position);
-            TheEventManager.OnBulletCompleted += HitBullet;
-            TheEventManager.OnSupportCompleted += EffectFromSupport;
+            EventController.OnBulletCompleted += HitBullet;
+            EventController.OnSupportCompleted += EffectFromSupport;
         }
         private void OnDisable()
         {
-            TheEventManager.OnBulletCompleted -= HitBullet;
-            TheEventManager.OnSupportCompleted -= EffectFromSupport;
+            EventController.OnBulletCompleted -= HitBullet;
+            EventController.OnSupportCompleted -= EffectFromSupport;
             CancelInvoke();
             StopAllCoroutines();
             RemoveFireOfFiregun();
@@ -371,9 +371,9 @@ namespace MODULES.Zombies
         float _disOfSupport;
         SupportData _supportdata;
 
-        public void EffectFromSupport(TheEnumManager.SUPPORT _support, Vector2 _pos)
+        public void EffectFromSupport(EnumController.SUPPORT _support, Vector2 _pos)
         {
-            _supportdata = TheWeaponManager.Instance.GetSupport(_support);
+            _supportdata = WeaponController.Instance.Support(_support);
             _disFromSupportPos = Vector2.Distance(vCURRENT_POS, _pos);
             _disOfSupport = _supportdata.GetRange();
 
@@ -383,20 +383,20 @@ namespace MODULES.Zombies
             //content
             switch (_support)
             {
-                case TheEnumManager.SUPPORT.grenade:
+                case EnumController.SUPPORT.grenade:
                     HEALTH.ReduceHp(_supportdata.GetDamage());
                     break;
 
-                case TheEnumManager.SUPPORT.freeze:
+                case EnumController.SUPPORT.freeze:
                     StartCoroutine(IeGetFreeze(_supportdata.GetTime()));
                     break;
 
 
-                case TheEnumManager.SUPPORT.poison:
+                case EnumController.SUPPORT.poison:
                     StartCoroutine(IeGetPoison(_supportdata.GetTime(), _supportdata.GetDamage()));
 
                     break;
-                case TheEnumManager.SUPPORT.big_bomb:
+                case EnumController.SUPPORT.big_bomb:
                     HEALTH.ReduceHp(_supportdata.GetDamage());
 
                     break;
@@ -425,7 +425,7 @@ namespace MODULES.Zombies
                 IsFreezing = true;
 
                 //EFFECT
-                _effectFreeze = TheObjectPoolingManager.Instance.GetObjectPooling(TheEnumManager.POOLING_OBJECT.effect_freeze).GetObject();
+                _effectFreeze = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.effect_freeze).Get();
                 _effectFreeze.transform.localScale = vScaleOfFree;
 
                 if (SPECIAL_STATUS)
@@ -497,13 +497,13 @@ namespace MODULES.Zombies
 
 
 
-            iHP = _zombie.DATA.GetHp(TheDataManager.Instance.THE_DATA_PLAYER.iCurrentLevel + 1, TheLevel.Instance.iCurrentWave);
+            iHP = _zombie.DATA.GetHp(DataController.Instance.playerData.CurrentLevel + 1, TheLevel.Instance.iCurrentWave);
             // if (_zombie.SPECIAL_STATUS) iHP = (int)(iHP * 0.5f);//Nếu ở trạng thái special, thì hp giảm 1 nửa
 
 
-            if (_zombie.ITEM_SYSTEM.eHat != TheEnumManager.HAT_OF_ZOMBIE.NO_HAT) iItemHat_Hp = (int)(iHP * 0.3f);
-            if (_zombie.ITEM_SYSTEM.eShield != TheEnumManager.SHIELD_OF_ZOMBIE.NO_SHIELD) iItemShield_Hp = (int)(iHP * 0.5f);
-            if (_zombie.ITEM_SYSTEM.eWeapon != TheEnumManager.WEAPON_OF_ZOMBIE.NO_WEAPON) fDamage += fDamage * 0.5f;
+            if (_zombie.ITEM_SYSTEM.eHat != EnumController.HAT_OF_ZOMBIE.NO_HAT) iItemHat_Hp = (int)(iHP * 0.3f);
+            if (_zombie.ITEM_SYSTEM.eShield != EnumController.SHIELD_OF_ZOMBIE.NO_SHIELD) iItemShield_Hp = (int)(iHP * 0.5f);
+            if (_zombie.ITEM_SYSTEM.eWeapon != EnumController.WEAPON_OF_ZOMBIE.NO_WEAPON) fDamage += fDamage * 0.5f;
 
             //total
             iCurrentTotalHeath = iHP + iItemHat_Hp + iItemShield_Hp;
@@ -528,7 +528,7 @@ namespace MODULES.Zombies
         public void ReduceHp(float _value)
         {
             //show text
-            _textBlood = TheObjectPoolingManager.Instance.GetObjectPooling(TheEnumManager.POOLING_OBJECT.text_blood).GetObject();
+            _textBlood = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.text_blood).Get();
             _textBlood.GetComponent<TextValue>().SetValue((int)_value);
             _textBlood.transform.position = ZOMBIE._tranOfCenter.position;
             _textBlood.SetActive(true);
@@ -571,7 +571,7 @@ namespace MODULES.Zombies
             if (_value >= iHP)
             {
                 iHP = 0;
-                ZOMBIE.SetStatus(TheEnumManager.ZOMBIE_STATUS.die);
+                ZOMBIE.SetStatus(EnumController.ZOMBIE_STATUS.die);
             }
             else
             {
@@ -617,9 +617,9 @@ namespace MODULES.Zombies
 
         private Zombie ZOMBIE;
 
-        public TheEnumManager.HAT_OF_ZOMBIE eHat;
-        public TheEnumManager.WEAPON_OF_ZOMBIE eWeapon;
-        public TheEnumManager.SHIELD_OF_ZOMBIE eShield;
+        public EnumController.HAT_OF_ZOMBIE eHat;
+        public EnumController.WEAPON_OF_ZOMBIE eWeapon;
+        public EnumController.SHIELD_OF_ZOMBIE eShield;
 
 
         private SpriteRenderer sprItem_Hat;
@@ -628,65 +628,65 @@ namespace MODULES.Zombies
 
 
 
-        public void SetItem(TheEnumManager.HAT_OF_ZOMBIE _item)
+        public void SetItem(EnumController.HAT_OF_ZOMBIE _item)
         {
             if (sprItem_Hat == null)
             {
-                eHat = TheEnumManager.HAT_OF_ZOMBIE.NO_HAT;
+                eHat = EnumController.HAT_OF_ZOMBIE.NO_HAT;
                 return;
             }
 
 
             eHat = _item;
-            if (_item == TheEnumManager.HAT_OF_ZOMBIE.NO_HAT)
+            if (_item == EnumController.HAT_OF_ZOMBIE.NO_HAT)
             {
                 sprItem_Hat.gameObject.SetActive(false);
                 return;
             }
             if (sprItem_Hat != null)
             {
-                sprItem_Hat.sprite = TheSpriteManager.Instance.ITEM_FOR_ZOMBIE.GetHat(_item).sprSprite;
+                sprItem_Hat.sprite = SpriteController.Instance._zombieItem.TakeHat(_item)._sprite;
                 sprItem_Hat.gameObject.SetActive(true);
             }
         }
-        public void SetItem(TheEnumManager.WEAPON_OF_ZOMBIE _item)
+        public void SetItem(EnumController.WEAPON_OF_ZOMBIE _item)
         {
             if (sprItem_Weapon == null)
             {
-                eWeapon = TheEnumManager.WEAPON_OF_ZOMBIE.NO_WEAPON;
+                eWeapon = EnumController.WEAPON_OF_ZOMBIE.NO_WEAPON;
                 return;
             }
 
             eWeapon = _item;
-            if (_item == TheEnumManager.WEAPON_OF_ZOMBIE.NO_WEAPON)
+            if (_item == EnumController.WEAPON_OF_ZOMBIE.NO_WEAPON)
             {
                 sprItem_Weapon.gameObject.SetActive(false);
                 return;
             }
             if (sprItem_Weapon != null)
             {
-                sprItem_Weapon.sprite = TheSpriteManager.Instance.ITEM_FOR_ZOMBIE.GetWeapon(_item).sprSprite;
+                sprItem_Weapon.sprite = SpriteController.Instance._zombieItem.TakeWeapon(_item)._sprite;
                 sprItem_Weapon.gameObject.SetActive(true);
             }
         }
-        public void SetItem(TheEnumManager.SHIELD_OF_ZOMBIE _item)
+        public void SetItem(EnumController.SHIELD_OF_ZOMBIE _item)
         {
             if (sprItem_Shield == null)
             {
-                eShield = TheEnumManager.SHIELD_OF_ZOMBIE.NO_SHIELD;
+                eShield = EnumController.SHIELD_OF_ZOMBIE.NO_SHIELD;
                 return;
             }
 
 
             eShield = _item;
-            if (_item == TheEnumManager.SHIELD_OF_ZOMBIE.NO_SHIELD)
+            if (_item == EnumController.SHIELD_OF_ZOMBIE.NO_SHIELD)
             {
                 sprItem_Shield.gameObject.SetActive(false);
                 return;
             };
             if (sprItem_Shield != null)
             {
-                sprItem_Shield.sprite = TheSpriteManager.Instance.ITEM_FOR_ZOMBIE.GetShield(_item).sprSprite;
+                sprItem_Shield.sprite = SpriteController.Instance._zombieItem.TakeShield(_item)._sprite;
                 sprItem_Shield.gameObject.SetActive(true);
             }
         }
@@ -696,12 +696,12 @@ namespace MODULES.Zombies
         GameObject _effect = null;
         public void RemoveHat()
         {
-            if (eHat == TheEnumManager.HAT_OF_ZOMBIE.NO_HAT) return;
-            eHat = TheEnumManager.HAT_OF_ZOMBIE.NO_HAT;
+            if (eHat == EnumController.HAT_OF_ZOMBIE.NO_HAT) return;
+            eHat = EnumController.HAT_OF_ZOMBIE.NO_HAT;
 
             sprItem_Hat.gameObject.SetActive(false);
             //effect
-            _effect = TheObjectPoolingManager.Instance.GetObjectPooling(TheEnumManager.POOLING_OBJECT.remove_item).GetObject();
+            _effect = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.remove_item).Get();
             _effect.transform.position = sprItem_Hat.transform.position;
             _effect.GetComponent<RemoveItem>().SetItem(sprItem_Hat.sprite);//add sprite
             _effect.SetActive(true);
@@ -710,12 +710,12 @@ namespace MODULES.Zombies
 
         public void RemoveShield()
         {
-            if (eShield == TheEnumManager.SHIELD_OF_ZOMBIE.NO_SHIELD) return;
-            eShield = TheEnumManager.SHIELD_OF_ZOMBIE.NO_SHIELD;
+            if (eShield == EnumController.SHIELD_OF_ZOMBIE.NO_SHIELD) return;
+            eShield = EnumController.SHIELD_OF_ZOMBIE.NO_SHIELD;
 
             sprItem_Shield.gameObject.SetActive(false);
             //explosion
-            _effect = TheObjectPoolingManager.Instance.GetObjectPooling(TheEnumManager.POOLING_OBJECT.remove_item).GetObject();
+            _effect = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.remove_item).Get();
             _effect.transform.position = sprItem_Shield.transform.position;
             _effect.GetComponent<RemoveItem>().SetItem(sprItem_Shield.sprite);//add sprite
             _effect.SetActive(true);

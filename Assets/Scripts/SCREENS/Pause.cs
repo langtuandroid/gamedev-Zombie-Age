@@ -22,22 +22,22 @@ namespace SCREENS
         {
             if (_bu == buBack)
             {
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_back);//sound
+                SoundController.Instance.Play(SoundController.SOUND.ui_click_back);//sound
                 MusicManager.Instance.Play();
-                TheUiManager.Instance.HidePopup(TheUiManager.POP_UP.pause);
+                UIController.Instance.HidePopup(UIController.POP_UP.pause);
             }
             else if (_bu == buReplay)
             {
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound
+                SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
                 // MusicManager.Instance.Play();
-                TheUiManager.Instance.LoadScene(TheUiManager.SCENE.Gameplay);
+                UIController.Instance.LoadScene(UIController.SCENE.Gameplay);
             }
             else if (_bu == buLevelSelection)
             {
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound
+                SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
                 MusicManager.Instance.Play();
-                TheUiManager.Instance.LoadScene(TheUiManager.SCENE.LevelSelection);
-                TheUiManager.Instance.HidePopup(TheUiManager.POP_UP.pause);
+                UIController.Instance.LoadScene(UIController.SCENE.LevelSelection);
+                UIController.Instance.HidePopup(UIController.POP_UP.pause);
             }
         }
 

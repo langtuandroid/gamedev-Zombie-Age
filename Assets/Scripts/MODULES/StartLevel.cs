@@ -18,9 +18,9 @@ namespace MODULES
         {
             TheLevel.Instance.LoadWave();//load wave
 
-            TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.sfx_explosion_grenade);//sound
+            SoundController.Instance.Play(SoundController.SOUND.sfx_explosion_grenade);//sound
             //effect
-            GameObject _effect = TheObjectPoolingManager.Instance.GetObjectPooling(TheEnumManager.POOLING_OBJECT.main_exploison).GetObject();
+            GameObject _effect = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.main_exploison).Get();
             _effect.transform.position = transform.position;
             _effect.SetActive(true);
             gameObject.SetActive(false);
@@ -28,7 +28,7 @@ namespace MODULES
 
 
 
-        private void BeginLevel(TheEnumManager.WEAPON _weapon, Vector2 _pos,float _range, int _dam)
+        private void BeginLevel(EnumController.WEAPON _weapon, Vector2 _pos,float _range, int _dam)
         {
             _dis = Vector2.Distance(transform.position, _pos);
             if (_dis > 2.0f) return;
@@ -48,14 +48,14 @@ namespace MODULES
 
 
 
-        private void TheEventManager_OnSupportCompleted(TheEnumManager.SUPPORT _support, Vector2 _pos)
+        private void TheEventManager_OnSupportCompleted(EnumController.SUPPORT _support, Vector2 _pos)
         {
-            if(_support== TheEnumManager.SUPPORT.big_bomb)
+            if(_support== EnumController.SUPPORT.big_bomb)
             {
                 LoadWave();//load wave
             }
 
-            if (_support == TheEnumManager.SUPPORT.grenade)
+            if (_support == EnumController.SUPPORT.grenade)
             {
                 _dis = Vector2.Distance(transform.position, _pos);
                 if (_dis > 4.0f) return;
@@ -67,16 +67,16 @@ namespace MODULES
 
         private void OnEnable()
         {
-            TheEventManager.OnBulletCompleted += BeginLevel;
-            TheEventManager.OnSupportCompleted += TheEventManager_OnSupportCompleted;
+            EventController.OnBulletCompleted += BeginLevel;
+            EventController.OnSupportCompleted += TheEventManager_OnSupportCompleted;
         }
 
    
 
         private void OnDisable()
         {
-            TheEventManager.OnBulletCompleted -= BeginLevel;
-            TheEventManager.OnSupportCompleted -= TheEventManager_OnSupportCompleted;
+            EventController.OnBulletCompleted -= BeginLevel;
+            EventController.OnSupportCompleted -= TheEventManager_OnSupportCompleted;
         }
     }
 }

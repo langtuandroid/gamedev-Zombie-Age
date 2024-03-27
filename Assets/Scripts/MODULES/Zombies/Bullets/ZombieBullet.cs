@@ -6,7 +6,7 @@ namespace MODULES.Zombies.Bullets
     public class ZombieBullet : MonoBehaviour
     {
 
-        private TheEnumManager.ZOMBIE eZombie;
+        private EnumController.ZOMBIE eZombie;
 
         private SpriteRenderer m_SpriteRenderer;
         private Transform _tranOfThis;
@@ -43,7 +43,7 @@ namespace MODULES.Zombies.Bullets
 
 
         //Setup
-        public void SetBullet(TheEnumManager.ZOMBIE _zombie, float  _damage, Vector2 _to, Vector3 _scale, Sprite _sprite)
+        public void SetBullet(EnumController.ZOMBIE _zombie, float  _damage, Vector2 _to, Vector3 _scale, Sprite _sprite)
         {
             m_SpriteRenderer.sprite = _sprite;
             vTargetPos = _to;
@@ -56,8 +56,8 @@ namespace MODULES.Zombies.Bullets
         public virtual void BulletComplete()
         {
 
-            TheEventManager.PostEvent_OnZombieBulletCompleted(eZombie, vTargetPos);
-            TheEventManager.ZombieEvent_OnZombieAttack(fDamage);//attack
+            EventController.OnZombieBulletCompletedInvoke(eZombie, vTargetPos);
+            EventController.ZombieEvent_OnZombieAttack(fDamage);//attack
 
         }
 

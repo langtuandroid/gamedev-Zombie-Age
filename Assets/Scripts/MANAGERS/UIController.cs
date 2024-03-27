@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using SCREENS;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 namespace MANAGERS
 {
-    public class TheUiManager : MonoBehaviour
+    public class UIController : MonoBehaviour
     {
-
-
         #region POP UP
         public enum POP_UP
         {
@@ -31,18 +30,18 @@ namespace MANAGERS
         [System.Serializable]
         public class PopUp
         {
-            public TheUiManager.POP_UP ePopup;
-            public GameObject objPopup;
+            [FormerlySerializedAs("ePopup")] public POP_UP _popUpType;
+            [FormerlySerializedAs("objPopup")] public GameObject _popUpObject;
         }
 
 
-        public static TheUiManager Instance;
-        [SerializeField] GameObject m_BlackCamera;
-        [SerializeField] Canvas m_CanvasOfPopup;
+        public static UIController Instance;
 
-        public List<PopUp> LIST_POP_UP;
-        private int iTotalPopup;
-        // Start is called before the first frame update
+        [FormerlySerializedAs("m_BlackCamera")] [SerializeField] private GameObject _vlackCamera;
+        [FormerlySerializedAs("m_CanvasOfPopup")] [SerializeField] private Canvas _canvasPopUp;
+
+        [FormerlySerializedAs("LIST_POP_UP")] public List<PopUp> _popUpList;
+        private int _totalPopUps;
         void Awake()
         {
             if (Instance == null)
@@ -53,88 +52,71 @@ namespace MANAGERS
 
             DontDestroyOnLoad(this.gameObject);
 
-            iTotalPopup = LIST_POP_UP.Count;
+            _totalPopUps = _popUpList.Count;
         }
 
-
-        //SHOW POPUP
-        public void ShowPopup(POP_UP _popup)
+        
+        public void PopUpShow(POP_UP _popup)
         {
-            if (CURRENT_SCENE != SCENE.Gameplay)
+            if (_cuurentScene != SCENE.Gameplay)
             {
                 if (_popup == POP_UP.gameover) return;
                 if (_popup == POP_UP.victory) return;
                 if (_popup == POP_UP.pause) return;
             }
 
+            _popUpList[(int)_popup]._popUpObject.SetActive(true);
 
-            //---------------------------------------
-            LIST_POP_UP[(int)_popup].objPopup.SetActive(true);
-
-            if (isShowing(POP_UP.loading))
-                LIST_POP_UP[(int)_popup].objPopup.transform.SetAsLastSibling();
+            if (IsShowing(POP_UP.loading))
+                _popUpList[(int)_popup]._popUpObject.transform.SetAsLastSibling();
             else
-                LIST_POP_UP[(int)_popup].objPopup.transform.SetSiblingIndex(iTotalPopup - 1);
+                _popUpList[(int)_popup]._popUpObject.transform.SetSiblingIndex(_totalPopUps - 1);
 
 
             if (_popup != POP_UP.loading)
-                TheEventManager.PostEvent_OnShowPopup(_popup);//event
+                EventController.OnShowPopupInvoke(_popup);//event
         }
-        public void ShowPopup(POP_UP _popup, float _timedelay)
+        public void PopUpShow(POP_UP _popup, float _timedelay)
         {
-            StartCoroutine(IeShowPop(_popup, _timedelay));
+            StartCoroutine(ShowPopRoutine(_popup, _timedelay));
         }
-        private IEnumerator IeShowPop(POP_UP _popup, float _timedelay)
+        private IEnumerator ShowPopRoutine(POP_UP _popup, float _timedelay)
         {
             yield return new WaitForSeconds(_timedelay);
-            ShowPopup(_popup);
+            PopUpShow(_popup);
         }
-
-
-
-        //CANCEL ALL COROUTINE
-        //public void StopAllCoroutine()
-        //{
-        //    StopAllCoroutines();
-        //}
-
-
-        //HIDE POPUP
+        
         public void HidePopup(POP_UP _popup)
         {
-
-
-            LIST_POP_UP[(int)_popup].objPopup.SetActive(false);
+            _popUpList[(int)_popup]._popUpObject.SetActive(false);
 
             if (_popup != POP_UP.loading)
-                TheEventManager.PostEvent_OnHidePopup(_popup);//event
+                EventController.OnHidePopupInvoke(_popup);//event
         }
 
 
-        //HIDE ALL
-        public void HideAll()
+        private void HideAll()
         {
-            for (int i = 0; i < iTotalPopup; i++)
+            for (int i = 0; i < _totalPopUps; i++)
             {
-                if (LIST_POP_UP[i].ePopup != POP_UP.loading)
-                    LIST_POP_UP[i].objPopup.SetActive(false);
+                if (_popUpList[i]._popUpType != POP_UP.loading)
+                    _popUpList[i]._popUpObject.SetActive(false);
             }
         }
 
-
-        //IS SHOWING
-        public bool isShowing()
+        
+        public bool IsShowing()
         {
-            for (int i = 0; i < iTotalPopup; i++)
+            for (int i = 0; i < _totalPopUps; i++)
             {
-                if (LIST_POP_UP[i].ePopup != POP_UP.loading && LIST_POP_UP[i].objPopup.activeInHierarchy) return true;
+                if (_popUpList[i]._popUpType != POP_UP.loading && _popUpList[i]._popUpObject.activeInHierarchy) return true;
             }
             return false;
         }
 
-        public bool isShowing(POP_UP _poup)
+        private bool IsShowing(POP_UP _poup)
         {
-            if (LIST_POP_UP[(int)_poup].objPopup.activeInHierarchy) return true;
+            if (_popUpList[(int)_poup]._popUpObject.activeInHierarchy) return true;
             return false;
         }
 
@@ -152,20 +134,20 @@ namespace MANAGERS
             Upgrade,
         }
 
-        public SCENE CURRENT_SCENE;
-        private bool bLoadingScene = false;
+        [FormerlySerializedAs("CURRENT_SCENE")] public SCENE _cuurentScene;
+        private bool _isOnLoadingScene;
         public void LoadScene(SCENE _scene)
         {
-            if (bLoadingScene) return;
-            bLoadingScene = true;
-            CURRENT_SCENE = _scene;
+            if (_isOnLoadingScene) return;
+            _isOnLoadingScene = true;
+            _cuurentScene = _scene;
 
-            StartCoroutine(IeLoadScene(_scene));
+            StartCoroutine(LoadSceneRoutine(_scene));
         }
 
-        private IEnumerator IeLoadScene(SCENE _scene)
+        private IEnumerator LoadSceneRoutine(SCENE _scene)
         {
-            ShowPopup(POP_UP.loading);
+            PopUpShow(POP_UP.loading);
             Loading.Instance.Setup(Loading.FADE.fade_in);//loading 
 
             Time.timeScale = 1;
@@ -174,34 +156,23 @@ namespace MANAGERS
 
             SceneManager.LoadScene(_scene.ToString(), LoadSceneMode.Single);
             yield return new WaitForSecondsRealtime(0.1f);
-
-
-
-            ShowPopup(POP_UP.loading);
+            
+            PopUpShow(POP_UP.loading);
             Loading.Instance.Setup(Loading.FADE.face_out);//loading 
-            bLoadingScene = false;
+            _isOnLoadingScene = false;
+            EventController.OnStartNewSceneInvoke();
 
-            //event
-            TheEventManager.PostEvent_OnStartNewScene();
-            //---------------
             StopAllCoroutines();
         }
 
 
         #endregion
-
-
-        public void LoadLink(string _link)
-        {
-            Application.OpenURL(_link);
-        }
         
-        //CAMẺA
-        public void SetCameraForPopupCanvas(Camera _cam)
+        public void SetCameraPopup(Camera _cam)
         {
-            m_CanvasOfPopup.renderMode = RenderMode.ScreenSpaceCamera;
-            m_CanvasOfPopup.worldCamera = _cam;
-            m_CanvasOfPopup.sortingOrder = 200;
+            _canvasPopUp.renderMode = RenderMode.ScreenSpaceCamera;
+            _canvasPopUp.worldCamera = _cam;
+            _canvasPopUp.sortingOrder = 200;
 
             float _screenWidth = Screen.width;
             float _screenHeight = Screen.height;
@@ -235,7 +206,7 @@ namespace MANAGERS
         {
             if (!GameObject.Find("BlackCamera"))
             {
-                GameObject _newCam = Instantiate(m_BlackCamera);
+                GameObject _newCam = Instantiate(_vlackCamera);
                 _newCam.name = "BlackCamera";
             }
         }

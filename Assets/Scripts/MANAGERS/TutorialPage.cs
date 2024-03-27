@@ -2,14 +2,14 @@
 
 namespace MANAGERS
 {
-    public class StepTutorial : MonoBehaviour
+    public class TutorialPage : MonoBehaviour
     {
-        public TheTutorialManager.TUTORIAL eTutorial;
-    
-        public float fTimeDelay;
-
+       
+        [SerializeField] private TutorialController.TUTORIAL eTutorial;
+        [SerializeField] private float fTimeDelay;
         private RaycastHit2D _ray;
-    
+        public TutorialController.TUTORIAL TutorialState => eTutorial;
+        public float Delay => fTimeDelay;
         public bool IsRightInputPos()
         {
             _ray = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
@@ -22,7 +22,7 @@ namespace MANAGERS
 
         private void OnEnable()
         {
-            TheTutorialManager.Instance.CURRENT_STEP_TUTORIAL = this;
+            TutorialController.Instance._currentStep = this;
         }
     }
 }

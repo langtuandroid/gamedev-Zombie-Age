@@ -10,7 +10,7 @@ namespace MODULES.Scriptobjectable
         [System.Serializable]
         public class Updata
         {
-            public TheEnumManager.UpgradeType eUpgrade; //save
+            public EnumController.UpgradeType eUpgrade; //save
             public bool bEquiped; //save
         }
 
@@ -45,11 +45,11 @@ namespace MODULES.Scriptobjectable
         {
             get
             {
-                return TheDataManager.Instance.THE_DATA_PLAYER.GetUpgarde(DATA.eUpgrade).bEquiped;
+                return DataController.Instance.playerData.TakeUpgarde(DATA.eUpgrade).bEquiped;
             }
             set
             {
-                TheDataManager.Instance.THE_DATA_PLAYER.GetUpgarde(DATA.eUpgrade).bEquiped = value;
+                DataController.Instance.playerData.TakeUpgarde(DATA.eUpgrade).bEquiped = value;
             }
         }
 
@@ -60,13 +60,13 @@ namespace MODULES.Scriptobjectable
             DATA.eUpgrade = ORIGINAL_DATA.eUpgrade;
             DATA.bEquiped = ORIGINAL_DATA.bEquiped;
 
-            if (TheDataManager.Instance.THE_DATA_PLAYER.GetUpgarde((DATA.eUpgrade)) != null)
+            if (DataController.Instance.playerData.TakeUpgarde((DATA.eUpgrade)) != null)
             {
-                DATA.bEquiped = TheDataManager.Instance.THE_DATA_PLAYER.GetUpgarde(DATA.eUpgrade).bEquiped;
+                DATA.bEquiped = DataController.Instance.playerData.TakeUpgarde(DATA.eUpgrade).bEquiped;
             }
             else
             {
-                TheDataManager.Instance.THE_DATA_PLAYER.LIST_UPGRADE.Add(DATA);
+                DataController.Instance.playerData._upgradeList.Add(DATA);
             }
         }
 

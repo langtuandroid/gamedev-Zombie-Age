@@ -123,7 +123,7 @@ namespace _4_Gameplay
             Application.targetFrameRate = 60;
             if (Instance == null)
                 Instance = this;
-            TheUiManager.Instance.SetCameraForPopupCanvas(Camera.main);//set camera
+            UIController.Instance.SetCameraPopup(Camera.main);//set camera
 
 
             MusicManager.Instance.Stop();
@@ -133,14 +133,14 @@ namespace _4_Gameplay
             _zombieWaveBar.Construct();
 
 
-            if (TheDataManager.Instance.eMode == TheDataManager.MODE.Release)
+            if (DataController.Instance.mode == DataController.Mode.Release)
                 _testModeText.gameObject.SetActive(false);
         }
 
 
         private void Start()
         {
-            LoadGame(TheDataManager.Instance.THE_DATA_PLAYER.iCurrentLevel + 1);//load level
+            LoadGame(DataController.Instance.playerData.CurrentLevel + 1);//load level
 
             _lastWaveObject.SetActive(false);
 
@@ -195,14 +195,14 @@ namespace _4_Gameplay
                 case GAME_STATUS.victory:
 
                     Debug.Log("VICTORY");
-                    TheEventManager.PostEvent_OnGameWin(); //event firebase
-                    TheUiManager.Instance.ShowPopup(TheUiManager.POP_UP.victory, 1.5f);
+                    EventController.OnGameWinInvoke(); //event firebase
+                    UIController.Instance.PopUpShow(UIController.POP_UP.victory, 1.5f);
                     break;
                 case GAME_STATUS.gameover:
 
                     Debug.Log("GAME OVER");
-                    TheEventManager.PostEvent_OnGameover(); //event firebase
-                    TheUiManager.Instance.ShowPopup(TheUiManager.POP_UP.gameover, 1.0f);
+                    EventController.OnGameoverInvoke(); //event firebase
+                    UIController.Instance.PopUpShow(UIController.POP_UP.gameover, 1.0f);
                     break;
             }
             Debug.Log("TIME SCALE: " + Time.timeScale);
@@ -228,25 +228,25 @@ namespace _4_Gameplay
 
         private void AssignButton(Button button)
         { //for tutorial
-            if (TheTutorialManager.Instance)
+            if (TutorialController.Instance)
             {
-                if (!TheTutorialManager.Instance.IsCheckRightInput()) return;
+                if (!TutorialController.Instance.IsRightInput()) return;
             }
 
             if (button == _pauseButton)
             {
                 if (_gameStatus != GAME_STATUS.playing) return;
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound           
+                SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound           
                 _gameStatus = GAME_STATUS.pause;
-                TheUiManager.Instance.ShowPopup(TheUiManager.POP_UP.pause);
+                UIController.Instance.PopUpShow(UIController.POP_UP.pause);
             }
             else if (button == _resetGunButton)
             {
-                TheEventManager.PostEvent_OnResetMagazinBullet();//event
+                EventController.OnResetMagazinBulletInvoke();//event
             }
             else if (button == _callSupportButton)
             {
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);
+                SoundController.Instance.Play(SoundController.SOUND.ui_click_next);
 
                 if (_supportPanel.activeInHierarchy)
                 {
@@ -274,7 +274,7 @@ namespace _4_Gameplay
             else if (TheLevel.Instance && TheLevel.Instance.iCurrentWave == TheLevel.Instance.LEVEL_DATA.iTotalWave - 1)
             {
                 // last wave
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.sfx_drum);//sound
+                SoundController.Instance.Play(SoundController.SOUND.sfx_drum);//sound
                 _lastWaveObject.SetActive(true);
                 //music
                 MusicManager.Instance.Stop();
@@ -294,15 +294,15 @@ namespace _4_Gameplay
             _hpText.text = _string;
         }
         
-        private void HandlePauseGame(TheUiManager.POP_UP _popup)
+        private void HandlePauseGame(UIController.POP_UP _popup)
         {
             Time.timeScale = 0;
             SetStatusOfGame(GAME_STATUS.pause);
         }
         
-        private void HandleResumeGame(TheUiManager.POP_UP _popup)
+        private void HandleResumeGame(UIController.POP_UP _popup)
         {
-            if (TheUiManager.Instance.isShowing()) return;
+            if (UIController.Instance.IsShowing()) return;
 
             Time.timeScale = 1;
             SetStatusOfGame(GAME_STATUS.resume);
@@ -339,26 +339,26 @@ namespace _4_Gameplay
 
         private void OnEnable()
         {
-            TheEventManager.OnStartNewWave += HandleShowTextWave;
-            TheEventManager.OnShowPopup += HandlePauseGame;
-            TheEventManager.OnHidePopup += HandleResumeGame;
-            TheEventManager.OnChangedWeapon += HandleChangedWeapon;
+            EventController.OnStartNewWave += HandleShowTextWave;
+            EventController.OnShowPopup += HandlePauseGame;
+            EventController.OnHidePopup += HandleResumeGame;
+            EventController.OnChangedWeapon += HandleChangedWeapon;
 
-            TheEventManager.OnZombieBorn += HandleZombieBorn;
-            TheEventManager.OnZombieDie += HandleZombieDie;
+            EventController.OnZombieBorn += HandleZombieBorn;
+            EventController.OnZombieDie += HandleZombieDie;
         }
 
 
         private void OnDisable()
         {
-            TheDataManager.Instance.SaveDataPlayer();
+            DataController.Instance.SaveData();
 
-            TheEventManager.OnStartNewWave -= HandleShowTextWave;
-            TheEventManager.OnShowPopup -= HandlePauseGame;
-            TheEventManager.OnHidePopup -= HandleResumeGame;
-            TheEventManager.OnChangedWeapon -= HandleChangedWeapon;
-            TheEventManager.OnZombieBorn -= HandleZombieBorn;
-            TheEventManager.OnZombieDie -= HandleZombieDie;
+            EventController.OnStartNewWave -= HandleShowTextWave;
+            EventController.OnShowPopup -= HandlePauseGame;
+            EventController.OnHidePopup -= HandleResumeGame;
+            EventController.OnChangedWeapon -= HandleChangedWeapon;
+            EventController.OnZombieBorn -= HandleZombieBorn;
+            EventController.OnZombieDie -= HandleZombieDie;
         }
     }
 }

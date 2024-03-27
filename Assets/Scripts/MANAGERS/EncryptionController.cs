@@ -5,31 +5,31 @@ using UnityEngine;
 
 namespace MANAGERS
 {
-    public class TheEncryptionManager : MonoBehaviour
+    public class EncryptionController : MonoBehaviour
     {
-        public static readonly string KEY_FOR_ENCRYPTION = "nhatquanglova12344321";
+        public static readonly string _encryptionKey = "nhatquanglova12344321";
         //OLD KEY : KEY_FOR_ENCRYPTION = "nhatquanglova12344321";
-        public static  string EncryptData(string toEncrypt)
+        public static  string Encrypt(string toEncrypt)
         {
 #if UNITY_WP8
             return toEncrypt;
 #else
             byte[] toEncryptArray = Encoding.UTF8.GetBytes(toEncrypt);
-            RijndaelManaged rDel = CreateRijndaelManaged();
+            RijndaelManaged rDel = CreateRijndael();
             ICryptoTransform cTransform = rDel.CreateEncryptor();
             byte[] resultArray = cTransform.TransformFinalBlock(toEncryptArray, 0, toEncryptArray.Length);
             return Convert.ToBase64String(resultArray, 0, resultArray.Length);
 #endif
         }
 
-        public static  string DecryptData(string toDecrypt)
+        public static  string Decrypt(string toDecrypt)
         {
       
 #if UNITY_WP8
             return toDecrypt;
 #else
             byte[] toEncryptArray = Convert.FromBase64String(toDecrypt);
-            RijndaelManaged rDel = CreateRijndaelManaged();
+            RijndaelManaged rDel = CreateRijndael();
             ICryptoTransform cTransform = rDel.CreateDecryptor();
             byte[] resultArray = cTransform.TransformFinalBlock(toEncryptArray, 0, toEncryptArray.Length);
             return Encoding.UTF8.GetString(resultArray);
@@ -37,9 +37,9 @@ namespace MANAGERS
         }
 
 #if !UNITY_WP8
-        private static RijndaelManaged CreateRijndaelManaged()
+        private static RijndaelManaged CreateRijndael()
         {
-            byte[] keyArray = Encoding.UTF8.GetBytes(KEY_FOR_ENCRYPTION);
+            byte[] keyArray = Encoding.UTF8.GetBytes(_encryptionKey);
             var result = new RijndaelManaged();
 
             var newKeysArray = new byte[16];

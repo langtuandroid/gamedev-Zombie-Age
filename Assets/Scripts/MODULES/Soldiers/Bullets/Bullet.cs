@@ -5,8 +5,8 @@ namespace MODULES.Soldiers.Bullets
 {
     public class Bullet : MonoBehaviour
     {
-        private TheEnumManager.WEAPON eWeapon;
-        private TheEnumManager.ZOMBIE eZombie;
+        private EnumController.WEAPON eWeapon;
+        private EnumController.ZOMBIE eZombie;
         private bool bBulletOfPlayer; //fasle is mean of zombie
         private SpriteRenderer m_SpriteRenderer;
 
@@ -43,7 +43,7 @@ namespace MODULES.Soldiers.Bullets
 
 
         //Set bullet of player
-        public void SetBullet(TheEnumManager.WEAPON _weapon, Vector2 _startPos, Vector2 _targetPos,  float _angle, float _range, int _damage,Sprite _spriteOfBullet,Vector3 _scaleOfBullet)
+        public void SetBullet(EnumController.WEAPON _weapon, Vector2 _startPos, Vector2 _targetPos,  float _angle, float _range, int _damage,Sprite _spriteOfBullet,Vector3 _scaleOfBullet)
         {
             bBulletOfPlayer = true; //bullet of player
             eWeapon = _weapon;
@@ -58,7 +58,7 @@ namespace MODULES.Soldiers.Bullets
         }
 
         //Set bullet of player
-        public void SetBullet(TheEnumManager.WEAPON _weapon, Vector2 _startPos, Vector2 _targetPos, float _angle, float _range, int _damage)
+        public void SetBullet(EnumController.WEAPON _weapon, Vector2 _startPos, Vector2 _targetPos, float _angle, float _range, int _damage)
         {
             bBulletOfPlayer = true; //bullet of player
             eWeapon = _weapon;
@@ -72,9 +72,9 @@ namespace MODULES.Soldiers.Bullets
         }
 
         //Set bullet of zombie
-        public void SetBullet(TheEnumManager.ZOMBIE _zombie, Vector2 _startPos, Vector2 _targetPos, float _angle, int _damage)
+        public void SetBullet(EnumController.ZOMBIE _zombie, Vector2 _startPos, Vector2 _targetPos, float _angle, int _damage)
         {
-            m_SpriteRenderer.sprite = TheZombieManager.Instance.GetSpriteBullet(_zombie).sprBulletSprite;
+            m_SpriteRenderer.sprite = ZombieController.Instance.GetSpriteBullet(_zombie)._bulletSprite;
             bBulletOfPlayer = false;//bullet of zombie
             eZombie = _zombie;
             vCurrentPos = _startPos;
@@ -90,11 +90,11 @@ namespace MODULES.Soldiers.Bullets
         public virtual void BulletComplete()
         {
             if (bBulletOfPlayer)
-                TheEventManager.PostEvent_OnBulletCompleted(eWeapon, vTargetPos,fRange, iDamage);
+                EventController.OnBulletCompletedInvoke(eWeapon, vTargetPos,fRange, iDamage);
             else
             {
-                TheEventManager.PostEvent_OnZombieBulletCompleted(eZombie, vTargetPos);
-                TheEventManager.ZombieEvent_OnZombieAttack(iDamage);//attack
+                EventController.OnZombieBulletCompletedInvoke(eZombie, vTargetPos);
+                EventController.ZombieEvent_OnZombieAttack(iDamage);//attack
             }
         }
 

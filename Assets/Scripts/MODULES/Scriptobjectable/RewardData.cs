@@ -8,7 +8,7 @@ namespace MODULES.Scriptobjectable
     [CreateAssetMenu(fileName = "Reward data")]
     public class RewardData : ScriptableObject
     {
-        public TheEnumManager.REWARD eReward;
+        public EnumController.REWARD eReward;
         public Sprite sprIcon;
         public int iValue;
         public string strContent;
@@ -26,219 +26,219 @@ namespace MODULES.Scriptobjectable
         public void GetReward()
         {
             //vitory gem: Dựa vào khả năng chỉ số defense còn lại của soldier.
-            if (eReward == TheEnumManager.REWARD.victory_gem_easy
-                || eReward == TheEnumManager.REWARD.victory_gem_normal
-                || eReward == TheEnumManager.REWARD.victory_gem_nightmate)
+            if (eReward == EnumController.REWARD.victory_gem_easy
+                || eReward == EnumController.REWARD.victory_gem_normal
+                || eReward == EnumController.REWARD.victory_gem_nightmate)
             {
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_purchase);//sound
+                SoundController.Instance.Play(SoundController.SOUND.ui_purchase);//sound
 
                 int _gem = GetVictoryGem();
 
                 if (VictoryReward.Instance.bX2Gem)
-                    TheDataManager.Instance.THE_DATA_PLAYER.iGem += 2 * _gem;
+                    DataController.Instance.playerData.Gem += 2 * _gem;
                 else
-                    TheDataManager.Instance.THE_DATA_PLAYER.iGem += _gem;
+                    DataController.Instance.playerData.Gem += _gem;
 
 
-                TheDataManager.Instance.SaveDataPlayer();//save)
+                DataController.Instance.SaveData();//save)
                 return;
             }
 
 
             switch (eReward)
             {
-                case TheEnumManager.REWARD.ads_free_gem:
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_purchase);//sound
-                    TheDataManager.Instance.THE_DATA_PLAYER.iGem += iValue;
+                case EnumController.REWARD.ads_free_gem:
+                    SoundController.Instance.Play(SoundController.SOUND.ui_purchase);//sound
+                    DataController.Instance.playerData.Gem += iValue;
                     break;
 
 
 
-                case TheEnumManager.REWARD.ads_gift_pack_1:
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_purchase);//sound
-                    TheDataManager.Instance.THE_DATA_PLAYER.GetSupport(TheEnumManager.SUPPORT.grenade).iCurrentValue += 1;
+                case EnumController.REWARD.ads_gift_pack_1:
+                    SoundController.Instance.Play(SoundController.SOUND.ui_purchase);//sound
+                    DataController.Instance.playerData.TakeSupport(EnumController.SUPPORT.grenade).iCurrentValue += 1;
                     break;
-                case TheEnumManager.REWARD.ads_gift_pack_2:
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_purchase);//sound
-                    TheDataManager.Instance.THE_DATA_PLAYER.GetSupport(TheEnumManager.SUPPORT.poison).iCurrentValue += 1;
-                    TheDataManager.Instance.THE_DATA_PLAYER.GetSupport(TheEnumManager.SUPPORT.freeze).iCurrentValue += 1;
+                case EnumController.REWARD.ads_gift_pack_2:
+                    SoundController.Instance.Play(SoundController.SOUND.ui_purchase);//sound
+                    DataController.Instance.playerData.TakeSupport(EnumController.SUPPORT.poison).iCurrentValue += 1;
+                    DataController.Instance.playerData.TakeSupport(EnumController.SUPPORT.freeze).iCurrentValue += 1;
                     break;
-                case TheEnumManager.REWARD.ads_gift_pack_3:
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_purchase);//sound
-                    TheDataManager.Instance.THE_DATA_PLAYER.GetSupport(TheEnumManager.SUPPORT.big_bomb).iCurrentValue += 1;
-                    TheDataManager.Instance.THE_DATA_PLAYER.GetSupport(TheEnumManager.SUPPORT.poison).iCurrentValue += 1;
-                    TheDataManager.Instance.THE_DATA_PLAYER.GetSupport(TheEnumManager.SUPPORT.grenade).iCurrentValue += 1;
+                case EnumController.REWARD.ads_gift_pack_3:
+                    SoundController.Instance.Play(SoundController.SOUND.ui_purchase);//sound
+                    DataController.Instance.playerData.TakeSupport(EnumController.SUPPORT.big_bomb).iCurrentValue += 1;
+                    DataController.Instance.playerData.TakeSupport(EnumController.SUPPORT.poison).iCurrentValue += 1;
+                    DataController.Instance.playerData.TakeSupport(EnumController.SUPPORT.grenade).iCurrentValue += 1;
                     break;
-                case TheEnumManager.REWARD.ads_gift_pack_4:
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_purchase);//sound
-                    TheDataManager.Instance.THE_DATA_PLAYER.GetSupport(TheEnumManager.SUPPORT.big_bomb).iCurrentValue += 1;
-                    TheDataManager.Instance.THE_DATA_PLAYER.GetSupport(TheEnumManager.SUPPORT.poison).iCurrentValue += 1;
-                    TheDataManager.Instance.THE_DATA_PLAYER.GetSupport(TheEnumManager.SUPPORT.freeze).iCurrentValue += 1;
-                    TheDataManager.Instance.THE_DATA_PLAYER.GetSupport(TheEnumManager.SUPPORT.grenade).iCurrentValue += 1;
+                case EnumController.REWARD.ads_gift_pack_4:
+                    SoundController.Instance.Play(SoundController.SOUND.ui_purchase);//sound
+                    DataController.Instance.playerData.TakeSupport(EnumController.SUPPORT.big_bomb).iCurrentValue += 1;
+                    DataController.Instance.playerData.TakeSupport(EnumController.SUPPORT.poison).iCurrentValue += 1;
+                    DataController.Instance.playerData.TakeSupport(EnumController.SUPPORT.freeze).iCurrentValue += 1;
+                    DataController.Instance.playerData.TakeSupport(EnumController.SUPPORT.grenade).iCurrentValue += 1;
                     break;
 
 
                 #region CHECK-IN
-                case TheEnumManager.REWARD.check_in_d1_gem:
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_purchase);//sound
-                    TheDataManager.Instance.THE_DATA_PLAYER.iGem += iValue;
+                case EnumController.REWARD.check_in_d1_gem:
+                    SoundController.Instance.Play(SoundController.SOUND.ui_purchase);//sound
+                    DataController.Instance.playerData.Gem += iValue;
                     break;
-                case TheEnumManager.REWARD.check_in_d2_gem:
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_purchase);//sound
-                    TheDataManager.Instance.THE_DATA_PLAYER.iGem += iValue;
+                case EnumController.REWARD.check_in_d2_gem:
+                    SoundController.Instance.Play(SoundController.SOUND.ui_purchase);//sound
+                    DataController.Instance.playerData.Gem += iValue;
                     break;
-                case TheEnumManager.REWARD.check_in_d3_grenade:
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_purchase);//sound
-                    TheDataManager.Instance.THE_DATA_PLAYER.GetSupport(TheEnumManager.SUPPORT.grenade).iCurrentValue += iValue;
+                case EnumController.REWARD.check_in_d3_grenade:
+                    SoundController.Instance.Play(SoundController.SOUND.ui_purchase);//sound
+                    DataController.Instance.playerData.TakeSupport(EnumController.SUPPORT.grenade).iCurrentValue += iValue;
                     break;
-                case TheEnumManager.REWARD.check_in_d4_gem:
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_purchase);//sound
-                    TheDataManager.Instance.THE_DATA_PLAYER.iGem += iValue;
+                case EnumController.REWARD.check_in_d4_gem:
+                    SoundController.Instance.Play(SoundController.SOUND.ui_purchase);//sound
+                    DataController.Instance.playerData.Gem += iValue;
                     break;
-                case TheEnumManager.REWARD.check_in_d5_freeze:
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_purchase);//sound
-                    TheDataManager.Instance.THE_DATA_PLAYER.GetSupport(TheEnumManager.SUPPORT.freeze ).iCurrentValue += iValue;
+                case EnumController.REWARD.check_in_d5_freeze:
+                    SoundController.Instance.Play(SoundController.SOUND.ui_purchase);//sound
+                    DataController.Instance.playerData.TakeSupport(EnumController.SUPPORT.freeze ).iCurrentValue += iValue;
 
                     break;
-                case TheEnumManager.REWARD.check_in_d6_gem:
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_purchase);//sound
-                    TheDataManager.Instance.THE_DATA_PLAYER.iGem += iValue;
+                case EnumController.REWARD.check_in_d6_gem:
+                    SoundController.Instance.Play(SoundController.SOUND.ui_purchase);//sound
+                    DataController.Instance.playerData.Gem += iValue;
                     break;
-                case TheEnumManager.REWARD.check_in_d7_grenade:
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_purchase);//sound
-                    TheDataManager.Instance.THE_DATA_PLAYER.GetSupport(TheEnumManager.SUPPORT.grenade).iCurrentValue += iValue;
+                case EnumController.REWARD.check_in_d7_grenade:
+                    SoundController.Instance.Play(SoundController.SOUND.ui_purchase);//sound
+                    DataController.Instance.playerData.TakeSupport(EnumController.SUPPORT.grenade).iCurrentValue += iValue;
                     break;
-                case TheEnumManager.REWARD.check_in_d8_bigbomb:
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_purchase);//sound
-                    TheDataManager.Instance.THE_DATA_PLAYER.GetSupport(TheEnumManager.SUPPORT.big_bomb ).iCurrentValue += iValue;
+                case EnumController.REWARD.check_in_d8_bigbomb:
+                    SoundController.Instance.Play(SoundController.SOUND.ui_purchase);//sound
+                    DataController.Instance.playerData.TakeSupport(EnumController.SUPPORT.big_bomb ).iCurrentValue += iValue;
 
                     break;
-                case TheEnumManager.REWARD.check_in_d9_freeze:
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_purchase);//sound
-                    TheDataManager.Instance.THE_DATA_PLAYER.GetSupport(TheEnumManager.SUPPORT.freeze ).iCurrentValue += iValue;
+                case EnumController.REWARD.check_in_d9_freeze:
+                    SoundController.Instance.Play(SoundController.SOUND.ui_purchase);//sound
+                    DataController.Instance.playerData.TakeSupport(EnumController.SUPPORT.freeze ).iCurrentValue += iValue;
 
                     break;
-                case TheEnumManager.REWARD.check_in_d10_gem:
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_purchase);//sound
-                    TheDataManager.Instance.THE_DATA_PLAYER.iGem += iValue;
+                case EnumController.REWARD.check_in_d10_gem:
+                    SoundController.Instance.Play(SoundController.SOUND.ui_purchase);//sound
+                    DataController.Instance.playerData.Gem += iValue;
                     break;
-                case TheEnumManager.REWARD.check_in_d11_bigbomb:
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_purchase);//sound
-                    TheDataManager.Instance.THE_DATA_PLAYER.GetSupport(TheEnumManager.SUPPORT.big_bomb).iCurrentValue += iValue;
+                case EnumController.REWARD.check_in_d11_bigbomb:
+                    SoundController.Instance.Play(SoundController.SOUND.ui_purchase);//sound
+                    DataController.Instance.playerData.TakeSupport(EnumController.SUPPORT.big_bomb).iCurrentValue += iValue;
 
                     break;
-                case TheEnumManager.REWARD.check_in_d12_gem:
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_purchase);//sound
-                    TheDataManager.Instance.THE_DATA_PLAYER.iGem += iValue;
+                case EnumController.REWARD.check_in_d12_gem:
+                    SoundController.Instance.Play(SoundController.SOUND.ui_purchase);//sound
+                    DataController.Instance.playerData.Gem += iValue;
                     break;
-                case TheEnumManager.REWARD.check_in_d13_grenade:
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_purchase);//sound
-                    TheDataManager.Instance.THE_DATA_PLAYER.GetSupport(TheEnumManager.SUPPORT.grenade).iCurrentValue += iValue;
+                case EnumController.REWARD.check_in_d13_grenade:
+                    SoundController.Instance.Play(SoundController.SOUND.ui_purchase);//sound
+                    DataController.Instance.playerData.TakeSupport(EnumController.SUPPORT.grenade).iCurrentValue += iValue;
                     break;
-                case TheEnumManager.REWARD.check_in_d14_freeze:
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_purchase);//sound
-                    TheDataManager.Instance.THE_DATA_PLAYER.GetSupport(TheEnumManager.SUPPORT.freeze ).iCurrentValue += iValue;
+                case EnumController.REWARD.check_in_d14_freeze:
+                    SoundController.Instance.Play(SoundController.SOUND.ui_purchase);//sound
+                    DataController.Instance.playerData.TakeSupport(EnumController.SUPPORT.freeze ).iCurrentValue += iValue;
 
                     break;
-                case TheEnumManager.REWARD.check_in_d15_gem:
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_purchase);//sound
-                    TheDataManager.Instance.THE_DATA_PLAYER.iGem += iValue;
+                case EnumController.REWARD.check_in_d15_gem:
+                    SoundController.Instance.Play(SoundController.SOUND.ui_purchase);//sound
+                    DataController.Instance.playerData.Gem += iValue;
                     break;
-                case TheEnumManager.REWARD.check_in_d16_poison:
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_purchase);//sound
-                    TheDataManager.Instance.THE_DATA_PLAYER.GetSupport(TheEnumManager.SUPPORT.poison).iCurrentValue += iValue;
+                case EnumController.REWARD.check_in_d16_poison:
+                    SoundController.Instance.Play(SoundController.SOUND.ui_purchase);//sound
+                    DataController.Instance.playerData.TakeSupport(EnumController.SUPPORT.poison).iCurrentValue += iValue;
 
                     break;
-                case TheEnumManager.REWARD.check_in_d17_gem:
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_purchase);//sound
-                    TheDataManager.Instance.THE_DATA_PLAYER.iGem += iValue;
+                case EnumController.REWARD.check_in_d17_gem:
+                    SoundController.Instance.Play(SoundController.SOUND.ui_purchase);//sound
+                    DataController.Instance.playerData.Gem += iValue;
                     break;
-                case TheEnumManager.REWARD.check_in_d18_gem:
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_purchase);//sound
-                    TheDataManager.Instance.THE_DATA_PLAYER.iGem += iValue;
+                case EnumController.REWARD.check_in_d18_gem:
+                    SoundController.Instance.Play(SoundController.SOUND.ui_purchase);//sound
+                    DataController.Instance.playerData.Gem += iValue;
                     break;
-                case TheEnumManager.REWARD.check_in_d19_gem:
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_purchase);//sound
-                    TheDataManager.Instance.THE_DATA_PLAYER.iGem += iValue;
+                case EnumController.REWARD.check_in_d19_gem:
+                    SoundController.Instance.Play(SoundController.SOUND.ui_purchase);//sound
+                    DataController.Instance.playerData.Gem += iValue;
                     break;
-                case TheEnumManager.REWARD.check_in_d20_grenade:
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_purchase);//sound
-                    TheDataManager.Instance.THE_DATA_PLAYER.GetSupport(TheEnumManager.SUPPORT.grenade).iCurrentValue += iValue;
+                case EnumController.REWARD.check_in_d20_grenade:
+                    SoundController.Instance.Play(SoundController.SOUND.ui_purchase);//sound
+                    DataController.Instance.playerData.TakeSupport(EnumController.SUPPORT.grenade).iCurrentValue += iValue;
                     break;
-                case TheEnumManager.REWARD.check_in_d21_freeze:
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_purchase);//sound
-                    TheDataManager.Instance.THE_DATA_PLAYER.GetSupport(TheEnumManager.SUPPORT.freeze ).iCurrentValue += iValue;
+                case EnumController.REWARD.check_in_d21_freeze:
+                    SoundController.Instance.Play(SoundController.SOUND.ui_purchase);//sound
+                    DataController.Instance.playerData.TakeSupport(EnumController.SUPPORT.freeze ).iCurrentValue += iValue;
 
                     break;
-                case TheEnumManager.REWARD.check_in_d22_gem:
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_purchase);//sound
-                    TheDataManager.Instance.THE_DATA_PLAYER.iGem += iValue;
+                case EnumController.REWARD.check_in_d22_gem:
+                    SoundController.Instance.Play(SoundController.SOUND.ui_purchase);//sound
+                    DataController.Instance.playerData.Gem += iValue;
                     break;
-                case TheEnumManager.REWARD.check_in_d23_grenade:
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_purchase);//sound
-                    TheDataManager.Instance.THE_DATA_PLAYER.GetSupport(TheEnumManager.SUPPORT.grenade).iCurrentValue += iValue;
+                case EnumController.REWARD.check_in_d23_grenade:
+                    SoundController.Instance.Play(SoundController.SOUND.ui_purchase);//sound
+                    DataController.Instance.playerData.TakeSupport(EnumController.SUPPORT.grenade).iCurrentValue += iValue;
                     break;
-                case TheEnumManager.REWARD.check_in_d24_gem:
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_purchase);//sound
-                    TheDataManager.Instance.THE_DATA_PLAYER.iGem += iValue;
+                case EnumController.REWARD.check_in_d24_gem:
+                    SoundController.Instance.Play(SoundController.SOUND.ui_purchase);//sound
+                    DataController.Instance.playerData.Gem += iValue;
                     break;
-                case TheEnumManager.REWARD.check_in_d25_gem:
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_purchase);//sound
-                    TheDataManager.Instance.THE_DATA_PLAYER.iGem += iValue;
+                case EnumController.REWARD.check_in_d25_gem:
+                    SoundController.Instance.Play(SoundController.SOUND.ui_purchase);//sound
+                    DataController.Instance.playerData.Gem += iValue;
                     break;
-                case TheEnumManager.REWARD.check_in_d26_freeze:
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_purchase);//sound
-                    TheDataManager.Instance.THE_DATA_PLAYER.GetSupport(TheEnumManager.SUPPORT.freeze ).iCurrentValue += iValue;
+                case EnumController.REWARD.check_in_d26_freeze:
+                    SoundController.Instance.Play(SoundController.SOUND.ui_purchase);//sound
+                    DataController.Instance.playerData.TakeSupport(EnumController.SUPPORT.freeze ).iCurrentValue += iValue;
 
                     break;
-                case TheEnumManager.REWARD.check_in_d27_poison:
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_purchase);//sound
-                    TheDataManager.Instance.THE_DATA_PLAYER.GetSupport(TheEnumManager.SUPPORT.poison).iCurrentValue += iValue;
+                case EnumController.REWARD.check_in_d27_poison:
+                    SoundController.Instance.Play(SoundController.SOUND.ui_purchase);//sound
+                    DataController.Instance.playerData.TakeSupport(EnumController.SUPPORT.poison).iCurrentValue += iValue;
 
                     break;
-                case TheEnumManager.REWARD.check_in_d28_gem:
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_purchase);//sound
-                    TheDataManager.Instance.THE_DATA_PLAYER.iGem += iValue;
+                case EnumController.REWARD.check_in_d28_gem:
+                    SoundController.Instance.Play(SoundController.SOUND.ui_purchase);//sound
+                    DataController.Instance.playerData.Gem += iValue;
                     break;
-                case TheEnumManager.REWARD.check_in_d29_grenade:
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_purchase);//sound
-                    TheDataManager.Instance.THE_DATA_PLAYER.GetSupport(TheEnumManager.SUPPORT.grenade).iCurrentValue += iValue;
+                case EnumController.REWARD.check_in_d29_grenade:
+                    SoundController.Instance.Play(SoundController.SOUND.ui_purchase);//sound
+                    DataController.Instance.playerData.TakeSupport(EnumController.SUPPORT.grenade).iCurrentValue += iValue;
                     break;
-                case TheEnumManager.REWARD.check_in_d30_gem:
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_purchase);//sound
-                    TheDataManager.Instance.THE_DATA_PLAYER.iGem += iValue;
+                case EnumController.REWARD.check_in_d30_gem:
+                    SoundController.Instance.Play(SoundController.SOUND.ui_purchase);//sound
+                    DataController.Instance.playerData.Gem += iValue;
                     break;
-                case TheEnumManager.REWARD.check_in_d31_bigbomb:
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_purchase);//sound
-                    TheDataManager.Instance.THE_DATA_PLAYER.GetSupport(TheEnumManager.SUPPORT.big_bomb ).iCurrentValue += iValue;
+                case EnumController.REWARD.check_in_d31_bigbomb:
+                    SoundController.Instance.Play(SoundController.SOUND.ui_purchase);//sound
+                    DataController.Instance.playerData.TakeSupport(EnumController.SUPPORT.big_bomb ).iCurrentValue += iValue;
 
                     break;
-                case TheEnumManager.REWARD.check_in_d32_grenade:
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_purchase);//sound
-                    TheDataManager.Instance.THE_DATA_PLAYER.GetSupport(TheEnumManager.SUPPORT.grenade).iCurrentValue += iValue;
+                case EnumController.REWARD.check_in_d32_grenade:
+                    SoundController.Instance.Play(SoundController.SOUND.ui_purchase);//sound
+                    DataController.Instance.playerData.TakeSupport(EnumController.SUPPORT.grenade).iCurrentValue += iValue;
                     break;
-                case TheEnumManager.REWARD.check_in_d33_gem:
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_purchase);//sound
-                    TheDataManager.Instance.THE_DATA_PLAYER.iGem += iValue;
+                case EnumController.REWARD.check_in_d33_gem:
+                    SoundController.Instance.Play(SoundController.SOUND.ui_purchase);//sound
+                    DataController.Instance.playerData.Gem += iValue;
                     break;
-                case TheEnumManager.REWARD.check_in_d34_gem:
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_purchase);//sound
-                    TheDataManager.Instance.THE_DATA_PLAYER.iGem += iValue;
+                case EnumController.REWARD.check_in_d34_gem:
+                    SoundController.Instance.Play(SoundController.SOUND.ui_purchase);//sound
+                    DataController.Instance.playerData.Gem += iValue;
                     break;
-                case TheEnumManager.REWARD.check_in_d35_poison:
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_purchase);//sound
-                    TheDataManager.Instance.THE_DATA_PLAYER.GetSupport(TheEnumManager.SUPPORT.poison).iCurrentValue += iValue;
+                case EnumController.REWARD.check_in_d35_poison:
+                    SoundController.Instance.Play(SoundController.SOUND.ui_purchase);//sound
+                    DataController.Instance.playerData.TakeSupport(EnumController.SUPPORT.poison).iCurrentValue += iValue;
                     break;
-                case TheEnumManager.REWARD.check_in_d36_gem:
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_purchase);//sound
-                    TheDataManager.Instance.THE_DATA_PLAYER.iGem += iValue;
+                case EnumController.REWARD.check_in_d36_gem:
+                    SoundController.Instance.Play(SoundController.SOUND.ui_purchase);//sound
+                    DataController.Instance.playerData.Gem += iValue;
                     break;
                 #endregion
 
 
             }
 
-            TheDataManager.Instance.SaveDataPlayer();//save)
+            DataController.Instance.SaveData();//save)
         }
 
 

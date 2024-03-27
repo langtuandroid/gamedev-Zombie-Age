@@ -81,14 +81,14 @@ namespace MODULES.Zombies
             //sound shot
             switch (DATA.eZombie)
             {
-                case TheEnumManager.ZOMBIE.boss_mug:
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.sfx_zom_bullet_explosion);
+                case EnumController.ZOMBIE.boss_mug:
+                    SoundController.Instance.Play(SoundController.SOUND.sfx_zom_bullet_explosion);
                     break;
-                case TheEnumManager.ZOMBIE.boss_soldier:
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.sfx_boss_shot_fire);
+                case EnumController.ZOMBIE.boss_soldier:
+                    SoundController.Instance.Play(SoundController.SOUND.sfx_boss_shot_fire);
                     break;
-                case TheEnumManager.ZOMBIE.boss_frog:
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.sfx_boss_shot_stone);
+                case EnumController.ZOMBIE.boss_frog:
+                    SoundController.Instance.Play(SoundController.SOUND.sfx_boss_shot_stone);
                     break;
             }
 
@@ -97,7 +97,7 @@ namespace MODULES.Zombies
             if (IsFreezing) goto RESET;
 
        
-            if(DATA.eZombie== TheEnumManager.ZOMBIE.boss_frog)
+            if(DATA.eZombie== EnumController.ZOMBIE.boss_frog)
             {
                 /// yield return _waitToShot;
                 if (IsFreezing) goto RESET;
@@ -111,7 +111,7 @@ namespace MODULES.Zombies
                 if (IsFreezing) goto RESET;
                 Instantiate(prefabBossBullet, m_TranOfOriginalBulletPos.position, Quaternion.identity);
             }
-            else if ( DATA.eZombie== TheEnumManager.ZOMBIE.boss_mug)
+            else if ( DATA.eZombie== EnumController.ZOMBIE.boss_mug)
             {
                 // yield return _waitToShot;
                 if (IsFreezing) goto RESET;
@@ -122,7 +122,7 @@ namespace MODULES.Zombies
                 Instantiate(prefabBossBullet, m_TranOfOriginalBulletPos.position, Quaternion.identity);
 
             }
-            else if (DATA.eZombie == TheEnumManager.ZOMBIE.boss_soldier)
+            else if (DATA.eZombie == EnumController.ZOMBIE.boss_soldier)
             {
                 //yield return _waitToShot;
                 if (IsFreezing) goto RESET;

@@ -10,7 +10,7 @@ namespace MODULES.Scriptobjectable
         [System.Serializable]
         public class SuData
         {
-            public TheEnumManager.SUPPORT _support;
+            public EnumController.SUPPORT _support;
             public int iCurrentValue;
         }
 
@@ -54,12 +54,12 @@ namespace MODULES.Scriptobjectable
             DATA.iCurrentValue = ORIGINAL_DATA.iCurrentValue;
 
 
-            if (TheDataManager.Instance.THE_DATA_PLAYER.GetSupport(DATA._support) != null)
-                DATA = TheDataManager.Instance.THE_DATA_PLAYER.GetSupport(DATA._support);
+            if (DataController.Instance.playerData.TakeSupport(DATA._support) != null)
+                DATA = DataController.Instance.playerData.TakeSupport(DATA._support);
             else
             {
 
-                TheDataManager.Instance.THE_DATA_PLAYER.LIST_SUPPORT.Add(DATA);
+                DataController.Instance.playerData._supportList.Add(DATA);
                 //TheDataManager.Instance.SaveDataPlayer();//save
             }
         }
@@ -71,13 +71,13 @@ namespace MODULES.Scriptobjectable
             switch (DATA._support)
             {
                 //freeze
-                case TheEnumManager.SUPPORT.freeze:
-                    if (TheUpgradeManager.Instance.GetUpgrade(TheEnumManager.UpgradeType.freeze_time50).bEQUIPED) return fEffectTime * 1.5f;
+                case EnumController.SUPPORT.freeze:
+                    if (UpgradeController.Instance.GetUpgrade(EnumController.UpgradeType.freeze_time50).bEQUIPED) return fEffectTime * 1.5f;
                     break;
 
                 //poison
-                case TheEnumManager.SUPPORT.poison:
-                    if (TheUpgradeManager.Instance.GetUpgrade(TheEnumManager.UpgradeType.poision_time25).bEQUIPED) return fEffectTime * 1.25f;
+                case EnumController.SUPPORT.poison:
+                    if (UpgradeController.Instance.GetUpgrade(EnumController.UpgradeType.poision_time25).bEQUIPED) return fEffectTime * 1.25f;
                     break;
             }
             return fEffectTime;
@@ -90,16 +90,16 @@ namespace MODULES.Scriptobjectable
 
             switch (DATA._support)
             {
-                case TheEnumManager.SUPPORT.grenade:
-                    if (TheUpgradeManager.Instance.GetUpgrade(TheEnumManager.UpgradeType.grenade_range25).bEQUIPED) return fRange * 1.25f;
+                case EnumController.SUPPORT.grenade:
+                    if (UpgradeController.Instance.GetUpgrade(EnumController.UpgradeType.grenade_range25).bEQUIPED) return fRange * 1.25f;
                     break;
-                case TheEnumManager.SUPPORT.freeze:
-                    if (TheUpgradeManager.Instance.GetUpgrade(TheEnumManager.UpgradeType.freeze_range25).bEQUIPED) return fRange * 1.25f;
+                case EnumController.SUPPORT.freeze:
+                    if (UpgradeController.Instance.GetUpgrade(EnumController.UpgradeType.freeze_range25).bEQUIPED) return fRange * 1.25f;
                     break;
-                case TheEnumManager.SUPPORT.poison:
-                    if (TheUpgradeManager.Instance.GetUpgrade(TheEnumManager.UpgradeType.posion_range25).bEQUIPED) return fRange * 1.25f;
+                case EnumController.SUPPORT.poison:
+                    if (UpgradeController.Instance.GetUpgrade(EnumController.UpgradeType.posion_range25).bEQUIPED) return fRange * 1.25f;
                     break;
-                case TheEnumManager.SUPPORT.big_bomb:
+                case EnumController.SUPPORT.big_bomb:
                     break;
             }
             return fRange;
@@ -111,16 +111,16 @@ namespace MODULES.Scriptobjectable
         {
             switch (DATA._support)
             {
-                case TheEnumManager.SUPPORT.grenade:
-                    if (TheUpgradeManager.Instance.GetUpgrade(TheEnumManager.UpgradeType.grenade_damage25).bEQUIPED) return (int)(iDamage * 1.25f);
+                case EnumController.SUPPORT.grenade:
+                    if (UpgradeController.Instance.GetUpgrade(EnumController.UpgradeType.grenade_damage25).bEQUIPED) return (int)(iDamage * 1.25f);
                     break;
-                case TheEnumManager.SUPPORT.freeze:
+                case EnumController.SUPPORT.freeze:
                     break;
-                case TheEnumManager.SUPPORT.poison:
-                    if (TheUpgradeManager.Instance.GetUpgrade(TheEnumManager.UpgradeType.posion_damage50).bEQUIPED) return (int)(iDamage * 1.5f);
+                case EnumController.SUPPORT.poison:
+                    if (UpgradeController.Instance.GetUpgrade(EnumController.UpgradeType.posion_damage50).bEQUIPED) return (int)(iDamage * 1.5f);
                     break;
-                case TheEnumManager.SUPPORT.big_bomb:
-                    if (TheUpgradeManager.Instance.GetUpgrade(TheEnumManager.UpgradeType.bigbom_damage25).bEQUIPED) return (int)(iDamage * 1.25f);
+                case EnumController.SUPPORT.big_bomb:
+                    if (UpgradeController.Instance.GetUpgrade(EnumController.UpgradeType.bigbom_damage25).bEQUIPED) return (int)(iDamage * 1.25f);
                     break;
             }
             return iDamage;

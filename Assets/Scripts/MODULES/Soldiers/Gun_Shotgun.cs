@@ -18,7 +18,7 @@ namespace MODULES.Soldiers
 
             if (Soldier.Instance.WEAPON_MANAGER.CURRENT_GUN_DATA.DATA.iCurrentAmmo <= 0) //het dan
             {
-                TheEventManager.Weapon_OnWeaponNoBullet(null);//event
+                EventController.OnWeaponNoBulletInvoke(null);//event
                 return;
             }
             if (bLOADING_BULLET)
@@ -38,7 +38,7 @@ namespace MODULES.Soldiers
 
             if (!Soldier.Instance.WEAPON_MANAGER.CURRENT_GUN_DATA.DATA.bIsDefaultGun)
                 Soldier.Instance.WEAPON_MANAGER.CURRENT_GUN_DATA.DATA.iCurrentAmmo--;
-            TheEventManager.Weapon_OnWeaponShot(Soldier.Instance.WEAPON_MANAGER.CURRENT_GUN_DATA);//event
+            EventController.OnWeaponShotInvoke(Soldier.Instance.WEAPON_MANAGER.CURRENT_GUN_DATA);//event
             iAmmoInMagazine--;
             if (iAmmoInMagazine == 0)
             {
@@ -53,14 +53,14 @@ namespace MODULES.Soldiers
             m_animator.Play(aniGunShake.name, -1, 0f);//shake gun
        
             //ldier.Instance.PlayAnimator(TheEnumManager.SOLDIER_STATUS.shooting);//soldier shake
-            TheSoundManager.Instance.PlayGunSound(TheEnumManager.WEAPON.shotgun);//sound
+            SoundController.Instance.PlayGunSound(EnumController.WEAPON.shotgun);//sound
 
 
             vTargetOfBullet = vInputPos + Random.insideUnitCircle * 1.3f;
             fAngelZ = GetRoatateZ(objBeam.transform.position, vTargetOfBullet);
 
-            _bullet = TheObjectPoolingManager.Instance.GetObjectPooling(TheEnumManager.POOLING_OBJECT.bullet_of_shotgun).GetObject();
-            _bullet.GetComponent<Bullet>().SetBullet(TheEnumManager.WEAPON.shotgun, objBeam.transform.position, vTargetOfBullet, fAngelZ, fRangeOfGBullet, iDamageOfGun,sprBullet,vScaleOfBullet);
+            _bullet = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.bullet_of_shotgun).Get();
+            _bullet.GetComponent<Bullet>().SetBullet(EnumController.WEAPON.shotgun, objBeam.transform.position, vTargetOfBullet, fAngelZ, fRangeOfGBullet, iDamageOfGun,sprBullet,vScaleOfBullet);
             _bullet.SetActive(true);
 
             #endregion

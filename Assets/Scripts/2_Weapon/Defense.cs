@@ -32,14 +32,14 @@ namespace _2_Weapon
 
         private void ButtonAssign(Button button)
         { 
-            if (TheTutorialManager.Instance)
+            if (TutorialController.Instance)
             {
-                if (!TheTutorialManager.Instance.IsCheckRightInput()) return;
+                if (!TutorialController.Instance.IsRightInput()) return;
             }
 
             if (button == _thisButton)
             {
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_wood_board);//sound
+                SoundController.Instance.Play(SoundController.SOUND.ui_wood_board);//sound
                 WeaponController.Instance.defencePanel.ViewTrack(this);
             }
             else if (button == _equiepButton)
@@ -49,13 +49,13 @@ namespace _2_Weapon
                 if (!_defenseData.DATA.bEquiped)
                 {
                     _defenseData.DATA.bEquiped = true;
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_equiped);//sound
+                    SoundController.Instance.Play(SoundController.SOUND.ui_equiped);//sound
                     _equiepButton.image.sprite = _equipedSprite;
                     WeaponController.Instance.defencePicked.AddTakenDefense(_defenseData);
                 }
                 else
                 {
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_equiped);//sound
+                    SoundController.Instance.Play(SoundController.SOUND.ui_equiped);//sound
                 }
             }
         }
@@ -96,11 +96,11 @@ namespace _2_Weapon
         public void Unlock()
         {
             int _price = _defenseData.iPriteToUnlock;
-            if (TheDataManager.Instance.THE_DATA_PLAYER.iGem >= _price)
+            if (DataController.Instance.playerData.Gem >= _price)
             {
-                TheDataManager.Instance.THE_DATA_PLAYER.iGem -= _price;
-                TheDataManager.Instance.SaveDataPlayer();
-                TheEventManager.PostEvent_OnUpdatedBoard();
+                DataController.Instance.playerData.Gem -= _price;
+                DataController.Instance.SaveData();
+                EventController.OnUpdatedBoardInvoke();
 
                 //content
                 if(!_defenseData.bUNLOCKED)
@@ -108,30 +108,30 @@ namespace _2_Weapon
                     RewardData _reward = null;
                     switch (_defenseData.DATA.eDefense)
                     {
-                        case TheEnumManager.DEFENSE.home:
+                        case EnumController.DEFENSE.home:
                             break;
-                        case TheEnumManager.DEFENSE.metal:
-                            _reward = TheDataManager.Instance.GetReward(TheEnumManager.REWARD.unlock_defense_metal);
+                        case EnumController.DEFENSE.metal:
+                            _reward = DataController.Instance.GetReward(EnumController.REWARD.unlock_defense_metal);
                             break;
-                        case TheEnumManager.DEFENSE.thorn:
-                            _reward = TheDataManager.Instance.GetReward(TheEnumManager.REWARD.unlock_defense_thorn );
+                        case EnumController.DEFENSE.thorn:
+                            _reward = DataController.Instance.GetReward(EnumController.REWARD.unlock_defense_thorn );
                             break;
                     }
-                    TheUiManager.Instance.ShowPopup(TheUiManager.POP_UP.reward);
+                    UIController.Instance.PopUpShow(UIController.POP_UP.reward);
                     VictoryReward.SetReward(_reward);
                 }
 
 
                 _defenseData.bUNLOCKED = true;
                 WeaponController.Instance.defencePanel.ViewTrack(this);
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_purchase);//sound
+                SoundController.Instance.Play(SoundController.SOUND.ui_purchase);//sound
             
             }
             else
             {
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound
+                SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
                 //khong du tien
-                TheUiManager.Instance.ShowPopup(TheUiManager.POP_UP.note);
+                UIController.Instance.PopUpShow(UIController.POP_UP.note);
                 Note.SetNote(Note.NOTE.no_gem.ToString());
             }
             Construct(_defenseData);
@@ -157,13 +157,13 @@ namespace _2_Weapon
 
         private void OnEnable()
         {
-            TheEventManager.OnAddToEquipedDefenseList += Equip;
-            TheEventManager.OnRemoveToEquipedDefenseList += UnEquip;
+            EventController.OnAddToEquipedDefenseList += Equip;
+            EventController.OnRemoveToEquipedDefenseList += UnEquip;
         }
         private void OnDisable()
         {
-            TheEventManager.OnAddToEquipedDefenseList -= Equip;
-            TheEventManager.OnRemoveToEquipedDefenseList -= UnEquip;
+            EventController.OnAddToEquipedDefenseList -= Equip;
+            EventController.OnRemoveToEquipedDefenseList -= UnEquip;
         }
     }
 }

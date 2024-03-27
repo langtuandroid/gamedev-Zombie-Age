@@ -24,27 +24,27 @@ namespace SCREENS
         {
             if (_bu == buClose)
             {
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound
-                TheUiManager.Instance.HidePopup(TheUiManager.POP_UP.video_reward);
+                SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
+                UIController.Instance.HidePopup(UIController.POP_UP.video_reward);
             }
             else if (_bu == buWacthAds1)
             {
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound
+                SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
                 ButtonWatchAds(1);
             }
             else if (_bu == buWacthAds2)
             {
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound
+                SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
                 ButtonWatchAds(2);
             }
             else if (_bu == buWacthAds3)
             {
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound
+                SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
                 ButtonWatchAds(3);
             }
             else if (_bu == buWacthAds4)
             {
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound
+                SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
                 ButtonWatchAds(4);
             }
         }
@@ -53,7 +53,7 @@ namespace SCREENS
         private void ButtonWatchAds(int _index)
         {
             if (iIndex != _index) return;
-            TheUiManager.Instance.HidePopup(TheUiManager.POP_UP.video_reward);
+            UIController.Instance.HidePopup(UIController.POP_UP.video_reward);
         }
 
 

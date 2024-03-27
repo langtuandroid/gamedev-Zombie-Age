@@ -32,14 +32,14 @@ namespace MODULES.Soldiers
         private void Start()
         {
             //contractor
-            WEAPON_MANAGER.Init(TheWeaponManager.Instance.LIST_EQUIPED_WEAPON);
+            WEAPON_MANAGER.Init(WeaponController.Instance.equipedWeaponList);
             DEFENSE_MANAGER.Init();
 
 
             objHandToThrow.SetActive(false);
 
-            TheEventManager.OnWeaponNoBullet += HandleNoBullet;
-            TheEventManager.OnZombieAttack += DEFENSE_MANAGER.HandleZombieAttack;
+            EventController.OnWeaponNoBullet += HandleNoBullet;
+            EventController.OnZombieAttack += DEFENSE_MANAGER.HandleZombieAttack;
 
         }
 
@@ -49,7 +49,7 @@ namespace MODULES.Soldiers
         {
             if (IsMoving)
             {
-                PlayAnimator(TheEnumManager.SOLDIER_STATUS.walk);
+                PlayAnimator(EnumController.SOLDIER_STATUS.walk);
             }
 
         }
@@ -70,19 +70,19 @@ namespace MODULES.Soldiers
         }
 
         //animator
-        public void PlayAnimator(TheEnumManager.SOLDIER_STATUS _status)
+        public void PlayAnimator(EnumController.SOLDIER_STATUS _status)
         {
             switch (_status)
             {
-                case TheEnumManager.SOLDIER_STATUS.idie:
+                case EnumController.SOLDIER_STATUS.idie:
                     // m_Animator.Play(aniIdie.name, -1, 0);
                     m_Animator.SetInteger("AnimationState", IDIE);
                     break;
-                case TheEnumManager.SOLDIER_STATUS.shooting:
+                case EnumController.SOLDIER_STATUS.shooting:
                     m_Animator.Play(aniShake.name, -1, 0);
                     m_Animator.SetInteger("AnimationState", SHAKE);
                     break;
-                case TheEnumManager.SOLDIER_STATUS.walk:
+                case EnumController.SOLDIER_STATUS.walk:
                     // m_Animator.Play(aniMove.name, -1, 0);
                     m_Animator.SetInteger("AnimationState", MOVE);
                     break;
@@ -108,14 +108,14 @@ namespace MODULES.Soldiers
 
         //Animation throw
         [SerializeField] private SpriteRenderer sprSpriteOfItemsSupport;
-        public void PlayerAnimationThrow(TheEnumManager.SUPPORT _support)
+        public void PlayerAnimationThrow(EnumController.SUPPORT _support)
         {
-            sprSpriteOfItemsSupport.sprite = TheSpriteManager.Instance.GetSpriteOfSupport(_support).spriSprite;
+            sprSpriteOfItemsSupport.sprite = SpriteController.Instance.GetSupportSprite(_support)._sprite;
             StartCoroutine(IePlayerAnimationThrow());
         }
         private IEnumerator IePlayerAnimationThrow()
         {
-            TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.sfx_throw);//sound
+            SoundController.Instance.Play(SoundController.SOUND.sfx_throw);//sound
             objHandToThrow.SetActive(true);
             WEAPON_MANAGER.CURRENT_WEAPON.gameObject.SetActive(false);
             yield return new WaitForSeconds(0.2f);
@@ -128,7 +128,7 @@ namespace MODULES.Soldiers
         //CHANGE WEAPON
         private void HandleNoBullet(GunData _gundata)
         {
-            WEAPON_MANAGER.ChooseWeapon(TheWeaponManager.Instance.LIST_EQUIPED_WEAPON[0].DATA.eWeapon);//cho khau dau tien
+            WEAPON_MANAGER.ChooseWeapon(WeaponController.Instance.equipedWeaponList[0].DATA.eWeapon);//cho khau dau tien
         }
 
 
@@ -137,8 +137,8 @@ namespace MODULES.Soldiers
         private void OnDisable()
         {
             // DEFENSE_MANAGER.Save();
-            TheEventManager.OnWeaponNoBullet -= HandleNoBullet;
-            TheEventManager.OnZombieAttack -= DEFENSE_MANAGER.HandleZombieAttack;
+            EventController.OnWeaponNoBullet -= HandleNoBullet;
+            EventController.OnZombieAttack -= DEFENSE_MANAGER.HandleZombieAttack;
         }
 
     }
@@ -194,7 +194,7 @@ namespace MODULES.Soldiers
 
 
         //Get weapon
-        public void ChooseWeapon(TheEnumManager.WEAPON _weapon)
+        public void ChooseWeapon(EnumController.WEAPON _weapon)
         {
             int _total = LIST_WEAPON.Count;
             for (int i = 0; i < _total; i++)
@@ -207,7 +207,7 @@ namespace MODULES.Soldiers
 
 
                     //changed gun
-                    TheEventManager.Weapon_OnChangedWeapon(CURRENT_GUN_DATA);
+                    EventController.OnChangedWeaponInvoke(CURRENT_GUN_DATA);
 
 
 
@@ -240,14 +240,14 @@ namespace MODULES.Soldiers
         [System.Serializable]
         public class UnitDefense
         {
-            public TheEnumManager.DEFENSE _defense;
+            public EnumController.DEFENSE _defense;
             public float fDefenseValue;
             public GameObject objDefense;
         }
         private int iTotalDefenseUnit;
 
         public List<UnitDefense> LIST_DEFENSE = new List<UnitDefense>();
-        public UnitDefense GetDefense(TheEnumManager.DEFENSE _defense)
+        public UnitDefense GetDefense(EnumController.DEFENSE _defense)
         {
 
             for (int i = 0; i < iTotalDefenseUnit; i++)
@@ -281,17 +281,17 @@ namespace MODULES.Soldiers
         public void Init()
         {
 
-            int _total = TheWeaponManager.Instance.LIST_DEFENSE.Count;
+            int _total = WeaponController.Instance._defenceList.Count;
             for (int i = 0; i < _total; i++)
             {
-                if (TheWeaponManager.Instance.LIST_DEFENSE[i].DATA.bEquiped)
+                if (WeaponController.Instance._defenceList[i].DATA.bEquiped)
                 {
                     UnitDefense _unit = new UnitDefense();
-                    _unit._defense = TheWeaponManager.Instance.LIST_DEFENSE[i].DATA.eDefense;
-                    _unit.fDefenseValue = TheWeaponManager.Instance.LIST_DEFENSE[i].GetDefense(TheWeaponManager.Instance.LIST_DEFENSE[i].DATA.eLevel);
+                    _unit._defense = WeaponController.Instance._defenceList[i].DATA.eDefense;
+                    _unit.fDefenseValue = WeaponController.Instance._defenceList[i].GetDefense(WeaponController.Instance._defenceList[i].DATA.eLevel);
 
-                    if (!TheWeaponManager.Instance.LIST_DEFENSE[i].DATA.bDefault)
-                        _unit.objDefense = Soldier.Instantiate(TheWeaponManager.Instance.LIST_DEFENSE[i].bjPrefab);
+                    if (!WeaponController.Instance._defenceList[i].DATA.bDefault)
+                        _unit.objDefense = Soldier.Instantiate(WeaponController.Instance._defenceList[i].bjPrefab);
                     LIST_DEFENSE.Add(_unit);
                 }
             }
@@ -339,17 +339,17 @@ namespace MODULES.Soldiers
             //FIRE
             if (GetFactorDefense() < 0.6f && iIndexOfFireOfHome == 1)
             {
-                Soldier.Instantiate(TheObjectPoolingManager.Instance.preabFireOfHome_level1);//fire of home
+                Soldier.Instantiate(ObjectPoolController.Instance._fireOnHomeLevel1);//fire of home
                 iIndexOfFireOfHome = 2;
             }
             if (GetFactorDefense() < 0.4f && iIndexOfFireOfHome == 2)
             {
-                Soldier.Instantiate(TheObjectPoolingManager.Instance.preabFireOfHome_level2);//fire of home
+                Soldier.Instantiate(ObjectPoolController.Instance._fireOnHomeLevel2);//fire of home
                 iIndexOfFireOfHome = 3;
             }
             if (GetFactorDefense() < 0.3f && iIndexOfFireOfHome == 3)
             {
-                Soldier.Instantiate(TheObjectPoolingManager.Instance.preabFireOfHome_level3);//fire of home
+                Soldier.Instantiate(ObjectPoolController.Instance._fireOnHomeLevel3);//fire of home
                 iIndexOfFireOfHome = 4;
             }
         }

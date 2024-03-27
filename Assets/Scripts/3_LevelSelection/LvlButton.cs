@@ -24,22 +24,22 @@ namespace _3_LevelSelection
         
         private void AssignButton()
         {
-            if (TheTutorialManager.Instance)
+            if (TutorialController.Instance)
             {
-                if (!TheTutorialManager.Instance.IsCheckRightInput()) return;
+                if (!TutorialController.Instance.IsRightInput()) return;
             }
 
-            if (Unlock || TheDataManager.Instance.eMode == TheDataManager.MODE.Debug)
+            if (Unlock || DataController.Instance.mode == DataController.Mode.Debug)
             {
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);
-                TheDataManager.Instance.THE_DATA_PLAYER.iCurrentLevel = _iLevel;
+                SoundController.Instance.Play(SoundController.SOUND.ui_click_next);
+                DataController.Instance.playerData.CurrentLevel = _iLevel;
                 LevelSelectionController.Instance.SetDifficultPopUp(true);
             }
             else
             {
-                if (_iLevel + 1 <= TheDataManager.Instance.TOTAL_LEVEL_IN_GAME)
+                if (_iLevel + 1 <= DataController.Instance.LevelsTotal)
                 {
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_cannot);
+                    SoundController.Instance.Play(SoundController.SOUND.ui_cannot);
                     Debug.Log("LOCKED!");
                 }
             }
@@ -53,7 +53,7 @@ namespace _3_LevelSelection
             _levelText.color = Color.white;
 
 
-            if (_iLevel + 1 > TheDataManager.Instance.TOTAL_LEVEL_IN_GAME)
+            if (_iLevel + 1 > DataController.Instance.LevelsTotal)
             {
                 _unlock = false;
                 _levelText.text = "";
@@ -62,7 +62,7 @@ namespace _3_LevelSelection
             {
                 _levelText.text = (_iLevel + 1).ToString();
 
-                IStar = TheDataManager.Instance.THE_DATA_PLAYER.GetStar(_iLevel);
+                IStar = DataController.Instance.playerData.NumOfStars(_iLevel);
 
                 if (IStar > 0)
                 {
@@ -80,7 +80,7 @@ namespace _3_LevelSelection
                     }
                     else
                     {
-                        if (TheDataManager.Instance.THE_DATA_PLAYER.GetStar(_iLevel - 1) > 0)
+                        if (DataController.Instance.playerData.NumOfStars(_iLevel - 1) > 0)
                         {
                             _levelButton.image.sprite = LevelSelectionController.Instance.LevelCurrSprite;
                             _unlock = true;

@@ -11,8 +11,8 @@ namespace MODULES.Scriptobjectable
         [System.Serializable]
         public class DeData
         {
-            public TheEnumManager.DEFENSE eDefense;
-            public TheEnumManager.ITEM_LEVEL eLevel;
+            public EnumController.DEFENSE eDefense;
+            public EnumController.ITEM_LEVEL eLevel;
             public bool bDefault;//is home
             public bool bUnlocked;
             public bool bEquiped;
@@ -56,17 +56,17 @@ namespace MODULES.Scriptobjectable
                     RewardData _reward = null;
                     switch (DATA.eDefense)
                     {
-                        case TheEnumManager.DEFENSE.home:
+                        case EnumController.DEFENSE.home:
                             break;
-                        case TheEnumManager.DEFENSE.metal:
-                            _reward = TheDataManager.Instance.GetReward(TheEnumManager.REWARD.unlock_defense_metal);
+                        case EnumController.DEFENSE.metal:
+                            _reward = DataController.Instance.GetReward(EnumController.REWARD.unlock_defense_metal);
                             break;
-                        case TheEnumManager.DEFENSE.thorn:
-                            _reward = TheDataManager.Instance.GetReward(TheEnumManager.REWARD.unlock_defense_thorn);
+                        case EnumController.DEFENSE.thorn:
+                            _reward = DataController.Instance.GetReward(EnumController.REWARD.unlock_defense_thorn);
                             break;
 
                     }
-                    TheUiManager.Instance.ShowPopup(TheUiManager.POP_UP.reward);
+                    UIController.Instance.PopUpShow(UIController.POP_UP.reward);
                     VictoryReward.SetReward(_reward);
                 }
                 DATA.bUnlocked = value;
@@ -88,7 +88,7 @@ namespace MODULES.Scriptobjectable
 
 
         //DEFENSE
-        public int GetDefense(TheEnumManager.ITEM_LEVEL _level)
+        public int GetDefense(EnumController.ITEM_LEVEL _level)
         {
             //Cong thuc: 6x+iBaseDefese
             //link do thi: https://www.desmos.com/calculator/wvnakbcsch
@@ -97,40 +97,40 @@ namespace MODULES.Scriptobjectable
 
             switch (DATA.eDefense)
             {
-                case TheEnumManager.DEFENSE.home:
+                case EnumController.DEFENSE.home:
                     _defense = (20 * (int)_level) + iBaseDefense;
                
-                    if (TheUpgradeManager.Instance.GetUpgrade(TheEnumManager.UpgradeType.home_defense15).bEQUIPED)
+                    if (UpgradeController.Instance.GetUpgrade(EnumController.UpgradeType.home_defense15).bEQUIPED)
                     {
                         _defense = _defense * 1.15f;
                     }
-                    if (TheUpgradeManager.Instance.GetUpgrade(TheEnumManager.UpgradeType.home_defense25).bEQUIPED)
+                    if (UpgradeController.Instance.GetUpgrade(EnumController.UpgradeType.home_defense25).bEQUIPED)
                     {
                         _defense = _defense * 1.25f;
                     }
                     break;
 
 
-                case TheEnumManager.DEFENSE.metal:
+                case EnumController.DEFENSE.metal:
                     _defense = 35 * (int)_level + iBaseDefense;
-                    if (TheUpgradeManager.Instance.GetUpgrade(TheEnumManager.UpgradeType.metal_defense15).bEQUIPED)
+                    if (UpgradeController.Instance.GetUpgrade(EnumController.UpgradeType.metal_defense15).bEQUIPED)
                     {
                         _defense = _defense * 1.15f;
                     }
-                    if (TheUpgradeManager.Instance.GetUpgrade(TheEnumManager.UpgradeType.metal_defense25).bEQUIPED)
+                    if (UpgradeController.Instance.GetUpgrade(EnumController.UpgradeType.metal_defense25).bEQUIPED)
                     {
                         _defense = _defense * 1.25f;
                     }
                     break;
 
 
-                case TheEnumManager.DEFENSE.thorn:
+                case EnumController.DEFENSE.thorn:
                     _defense = 30 * (int)_level + iBaseDefense;
-                    if (TheUpgradeManager.Instance.GetUpgrade(TheEnumManager.UpgradeType.thorn_defense15).bEQUIPED)
+                    if (UpgradeController.Instance.GetUpgrade(EnumController.UpgradeType.thorn_defense15).bEQUIPED)
                     {
                         _defense = _defense * 1.15f;
                     }
-                    if (TheUpgradeManager.Instance.GetUpgrade(TheEnumManager.UpgradeType.thorn_defense25).bEQUIPED)
+                    if (UpgradeController.Instance.GetUpgrade(EnumController.UpgradeType.thorn_defense25).bEQUIPED)
                     {
                         _defense = _defense * 1.25f;
                     }
@@ -143,10 +143,10 @@ namespace MODULES.Scriptobjectable
         }
 
         //get price
-        public int GetPriceToUpgrade(TheEnumManager.ITEM_LEVEL _level)
+        public int GetPriceToUpgrade(EnumController.ITEM_LEVEL _level)
         {
-            if (_level != TheEnumManager.ITEM_LEVEL.level_7)
-                return (int)(GetDefense(_level) * TheDataManager.Instance.PRICE_CONFIG.fUnitPriceGem_Defense);
+            if (_level != EnumController.ITEM_LEVEL.level_7)
+                return (int)(GetDefense(_level) * DataController.Instance.PriceData.fUnitPriceGem_Defense);
             else return 0;
 
         }
@@ -163,13 +163,13 @@ namespace MODULES.Scriptobjectable
             DATA.bDefault = ORIGINAL_DATA.bDefault;
             //=======================
 
-            if (TheDataManager.Instance.THE_DATA_PLAYER.GetDefense(DATA.eDefense) != null)
+            if (DataController.Instance.playerData.TakeDefense(DATA.eDefense) != null)
             {
-                DATA = TheDataManager.Instance.THE_DATA_PLAYER.GetDefense(DATA.eDefense);
+                DATA = DataController.Instance.playerData.TakeDefense(DATA.eDefense);
             }
             else
             {
-                TheDataManager.Instance.THE_DATA_PLAYER.LIST_DEFENSE.Add(DATA);
+                DataController.Instance.playerData._defenseList.Add(DATA);
                 // TheDataManager.Instance.SaveDataPlayer();//save
             }
         }
@@ -179,11 +179,11 @@ namespace MODULES.Scriptobjectable
         //CHECK UNLOCK WITH LEVEL
         public void CheckUnlockWithLevel()
         {
-            int _currentlevel = TheDataManager.Instance.THE_DATA_PLAYER.GetTotalPlayerLevel();
+            int _currentlevel = DataController.Instance.playerData.CalculatePlayerLevel();
             if (!bUNLOCKED && !bIsOnlyCoinUnlock && _currentlevel >= iLevelToUnlock)
             {
                 bUNLOCKED = true;
-                TheDataManager.Instance.SaveDataPlayer();//save
+                DataController.Instance.SaveData();//save
             }
         }
     }

@@ -43,16 +43,16 @@ namespace SCREENS
         private void SetButton(Button _bu)
         {
             //tutorial
-            if (TheTutorialManager.Instance)
+            if (TutorialController.Instance)
             {
-                if (!TheTutorialManager.Instance.IsCheckRightInput()) return;
+                if (!TutorialController.Instance.IsRightInput()) return;
             }
 
             if (_bu == buReceive)
             {
                 REWARD.GetReward();
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound
-                TheUiManager.Instance.HidePopup(TheUiManager.POP_UP.reward);
+                SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
+                UIController.Instance.HidePopup(UIController.POP_UP.reward);
 
             }
             else if (_bu == buX2Gem)
@@ -69,16 +69,16 @@ namespace SCREENS
             if (_reward == null) return;
 
             //event
-            TheEventManager.PostEvent_OnGetReward(_reward.eReward);
+            EventController.OnGetRewardInvoke(_reward.eReward);
 
             Instance.bX2Gem = false;
-            TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_wood_board);//sound
+            SoundController.Instance.Play(SoundController.SOUND.ui_wood_board);//sound
             Instance.REWARD = _reward;
             Instance.imaIcon.sprite = Instance.REWARD.sprIcon;
 
-            if (_reward.eReward == TheEnumManager.REWARD.victory_gem_easy
-                || _reward.eReward == TheEnumManager.REWARD.victory_gem_normal
-                || _reward.eReward == TheEnumManager.REWARD.victory_gem_nightmate)
+            if (_reward.eReward == EnumController.REWARD.victory_gem_easy
+                || _reward.eReward == EnumController.REWARD.victory_gem_normal
+                || _reward.eReward == EnumController.REWARD.victory_gem_nightmate)
             {
                 Instance.REWARD.strContent = "Get +" + _reward.GetVictoryGem() + " gems now! ";
             }
@@ -110,7 +110,7 @@ namespace SCREENS
 
         private void OnDisable()
         {
-            TheEventManager.PostEvent_OnUpdatedBoard();
+            EventController.OnUpdatedBoardInvoke();
 
         }
 

@@ -12,8 +12,8 @@ namespace MODULES.Scriptobjectable
         [System.Serializable]
         public class WeData
         {
-            public TheEnumManager.WEAPON eWeapon;
-            public TheEnumManager.ITEM_LEVEL eLevel;
+            public EnumController.WEAPON eWeapon;
+            public EnumController.ITEM_LEVEL eLevel;
 
 
             [Space(10)]
@@ -56,40 +56,40 @@ namespace MODULES.Scriptobjectable
                     RewardData _reward = null;
                     switch (DATA.eWeapon)
                     {
-                        case TheEnumManager.WEAPON.colt_python:
-                            _reward = TheDataManager.Instance.GetReward(TheEnumManager.REWARD.unlock_gun_glock);
+                        case EnumController.WEAPON.colt_python:
+                            _reward = DataController.Instance.GetReward(EnumController.REWARD.unlock_gun_glock);
                             break;
-                        case TheEnumManager.WEAPON.shotgun:
-                            _reward = TheDataManager.Instance.GetReward(TheEnumManager.REWARD.unlock_gun_shotgun);
+                        case EnumController.WEAPON.shotgun:
+                            _reward = DataController.Instance.GetReward(EnumController.REWARD.unlock_gun_shotgun);
                             break;
-                        case TheEnumManager.WEAPON.shotgun2barrel:
-                            _reward = TheDataManager.Instance.GetReward(TheEnumManager.REWARD.unlock_gun_double_shotgun);
+                        case EnumController.WEAPON.shotgun2barrel:
+                            _reward = DataController.Instance.GetReward(EnumController.REWARD.unlock_gun_double_shotgun);
                             break;
-                        case TheEnumManager.WEAPON.fn_p90:
-                            _reward = TheDataManager.Instance.GetReward(TheEnumManager.REWARD.unlock_gun_ar15);
+                        case EnumController.WEAPON.fn_p90:
+                            _reward = DataController.Instance.GetReward(EnumController.REWARD.unlock_gun_ar15);
                             break;
-                        case TheEnumManager.WEAPON.ak47:
-                            _reward = TheDataManager.Instance.GetReward(TheEnumManager.REWARD.unlock_gun_ak47);
+                        case EnumController.WEAPON.ak47:
+                            _reward = DataController.Instance.GetReward(EnumController.REWARD.unlock_gun_ak47);
                             break;
-                        case TheEnumManager.WEAPON.m16:
-                            _reward = TheDataManager.Instance.GetReward(TheEnumManager.REWARD.unlock_gun_m16);
+                        case EnumController.WEAPON.m16:
+                            _reward = DataController.Instance.GetReward(EnumController.REWARD.unlock_gun_m16);
                             break;
-                        case TheEnumManager.WEAPON.m134:
-                            _reward = TheDataManager.Instance.GetReward(TheEnumManager.REWARD.unlock_gun_minigun);
+                        case EnumController.WEAPON.m134:
+                            _reward = DataController.Instance.GetReward(EnumController.REWARD.unlock_gun_minigun);
                             break;
-                        case TheEnumManager.WEAPON.firegun:
-                            _reward = TheDataManager.Instance.GetReward(TheEnumManager.REWARD.unlock_gun_firegun);
+                        case EnumController.WEAPON.firegun:
+                            _reward = DataController.Instance.GetReward(EnumController.REWARD.unlock_gun_firegun);
                             break;
-                        case TheEnumManager.WEAPON.bazoka:
-                            _reward = TheDataManager.Instance.GetReward(TheEnumManager.REWARD.unlock_gun_bazoka);
+                        case EnumController.WEAPON.bazoka:
+                            _reward = DataController.Instance.GetReward(EnumController.REWARD.unlock_gun_bazoka);
                             break;
-                        case TheEnumManager.WEAPON.stun_gun:
-                            _reward = TheDataManager.Instance.GetReward(TheEnumManager.REWARD.unlock_gun_electric);
+                        case EnumController.WEAPON.stun_gun:
+                            _reward = DataController.Instance.GetReward(EnumController.REWARD.unlock_gun_electric);
                             break;
 
                     }
 
-                    TheUiManager.Instance.ShowPopup(TheUiManager.POP_UP.reward);
+                    UIController.Instance.PopUpShow(UIController.POP_UP.reward);
                     VictoryReward.SetReward(_reward);
 
                 }
@@ -126,7 +126,7 @@ namespace MODULES.Scriptobjectable
 
         //Get damage
 
-        public int GetDamage(TheEnumManager.ITEM_LEVEL _level)
+        public int GetDamage(EnumController.ITEM_LEVEL _level)
         {
             //    //Cong thuc: Damage = 4*level+iBaseDamage;
             //    // int _damage = 4 * (int)_level + iBaseDamage;
@@ -138,11 +138,11 @@ namespace MODULES.Scriptobjectable
 
             int _damage = LIST_DAMAGE[(int)_level];
 
-            if (TheUpgradeManager.Instance.GetUpgrade(TheEnumManager.UpgradeType.weapon_damage5).bEQUIPED)
+            if (UpgradeController.Instance.GetUpgrade(EnumController.UpgradeType.weapon_damage5).bEQUIPED)
             {
                 _damage = (int)(_damage * 1.05f);
             }
-            if (TheUpgradeManager.Instance.GetUpgrade(TheEnumManager.UpgradeType.weapon_damage_10).bEQUIPED)
+            if (UpgradeController.Instance.GetUpgrade(EnumController.UpgradeType.weapon_damage_10).bEQUIPED)
             {
                 _damage = (int)(_damage * 1.1f);
             }
@@ -183,9 +183,9 @@ namespace MODULES.Scriptobjectable
         [Header("_____ PRICE TO UPGRADE ____________")]
         [Space(30)]
         public List<int> LIST_UPGRADE_PRICE;
-        public int GetPriceToUpgrade(TheEnumManager.ITEM_LEVEL _level)
+        public int GetPriceToUpgrade(EnumController.ITEM_LEVEL _level)
         {
-            if (_level == TheEnumManager.ITEM_LEVEL.level_7) return 0;
+            if (_level == EnumController.ITEM_LEVEL.level_7) return 0;
             return LIST_UPGRADE_PRICE[(int)_level];
 
 
@@ -212,11 +212,11 @@ namespace MODULES.Scriptobjectable
         //CHECK UNLOCK WITH LEVEL
         public void CheckUnlockWithLevel()
         {
-            int _currentlevel = TheDataManager.Instance.THE_DATA_PLAYER.GetTotalPlayerLevel();
+            int _currentlevel = DataController.Instance.playerData.CalculatePlayerLevel();
             if (!bUNLOCKED && !bIsOnlyCoinUnlock && _currentlevel >= iLevelToUnlock)
             {
                 bUNLOCKED = true;
-                TheDataManager.Instance.SaveDataPlayer();//save
+                DataController.Instance.SaveData();//save
             }
         }
 
@@ -234,20 +234,20 @@ namespace MODULES.Scriptobjectable
 
             //=============================
 
-            if (TheDataManager.Instance.THE_DATA_PLAYER.GetWeapon(DATA.eWeapon) != null)
+            if (DataController.Instance.playerData.TakeWeapon(DATA.eWeapon) != null)
             {
-                DATA = TheDataManager.Instance.THE_DATA_PLAYER.GetWeapon(DATA.eWeapon);
+                DATA = DataController.Instance.playerData.TakeWeapon(DATA.eWeapon);
             }
             else
             {
-                TheDataManager.Instance.THE_DATA_PLAYER.LIST_WEAPON.Add(DATA);
+                DataController.Instance.playerData._weaponList.Add(DATA);
                 // TheDataManager.Instance.SaveDataPlayer();//save
             }
 
 
 
-            if (DATA.bEquiped && !TheWeaponManager.Instance.LIST_EQUIPED_WEAPON.Contains(this))
-                TheWeaponManager.Instance.LIST_EQUIPED_WEAPON.Add(this);
+            if (DATA.bEquiped && !WeaponController.Instance.equipedWeaponList.Contains(this))
+                WeaponController.Instance.equipedWeaponList.Add(this);
 
         }
 

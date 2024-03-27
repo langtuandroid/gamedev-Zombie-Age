@@ -5,7 +5,7 @@ namespace MODULES.Zombies.Bullets
 {
     public class ZombieBullet_Bezier : MonoBehaviour
     {
-        public TheEnumManager.ZOMBIE eZombie;
+        public EnumController.ZOMBIE eZombie;
         public float fDamage;
 
 
@@ -41,7 +41,7 @@ namespace MODULES.Zombies.Bullets
 
 
         //setup
-        public void SetUp(TheEnumManager.ZOMBIE _zombie,float _Damage)
+        public void SetUp(EnumController.ZOMBIE _zombie,float _Damage)
         {
             fDamage = _Damage;
             eZombie = _zombie;
@@ -59,14 +59,14 @@ namespace MODULES.Zombies.Bullets
             if (fTimeBezier >= 0.95f)
             {
 
-                TheEventManager.ZombieEvent_OnZombieAttack(fDamage);//attack
+                EventController.ZombieEvent_OnZombieAttack(fDamage);//attack
                 //effect
-                _effect = TheObjectPoolingManager.Instance.GetObjectPooling(TheEnumManager.POOLING_OBJECT.main_exploison).GetObject();
+                _effect = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.main_exploison).Get();
                 _effect.transform.position = vCurrentPos;
                 _effect.SetActive(true);
 
                 //sound
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.sfx_explosion_grenade);
+                SoundController.Instance.Play(SoundController.SOUND.sfx_explosion_grenade);
 
                 fTimeBezier = 0.0f;
                 m_gameobject.SetActive(false);

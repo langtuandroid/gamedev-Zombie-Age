@@ -63,7 +63,7 @@ namespace MODULES.Soldiers
             if (GameplayController.Instance.GameStatus != GameplayController.GAME_STATUS.playing) return;
             if (Soldier.Instance.WEAPON_MANAGER.CURRENT_GUN_DATA.DATA.iCurrentAmmo <= 0)
             {
-                TheEventManager.Weapon_OnWeaponNoBullet(null);//event - thay sung
+                EventController.OnWeaponNoBulletInvoke(null);//event - thay sung
                 return;
             }
             if (bLOADING_BULLET) return;
@@ -75,7 +75,7 @@ namespace MODULES.Soldiers
 
             Soldier.Instance.WEAPON_MANAGER.CURRENT_GUN_DATA.DATA.iCurrentAmmo--;
 
-            TheEventManager.Weapon_OnWeaponShot(Soldier.Instance.WEAPON_MANAGER.CURRENT_GUN_DATA);//event
+            EventController.OnWeaponShotInvoke(Soldier.Instance.WEAPON_MANAGER.CURRENT_GUN_DATA);//event
             iAmmoInMagazine--;
             if (iAmmoInMagazine == 0 ) bLOADING_MAGAZINE = true;
        
@@ -87,7 +87,7 @@ namespace MODULES.Soldiers
        
             // Soldier.Instance.PlayAnimator(TheEnumManager.SOLDIER_STATUS.shooting);//soldier shake
 
-            TheSoundManager.Instance.PlayGunSound( TheEnumManager.WEAPON.bazoka);//sound
+            SoundController.Instance.PlayGunSound( EnumController.WEAPON.bazoka);//sound
 
 
 
@@ -98,7 +98,7 @@ namespace MODULES.Soldiers
 
 
             //EFFECT---------------
-            objBullet = TheObjectPoolingManager.Instance.GetObjectPooling(TheEnumManager.POOLING_OBJECT.bullet_of_bazoka).GetObject();
+            objBullet = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.bullet_of_bazoka).Get();
             objBullet.GetComponent<BulletBazoka>().Setup(LIST_PATH, fRangeOfGBullet, iDamageOfGun);
             objBullet.transform.position = LIST_PATH[0];
             objBullet.transform.eulerAngles = m_tranform.eulerAngles;
@@ -107,7 +107,7 @@ namespace MODULES.Soldiers
 
             //THAY SUNG
             if (Soldier.Instance.WEAPON_MANAGER.CURRENT_GUN_DATA.DATA.iCurrentAmmo == 0)
-                TheEventManager.Weapon_OnWeaponNoBullet(null);//event - thay sung
+                EventController.OnWeaponNoBulletInvoke(null);//event - thay sung
 
         }
     }

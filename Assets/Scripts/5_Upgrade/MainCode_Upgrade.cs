@@ -40,7 +40,7 @@ namespace _5_Upgrade
                 buReset.onClick.RemoveAllListeners();
                 buUpgrade.onClick.RemoveAllListeners();
 
-                DATA = TheUpgradeManager.Instance.GetUpgrade(m_ButtonUpgrade._upgradeType);
+                DATA = UpgradeController.Instance.GetUpgrade(m_ButtonUpgrade._upgradeType);
                 buReset.onClick.AddListener(() => SetButton(buReset));
                 buUpgrade.onClick.AddListener(() => SetButton(buUpgrade));
 
@@ -79,16 +79,16 @@ namespace _5_Upgrade
                 {
                     if (DATA.bEQUIPED)
                     {
-                        TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//s
+                        SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//s
                         DATA.Remove();
                         Show(m_ButtonUpgrade);
                         m_ButtonUpgrade.Construct();
                         Instance.UpdateTextStar();
 
-                        TheDataManager.Instance.SaveDataPlayer();//save
+                        DataController.Instance.SaveData();//save
                     }
                     else
-                        TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_cannot);//s
+                        SoundController.Instance.Play(SoundController.SOUND.ui_cannot);//s
                 }
                 else if (_bu == buUpgrade)
                 {
@@ -96,31 +96,31 @@ namespace _5_Upgrade
                     {
                         int _star = 0;
 
-                        _star = TheDataManager.Instance.THE_DATA_PLAYER.GetTotalStar()
-                                - TheUpgradeManager.Instance.GetTotalStarEquied();
+                        _star = DataController.Instance.playerData.GetAllStars()
+                                - UpgradeController.Instance.GetTotalStarEquied();
 
 
-                        if (TheDataManager.Instance.eMode == TheDataManager.MODE.Release)
+                        if (DataController.Instance.mode == DataController.Mode.Release)
                         {
                             if (_star < DATA.iStar)
                             {
-                                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_cannot);//sound
-                                TheUiManager.Instance.ShowPopup(TheUiManager.POP_UP.note);
+                                SoundController.Instance.Play(SoundController.SOUND.ui_cannot);//sound
+                                UIController.Instance.PopUpShow(UIController.POP_UP.note);
                                 Note.SetNote(Note.NOTE.no_enought_star_to_upgrade.ToString());
                                 return;
                             }
                         }
 
-                        TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//s
+                        SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//s
                         DATA.Upgrade();
                         Show(m_ButtonUpgrade);
                         m_ButtonUpgrade.Construct();
                         Instance.UpdateTextStar();
 
-                        TheDataManager.Instance.SaveDataPlayer();//save
+                        DataController.Instance.SaveData();//save
                     }
                     else
-                        TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_cannot);//s
+                        SoundController.Instance.Play(SoundController.SOUND.ui_cannot);//s
                 }
             }
         }
@@ -163,23 +163,23 @@ namespace _5_Upgrade
         {
             if (bu == buBack)
             {
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound
-                TheUiManager.Instance.LoadScene(TheUiManager.SCENE.LevelSelection);
+                SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
+                UIController.Instance.LoadScene(UIController.SCENE.LevelSelection);
             }
         }
 
 
         private void UpdateTextStar()
         {
-            txtStar_Yellow.text = TheUpgradeManager.Instance.GetTotalStarEquied()
-                                  + "/" + TheDataManager.Instance.THE_DATA_PLAYER.GetTotalStar();
+            txtStar_Yellow.text = UpgradeController.Instance.GetTotalStarEquied()
+                                  + "/" + DataController.Instance.playerData.GetAllStars();
 
         }
 
         private void OnDisable()
         {
             //save
-            TheDataManager.Instance.SaveDataPlayer();//save
+            DataController.Instance.SaveData();//save
         }
     }
 }

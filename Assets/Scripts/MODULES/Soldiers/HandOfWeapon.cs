@@ -75,7 +75,7 @@ namespace MODULES.Soldiers
                 _fTimeWaitToReloadMagazine -= Time.deltaTime;
                 if (_fTimeWaitToReloadMagazine <= 0)
                 {
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_cannot);//sound
+                    SoundController.Instance.Play(SoundController.SOUND.ui_cannot);//sound
                     ReloadMagazine();
                     CancelInvoke("PlaySoundReload");
                 }
@@ -125,11 +125,11 @@ namespace MODULES.Soldiers
                 {
                     _fCountTimeToShot -= Time.deltaTime;
                     if (!Soldier.Instance.IsMoving)
-                        Soldier.Instance.PlayAnimator(TheEnumManager.SOLDIER_STATUS.idie);
+                        Soldier.Instance.PlayAnimator(EnumController.SOLDIER_STATUS.idie);
                     if (_fCountTimeToShot <= 0f)
                     {
                         if (!Soldier.Instance.IsMoving)
-                            Soldier.Instance.PlayAnimator(TheEnumManager.SOLDIER_STATUS.shooting);
+                            Soldier.Instance.PlayAnimator(EnumController.SOLDIER_STATUS.shooting);
 
                         Shot();
                         _fCountTimeToShot = fTimeloadOfBullet;
@@ -146,7 +146,7 @@ namespace MODULES.Soldiers
             }
             else if (Input.GetMouseButtonUp(0))
             {
-                Soldier.Instance.PlayAnimator(TheEnumManager.SOLDIER_STATUS.idie);
+                Soldier.Instance.PlayAnimator(EnumController.SOLDIER_STATUS.idie);
                 _fCountTimeToShot = 0f;
                 Soldier.Instance.IsMoving = false;
                 bTouchingInput = false;
@@ -264,7 +264,7 @@ namespace MODULES.Soldiers
                 < Soldier.Instance.WEAPON_MANAGER.CURRENT_GUN_DATA.iAmmoInMagazine)
                 bLOADING_MAGAZINE = true;
             else
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_cannot);//sound
+                SoundController.Instance.Play(SoundController.SOUND.ui_cannot);//sound
         }
 
 
@@ -306,14 +306,14 @@ namespace MODULES.Soldiers
         //PLAY SOUND RELOAD
         private void PlaySoundReload()
         {
-            TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.sfx_reload);//sound
+            SoundController.Instance.Play(SoundController.SOUND.sfx_reload);//sound
         }
 
 
         private void OnEnable()
         {
             GameplayController.Instance.weaponShell.Show(GetFactorBullet());//show shell
-            TheEventManager.OnResetMagazinBullet += ResetMagazineBulletFromPlayer;
+            EventController.OnResetMagazinBullet += ResetMagazineBulletFromPlayer;
         }
 
 
@@ -321,7 +321,7 @@ namespace MODULES.Soldiers
         private void OnDisable()
         {
             CancelInvoke();
-            TheEventManager.OnResetMagazinBullet -= ResetMagazineBulletFromPlayer;
+            EventController.OnResetMagazinBullet -= ResetMagazineBulletFromPlayer;
         }
     }
 }

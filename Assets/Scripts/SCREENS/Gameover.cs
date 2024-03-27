@@ -23,26 +23,26 @@ namespace SCREENS
             if (_bu == buShop)
             {
                 MusicManager.Instance.Play();
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound
-                TheUiManager.Instance.ShowPopup(TheUiManager.POP_UP.shop);
+                SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
+                UIController.Instance.PopUpShow(UIController.POP_UP.shop);
             }
             else if (_bu == buLevelSelection)
             {
                 MusicManager.Instance.Play();
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound
-                TheUiManager.Instance.LoadScene(TheUiManager.SCENE.LevelSelection);
+                SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
+                UIController.Instance.LoadScene(UIController.SCENE.LevelSelection);
            
             }
             else if (_bu == buReplay)
             {
                 // MusicManager.Instance.Play();
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound
-                TheUiManager.Instance.LoadScene(TheUiManager.SCENE.Gameplay);           
+                SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
+                UIController.Instance.LoadScene(UIController.SCENE.Gameplay);           
             }
         }
         private void OnEnable()
         {
-            TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_game_over);//sound
+            SoundController.Instance.Play(SoundController.SOUND.ui_game_over);//sound
             MusicManager.Instance.Stop();
         }
 

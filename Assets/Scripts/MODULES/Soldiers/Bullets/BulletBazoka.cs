@@ -57,7 +57,7 @@ namespace MODULES.Soldiers.Bullets
                 if(iIndexOfPath>=iTotalPoinOnPath)
                 {
                     bAllowMove = false;
-                    TheEventManager.PostEvent_OnBulletCompleted(TheEnumManager.WEAPON.bazoka, vCurrentPos,fRange, iDamage);//event
+                    EventController.OnBulletCompletedInvoke(EnumController.WEAPON.bazoka, vCurrentPos,fRange, iDamage);//event
                     m_gameobject.SetActive(false);
                 }
                 else
@@ -105,7 +105,7 @@ namespace MODULES.Soldiers.Bullets
         {
             if (_time <= 0)
             {
-                _smock = TheObjectPoolingManager.Instance.GetObjectPooling(TheEnumManager.POOLING_OBJECT.smock_of_bazoka).GetObject();
+                _smock = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.smock_of_bazoka).Get();
                 _smock.transform.position = vCurrentPos;
                 _smock.SetActive(true);
                 _time = 0.03f;

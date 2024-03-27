@@ -17,14 +17,14 @@ namespace _4_Gameplay
             [System.Serializable]
             public class Unit
             {
-                [FormerlySerializedAs("eSupport")] [SerializeField] private TheEnumManager.SUPPORT _supportType;
+                [FormerlySerializedAs("eSupport")] [SerializeField] private EnumController.SUPPORT _supportType;
                 [FormerlySerializedAs("DATA")] [SerializeField] private SupportData _data;
                 [FormerlySerializedAs("buUse")] [SerializeField] private Button _useButton;
                 private Text _valueText;
-                public TheEnumManager.SUPPORT SupportType => _supportType;
+                public EnumController.SUPPORT SupportType => _supportType;
                 public void Construct()
                 {
-                    _data = TheWeaponManager.Instance.GetSupport(_supportType);
+                    _data = WeaponController.Instance.Support(_supportType);
                     _valueText = _useButton.GetComponentInChildren<Text>();
                     SetStatus();
                 }
@@ -63,7 +63,7 @@ namespace _4_Gameplay
                     _uiSupport[i].Construct();
                 }
             }
-            public Unit GetUI(TheEnumManager.SUPPORT _support)
+            public Unit GetUI(EnumController.SUPPORT _support)
             {
                 int length = _uiSupport.Count;
                 for (int i = 0; i < length; i++)
@@ -78,7 +78,7 @@ namespace _4_Gameplay
        
         [FormerlySerializedAs("MAIN_SOLDIER")] [SerializeField] private Soldier _mainSoldier;
         [FormerlySerializedAs("SUPPORT_UI")] [SerializeField] private SupportUI _uiSupport;
-        [FormerlySerializedAs("eCurrentSupport")] [SerializeField] private TheEnumManager.SUPPORT _currentSupport;
+        [FormerlySerializedAs("eCurrentSupport")] [SerializeField] private EnumController.SUPPORT _currentSupport;
         
         [Space(20)]
         [FormerlySerializedAs("m_tranOfPointOfSupport")] [SerializeField] private Transform _supportPoint;
@@ -99,19 +99,19 @@ namespace _4_Gameplay
         
         public void UseSupport_Grenade()
         {
-            _uiSupport.GetUI(TheEnumManager.SUPPORT.grenade).Use();
+            _uiSupport.GetUI(EnumController.SUPPORT.grenade).Use();
         }
         public void UseSupport_Freeze()
         {
-            _uiSupport.GetUI(TheEnumManager.SUPPORT.freeze).Use();
+            _uiSupport.GetUI(EnumController.SUPPORT.freeze).Use();
         }
         public void UseSupport_Poison()
         {
-            _uiSupport.GetUI(TheEnumManager.SUPPORT.poison).Use();
+            _uiSupport.GetUI(EnumController.SUPPORT.poison).Use();
         }
         public void UseSupport_Bigbomb()
         {
-            _uiSupport.GetUI(TheEnumManager.SUPPORT.big_bomb).Use();
+            _uiSupport.GetUI(EnumController.SUPPORT.big_bomb).Use();
         }
         
         private void Update()
@@ -135,13 +135,13 @@ namespace _4_Gameplay
 
         }
 
-        private void StartSupport(TheEnumManager.SUPPORT _support)
+        private void StartSupport(EnumController.SUPPORT _support)
         {
             StartCoroutine(StartSupportRoutine(_support));
         }
 
         WaitForSeconds _wait = new WaitForSeconds(0.05f);
-        private IEnumerator StartSupportRoutine(TheEnumManager.SUPPORT _support)
+        private IEnumerator StartSupportRoutine(EnumController.SUPPORT _support)
         {
             _isSupport = true;
             _mainSoldier.PlayerAnimationThrow(_support);
@@ -150,28 +150,28 @@ namespace _4_Gameplay
             GameObject _item = null;
             switch (_support)
             {
-                case TheEnumManager.SUPPORT.grenade:
+                case EnumController.SUPPORT.grenade:
                     vStartPosOfItem = new Vector2(-4.91f, 2.54f);
-                    _item = TheObjectPoolingManager.Instance.GetObjectPooling(TheEnumManager.POOLING_OBJECT.support_grenade).GetObject();
+                    _item = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.support_grenade).Get();
                     break;
-                case TheEnumManager.SUPPORT.freeze:
+                case EnumController.SUPPORT.freeze:
                     vStartPosOfItem = new Vector2(-4.91f, 2.54f);
-                    _item = TheObjectPoolingManager.Instance.GetObjectPooling(TheEnumManager.POOLING_OBJECT.support_freeze).GetObject();
+                    _item = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.support_freeze).Get();
                     break;
-                case TheEnumManager.SUPPORT.poison:
+                case EnumController.SUPPORT.poison:
                     vStartPosOfItem = new Vector2(-4.91f, 2.54f);
-                    _item = TheObjectPoolingManager.Instance.GetObjectPooling(TheEnumManager.POOLING_OBJECT.support_poison).GetObject();
+                    _item = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.support_poison).Get();
                     break;
-                case TheEnumManager.SUPPORT.big_bomb:
+                case EnumController.SUPPORT.big_bomb:
                     vStartPosOfItem = vInputOfPlayer;
                     vStartPosOfItem.y = 8;
-                    _item = TheObjectPoolingManager.Instance.GetObjectPooling(TheEnumManager.POOLING_OBJECT.support_bigbom).GetObject();
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.sfx_throw_big_bomb);//sound
+                    _item = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.support_bigbom).Get();
+                    SoundController.Instance.Play(SoundController.SOUND.sfx_throw_big_bomb);//sound
                     break;
 
             }
             _item.transform.position = vStartPosOfItem;
-            _item.GetComponent<ItemOfSupport>().SetMove(vStartPosOfItem, vInputOfPlayer);
+            _item.GetComponent<SupportItem>().Move(vStartPosOfItem, vInputOfPlayer);
             _item.SetActive(true);
 
 

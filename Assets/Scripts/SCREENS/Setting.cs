@@ -36,7 +36,7 @@ namespace SCREENS
                 buMusic.GetComponentInChildren<Text>().text = "MUSIC ON";
             }
 
-            if (TheSoundManager.Instance.Mute)
+            if (SoundController.Instance.Mute)
             {
                 buSound.image.color = Color.gray;
                 buSound.GetComponentInChildren<Text>().text = "SOUND OFF";
@@ -54,45 +54,45 @@ namespace SCREENS
         {
             if (_bu == buBack)
             {
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_back );//sound
-                TheUiManager.Instance.HidePopup(TheUiManager.POP_UP.setting);
+                SoundController.Instance.Play(SoundController.SOUND.ui_click_back );//sound
+                UIController.Instance.HidePopup(UIController.POP_UP.setting);
             }
             else if (_bu == buMusic)
             {
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound
+                SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
                 MusicManager.Instance.Mute = !MusicManager.Instance.Mute;
                 Init();
             }
             else if (_bu == buSound)
             {
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound
-                TheSoundManager.Instance.Mute = !TheSoundManager.Instance.Mute;
+                SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
+                SoundController.Instance.Mute = !SoundController.Instance.Mute;
                 Init();
             }
             else if (_bu == buFacebook)
             {
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound
+                SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
                 
             }
 
             else if (_bu == buLikeUs)
             {
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound
+                SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
                 
             }
             else if (_bu == buReport)
             {
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound
+                SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
                 
             }
             else if (_bu == buAbout)
             {
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound
-                TheUiManager.Instance.ShowPopup(TheUiManager.POP_UP.about_us);
+                SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
+                UIController.Instance.PopUpShow(UIController.POP_UP.about_us);
             }
             else if (_bu == buMoregame)
             {
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound
+                SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
                 
             }
         }

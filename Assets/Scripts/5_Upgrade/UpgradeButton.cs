@@ -8,7 +8,7 @@ namespace _5_Upgrade
 {
     public class UpgradeButton : MonoBehaviour
     {
-        [FormerlySerializedAs("eUpgrade")] public TheEnumManager.UpgradeType _upgradeType;
+        [FormerlySerializedAs("eUpgrade")] public EnumController.UpgradeType _upgradeType;
         private Button _thisButton;
 
        
@@ -25,7 +25,7 @@ namespace _5_Upgrade
 
             Construct();
 
-            if (_upgradeType == TheEnumManager.UpgradeType.zombie_all_speed10)
+            if (_upgradeType == EnumController.UpgradeType.zombie_all_speed10)
             {
                 Invoke("Click", 0.1f);
             }
@@ -34,7 +34,7 @@ namespace _5_Upgrade
 
         public void Construct()
         {
-            UpgradeData _temp = TheUpgradeManager.Instance.GetUpgrade(_upgradeType);
+            UpgradeData _temp = UpgradeController.Instance.GetUpgrade(_upgradeType);
             _valueText.text = _temp.iStar.ToString();
 
 
@@ -55,7 +55,7 @@ namespace _5_Upgrade
         
         private void Click()
         {
-            TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);
+            SoundController.Instance.Play(SoundController.SOUND.ui_click_next);
             MainCode_Upgrade.Instance.m_BoardInfo.Show(this);
             MainCode_Upgrade.Instance.tranOfYellowCirle.position = transform.position;
         }

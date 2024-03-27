@@ -78,34 +78,6 @@ namespace MODULES.Scriptobjectable
             m_audioSource.clip = LIST_SOUND_TRACK[_total];
             m_audioSource.Play();
         }
-
-
-
-        //============== EVENT ==========================
-
-        private void HandleAdsClosed()
-        {
-            m_audioSource.volume = 1f;
-        }
-
-        private void HandleAdsOpening()
-        {
-            m_audioSource.volume = 0f;
-        }
-
-
-        private void OnEnable()
-        {
-            TheEventManager.OnAdsOpening += HandleAdsOpening;
-            TheEventManager.OnAdsClosed += HandleAdsClosed;
-        }
-
-
-
-        private void OnDisable()
-        {
-            TheEventManager.OnAdsOpening -= HandleAdsOpening;
-            TheEventManager.OnAdsClosed -= HandleAdsClosed;
-        }
+        
     }
 }

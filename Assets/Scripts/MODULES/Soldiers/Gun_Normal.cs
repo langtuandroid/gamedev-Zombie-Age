@@ -16,7 +16,7 @@ namespace MODULES.Soldiers
             if (GameplayController.Instance.GameStatus != GameplayController.GAME_STATUS.playing) return;
             if (Soldier.Instance.WEAPON_MANAGER.CURRENT_GUN_DATA.DATA.iCurrentAmmo <= 0)
             {
-                TheEventManager.Weapon_OnWeaponNoBullet(null);//event - thay sung
+                EventController.OnWeaponNoBulletInvoke(null);//event - thay sung
                 return;
             }
             if (bLOADING_BULLET) return;
@@ -29,7 +29,7 @@ namespace MODULES.Soldiers
             iAmmoInMagazine--;
             if (iAmmoInMagazine == 0) bLOADING_MAGAZINE = true;
 
-            TheEventManager.Weapon_OnWeaponShot(Soldier.Instance.WEAPON_MANAGER.CURRENT_GUN_DATA);//event     
+            EventController.OnWeaponShotInvoke(Soldier.Instance.WEAPON_MANAGER.CURRENT_GUN_DATA);//event     
             GameplayController.Instance.weaponShell.Show(GetFactorBullet());//show shell
 
 
@@ -39,20 +39,20 @@ namespace MODULES.Soldiers
        
             //Soldier.Instance.PlayAnimator(TheEnumManager.SOLDIER_STATUS.shooting);//soldier shake
             m_animator.Play(aniGunShake.name, -1, 0f);//shake gun
-            TheSoundManager.Instance.PlayGunSound(Soldier.Instance.WEAPON_MANAGER.CURRENT_GUN_DATA.DATA.eWeapon);//sound
+            SoundController.Instance.PlayGunSound(Soldier.Instance.WEAPON_MANAGER.CURRENT_GUN_DATA.DATA.eWeapon);//sound
 
             //bullet
             vTargetOfBullet = vInputPos + Random.insideUnitCircle * 1.3f;
             fAngelZ = GetRoatateZ(objBeam.transform.position, vTargetOfBullet);
 
-            _bullet = TheObjectPoolingManager.Instance.GetObjectPooling(TheEnumManager.POOLING_OBJECT.bullet).GetObject();
+            _bullet = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.bullet).Get();
             _bullet.GetComponent<Bullet>().SetBullet(Soldier.Instance.WEAPON_MANAGER.CURRENT_GUN_DATA.DATA.eWeapon, objBeam.transform.position, vTargetOfBullet, fAngelZ, fRangeOfGBullet, iDamageOfGun, sprBullet, vScaleOfBullet);
             _bullet.SetActive(true);
             #endregion
 
             //THAY SUNG
             if (Soldier.Instance.WEAPON_MANAGER.CURRENT_GUN_DATA.DATA.iCurrentAmmo == 0)
-                TheEventManager.Weapon_OnWeaponNoBullet(null);//event - thay sung
+                EventController.OnWeaponNoBulletInvoke(null);//event - thay sung
         }
 
     }

@@ -69,26 +69,26 @@ namespace _3_LevelSelection
             //SHOW INFO
             public void ShowInfo()
             {
-                txtLevel.text = "LEVEL " + (TheDataManager.Instance.THE_DATA_PLAYER.iCurrentLevel + 1).ToString();
+                txtLevel.text = "LEVEL " + (DataController.Instance.playerData.CurrentLevel + 1).ToString();
 
 
-                int _level = TheDataManager.Instance.THE_DATA_PLAYER.iCurrentLevel;
-                iCurrentStar = TheDataManager.Instance.THE_DATA_PLAYER.GetStar(_level);
+                int _level = DataController.Instance.playerData.CurrentLevel;
+                iCurrentStar = DataController.Instance.playerData.NumOfStars(_level);
 
                 StateOfDifficuftButton();
                 if (iCurrentStar == 2 || iCurrentStar == 3)
                 {
-                    TheDataManager.Instance.THE_DATA_PLAYER.CURRENT_DIFFICUFT = TheEnumManager.DIFFICUFT.nightmare;
+                    DataController.Instance.playerData.Difficuft = EnumController.DIFFICUFT.nightmare;
                     m_tranOfButtonChoose.position = buNightmare.transform.position;
                 }
                 else if (iCurrentStar == 1)
                 {
-                    TheDataManager.Instance.THE_DATA_PLAYER.CURRENT_DIFFICUFT = TheEnumManager.DIFFICUFT.normal;
+                    DataController.Instance.playerData.Difficuft = EnumController.DIFFICUFT.normal;
                     m_tranOfButtonChoose.position = buNormal.transform.position;
                 }
                 else
                 {
-                    TheDataManager.Instance.THE_DATA_PLAYER.CURRENT_DIFFICUFT = TheEnumManager.DIFFICUFT.easy;
+                    DataController.Instance.playerData.Difficuft = EnumController.DIFFICUFT.easy;
                     m_tranOfButtonChoose.position = buEasy.transform.position;
                 }
 
@@ -96,7 +96,7 @@ namespace _3_LevelSelection
                 imaStarOfLevel.sprite = GetSpriteOfStar(iCurrentStar);
 
                 //-------------------- ICON BACKGROUND
-                LevelData _leveldata = Resources.Load<LevelData>("Levels/Configs/Level_" + (TheDataManager.Instance.THE_DATA_PLAYER.iCurrentLevel + 1));
+                LevelData _leveldata = Resources.Load<LevelData>("Levels/Configs/Level_" + (DataController.Instance.playerData.CurrentLevel + 1));
                 sprBackgroundLevel.sprite = _leveldata.sprBackground;
                 sprFrameBackground.sprite = _leveldata.sprBackgroundFrame;
 
@@ -133,38 +133,38 @@ namespace _3_LevelSelection
             private void SetButton(Button _bu)
             {
                 //for tutorial
-                if (TheTutorialManager.Instance)
+                if (TutorialController.Instance)
                 {
-                    if (!TheTutorialManager.Instance.IsCheckRightInput()) return;
+                    if (!TutorialController.Instance.IsRightInput()) return;
                 }
 
 
                 if (_bu == buClose)
                 {
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_back);//sound
+                    SoundController.Instance.Play(SoundController.SOUND.ui_click_back);//sound
                     LevelSelectionController.Instance.SetDifficultPopUp(false);
                 }
                 else if (_bu == buEasy)
                 {
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound
-                    TheDataManager.Instance.THE_DATA_PLAYER.CURRENT_DIFFICUFT = TheEnumManager.DIFFICUFT.easy;
+                    SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
+                    DataController.Instance.playerData.Difficuft = EnumController.DIFFICUFT.easy;
                     // StateOfDifficuftButton();
                     m_tranOfButtonChoose.position = buEasy.transform.position;
                 }
                 else if (_bu == buNormal)
                 {
 
-                    if (iCurrentStar >= 1 || TheDataManager.Instance.eMode == TheDataManager.MODE.Debug)
+                    if (iCurrentStar >= 1 || DataController.Instance.mode == DataController.Mode.Debug)
                     {
-                        TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound
-                        TheDataManager.Instance.THE_DATA_PLAYER.CURRENT_DIFFICUFT = TheEnumManager.DIFFICUFT.normal;
+                        SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
+                        DataController.Instance.playerData.Difficuft = EnumController.DIFFICUFT.normal;
                         // StateOfDifficuftButton();
                         m_tranOfButtonChoose.position = buNormal.transform.position;
                     }
                     else
                     {
-                        TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_cannot);//sound
-                        TheUiManager.Instance.ShowPopup(TheUiManager.POP_UP.note);
+                        SoundController.Instance.Play(SoundController.SOUND.ui_cannot);//sound
+                        UIController.Instance.PopUpShow(UIController.POP_UP.note);
                         Note.SetNote(Note.NOTE.no_enought_star.ToString());
                         Debug.Log("LOCKED");
                     }
@@ -173,17 +173,17 @@ namespace _3_LevelSelection
                 }
                 else if (_bu == buNightmare)
                 {
-                    if (iCurrentStar >= 2 || TheDataManager.Instance.eMode == TheDataManager.MODE.Debug)
+                    if (iCurrentStar >= 2 || DataController.Instance.mode == DataController.Mode.Debug)
                     {
-                        TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound
-                        TheDataManager.Instance.THE_DATA_PLAYER.CURRENT_DIFFICUFT = TheEnumManager.DIFFICUFT.nightmare;
+                        SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
+                        DataController.Instance.playerData.Difficuft = EnumController.DIFFICUFT.nightmare;
                         // StateOfDifficuftButton();
                         m_tranOfButtonChoose.position = buNightmare.transform.position;
                     }
                     else
                     {
-                        TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_cannot);//sound
-                        TheUiManager.Instance.ShowPopup(TheUiManager.POP_UP.note);
+                        SoundController.Instance.Play(SoundController.SOUND.ui_cannot);//sound
+                        UIController.Instance.PopUpShow(UIController.POP_UP.note);
                         Note.SetNote(Note.NOTE.no_enought_star.ToString());
                         Debug.Log("LOCKED");
                     }
@@ -192,8 +192,8 @@ namespace _3_LevelSelection
                 else if (_bu == buStart)
                 {
                     Debug.Log("START");
-                    TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.sfx_gun_shotgun);//sound
-                    TheUiManager.Instance.LoadScene(TheUiManager.SCENE.Weapon);
+                    SoundController.Instance.Play(SoundController.SOUND.sfx_gun_shotgun);//sound
+                    UIController.Instance.LoadScene(UIController.SCENE.Weapon);
                 }
             }
 
@@ -252,10 +252,10 @@ namespace _3_LevelSelection
         {
             if (Instance == null)
                 Instance = this;
-            TheUiManager.Instance.SetCameraForPopupCanvas(Camera.main);//set camera
+            UIController.Instance.SetCameraPopup(Camera.main);//set camera
 
-            iTotalMap = Mathf.CeilToInt(TheDataManager.Instance.TOTAL_LEVEL_IN_GAME / 15.0f);
-            iIndexOfMap = (int)(TheDataManager.Instance.THE_DATA_PLAYER.LIST_STAR.Count / 15.0f);
+            iTotalMap = Mathf.CeilToInt(DataController.Instance.LevelsTotal / 15.0f);
+            iIndexOfMap = (int)(DataController.Instance.playerData.StarList.Count / 15.0f);
         }
         
         private void Start()
@@ -273,7 +273,7 @@ namespace _3_LevelSelection
 
             iTotalLevelButton = _levelButtonGroup.childCount;
             ConstructMap(iIndexOfMap);
-            _totalStarText.text = TheDataManager.Instance.THE_DATA_PLAYER.GetTotalStar().ToString();
+            _totalStarText.text = DataController.Instance.playerData.GetAllStars().ToString();
 
 
             _difficultPopup.Init();
@@ -291,15 +291,15 @@ namespace _3_LevelSelection
         private void AssignButtons(Button button)
         {
             //for tutorial
-            if (TheTutorialManager.Instance)
+            if (TutorialController.Instance)
             {
-                if (!TheTutorialManager.Instance.IsCheckRightInput()) return;
+                if (!TutorialController.Instance.IsRightInput()) return;
             }
 
             if (button == _mapNextButton)
             {
 
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound
+                SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
                 iIndexOfMap++;
                 if (iIndexOfMap == iTotalMap)
                     iIndexOfMap = 0;
@@ -308,7 +308,7 @@ namespace _3_LevelSelection
             }
             else if (button == _backMapButton)
             {
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_back);//sound
+                SoundController.Instance.Play(SoundController.SOUND.ui_click_back);//sound
                 iIndexOfMap--;
                 if (iIndexOfMap < 0)
                     iIndexOfMap = iTotalMap - 1;
@@ -317,27 +317,27 @@ namespace _3_LevelSelection
             }
             else if (button == _shopButton)
             {
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound
-                TheUiManager.Instance.ShowPopup(TheUiManager.POP_UP.shop);
+                SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
+                UIController.Instance.PopUpShow(UIController.POP_UP.shop);
             }
             else if (button == _vireoRevardButton)
             {
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);
-                TheUiManager.Instance.ShowPopup(TheUiManager.POP_UP.video_reward);
+                SoundController.Instance.Play(SoundController.SOUND.ui_click_next);
+                UIController.Instance.PopUpShow(UIController.POP_UP.video_reward);
             }
             else if (button == _settingsButton)
             {
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);
-                TheUiManager.Instance.ShowPopup(TheUiManager.POP_UP.setting);
+                SoundController.Instance.Play(SoundController.SOUND.ui_click_next);
+                UIController.Instance.PopUpShow(UIController.POP_UP.setting);
             }
             else if (button == _upgradeButton)
             {
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);
-                TheUiManager.Instance.LoadScene(TheUiManager.SCENE.Upgrade);
+                SoundController.Instance.Play(SoundController.SOUND.ui_click_next);
+                UIController.Instance.LoadScene(UIController.SCENE.Upgrade);
             }
             else if (button == _bugSupportButton)
             {
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);
+                SoundController.Instance.Play(SoundController.SOUND.ui_click_next);
                 
             }
         }
@@ -382,10 +382,10 @@ namespace _3_LevelSelection
         {
             yield return new WaitForSecondsRealtime(delay);
 
-            if (TheDataManager.Instance.THE_DATA_PLAYER.IsReadyToGetCheckIn())
+            if (DataController.Instance.playerData.CheckInReady())
             {
-                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_wood_board);//sound
-                TheUiManager.Instance.ShowPopup(TheUiManager.POP_UP.check_in);
+                SoundController.Instance.Play(SoundController.SOUND.ui_wood_board);//sound
+                UIController.Instance.PopUpShow(UIController.POP_UP.check_in);
 
             }
         }

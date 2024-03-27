@@ -29,13 +29,13 @@ namespace MODULES
         {
             for (int i = 0; i < _loop; i++)
             {
-                _blood = TheObjectPoolingManager.Instance.GetObjectPooling(TheEnumManager.POOLING_OBJECT.zombie_blood_exploison).GetObject();
+                _blood = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.zombie_blood_exploison).Get();
                 if(_blood)
                 {
                     vTempPos = vCurrentPos + Random.insideUnitCircle*2.0f;
                     _blood.transform.position = vTempPos;
                     _blood.SetActive(true);
-                    TheSoundManager.Instance.ZombieExplosion();//sound
+                    SoundController.Instance.ZombieExplosion();//sound
                     yield return _time;
                 }
             }
