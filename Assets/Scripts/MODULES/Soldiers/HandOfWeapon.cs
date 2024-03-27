@@ -60,7 +60,7 @@ namespace MODULES.Soldiers
 
         void Update()
         {
-            if (MainCode_Gameplay.Instance.eGameStatus != MainCode_Gameplay.GAME_STATUS.playing) return;
+            if (GameplayController.Instance.GameStatus != GameplayController.GAME_STATUS.playing) return;
 
 
             //=========reload
@@ -107,10 +107,10 @@ namespace MODULES.Soldiers
                 }
 
                 //===================================
-                if (MainCode_Gameplay.Instance.eInputType != MainCode_Gameplay.INPUT_TYPE.shooting) return;
+                if (GameplayController.Instance.InputType != GameplayController.INPUT_TYPE.shooting) return;
                 if (bLoadingBullet) return;
                 if (bLoadingMagazine) return;
-                if (TheSupportManager.Instance.bSupporting) return;
+                if (SupportManager.Instance.IsSupport) return;
                 //--------------------------------------------
 
                 vInputPos = m_MainCamera.ScreenToWorldPoint(Input.mousePosition);
@@ -253,7 +253,7 @@ namespace MODULES.Soldiers
                     iAmmoInMagazine = _totalAmmo;
             }
 
-            MainCode_Gameplay.Instance.m_WeaponShell.ShowBar(GetFactorBullet());//show shell
+            GameplayController.Instance.weaponShell.Show(GetFactorBullet());//show shell
             bLoadingMagazine = false;
 
             m_animator.SetBool("isShooting", true);
@@ -312,7 +312,7 @@ namespace MODULES.Soldiers
 
         private void OnEnable()
         {
-            MainCode_Gameplay.Instance.m_WeaponShell.ShowBar(GetFactorBullet());//show shell
+            GameplayController.Instance.weaponShell.Show(GetFactorBullet());//show shell
             TheEventManager.OnResetMagazinBullet += ResetMagazineBulletFromPlayer;
         }
 

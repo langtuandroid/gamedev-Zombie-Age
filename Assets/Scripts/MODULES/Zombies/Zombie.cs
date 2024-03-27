@@ -237,7 +237,7 @@ namespace MODULES.Zombies
         #region ATTACK
         public void Attack()
         {
-            if (MainCode_Gameplay.Instance.eGameStatus != MainCode_Gameplay.GAME_STATUS.playing) return;
+            if (GameplayController.Instance.GameStatus != GameplayController.GAME_STATUS.playing) return;
             if (IsFreezing) return;
 
             //play sound
@@ -331,7 +331,7 @@ namespace MODULES.Zombies
             else
             {
                 //is boss
-                MainCode_Gameplay.Instance.m_BossHpBar.ShowBar(_factor);
+                GameplayController.Instance.bossHpBar.Show(_factor);
             }
         }
 

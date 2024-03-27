@@ -299,7 +299,7 @@ namespace MODULES.Soldiers
             iTotalDefenseUnit = LIST_DEFENSE.Count;
             fTotalDefense = GetCurrentDefense();
 
-            MainCode_Gameplay.Instance.ShowHpBar(1.0f, (int)fCurrentDefense + "/" + (int)fTotalDefense);
+            GameplayController.Instance.ShowHpBar(1.0f, (int)fCurrentDefense + "/" + (int)fTotalDefense);
         }
 
 
@@ -331,9 +331,9 @@ namespace MODULES.Soldiers
             if (fCurrentDefense <= 0)
             {
                 fCurrentDefense = 0;
-                MainCode_Gameplay.Instance.SetGameStartus(MainCode_Gameplay.GAME_STATUS.gameover);//game over
+                GameplayController.Instance.SetStatusOfGame(GameplayController.GAME_STATUS.gameover);//game over
             }
-            MainCode_Gameplay.Instance.ShowHpBar(GetFactorDefense(), (int)fCurrentDefense + "/" + (int)fTotalDefense);//show bar
+            GameplayController.Instance.ShowHpBar(GetFactorDefense(), (int)fCurrentDefense + "/" + (int)fTotalDefense);//show bar
 
 
             //FIRE

@@ -179,12 +179,12 @@ namespace MODULES
         IEnumerator ieLoadWave()
         {
             yield return new WaitForSeconds(0.5f);
-            if (MainCode_Gameplay.Instance.eGameStatus != MainCode_Gameplay.GAME_STATUS.playing) yield break;
+            if (GameplayController.Instance.GameStatus != GameplayController.GAME_STATUS.playing) yield break;
 
             iCurrentWave++;
             if (iCurrentWave == LEVEL_DATA.iTotalWave)
             {
-                MainCode_Gameplay.Instance.SetGameStartus(MainCode_Gameplay.GAME_STATUS.victory);
+                GameplayController.Instance.SetStatusOfGame(GameplayController.GAME_STATUS.victory);
             }
             else
             {
@@ -262,7 +262,7 @@ namespace MODULES
 
                         //-------------- update zombie wave bar -----------
                         iCountZombie++;
-                        MainCode_Gameplay.Instance.m_ZombieWaveBar.UpdateBar(iCountZombie * 1.0f / iTotalZombie);
+                        GameplayController.Instance.zombieWaveBar.Update(iCountZombie * 1.0f / iTotalZombie);
 
                         _tempZombie.gameObject.SetActive(true);
 

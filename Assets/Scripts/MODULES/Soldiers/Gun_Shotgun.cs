@@ -13,8 +13,8 @@ namespace MODULES.Soldiers
 
         public override void Shot()
         {
-            if (MainCode_Gameplay.Instance.eGameStatus == MainCode_Gameplay.GAME_STATUS.victory
-                || MainCode_Gameplay.Instance.eGameStatus == MainCode_Gameplay.GAME_STATUS.gameover) return;
+            if (GameplayController.Instance.GameStatus == GameplayController.GAME_STATUS.victory
+                || GameplayController.Instance.GameStatus == GameplayController.GAME_STATUS.gameover) return;
 
             if (Soldier.Instance.WEAPON_MANAGER.CURRENT_GUN_DATA.DATA.iCurrentAmmo <= 0) //het dan
             {
@@ -44,7 +44,7 @@ namespace MODULES.Soldiers
             {
                 bLOADING_MAGAZINE = true;
             }
-            MainCode_Gameplay.Instance.m_WeaponShell.ShowBar(GetFactorBullet());//show shell
+            GameplayController.Instance.weaponShell.Show(GetFactorBullet());//show shell
 
 
 

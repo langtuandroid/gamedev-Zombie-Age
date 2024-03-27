@@ -60,7 +60,7 @@ namespace MODULES.Soldiers
 
         private void Deshot()
         {
-            if (MainCode_Gameplay.Instance.eGameStatus != MainCode_Gameplay.GAME_STATUS.playing) return;
+            if (GameplayController.Instance.GameStatus != GameplayController.GAME_STATUS.playing) return;
             if (Soldier.Instance.WEAPON_MANAGER.CURRENT_GUN_DATA.DATA.iCurrentAmmo <= 0)
             {
                 TheEventManager.Weapon_OnWeaponNoBullet(null);//event - thay sung
@@ -80,7 +80,7 @@ namespace MODULES.Soldiers
             if (iAmmoInMagazine == 0 ) bLOADING_MAGAZINE = true;
        
 
-            MainCode_Gameplay.Instance.m_WeaponShell.ShowBar(GetFactorBullet());//show shell
+            GameplayController.Instance.weaponShell.Show(GetFactorBullet());//show shell
 
             //animation of body
             objBeam.SetActive(true);

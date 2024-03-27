@@ -23,7 +23,7 @@ namespace MODULES.Soldiers.Bullets
         {
             if (Time.timeScale != 1.0f) return;//debug
 
-            if (MainCode_Gameplay.Instance.eGameStatus != MainCode_Gameplay.GAME_STATUS.playing) return;
+            if (GameplayController.Instance.GameStatus != GameplayController.GAME_STATUS.playing) return;
             _euler.z += _angle;
             m_tranform.localScale += _scale;
             m_tranform.eulerAngles = _euler;

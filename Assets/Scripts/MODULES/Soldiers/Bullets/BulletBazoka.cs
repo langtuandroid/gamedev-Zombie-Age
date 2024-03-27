@@ -45,7 +45,7 @@ namespace MODULES.Soldiers.Bullets
         void Update()
         {
             if (Time.timeScale != 1.0f) return; //for debug
-            if (MainCode_Gameplay.Instance.eGameStatus != MainCode_Gameplay.GAME_STATUS.playing) return;
+            if (GameplayController.Instance.GameStatus != GameplayController.GAME_STATUS.playing) return;
             if (!bAllowMove) return;
 
             Smock();//smock
