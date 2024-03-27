@@ -1,45 +1,48 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using MANAGERS;
 using UnityEngine;
 using UnityEngine.UI;
-public class AboutUs : MonoBehaviour
+
+namespace SCREENS
 {
-    [SerializeField]
-    private Button buBack,buResetGame,buMoregame;
-    [SerializeField] Text txtContent;
-    [SerializeField] Image imaLogo;
-
-    // Start is called before the first frame update
-    void Start()
+    public class AboutUs : MonoBehaviour
     {
-        buBack.onClick.AddListener(() => SetButton(buBack));
-        buResetGame.onClick.AddListener(() => SetButton(buResetGame));
-        buMoregame.onClick.AddListener(() => SetButton(buMoregame));
+        [SerializeField]
+        private Button buBack,buResetGame,buMoregame;
+        [SerializeField] Text txtContent;
+        [SerializeField] Image imaLogo;
 
-
-        imaLogo.sprite = TheDataManager.Instance.GAME_INFO.sprLogoPNG;
-        txtContent.text = "Add: " + TheDataManager.Instance.GAME_INFO.strAddress + "\n Email: " + TheDataManager.Instance.GAME_INFO.strEmailReport;
-    }
-
-    //SET BUTTON
-    private void SetButton(Button _bu)
-    {
-        if (_bu == buBack)
+        // Start is called before the first frame update
+        void Start()
         {
-            TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_back);//sound
-            TheUiManager.Instance.HidePopup(TheUiManager.POP_UP.about_us);
+            buBack.onClick.AddListener(() => SetButton(buBack));
+            buResetGame.onClick.AddListener(() => SetButton(buResetGame));
+            buMoregame.onClick.AddListener(() => SetButton(buMoregame));
+
+
+            imaLogo.sprite = TheDataManager.Instance.GAME_INFO.sprLogoPNG;
+            txtContent.text = "Add: " + TheDataManager.Instance.GAME_INFO.strAddress + "\n Email: " + TheDataManager.Instance.GAME_INFO.strEmailReport;
         }
-      else  if (_bu == buResetGame )
+
+        //SET BUTTON
+        private void SetButton(Button _bu)
         {
-            TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound
-            TheUiManager.Instance.ShowPopup(TheUiManager.POP_UP.note);
-            Note.SetNote(Note.NOTE.reset_game.ToString());
+            if (_bu == buBack)
+            {
+                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_back);//sound
+                TheUiManager.Instance.HidePopup(TheUiManager.POP_UP.about_us);
+            }
+            else  if (_bu == buResetGame )
+            {
+                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound
+                TheUiManager.Instance.ShowPopup(TheUiManager.POP_UP.note);
+                Note.SetNote(Note.NOTE.reset_game.ToString());
                 
-        }
-        else if (_bu == buMoregame)
-        {
-            TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next );//sound
-            TheUiManager.Instance.LoadLink(TheDataManager.Instance.GAME_INFO.strLinkMoreGame);
+            }
+            else if (_bu == buMoregame)
+            {
+                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next );//sound
+                TheUiManager.Instance.LoadLink(TheDataManager.Instance.GAME_INFO.strLinkMoreGame);
+            }
         }
     }
 }

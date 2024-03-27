@@ -1,60 +1,63 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using MODULES.Scriptobjectable;
 using UnityEngine;
 
-public class TheUpgradeManager : MonoBehaviour
+namespace MANAGERS
 {
-    public static TheUpgradeManager Instance;
-
-    private void Awake()
+    public class TheUpgradeManager : MonoBehaviour
     {
-        if (Instance == null)
-            Instance = this;
-    }
+        public static TheUpgradeManager Instance;
 
-
-
-    [Space(20)]
-    public List<UpgradeData> LIST_UPGRADE_IN_GAME;
-
-
-    public void Init()
-    {
-        int length = LIST_UPGRADE_IN_GAME.Count;
-        for (int i = 0; i < length; i++)
+        private void Awake()
         {
-            LIST_UPGRADE_IN_GAME[i].Init();
+            if (Instance == null)
+                Instance = this;
         }
-    }
 
-    public UpgradeData GetUpgrade(TheEnumManager.KIND_OF_UPGRADE _upgrade)
-    {
-        int length = LIST_UPGRADE_IN_GAME.Count;
-        for (int i = 0; i < length; i++)
+
+
+        [Space(20)]
+        public List<UpgradeData> LIST_UPGRADE_IN_GAME;
+
+
+        public void Init()
         {
-            if (LIST_UPGRADE_IN_GAME[i].DATA.eUpgrade == _upgrade)
+            int length = LIST_UPGRADE_IN_GAME.Count;
+            for (int i = 0; i < length; i++)
             {
-                return LIST_UPGRADE_IN_GAME[i];
-            }
-        }
-        return null;
-    }
-
-    //count
-    public int GetTotalStarEquied()
-    {
-        int _temp = 0;
-        int length = LIST_UPGRADE_IN_GAME.Count;
-
-        for (int i = 0; i < length; i++)
-        {
-            if (TheDataManager.Instance.THE_DATA_PLAYER.GetUpgarde(LIST_UPGRADE_IN_GAME[i].DATA.eUpgrade).bEquiped)
-
-            {
-                _temp += LIST_UPGRADE_IN_GAME[i].iStar;
+                LIST_UPGRADE_IN_GAME[i].Init();
             }
         }
 
-        return _temp;
+        public UpgradeData GetUpgrade(TheEnumManager.KIND_OF_UPGRADE _upgrade)
+        {
+            int length = LIST_UPGRADE_IN_GAME.Count;
+            for (int i = 0; i < length; i++)
+            {
+                if (LIST_UPGRADE_IN_GAME[i].DATA.eUpgrade == _upgrade)
+                {
+                    return LIST_UPGRADE_IN_GAME[i];
+                }
+            }
+            return null;
+        }
+
+        //count
+        public int GetTotalStarEquied()
+        {
+            int _temp = 0;
+            int length = LIST_UPGRADE_IN_GAME.Count;
+
+            for (int i = 0; i < length; i++)
+            {
+                if (TheDataManager.Instance.THE_DATA_PLAYER.GetUpgarde(LIST_UPGRADE_IN_GAME[i].DATA.eUpgrade).bEquiped)
+
+                {
+                    _temp += LIST_UPGRADE_IN_GAME[i].iStar;
+                }
+            }
+
+            return _temp;
+        }
     }
 }

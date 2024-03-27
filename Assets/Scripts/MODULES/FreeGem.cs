@@ -1,42 +1,45 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using MANAGERS;
+using MODULES.Scriptobjectable;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FreeGem : MonoBehaviour
+namespace MODULES
 {
-    private Button buThis;
-    [SerializeField] Text txtValue;
-
-    // Start is called before the first frame update
-    void Start()
+    public class FreeGem : MonoBehaviour
     {
-        RewardData _reward = TheDataManager.Instance.GetReward(TheEnumManager.REWARD.ads_free_gem);
+        private Button buThis;
+        [SerializeField] Text txtValue;
 
-        buThis = GetComponent<Button>();
-
-        buThis.onClick.AddListener(() => SetButton(buThis));
-        txtValue.text = "+" + _reward.iValue;
-    }
-
-    private void OnEnable()
-    {
-        gameObject.SetActive(false);
-    }
-
-    private void SetButton(Button _bu)
-    {
-        //for tutorial
-        if (TheTutorialManager.Instance)
+        // Start is called before the first frame update
+        void Start()
         {
-            if (!TheTutorialManager.Instance.IsCheckRightInput()) return;
+            RewardData _reward = TheDataManager.Instance.GetReward(TheEnumManager.REWARD.ads_free_gem);
+
+            buThis = GetComponent<Button>();
+
+            buThis.onClick.AddListener(() => SetButton(buThis));
+            txtValue.text = "+" + _reward.iValue;
         }
 
-
-        if (_bu == buThis)
+        private void OnEnable()
         {
+            gameObject.SetActive(false);
+        }
+
+        private void SetButton(Button _bu)
+        {
+            //for tutorial
+            if (TheTutorialManager.Instance)
+            {
+                if (!TheTutorialManager.Instance.IsCheckRightInput()) return;
+            }
+
+
+            if (_bu == buThis)
+            {
             
-        }
+            }
 
+        }
     }
 }

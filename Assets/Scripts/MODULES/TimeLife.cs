@@ -1,45 +1,46 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public enum TYPE
+namespace MODULES
 {
-    Destroy,
-    Active,
-}
-public class TimeLife : MonoBehaviour
-{
-    public TYPE eType;
-    public float fTimeLife;
-    private float fCountTime;
-    private GameObject _gameobject;
-
-    private void Awake()
+    public enum TYPE
     {
-        _gameobject = gameObject;
+        Destroy,
+        Active,
     }
-    // Update is called once per frame
-    void Update()
+    public class TimeLife : MonoBehaviour
     {
-        fCountTime -= Time.deltaTime;
-        if(fCountTime<=0)
+        public TYPE eType;
+        public float fTimeLife;
+        private float fCountTime;
+        private GameObject _gameobject;
+
+        private void Awake()
         {
-            fCountTime = fTimeLife;
-            switch(eType)
+            _gameobject = gameObject;
+        }
+        // Update is called once per frame
+        void Update()
+        {
+            fCountTime -= Time.deltaTime;
+            if(fCountTime<=0)
             {
-                case TYPE.Active:
-                    _gameobject.SetActive(false);
-                    break;
-                case TYPE.Destroy:
-                    Destroy(_gameobject);
-                    break;
+                fCountTime = fTimeLife;
+                switch(eType)
+                {
+                    case TYPE.Active:
+                        _gameobject.SetActive(false);
+                        break;
+                    case TYPE.Destroy:
+                        Destroy(_gameobject);
+                        break;
+                }
             }
         }
-    }
 
-    private void OnEnable()
-    {
-        fCountTime = fTimeLife;
-    }
+        private void OnEnable()
+        {
+            fCountTime = fTimeLife;
+        }
 
+    }
 }

@@ -1,13 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class TextValue : MonoBehaviour
+namespace MODULES
 {
-    [SerializeField] TextMesh m_TextMesh;
-
-    public  void SetValue(int _value)
+    public class TextValue : MonoBehaviour
     {
-        m_TextMesh.text = "-" + _value.ToString();
+        [SerializeField] TextMesh m_TextMesh;
+
+        public  void SetValue(int _value)
+        {
+            m_TextMesh.text = "-" + _value.ToString();
+        }
     }
 }

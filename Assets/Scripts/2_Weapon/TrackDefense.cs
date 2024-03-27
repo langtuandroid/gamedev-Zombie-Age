@@ -1,5 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using _2_Weapon;
+using MANAGERS;
+using MODULES.Scriptobjectable;
+using SCREENS;
 using UnityEngine;
 using UnityEngine.UI;
 

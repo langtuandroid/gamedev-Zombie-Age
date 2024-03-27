@@ -1,48 +1,51 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using MANAGERS;
+using MODULES.Scriptobjectable;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Gameover : MonoBehaviour
+namespace SCREENS
 {
-    [SerializeField]
-    private Button buShop, buLevelSelection, buReplay;
-    // Start is called before the first frame update
-    void Start()
+    public class Gameover : MonoBehaviour
     {
-        buReplay.onClick.AddListener(() => SetButton(buReplay));
-        buShop.onClick.AddListener(() => SetButton(buShop));
-        buLevelSelection.onClick.AddListener(() => SetButton(buLevelSelection));
-    }
+        [SerializeField]
+        private Button buShop, buLevelSelection, buReplay;
+        // Start is called before the first frame update
+        void Start()
+        {
+            buReplay.onClick.AddListener(() => SetButton(buReplay));
+            buShop.onClick.AddListener(() => SetButton(buShop));
+            buLevelSelection.onClick.AddListener(() => SetButton(buLevelSelection));
+        }
 
-    //SET BUTTON
-    private void SetButton(Button _bu)
-    {
-        if (_bu == buShop)
+        //SET BUTTON
+        private void SetButton(Button _bu)
         {
-            MusicManager.Instance.Play();
-            TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound
-            TheUiManager.Instance.ShowPopup(TheUiManager.POP_UP.shop);
-        }
-        else if (_bu == buLevelSelection)
-        {
-            MusicManager.Instance.Play();
-            TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound
-            TheUiManager.Instance.LoadScene(TheUiManager.SCENE.LevelSelection);
+            if (_bu == buShop)
+            {
+                MusicManager.Instance.Play();
+                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound
+                TheUiManager.Instance.ShowPopup(TheUiManager.POP_UP.shop);
+            }
+            else if (_bu == buLevelSelection)
+            {
+                MusicManager.Instance.Play();
+                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound
+                TheUiManager.Instance.LoadScene(TheUiManager.SCENE.LevelSelection);
            
+            }
+            else if (_bu == buReplay)
+            {
+                // MusicManager.Instance.Play();
+                TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound
+                TheUiManager.Instance.LoadScene(TheUiManager.SCENE.Gameplay);           
+            }
         }
-        else if (_bu == buReplay)
+        private void OnEnable()
         {
-           // MusicManager.Instance.Play();
-            TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound
-            TheUiManager.Instance.LoadScene(TheUiManager.SCENE.Gameplay);           
+            TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_game_over);//sound
+            MusicManager.Instance.Stop();
         }
-    }
-    private void OnEnable()
-    {
-        TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_game_over);//sound
-        MusicManager.Instance.Stop();
-    }
 
    
+    }
 }

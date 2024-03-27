@@ -1,109 +1,111 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using MANAGERS;
 using UnityEngine;
 
-public class MusicManager : MonoBehaviour
+namespace MODULES.Scriptobjectable
 {
-    public static MusicManager Instance;
-    AudioSource m_audioSource;
-    public List<AudioClip> LIST_SOUND_TRACK;
-
-    private void Awake()
+    public class MusicManager : MonoBehaviour
     {
-        if (Instance == null)
-            Instance = this;
-        else
-            Destroy(this.gameObject);
-        DontDestroyOnLoad(this.gameObject);
+        public static MusicManager Instance;
+        AudioSource m_audioSource;
+        public List<AudioClip> LIST_SOUND_TRACK;
 
-        m_audioSource = GetComponent<AudioSource>();
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        Mute = GetValueMuteFormData();
-        Play();
-    }
-
-    public bool Mute
-    {
-        get
+        private void Awake()
         {
-            return m_audioSource.mute;
-        }
-        set
-        {
-            m_audioSource.mute = value;
-            if (m_audioSource.mute)
-                PlayerPrefs.SetString("Music", "off");
+            if (Instance == null)
+                Instance = this;
             else
-                PlayerPrefs.SetString("Music", "on");
-            PlayerPrefs.Save();
+                Destroy(this.gameObject);
+            DontDestroyOnLoad(this.gameObject);
+
+            m_audioSource = GetComponent<AudioSource>();
         }
-    }
 
-    private bool GetValueMuteFormData()
-    {
-        if (PlayerPrefs.GetString("Music") == "off")
-            return true;
-        else return false;
-    }
+        // Start is called before the first frame update
+        void Start()
+        {
+            Mute = GetValueMuteFormData();
+            Play();
+        }
 
-    public void Stop()
-    {
-        m_audioSource.Stop();
-    }
+        public bool Mute
+        {
+            get
+            {
+                return m_audioSource.mute;
+            }
+            set
+            {
+                m_audioSource.mute = value;
+                if (m_audioSource.mute)
+                    PlayerPrefs.SetString("Music", "off");
+                else
+                    PlayerPrefs.SetString("Music", "on");
+                PlayerPrefs.Save();
+            }
+        }
 
-    public void Play()
-    {
-        if (m_audioSource.isPlaying) return;
+        private bool GetValueMuteFormData()
+        {
+            if (PlayerPrefs.GetString("Music") == "off")
+                return true;
+            else return false;
+        }
 
-        int _total = LIST_SOUND_TRACK.Count;
-        _total = UnityEngine.Random.Range(0, _total);
+        public void Stop()
+        {
+            m_audioSource.Stop();
+        }
 
-        m_audioSource.Stop();
-        m_audioSource.clip = LIST_SOUND_TRACK[_total];
-        m_audioSource.Play();
-    }
+        public void Play()
+        {
+            if (m_audioSource.isPlaying) return;
 
-    public void PlayHard()
-    {
-        int _total = LIST_SOUND_TRACK.Count;
-        _total = UnityEngine.Random.Range(0, _total);
+            int _total = LIST_SOUND_TRACK.Count;
+            _total = UnityEngine.Random.Range(0, _total);
 
-        m_audioSource.Stop();
-        m_audioSource.clip = LIST_SOUND_TRACK[_total];
-        m_audioSource.Play();
-    }
+            m_audioSource.Stop();
+            m_audioSource.clip = LIST_SOUND_TRACK[_total];
+            m_audioSource.Play();
+        }
 
+        public void PlayHard()
+        {
+            int _total = LIST_SOUND_TRACK.Count;
+            _total = UnityEngine.Random.Range(0, _total);
 
-
-    //============== EVENT ==========================
-
-    private void HandleAdsClosed()
-    {
-        m_audioSource.volume = 1f;
-    }
-
-    private void HandleAdsOpening()
-    {
-        m_audioSource.volume = 0f;
-    }
-
-
-    private void OnEnable()
-    {
-        TheEventManager.OnAdsOpening += HandleAdsOpening;
-        TheEventManager.OnAdsClosed += HandleAdsClosed;
-    }
+            m_audioSource.Stop();
+            m_audioSource.clip = LIST_SOUND_TRACK[_total];
+            m_audioSource.Play();
+        }
 
 
 
-    private void OnDisable()
-    {
-        TheEventManager.OnAdsOpening -= HandleAdsOpening;
-        TheEventManager.OnAdsClosed -= HandleAdsClosed;
+        //============== EVENT ==========================
+
+        private void HandleAdsClosed()
+        {
+            m_audioSource.volume = 1f;
+        }
+
+        private void HandleAdsOpening()
+        {
+            m_audioSource.volume = 0f;
+        }
+
+
+        private void OnEnable()
+        {
+            TheEventManager.OnAdsOpening += HandleAdsOpening;
+            TheEventManager.OnAdsClosed += HandleAdsClosed;
+        }
+
+
+
+        private void OnDisable()
+        {
+            TheEventManager.OnAdsOpening -= HandleAdsOpening;
+            TheEventManager.OnAdsClosed -= HandleAdsClosed;
+        }
     }
 }

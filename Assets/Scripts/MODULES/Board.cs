@@ -1,71 +1,73 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using MANAGERS;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Board : MonoBehaviour
+namespace MODULES
 {
-    public enum TYPE
+    public class Board : MonoBehaviour
     {
-        gem,
-    }
-    public TYPE eType;
-
-    private Button buButtonThis;
-    private Text txtValue;
-
-    // Start is called before the first frame update
-
-    private void Awake()
-    {
-
-        buButtonThis = GetComponent<Button>();
-        txtValue = this.GetComponentInChildren<Text>();
-    }
-    void Start()
-    {
-        buButtonThis.onClick.AddListener(() => SetButton());
-    }
-
-
-    private void SetButton()
-    {
-        //for tutorial
-        if (TheTutorialManager.Instance)
+        public enum TYPE
         {
-            if (!TheTutorialManager.Instance.IsCheckRightInput()) return;
+            gem,
+        }
+        public TYPE eType;
+
+        private Button buButtonThis;
+        private Text txtValue;
+
+        // Start is called before the first frame update
+
+        private void Awake()
+        {
+
+            buButtonThis = GetComponent<Button>();
+            txtValue = this.GetComponentInChildren<Text>();
+        }
+        void Start()
+        {
+            buButtonThis.onClick.AddListener(() => SetButton());
         }
 
-        TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound
-        switch (eType)
+
+        private void SetButton()
         {
-            case TYPE.gem:
-                TheUiManager.Instance.ShowPopup(TheUiManager.POP_UP.shop);//
-                break;
+            //for tutorial
+            if (TheTutorialManager.Instance)
+            {
+                if (!TheTutorialManager.Instance.IsCheckRightInput()) return;
+            }
+
+            TheSoundManager.Instance.PlaySound(TheSoundManager.SOUND.ui_click_next);//sound
+            switch (eType)
+            {
+                case TYPE.gem:
+                    TheUiManager.Instance.ShowPopup(TheUiManager.POP_UP.shop);//
+                    break;
+
+            }
+        }
+
+        private void ShowValue()
+        {
+
+            switch (eType)
+            {
+                case TYPE.gem:
+                    txtValue.text = TheDataManager.Instance.THE_DATA_PLAYER.iGem.ToString();
+                    break;
+
+            }
+        }
+
+        private void OnEnable()
+        {
+            ShowValue();
+            TheEventManager.OnUpdatedBoard += ShowValue;
 
         }
-    }
-
-    private void ShowValue()
-    {
-
-        switch (eType)
+        private void OnDisable()
         {
-            case TYPE.gem:
-                txtValue.text = TheDataManager.Instance.THE_DATA_PLAYER.iGem.ToString();
-                break;
-
+            TheEventManager.OnUpdatedBoard -= ShowValue;
         }
-    }
-
-    private void OnEnable()
-    {
-        ShowValue();
-        TheEventManager.OnUpdatedBoard += ShowValue;
-
-    }
-    private void OnDisable()
-    {
-        TheEventManager.OnUpdatedBoard -= ShowValue;
     }
 }
