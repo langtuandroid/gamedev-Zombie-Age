@@ -34,6 +34,7 @@ namespace _5_Upgrade
 
         public void Construct()
         {
+            Debug.Log(UpgradeController.Instance);
             UpgradeData _temp = UpgradeController.Instance.GetUpgrade(_upgradeType);
             _valueText.text = _temp.iStar.ToString();
 

@@ -13,9 +13,7 @@ namespace _5_Upgrade
         {
             [SerializeField] UpgradeData DATA;
             [SerializeField] UpgradeButton m_ButtonUpgrade;
-
-
-
+            
             [SerializeField] Image imaIcon;
             [SerializeField] Image imaStar;
 
