@@ -14,6 +14,7 @@ namespace _2_Weapon
         [Inject] private SoundController _soundController;
         [Inject] private DataController _dataController;
         [Inject] private WeaponController _weaponController;
+        [Inject] private WeaponsManager _weaponsManager;
         
         [FormerlySerializedAs("GUN_DATA")] [SerializeField] private GunData _gunData;
         [FormerlySerializedAs("buThis")] [SerializeField] private Button _thisButton;
@@ -77,16 +78,16 @@ namespace _2_Weapon
             if (_button == _thisButton)
             {
                 _soundController.Play(SoundController.SOUND.ui_wood_board);//sound
-                WeaponsManager.Instance.weaponPanel.VisualiseTrack(this);
+                _weaponsManager.weaponPanel.VisualiseTrack(this);
             }
             else if (_button == _equipButton)
             {
-                WeaponsManager.Instance.weaponPanel.VisualiseTrack(this);
+                _weaponsManager.weaponPanel.VisualiseTrack(this);
                 if (!_gunData.DATA.bEquiped)
                 {
                     _soundController.Play(SoundController.SOUND.ui_cannot);//sound
                     // GUN_DATA.DATA.bEquiped = true;
-                    WeaponsManager.Instance.weaponPicked.AddTakenWeapon(_gunData);
+                    _weaponsManager.weaponPicked.AddTakenWeapon(_gunData);
                 }
                 else
                     _soundController.Play(SoundController.SOUND.ui_cannot);//sound
@@ -114,12 +115,9 @@ namespace _2_Weapon
                 _uiController.PopUpShow(UIController.POP_UP.note);
                 Note.AssignNote(Note.NOTE.no_gem.ToString());
             }
-
-
-
-
+            
             Construct(_gunData);
-            WeaponsManager.Instance.weaponPanel.VisualiseTrack(this);
+            _weaponsManager.weaponPanel.VisualiseTrack(this);
         }
         
         private void Equip(GunData _gun)

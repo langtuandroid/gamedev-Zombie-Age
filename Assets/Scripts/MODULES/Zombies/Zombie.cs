@@ -14,6 +14,7 @@ namespace MODULES.Zombies
     {
         [Inject] private WeaponController _weaponController;
         [Inject] protected SoundController SoundController;
+        [Inject] private GameplayController _gameplayController;
         [FormerlySerializedAs("eStatus")] public EnumController.ZOMBIE_STATUS _zombieStatus;
         [FormerlySerializedAs("DATA")] public ZombieData _zombieData;
         [FormerlySerializedAs("ITEM_SYSTEM")] public ItemsSystem _itemsSystem;
@@ -223,7 +224,7 @@ namespace MODULES.Zombies
         #region ATTACK
         public void Attack()
         {
-            if (GameplayController.Instance.GameStatus != GameplayController.GAME_STATUS.playing) return;
+            if (_gameplayController.GameStatus != GameplayController.GAME_STATUS.playing) return;
             if (IsFreezing) return;
 
             //play sound
@@ -317,7 +318,7 @@ namespace MODULES.Zombies
             else
             {
                 //is boss
-                GameplayController.Instance.bossHpBar.Show(_factor);
+                _gameplayController.bossHpBar.Show(_factor);
             }
         }
 

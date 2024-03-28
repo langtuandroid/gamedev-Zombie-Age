@@ -13,6 +13,7 @@ namespace MODULES.Soldiers
     {
         [Inject] private WeaponController _weaponController;
         [Inject] private SoundController _soundController;
+        [Inject] private DiContainer _diContainer;
         public static Soldier Instance;
         [FormerlySerializedAs("objHandToThrow")] [SerializeField] private GameObject _throwObject;
         [FormerlySerializedAs("m_Animator")] [SerializeField] private Animator _animator;
@@ -31,6 +32,8 @@ namespace MODULES.Soldiers
 
         private void Start()
         {
+            _diContainer.Inject(_weaponManager);
+            _diContainer.Inject(_defenceManager);
             _weaponManager.Construct(_weaponController.equipedWeaponList);
             _defenceManager.Construct();
             
@@ -114,6 +117,7 @@ namespace MODULES.Soldiers
     [System.Serializable]
     public class WeaponSystems
     {
+        [Inject] private DiContainer _diContainer;
         [FormerlySerializedAs("CURRENT_GUN_DATA")] public GunData _gunData;
         [FormerlySerializedAs("CURRENT_WEAPON")] public HandWeapon _thisWeapon;
 
@@ -122,8 +126,10 @@ namespace MODULES.Soldiers
             int _total = _list.Count;
             for (int i = 0; i < _total; i++)
             {
-                Weapon _new = new Weapon(_list[i]);
-                _weaponList.Add(_new);
+                Weapon weapon = new Weapon();
+                _diContainer.Inject(weapon);
+                weapon.Construct(_list[i]);
+                _weaponList.Add(weapon);
             }
         }
 
@@ -131,18 +137,14 @@ namespace MODULES.Soldiers
         [System.Serializable]
         public class Weapon
         {
+            [Inject] private DiContainer _diContainer;
             [FormerlySerializedAs("GUN_DATA")] public GunData _gunData;
             [FormerlySerializedAs("objHandWeapon")] public GameObject _weaponPrefab;
-
-            public Weapon(GunData _gundata)
+            
+            public void Construct(GunData _gundata)
             {
                 _gunData = _gundata;
-                Construct();
-            }
-            
-            public void Construct()
-            {
-                _weaponPrefab = Soldier.Instantiate(_gunData.objPrefabHand);
+                _weaponPrefab = _diContainer.InstantiatePrefab(_gunData.objPrefabHand);
                 _weaponPrefab.SetActive(false);
                 Soldier.Instance.SetHandPositions(_weaponPrefab);//set pos
             }
@@ -182,6 +184,8 @@ namespace MODULES.Soldiers
     [System.Serializable]
     public class Defense
     {
+        [Inject] private GameplayController _gameplayController;
+        [Inject] private WeaponController _weaponController;
         [System.Serializable]
         public class UnitDefense
         {
@@ -222,17 +226,17 @@ namespace MODULES.Soldiers
         public void Construct()
         {
 
-            int _total = WeaponController.Instance._defenceList.Count;
+            int _total = _weaponController._defenceList.Count;
             for (int i = 0; i < _total; i++)
             {
-                if (WeaponController.Instance._defenceList[i].DATA.bEquiped)
+                if (_weaponController._defenceList[i].DATA.bEquiped)
                 {
                     UnitDefense _unit = new UnitDefense();
-                    _unit._defense = WeaponController.Instance._defenceList[i].DATA.eDefense;
-                    _unit.fDefenseValue = WeaponController.Instance._defenceList[i].GetDefense(WeaponController.Instance._defenceList[i].DATA.eLevel);
+                    _unit._defense = _weaponController._defenceList[i].DATA.eDefense;
+                    _unit.fDefenseValue = _weaponController._defenceList[i].GetDefense(_weaponController._defenceList[i].DATA.eLevel);
 
-                    if (!WeaponController.Instance._defenceList[i].DATA.bDefault)
-                        _unit.objDefense = Soldier.Instantiate(WeaponController.Instance._defenceList[i].bjPrefab);
+                    if (!_weaponController._defenceList[i].DATA.bDefault)
+                        _unit.objDefense = Object.Instantiate(_weaponController._defenceList[i].bjPrefab);
                     _defenceList.Add(_unit);
                 }
             }
@@ -240,7 +244,7 @@ namespace MODULES.Soldiers
             _defaultUnit = _defenceList.Count;
             _defenceTotal = CurrDefence();
 
-            GameplayController.Instance.ShowHpBar(1.0f, (int)_currentDefence + "/" + (int)_defenceTotal);
+            _gameplayController.ShowHpBar(1.0f, (int)_currentDefence + "/" + (int)_defenceTotal);
         }
 
 
@@ -272,9 +276,9 @@ namespace MODULES.Soldiers
             if (_currentDefence <= 0)
             {
                 _currentDefence = 0;
-                GameplayController.Instance.SetStatusOfGame(GameplayController.GAME_STATUS.gameover);//game over
+                _gameplayController.SetStatusOfGame(GameplayController.GAME_STATUS.gameover);//game over
             }
-            GameplayController.Instance.ShowHpBar(GetFactorDefense(), (int)_currentDefence + "/" + (int)_defenceTotal);//show bar
+            _gameplayController.ShowHpBar(GetFactorDefense(), (int)_currentDefence + "/" + (int)_defenceTotal);//show bar
 
 
             //FIRE

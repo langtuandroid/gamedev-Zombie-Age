@@ -98,7 +98,7 @@ namespace MANAGERS
                 Instance = this;
             else
                 Destroy(this.gameObject);
-            DontDestroyOnLoad(this.gameObject);
+
 
             _audioSource = GetComponent<AudioSource>();
             Mute = MuteDataSaved();

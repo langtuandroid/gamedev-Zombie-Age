@@ -2,11 +2,13 @@
 using _4_Gameplay;
 using MANAGERS;
 using UnityEngine;
+using Zenject;
 
 namespace MODULES.Soldiers.Bullets
 {
     public class BulletBazoka : MonoBehaviour
     {
+        [Inject] private GameplayController _gameplayController;
         private GameObject _gameobject;
         private Transform _transform;
         private List<Vector2> _path = new();
@@ -44,7 +46,7 @@ namespace MODULES.Soldiers.Bullets
         private void Update()
         {
             if (Time.timeScale != 1.0f) return; //for debug
-            if (GameplayController.Instance.GameStatus != GameplayController.GAME_STATUS.playing) return;
+            if (_gameplayController.GameStatus != GameplayController.GAME_STATUS.playing) return;
             if (!_allowMove) return;
 
             Smock();//smock

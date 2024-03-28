@@ -14,6 +14,7 @@ namespace MODULES
     {
         [Inject] private DiContainer _diContainer;   
         [Inject] private DataController _dataController;
+        [Inject] private GameplayController _gameplayController;
         [FormerlySerializedAs("LEVEL_DATA")] public LevelData _levelData;
         [System.Serializable]
         public class UnitWave
@@ -165,12 +166,12 @@ namespace MODULES
         IEnumerator LoadWaveRoutine()
         {
             yield return new WaitForSeconds(0.5f);
-            if (GameplayController.Instance.GameStatus != GameplayController.GAME_STATUS.playing) yield break;
+            if (_gameplayController.GameStatus != GameplayController.GAME_STATUS.playing) yield break;
 
             CurrentWave++;
             if (CurrentWave == _levelData.iTotalWave)
             {
-                GameplayController.Instance.SetStatusOfGame(GameplayController.GAME_STATUS.victory);
+                _gameplayController.SetStatusOfGame(GameplayController.GAME_STATUS.victory);
             }
             else
             {
@@ -239,7 +240,7 @@ namespace MODULES
                         _tempZombie._health = zombieHealthh;
 
                         _zombieCount++;
-                        GameplayController.Instance.zombieWaveBar.Update(_zombieCount * 1.0f / _zombiesTotal);
+                        _gameplayController.zombieWaveBar.Update(_zombieCount * 1.0f / _zombiesTotal);
 
                         _tempZombie.gameObject.SetActive(true);
 

@@ -13,17 +13,24 @@ namespace _4_Gameplay
     public class SupportManager : MonoBehaviour
     {
         [Inject] private SoundController _soundController;
+        [Inject] private GameplayController _gameplayController;
+        [Inject] private DiContainer _diContainer;
         
         [System.Serializable]
         public class SupportUI
         {
+            [Inject] private DiContainer _diContainer;
+            
             [System.Serializable]
             public class Unit
             {
+                [Inject] private SupportManager _supportManager;
+                [Inject] private GameplayController _gameplayController;
                 [FormerlySerializedAs("eSupport")] [SerializeField] private EnumController.SUPPORT _supportType;
                 [FormerlySerializedAs("DATA")] [SerializeField] private SupportData _data;
                 [FormerlySerializedAs("buUse")] [SerializeField] private Button _useButton;
                 private Text _valueText;
+               
                 public EnumController.SUPPORT SupportType => _supportType;
                 public void Construct()
                 {
@@ -38,9 +45,8 @@ namespace _4_Gameplay
                     _data.DATA.iCurrentValue--;
                     SetStatus();
 
-                    GameplayController.Instance.InputType = GameplayController.INPUT_TYPE.using_support;
-                    Instance._currentSupport = _supportType;
-
+                    _gameplayController.InputType = GameplayController.INPUT_TYPE.using_support;
+                    _supportManager._currentSupport = _supportType;
                 }
 
                 private void SetStatus()
@@ -63,6 +69,7 @@ namespace _4_Gameplay
                 int length = _uiSupport.Count;
                 for (int i = 0; i < length; i++)
                 {
+                    _diContainer.Inject(_uiSupport[i]);
                     _uiSupport[i].Construct();
                 }
             }
@@ -77,8 +84,6 @@ namespace _4_Gameplay
             }
         }
         
-        public static SupportManager Instance;
-       
         [FormerlySerializedAs("MAIN_SOLDIER")] [SerializeField] private Soldier _mainSoldier;
         [FormerlySerializedAs("SUPPORT_UI")] [SerializeField] private SupportUI _uiSupport;
         [FormerlySerializedAs("eCurrentSupport")] [SerializeField] private EnumController.SUPPORT _currentSupport;
@@ -94,7 +99,7 @@ namespace _4_Gameplay
 
         private void Awake()
         {
-            if (Instance == null) Instance = this;
+            _diContainer.Inject(_uiSupport);
             _uiSupport.Consrtuct();
             _supportPoint.position = Vector2.one * 100f;
             _mainCamera = Camera.main;
@@ -121,16 +126,16 @@ namespace _4_Gameplay
         {
             if (Input.GetMouseButton(0))
             {
-                if (GameplayController.Instance.InputType != GameplayController.INPUT_TYPE.using_support) return;
+                if (_gameplayController.InputType != GameplayController.INPUT_TYPE.using_support) return;
                 vInputOfPlayer = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
                 _supportPoint.position = vInputOfPlayer;
                 _supportPoint.localScale = Vector3.one;
             }
 
-            if (GameplayController.Instance.InputType != GameplayController.INPUT_TYPE.using_support) return;
+            if (_gameplayController.InputType != GameplayController.INPUT_TYPE.using_support) return;
             if (Input.GetMouseButtonUp(0))
             {
-                GameplayController.Instance.InputType = GameplayController.INPUT_TYPE.shooting;
+                _gameplayController.InputType = GameplayController.INPUT_TYPE.shooting;
                 _supportPoint.localScale = Vector3.one * 1.7f;
                 if (!_isSupport)
                     StartSupport(_currentSupport);
@@ -179,7 +184,7 @@ namespace _4_Gameplay
 
 
             yield return _wait;
-            GameplayController.Instance.InputType = GameplayController.INPUT_TYPE.shooting;
+            _gameplayController.InputType = GameplayController.INPUT_TYPE.shooting;
             _supportPoint.position = Vector2.one * 100;
 
             _isSupport = false;

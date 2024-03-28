@@ -10,6 +10,7 @@ namespace _3_LevelSelection
     {
         [Inject] private SoundController _soundController;
         [Inject] private DataController _dataController;
+        [Inject] private LevelSelectionController _levelSelectionController;
         private Button _levelButton;
         private Text _levelText;
         private bool _unlock;
@@ -36,7 +37,7 @@ namespace _3_LevelSelection
             {
                 _soundController.Play(SoundController.SOUND.ui_click_next);
                 _dataController.playerData.CurrentLevel = _iLevel;
-                LevelSelectionController.Instance.SetDifficultPopUp(true);
+                _levelSelectionController.SetDifficultPopUp(true);
             }
             else
             {
@@ -72,25 +73,25 @@ namespace _3_LevelSelection
                     _unlock = true;
 
                     if (IStar > 0)
-                        _levelButton.image.sprite = LevelSelectionController.Instance.SpriteOfLevels[IStar - 1];
+                        _levelButton.image.sprite = _levelSelectionController.SpriteOfLevels[IStar - 1];
                 }
                 else
                 {
                     if (lvl == 0)
                     {
-                        _levelButton.image.sprite = LevelSelectionController.Instance.LevelCurrSprite;
+                        _levelButton.image.sprite = _levelSelectionController.LevelCurrSprite;
                         _unlock = true;
                     }
                     else
                     {
                         if (_dataController.playerData.NumOfStars(_iLevel - 1) > 0)
                         {
-                            _levelButton.image.sprite = LevelSelectionController.Instance.LevelCurrSprite;
+                            _levelButton.image.sprite = _levelSelectionController.LevelCurrSprite;
                             _unlock = true;
                         }
                         else
                         {
-                            _levelButton.image.sprite = LevelSelectionController.Instance.LockedSprite;
+                            _levelButton.image.sprite = _levelSelectionController.LockedSprite;
                             _unlock = true; //TODO Remove for test only
                             _levelText.color = Color.white * 0.75f;
                         }

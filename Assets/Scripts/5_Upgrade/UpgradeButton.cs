@@ -11,6 +11,7 @@ namespace _5_Upgrade
     {
         [Inject] private SoundController _soundController;
         [Inject] private UpgradeController _upgradeController;
+        [Inject] private UpgradeManager _upgradeManager;
         [FormerlySerializedAs("eUpgrade")] public EnumController.UpgradeType _upgradeType;
         private Button _thisButton;
 
@@ -52,15 +53,15 @@ namespace _5_Upgrade
                 _thisButton.image.sprite = _temp.sprIcon_gray;
             }
 
-            _starImage.sprite = UpgradeManager.Instance.sprStar;
+            _starImage.sprite = _upgradeManager.sprStar;
 
         }
         
         private void Click()
         {
             _soundController.Play(SoundController.SOUND.ui_click_next);
-            UpgradeManager.Instance.m_BoardInfo.Show(this);
-            UpgradeManager.Instance.tranOfYellowCirle.position = transform.position;
+            _upgradeManager.m_BoardInfo.Show(this);
+            _upgradeManager.tranOfYellowCirle.position = transform.position;
         }
     }
 }

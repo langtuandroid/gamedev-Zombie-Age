@@ -51,8 +51,6 @@ namespace MANAGERS
             else
                 Destroy(gameObject);
 
-            DontDestroyOnLoad(this.gameObject);
-
             _totalPopUps = _popUpList.Count;
         }
 

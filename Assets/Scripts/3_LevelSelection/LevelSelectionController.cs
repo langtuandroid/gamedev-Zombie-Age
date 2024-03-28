@@ -17,14 +17,13 @@ namespace _3_LevelSelection
         [Inject] private DiContainer _diContainer;
         [Inject] private DataController _dataController;
         
-        public static LevelSelectionController Instance;
-        
         [System.Serializable]
         public class DifficuftPopup
         {
             [Inject] private UIController _uiController;
             [Inject] private DataController _dataController;
             [Inject] private SoundController _soundController;
+            [Inject] private LevelSelectionController _levelSelectionController;
             [SerializeField]
             private Button buClose, buEasy, buNormal, buNightmare, buStart;
             [SerializeField] Transform m_tranOfButtonChoose;
@@ -153,7 +152,7 @@ namespace _3_LevelSelection
                 if (_bu == buClose)
                 {
                     _soundController.Play(SoundController.SOUND.ui_click_back);//sound
-                    LevelSelectionController.Instance.SetDifficultPopUp(false);
+                    _levelSelectionController.SetDifficultPopUp(false);
                 }
                 else if (_bu == buEasy)
                 {
@@ -257,8 +256,6 @@ namespace _3_LevelSelection
         public List<Sprite> SpriteOfLevels => _spriteOfLevel;
         private void Awake()
         {
-            if (Instance == null)
-                Instance = this;
             _uiController.SetCameraPopup(Camera.main);//set camera
 
             iTotalMap = Mathf.CeilToInt(_dataController.LevelsTotal / 15.0f);

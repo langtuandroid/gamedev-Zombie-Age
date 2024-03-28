@@ -11,6 +11,8 @@ namespace _2_Weapon
     {
         [Inject] private WeaponController _weaponController;
         [Inject] private SoundController _soundController;
+        [Inject] private WeaponsManager _weaponsManager;
+        
         [FormerlySerializedAs("eSupport")] [SerializeField] private EnumController.SUPPORT _eSupport;
         [FormerlySerializedAs("SUPPORT_DATA")] [SerializeField] private SupportData _supportData;
 
@@ -29,7 +31,7 @@ namespace _2_Weapon
 
             ShowData();
             if (_supportData.DATA._support == EnumController.SUPPORT.big_bomb)
-                WeaponsManager.Instance.supportPanel.ViewTrack(this);
+                _weaponsManager.supportPanel.ViewTrack(this);
         }
 
 
@@ -41,7 +43,7 @@ namespace _2_Weapon
             }
 
             _soundController.Play(SoundController.SOUND.ui_wood_board);//sound
-            WeaponsManager.Instance.supportPanel.ViewTrack(this);
+            _weaponsManager.supportPanel.ViewTrack(this);
         }
 
         public void ShowData()

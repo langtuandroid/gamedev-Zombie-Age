@@ -17,6 +17,8 @@ namespace _2_Weapon
         [Inject] private DataController _dataController;
         [Inject] private WeaponController _weaponController;
         
+        private static WeaponsManager Instance;
+        
         [System.Serializable]
         public class PanelManager
         {
@@ -937,7 +939,7 @@ namespace _2_Weapon
          
         
         
-        public static WeaponsManager Instance;
+        
         [Space(30)]
         [FormerlySerializedAs("LIST_PANEL_MANAGER")] [SerializeField] private List<PanelManager> _listPanelManager;
         private void Construct()

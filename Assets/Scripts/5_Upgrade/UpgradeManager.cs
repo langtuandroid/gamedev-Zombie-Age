@@ -14,7 +14,6 @@ namespace _5_Upgrade
         [Inject] private DiContainer _diContainer;
         [Inject] private DataController _dataController;
         [Inject] private UIController _uiController;
-        public static UpgradeManager Instance;
         
         [System.Serializable]
         public class BoardInfo
@@ -23,6 +22,7 @@ namespace _5_Upgrade
             [Inject] private DataController _dataController;
             [Inject] private UpgradeController _upgradeController;
             [Inject] private UIController _uiController;
+            [Inject] private UpgradeManager _upgradeManager;
             [SerializeField] UpgradeData DATA;
             [SerializeField] UpgradeButton m_ButtonUpgrade;
             
@@ -54,10 +54,8 @@ namespace _5_Upgrade
                 txtName.text = DATA.strName;
                 txtContent.text = DATA.strContent;
 
-                imaStar.sprite = Instance.sprStar;
-
-
-
+                imaStar.sprite = _upgradeManager.sprStar;
+                
                 if (DATA.bEQUIPED)
                 {
                     imaIcon.sprite = DATA.sprIcon;
@@ -87,7 +85,7 @@ namespace _5_Upgrade
                         DATA.Remove();
                         Show(m_ButtonUpgrade);
                         m_ButtonUpgrade.Construct();
-                        Instance.UpdateTextStar();
+                        _upgradeManager.UpdateTextStar();
 
                         _dataController.SaveData();//save
                     }
@@ -119,7 +117,7 @@ namespace _5_Upgrade
                         DATA.Upgrade();
                         Show(m_ButtonUpgrade);
                         m_ButtonUpgrade.Construct();
-                        Instance.UpdateTextStar();
+                        _upgradeManager.UpdateTextStar();
 
                         _dataController.SaveData();//save
                     }
@@ -147,9 +145,6 @@ namespace _5_Upgrade
 
         private void Awake()
         {
-            if (Instance == null)
-                Instance = this;
-
             _diContainer.Inject(m_BoardInfo);
         }
 

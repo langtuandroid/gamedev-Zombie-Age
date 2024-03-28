@@ -1,10 +1,12 @@
 ﻿using _4_Gameplay;
 using UnityEngine;
+using Zenject;
 
 namespace MODULES.Soldiers.Bullets
 {
     public class BulletFire : MonoBehaviour
     {
+        [Inject] private GameplayController _gameplayController;
         private Transform _transform;
 
         private void Awake()
@@ -21,7 +23,7 @@ namespace MODULES.Soldiers.Bullets
         {
             if (Time.timeScale != 1.0f) return;//debug
 
-            if (GameplayController.Instance.GameStatus != GameplayController.GAME_STATUS.playing) return;
+            if (_gameplayController.GameStatus != GameplayController.GAME_STATUS.playing) return;
             _euler.z += _angle;
             _transform.localScale += _scale;
             _transform.eulerAngles = _euler;

@@ -20,7 +20,7 @@ namespace MODULES.Soldiers
 
         protected override void Shoot()
         {
-            if (GameplayController.Instance.GameStatus != GameplayController.GAME_STATUS.playing) return;
+            if (_gameplayController.GameStatus != GameplayController.GAME_STATUS.playing) return;
             if (Soldier.Instance._weaponManager._gunData.DATA.iCurrentAmmo <= 0)
             {
                 EventController.OnWeaponNoBulletInvoke(null);//event - thay sung
@@ -37,7 +37,7 @@ namespace MODULES.Soldiers
             _ammoInMagazine--;
             if (_ammoInMagazine == 0) IsLoadingMagazine = true;
 
-            GameplayController.Instance.weaponShell.Show(GetFactorBullet());
+            _gameplayController.weaponShell.Show(GetFactorBullet());
             #region SHOT
 
             _beam.SetActive(true);      

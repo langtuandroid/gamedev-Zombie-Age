@@ -9,7 +9,9 @@ namespace MODULES.Soldiers
 {
     public class HandWeapon : MonoBehaviour
     {
-        protected SoundController SoundController;
+        [Inject] protected SoundController SoundController;
+        [Inject] protected GameplayController _gameplayController;
+        [Inject] private SupportManager _supportManager;
         private Camera _camera;
         [FormerlySerializedAs("objBeam")] public GameObject _beam;
         [FormerlySerializedAs("m_animator")] [SerializeField] protected Animator _animator;
@@ -33,7 +35,6 @@ namespace MODULES.Soldiers
         }
         private void Start()
         {
-            SoundController = SoundController.Instance;
             Construct();
             ReloadingMagazine();
         }
@@ -52,7 +53,7 @@ namespace MODULES.Soldiers
         
         private void Update()
         {
-            if (GameplayController.Instance.GameStatus != GameplayController.GAME_STATUS.playing) return;
+            if (_gameplayController.GameStatus != GameplayController.GAME_STATUS.playing) return;
             
             if (_timeToReloadMagazine > 0)
             {
@@ -96,10 +97,10 @@ namespace MODULES.Soldiers
                     Move(_inputPosition);
                 }
                 
-                if (GameplayController.Instance.InputType != GameplayController.INPUT_TYPE.shooting) return;
+                if (_gameplayController.InputType != GameplayController.INPUT_TYPE.shooting) return;
                 if (_isLoadingBullet) return;
                 if (_isLoadingMagazine) return;
-                if (SupportManager.Instance.IsSupport) return;
+                if (_supportManager.IsSupport) return;
 
                 _inputPosition = _camera.ScreenToWorldPoint(Input.mousePosition);
                 if (_inputPosition.x < -6.0f) return;
@@ -213,7 +214,7 @@ namespace MODULES.Soldiers
                     _ammoInMagazine = _totalAmmo;
             }
 
-            GameplayController.Instance.weaponShell.Show(GetFactorBullet());//show shell
+            _gameplayController.weaponShell.Show(GetFactorBullet());//show shell
             _isLoadingMagazine = false;
 
             _animator.SetBool("isShooting", true);
@@ -266,7 +267,7 @@ namespace MODULES.Soldiers
 
         private void OnEnable()
         {
-            GameplayController.Instance.weaponShell.Show(GetFactorBullet());//show shell
+            _gameplayController.weaponShell.Show(GetFactorBullet());//show shell
             EventController.OnResetMagazinBullet += ResetMagazineBulletFromPlayer;
         }
         

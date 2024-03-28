@@ -86,8 +86,6 @@ namespace _4_Gameplay
             }
         }
         
-        public static GameplayController Instance;
-        
         [FormerlySerializedAs("m_WeaponShell")] [SerializeField] private WeaponShell _weaponShell;
         [FormerlySerializedAs("eGameStatus")] [SerializeField] private GAME_STATUS _gameStatus;
         [FormerlySerializedAs("eInputType")] [SerializeField] private INPUT_TYPE _inputType;
@@ -127,8 +125,6 @@ namespace _4_Gameplay
         private void Awake()
         {
             Application.targetFrameRate = 60;
-            if (Instance == null)
-                Instance = this;
             _uiController.SetCameraPopup(Camera.main);//set camera
 
 

@@ -1,5 +1,6 @@
 using _5_Upgrade;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace Installers.SceneInstallers

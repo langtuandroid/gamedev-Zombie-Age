@@ -13,6 +13,7 @@ namespace _2_Weapon
         [Inject] private UIController _uiController;
         [Inject] private SoundController _soundController;
         [Inject] private DataController _dataController;
+        [Inject] private WeaponsManager _weaponsManager;
         
         [FormerlySerializedAs("DEFENSE_DATA")] [SerializeField] private DefenseData _defenseData;
         [FormerlySerializedAs("imaIcon")] [SerializeField] private Image _iconImage;
@@ -43,18 +44,18 @@ namespace _2_Weapon
             if (button == _thisButton)
             {
                 _soundController.Play(SoundController.SOUND.ui_wood_board);//sound
-                WeaponsManager.Instance.defencePanel.ViewTrack(this);
+                _weaponsManager.defencePanel.ViewTrack(this);
             }
             else if (button == _equiepButton)
             {
-                WeaponsManager.Instance.defencePanel.ViewTrack(this);
+                _weaponsManager.defencePanel.ViewTrack(this);
                 //equiped
                 if (!_defenseData.DATA.bEquiped)
                 {
                     _defenseData.DATA.bEquiped = true;
                     _soundController.Play(SoundController.SOUND.ui_equiped);//sound
                     _equiepButton.image.sprite = _equipedSprite;
-                    WeaponsManager.Instance.defencePicked.AddTakenDefense(_defenseData);
+                    _weaponsManager.defencePicked.AddTakenDefense(_defenseData);
                 }
                 else
                 {
@@ -126,7 +127,7 @@ namespace _2_Weapon
 
 
                 _defenseData.bUNLOCKED = true;
-                WeaponsManager.Instance.defencePanel.ViewTrack(this);
+                _weaponsManager.defencePanel.ViewTrack(this);
                 _soundController.Play(SoundController.SOUND.ui_purchase);//sound
             
             }

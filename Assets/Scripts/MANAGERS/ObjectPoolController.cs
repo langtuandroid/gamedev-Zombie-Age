@@ -1,15 +1,18 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Zenject;
 
 namespace MANAGERS
 {
     public class ObjectPoolController : MonoBehaviour
     {
+        [Inject] private DiContainer _diContainer;
         #region Object on Pooler
         [System.Serializable]
         public class ObjectPool
         {
+            [Inject] private DiContainer _diContainer;
             [FormerlySerializedAs("ePoollingObject")] [SerializeField] private EnumController.POOLING_OBJECT _poollingType;
             [FormerlySerializedAs("objPrefab")] [SerializeField] private GameObject _prefab;
             [FormerlySerializedAs("LIST_POOL")] [SerializeField] private List<GameObject> _poolList;
@@ -23,7 +26,7 @@ namespace MANAGERS
                 GameObject _temp;
                 for (int i = 0; i < _totalObjects; i++)
                 {
-                    _temp = Instantiate(_prefab, Vector2.one * 100, Quaternion.identity);
+                    _temp = _diContainer.InstantiatePrefab(_prefab, Vector2.one * 100, Quaternion.identity, null);
                     _temp.SetActive(false);
                     _poolList[i] = _temp;
                 }
@@ -38,7 +41,7 @@ namespace MANAGERS
                         return _poolList[i];
                 }
                 //---------
-                GameObject _temp = Instantiate(_prefab, Vector2.one * 100, Quaternion.identity);
+                GameObject _temp = _diContainer.InstantiatePrefab(_prefab, Vector2.one * 100, Quaternion.identity, null);
                 _temp.SetActive(false);
                 _poolList.Add(_temp);
                 _totalObjects++;
@@ -73,6 +76,7 @@ namespace MANAGERS
             _totalPools = _poolList.Count;
             for (int i = 0; i < _totalPools; i++)
             {
+                _diContainer.Inject(_poolList[i]);
                 _poolList[i].Construct();
             }
         }

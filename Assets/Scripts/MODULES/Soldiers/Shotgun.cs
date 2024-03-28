@@ -13,8 +13,8 @@ namespace MODULES.Soldiers
 
         protected override void Shoot()
         {
-            if (GameplayController.Instance.GameStatus == GameplayController.GAME_STATUS.victory
-                || GameplayController.Instance.GameStatus == GameplayController.GAME_STATUS.gameover) return;
+            if (_gameplayController.GameStatus == GameplayController.GAME_STATUS.victory
+                || _gameplayController.GameStatus == GameplayController.GAME_STATUS.gameover) return;
 
             if (Soldier.Instance._weaponManager._gunData.DATA.iCurrentAmmo <= 0) //het dan
             {
@@ -41,7 +41,7 @@ namespace MODULES.Soldiers
             {
                 IsLoadingMagazine = true;
             }
-            GameplayController.Instance.weaponShell.Show(GetFactorBullet());//show shell
+            _gameplayController.weaponShell.Show(GetFactorBullet());//show shell
 
 
 

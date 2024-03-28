@@ -19,8 +19,6 @@ namespace MANAGERS
                 Instance = this;
             else
                 Destroy(gameObject);
-
-            DontDestroyOnLoad(this);
         }
         
         #region  LIST WEAPON ON GAME
