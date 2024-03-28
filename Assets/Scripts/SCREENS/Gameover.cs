@@ -3,11 +3,15 @@ using MODULES.Scriptobjectable;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Zenject;
 
 namespace SCREENS
 {
     public class Gameover : MonoBehaviour
     {
+        [Inject] private UIController _uiController;
+        [Inject] private SoundController _soundController;
+        [Inject] private MusicController _musicController;
         [SerializeField]
         [FormerlySerializedAs("buShop")]  private Button _shopButton;
         [FormerlySerializedAs("buLevelSelection")] [SerializeField] private Button _levelSelectButton;
@@ -24,27 +28,27 @@ namespace SCREENS
         {
             if (_bu == _shopButton)
             {
-                MusicManager.Instance.Play();
-                SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
-                UIController.Instance.PopUpShow(UIController.POP_UP.shop);
+                _musicController.Play();
+                _soundController.Play(SoundController.SOUND.ui_click_next);//sound
+                _uiController.PopUpShow(UIController.POP_UP.shop);
             }
             else if (_bu == _levelSelectButton)
             {
-                MusicManager.Instance.Play();
-                SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
-                UIController.Instance.LoadScene(UIController.SCENE.LevelSelection);
+                _musicController.Play();
+                _soundController.Play(SoundController.SOUND.ui_click_next);//sound
+                _uiController.LoadScene(UIController.SCENE.LevelSelection);
            
             }
             else if (_bu == _replayButton)
             {
-                SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
-                UIController.Instance.LoadScene(UIController.SCENE.Gameplay);           
+                _soundController.Play(SoundController.SOUND.ui_click_next);//sound
+                _uiController.LoadScene(UIController.SCENE.Gameplay);           
             }
         }
         private void OnEnable()
         {
-            SoundController.Instance.Play(SoundController.SOUND.ui_game_over);//sound
-            MusicManager.Instance.Stop();
+            _soundController.Play(SoundController.SOUND.ui_game_over);//sound
+            _musicController.Stop();
         }
     }
 }

@@ -2,11 +2,13 @@
 using MANAGERS;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Zenject;
 
 namespace MODULES.Zombies
 {
     public class ZombieBoss : Zombie
     {
+       
         private enum Status
         {
             walk,
@@ -54,11 +56,7 @@ namespace MODULES.Zombies
         {
             return new Vector2(Random.Range(_targetXmin, _targetXmax), Random.Range(_targetYmin, _targetYmax));
         }
-
-
-        //SHOT
-        GameObject _bullet = null;
-
+        
         private WaitForSeconds _attackTime = new(2.0f);
         private WaitForSeconds _waitToShootTime = new(0.3f);
         private WaitForSeconds _shootCooldown = new(0.1f);
@@ -78,13 +76,13 @@ namespace MODULES.Zombies
             switch (_zombieData.eZombie)
             {
                 case EnumController.ZOMBIE.boss_mug:
-                    SoundController.Instance.Play(SoundController.SOUND.sfx_zom_bullet_explosion);
+                    SoundController.Play(SoundController.SOUND.sfx_zom_bullet_explosion);
                     break;
                 case EnumController.ZOMBIE.boss_soldier:
-                    SoundController.Instance.Play(SoundController.SOUND.sfx_boss_shot_fire);
+                    SoundController.Play(SoundController.SOUND.sfx_boss_shot_fire);
                     break;
                 case EnumController.ZOMBIE.boss_frog:
-                    SoundController.Instance.Play(SoundController.SOUND.sfx_boss_shot_stone);
+                    SoundController.Play(SoundController.SOUND.sfx_boss_shot_stone);
                     break;
             }
 

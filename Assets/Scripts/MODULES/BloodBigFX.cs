@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using MANAGERS;
 using UnityEngine;
+using Zenject;
 
 namespace MODULES
 {
     public class BloodBigFX : MonoBehaviour
     {
+        [Inject] private SoundController _soundController;
         private Vector2 _thisPos;
         private Vector2 _tempPos;
         private int _bloodNum = 15;
@@ -34,7 +36,7 @@ namespace MODULES
                     _tempPos = _thisPos + Random.insideUnitCircle*2.0f;
                     _bloodPrefab.transform.position = _tempPos;
                     _bloodPrefab.SetActive(true);
-                    SoundController.Instance.ZombieExplosion();//sound
+                    _soundController.ZombieExplosion();//sound
                     yield return _timeBetween;
                 }
             }

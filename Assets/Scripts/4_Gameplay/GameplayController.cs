@@ -6,11 +6,16 @@ using MODULES.Zombies;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Zenject;
 
 namespace _4_Gameplay
 {
     public class GameplayController : MonoBehaviour
     {
+        [Inject] private UIController _uiController;
+        [Inject] private SoundController _soundController;
+        [Inject] private MusicController _musicController;
+        [Inject] private DataController _dataController;
         public enum INPUT_TYPE
         {
             shooting,
@@ -80,6 +85,7 @@ namespace _4_Gameplay
                 _barImage.fillAmount = _factor;
             }
         }
+        
         public static GameplayController Instance;
         
         [FormerlySerializedAs("m_WeaponShell")] [SerializeField] private WeaponShell _weaponShell;
@@ -123,24 +129,24 @@ namespace _4_Gameplay
             Application.targetFrameRate = 60;
             if (Instance == null)
                 Instance = this;
-            UIController.Instance.SetCameraPopup(Camera.main);//set camera
+            _uiController.SetCameraPopup(Camera.main);//set camera
 
 
-            MusicManager.Instance.Stop();
-            MusicManager.Instance.Play();
+            _musicController.Stop();
+            _musicController.Play();
 
             _bossHpBar.Construct();
             _zombieWaveBar.Construct();
 
 
-            if (DataController.Instance.mode == DataController.Mode.Release)
+            if (_dataController.mode == DataController.Mode.Release)
                 _testModeText.gameObject.SetActive(false);
         }
 
 
         private void Start()
         {
-            LoadGame(DataController.Instance.playerData.CurrentLevel + 1);//load level
+            LoadGame(_dataController.playerData.CurrentLevel + 1);//load level
 
             _lastWaveObject.SetActive(false);
 
@@ -196,13 +202,13 @@ namespace _4_Gameplay
 
                     Debug.Log("VICTORY");
                     EventController.OnGameWinInvoke(); //event firebase
-                    UIController.Instance.PopUpShow(UIController.POP_UP.victory, 1.5f);
+                    _uiController.PopUpShow(UIController.POP_UP.victory, 1.5f);
                     break;
                 case GAME_STATUS.gameover:
 
                     Debug.Log("GAME OVER");
                     EventController.OnGameoverInvoke(); //event firebase
-                    UIController.Instance.PopUpShow(UIController.POP_UP.gameover, 1.0f);
+                    _uiController.PopUpShow(UIController.POP_UP.gameover, 1.0f);
                     break;
             }
             Debug.Log("TIME SCALE: " + Time.timeScale);
@@ -236,9 +242,9 @@ namespace _4_Gameplay
             if (button == _pauseButton)
             {
                 if (_gameStatus != GAME_STATUS.playing) return;
-                SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound           
+                _soundController.Play(SoundController.SOUND.ui_click_next);//sound           
                 _gameStatus = GAME_STATUS.pause;
-                UIController.Instance.PopUpShow(UIController.POP_UP.pause);
+                _uiController.PopUpShow(UIController.POP_UP.pause);
             }
             else if (button == _resetGunButton)
             {
@@ -246,7 +252,7 @@ namespace _4_Gameplay
             }
             else if (button == _callSupportButton)
             {
-                SoundController.Instance.Play(SoundController.SOUND.ui_click_next);
+                _soundController.Play(SoundController.SOUND.ui_click_next);
 
                 if (_supportPanel.activeInHierarchy)
                 {
@@ -274,11 +280,11 @@ namespace _4_Gameplay
             else if (LevelController.Instance && LevelController.Instance.CurrentWave == LevelController.Instance._levelData.iTotalWave - 1)
             {
                 // last wave
-                SoundController.Instance.Play(SoundController.SOUND.sfx_drum);//sound
+                _soundController.Play(SoundController.SOUND.sfx_drum);//sound
                 _lastWaveObject.SetActive(true);
                 //music
-                MusicManager.Instance.Stop();
-                MusicManager.Instance.Play();
+                _musicController.Stop();
+                _musicController.Play();
 
                 _waveText.text = "WAVE: " + (LevelController.Instance.CurrentWave + 1) + "/" + LevelController.Instance._levelData.iTotalWave;
             }
@@ -302,7 +308,7 @@ namespace _4_Gameplay
         
         private void HandleResumeGame(UIController.POP_UP _popup)
         {
-            if (UIController.Instance.IsShowing()) return;
+            if (_uiController.IsShowing()) return;
 
             Time.timeScale = 1;
             SetStatusOfGame(GAME_STATUS.resume);
@@ -351,7 +357,7 @@ namespace _4_Gameplay
 
         private void OnDisable()
         {
-            DataController.Instance.SaveData();
+            _dataController.SaveData();
 
             EventController.OnStartNewWave -= HandleShowTextWave;
             EventController.OnShowPopup -= HandlePauseGame;

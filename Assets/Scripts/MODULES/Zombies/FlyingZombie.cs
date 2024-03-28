@@ -2,11 +2,13 @@
 using MODULES.Zombies.Bullets;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Zenject;
 
 namespace MODULES.Zombies
 {
     public class FlyingZombie : Zombie
     {
+       
         [FormerlySerializedAs("m_TranOfOriginalBulletPos")] [SerializeField] Transform _bulletPos;
         [FormerlySerializedAs("vScaleOfBullet")] [SerializeField] Vector3 _bulletScale;
         [FormerlySerializedAs("sprBullet")] [Space(20)]
@@ -46,8 +48,8 @@ namespace MODULES.Zombies
         {
             if (Speed == 0) return;
 
-            if (_zombieData.eZombie == EnumController.ZOMBIE.ruoi) SoundController.Instance.Play(SoundController.SOUND.sfx_zombie_ruoi_shot);//sound
-            if (_zombieData.eZombie == EnumController.ZOMBIE.muoi) SoundController.Instance.Play(SoundController.SOUND.sfx_zombie_ruoi_shot);//sound
+            if (_zombieData.eZombie == EnumController.ZOMBIE.ruoi) SoundController.Play(SoundController.SOUND.sfx_zombie_ruoi_shot);//sound
+            if (_zombieData.eZombie == EnumController.ZOMBIE.muoi) SoundController.Play(SoundController.SOUND.sfx_zombie_ruoi_shot);//sound
 
             _targetBulletPos.x = Random.Range(-8.0f, -5.0f);
             _targetBulletPos.y = _bulletPos.position.y;

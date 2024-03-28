@@ -3,12 +3,14 @@ using MODULES.Scriptobjectable;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Zenject;
 
 namespace _2_Weapon
 {
     public class Support : MonoBehaviour
     {
-         
+        [Inject] private WeaponController _weaponController;
+        [Inject] private SoundController _soundController;
         [FormerlySerializedAs("eSupport")] [SerializeField] private EnumController.SUPPORT _eSupport;
         [FormerlySerializedAs("SUPPORT_DATA")] [SerializeField] private SupportData _supportData;
 
@@ -22,12 +24,12 @@ namespace _2_Weapon
             _thisButton = GetComponent<Button>();
             _thisButton.onClick.AddListener(() => ButtonAssign());
 
-            _supportData = MANAGERS.WeaponController.Instance.Support(_eSupport);
+            _supportData = _weaponController.Support(_eSupport);
             _nameText.text = _supportData.name;
 
             ShowData();
             if (_supportData.DATA._support == EnumController.SUPPORT.big_bomb)
-                WeaponController.Instance.supportPanel.ViewTrack(this);
+                WeaponsManager.Instance.supportPanel.ViewTrack(this);
         }
 
 
@@ -38,8 +40,8 @@ namespace _2_Weapon
                 if (!TutorialController.Instance.IsRightInput()) return;
             }
 
-            SoundController.Instance.Play(SoundController.SOUND.ui_wood_board);//sound
-            WeaponController.Instance.supportPanel.ViewTrack(this);
+            _soundController.Play(SoundController.SOUND.ui_wood_board);//sound
+            WeaponsManager.Instance.supportPanel.ViewTrack(this);
         }
 
         public void ShowData()

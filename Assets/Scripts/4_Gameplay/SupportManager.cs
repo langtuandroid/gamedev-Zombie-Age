@@ -6,11 +6,14 @@ using MODULES.Soldiers;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Zenject;
 
 namespace _4_Gameplay
 {
     public class SupportManager : MonoBehaviour
     {
+        [Inject] private SoundController _soundController;
+        
         [System.Serializable]
         public class SupportUI
         {
@@ -166,7 +169,7 @@ namespace _4_Gameplay
                     vStartPosOfItem = vInputOfPlayer;
                     vStartPosOfItem.y = 8;
                     _item = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.support_bigbom).Get();
-                    SoundController.Instance.Play(SoundController.SOUND.sfx_throw_big_bomb);//sound
+                    _soundController.Play(SoundController.SOUND.sfx_throw_big_bomb);//sound
                     break;
 
             }

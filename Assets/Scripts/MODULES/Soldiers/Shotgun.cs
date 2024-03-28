@@ -49,7 +49,7 @@ namespace MODULES.Soldiers
             _beam.SetActive(true);
             _animator.Play(_gunShakeAnimation.name, -1, 0f);//shake gun
             
-            SoundController.Instance.PlayGunSound(EnumController.WEAPON.shotgun);//sound
+            SoundController.PlayGunSound(EnumController.WEAPON.shotgun);//sound
 
 
             _targetOfBullet = _inputPosition + Random.insideUnitCircle * 1.3f;

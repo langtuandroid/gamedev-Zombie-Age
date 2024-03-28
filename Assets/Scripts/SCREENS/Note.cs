@@ -2,11 +2,15 @@
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Zenject;
 
 namespace SCREENS
 {
     public class Note : MonoBehaviour
     {
+        [Inject] private UIController _uiController;
+        [Inject] private SoundController _soundController;
+        [Inject] private DataController _dataController;
         public enum NOTE
         {
             no_gem,
@@ -38,23 +42,23 @@ namespace SCREENS
         {
             if (_bu == _backButton)
             {
-                SoundController.Instance.Play(SoundController.SOUND.ui_click_back);//sound
-                UIController.Instance.HidePopup(UIController.POP_UP.note);
+                _soundController.Play(SoundController.SOUND.ui_click_back);//sound
+                _uiController.HidePopup(UIController.POP_UP.note);
             }
             if (_bu == _doneButton)
             {
-                SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
+                _soundController.Play(SoundController.SOUND.ui_click_next);//sound
 
                 if (_note.Equals(NOTE.no_gem.ToString()))
                 {
-                    UIController.Instance.PopUpShow(UIController.POP_UP.shop);
+                    _uiController.PopUpShow(UIController.POP_UP.shop);
                 }
                 else if (_note.Equals(NOTE.reset_game.ToString()))
                 {
-                    DataController.Instance.ResetAll();
+                    _dataController.ResetAll();
                 }
 
-                UIController.Instance.HidePopup(UIController.POP_UP.note);
+                _uiController.HidePopup(UIController.POP_UP.note);
             }
         }
 

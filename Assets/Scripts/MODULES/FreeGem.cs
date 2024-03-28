@@ -3,17 +3,19 @@ using MODULES.Scriptobjectable;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Zenject;
 
 namespace MODULES
 {
     public class FreeGem : MonoBehaviour
     {
+        [Inject] private DataController _dataController;
         private Button _thisButton;
         [FormerlySerializedAs("txtValue")] [SerializeField] private Text _valueText;
 
         private void Start()
         {
-            RewardData _reward = DataController.Instance.GetReward(EnumController.REWARD.ads_free_gem);
+            RewardData _reward = _dataController.GetReward(EnumController.REWARD.ads_free_gem);
 
             _thisButton = GetComponent<Button>();
 

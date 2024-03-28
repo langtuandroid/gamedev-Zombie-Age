@@ -1,10 +1,12 @@
 ﻿using MANAGERS;
 using UnityEngine;
+using Zenject;
 
 namespace MODULES.Zombies.Bullets
 {
     public class ZombieBullet_Bezier : MonoBehaviour
     {
+        [Inject] private SoundController _soundController;
         private float _damage;
         private Bezier _bezier = new ();
         private Transform _transform;
@@ -49,7 +51,7 @@ namespace MODULES.Zombies.Bullets
                 _effect.SetActive(true);
 
                 //sound
-                SoundController.Instance.Play(SoundController.SOUND.sfx_explosion_grenade);
+                _soundController.Play(SoundController.SOUND.sfx_explosion_grenade);
 
                 _timeBezier = 0.0f;
                 _gameobject.SetActive(false);

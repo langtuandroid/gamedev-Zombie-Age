@@ -4,11 +4,23 @@ using System.Xml.Serialization;
 using MODULES.Scriptobjectable;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Zenject;
 
 namespace MANAGERS
 {
     public class DataController : MonoBehaviour
     {
+        [Inject] private UIController _uiController;
+        [Inject] private UpgradeController _upgradeController;
+        [Inject] private DiContainer _diContainer;
+        [Inject] private WeaponController _weaponController;
+        
+        public static DataController Instance;
+        
+        private void Awake()
+        {
+            Instance = this;
+        }
         public enum Mode
         {
             Release,
@@ -177,7 +189,7 @@ namespace MANAGERS
 
             public bool CheckInReady()
             {
-                if (_day > DataController.Instance._revardList.Count) return false;
+                if (_day > Instance._revardList.Count) return false;
 
                 if (ThisYear() > checkYear)
                 {
@@ -230,7 +242,6 @@ namespace MANAGERS
         }
         #endregion
         
-        public static DataController Instance;
         [FormerlySerializedAs("eMode")] [SerializeField] private Mode _mode;
        
         
@@ -246,14 +257,8 @@ namespace MANAGERS
         private PlayerData _playerData;
         public PlayerData playerData
         {
-            get
-            {
-                return _playerData;
-            }
-            set
-            {
-                _playerData = value;
-            }
+            get => _playerData;
+            set => _playerData = value;
         }
         
         private string _pathOfPlayerData;
@@ -280,16 +285,6 @@ namespace MANAGERS
         }
         #endregion
         
-        private void Awake()
-        {
-            if (Instance == null)
-                Instance = this;
-            else
-                Destroy(gameObject);
-
-            DontDestroyOnLoad(this);
-        }
-
         private void Start()
         {
             Construct();
@@ -298,6 +293,7 @@ namespace MANAGERS
         private void Construct()
         {
             _playerData = new PlayerData();
+            _diContainer.Inject(_playerData);
 
 #if UNITY_EDITOR
             _pathOfPlayerData = Application.dataPath + "/Resources/Data/PlayerData.xml";
@@ -307,8 +303,8 @@ namespace MANAGERS
 
             TakePlayerData();
 
-            WeaponController.Instance.Construct();
-            UpgradeController.Instance.Construct();
+            _weaponController.Construct();
+            _upgradeController.Construct();
 
             
             if (playerData.GetAllStars() == 0)
@@ -394,12 +390,12 @@ namespace MANAGERS
             }
 
             Construct();
-            UIController.Instance.LoadScene(UIController.SCENE.Menu);
+            _uiController.LoadScene(UIController.SCENE.Menu);
         }
 
         public int GetStars()
         {
-            switch (DataController.Instance.playerData.Difficuft)
+            switch (playerData.Difficuft)
             {
                 case EnumController.DIFFICUFT.easy:
                     return 1;

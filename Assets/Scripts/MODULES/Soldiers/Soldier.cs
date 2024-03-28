@@ -5,11 +5,14 @@ using MANAGERS;
 using MODULES.Scriptobjectable;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Zenject;
 
 namespace MODULES.Soldiers
 {
     public class Soldier : MonoBehaviour
     {
+        [Inject] private WeaponController _weaponController;
+        [Inject] private SoundController _soundController;
         public static Soldier Instance;
         [FormerlySerializedAs("objHandToThrow")] [SerializeField] private GameObject _throwObject;
         [FormerlySerializedAs("m_Animator")] [SerializeField] private Animator _animator;
@@ -28,7 +31,7 @@ namespace MODULES.Soldiers
 
         private void Start()
         {
-            _weaponManager.Construct(WeaponController.Instance.equipedWeaponList);
+            _weaponManager.Construct(_weaponController.equipedWeaponList);
             _defenceManager.Construct();
             
             _throwObject.SetActive(false);
@@ -87,7 +90,7 @@ namespace MODULES.Soldiers
         }
         private IEnumerator PlayerThrowRoutine()
         {
-            SoundController.Instance.Play(SoundController.SOUND.sfx_throw);//sound
+            _soundController.Play(SoundController.SOUND.sfx_throw);//sound
             _throwObject.SetActive(true);
             _weaponManager._thisWeapon.gameObject.SetActive(false);
             yield return new WaitForSeconds(0.2f);
@@ -98,7 +101,7 @@ namespace MODULES.Soldiers
 
         private void NoBullet(GunData _gundata)
         {
-            _weaponManager.WeaponChoose(WeaponController.Instance.equipedWeaponList[0].DATA.eWeapon);//cho khau dau tien
+            _weaponManager.WeaponChoose(_weaponController.equipedWeaponList[0].DATA.eWeapon);//cho khau dau tien
         }
         private void OnDisable()
         {

@@ -2,11 +2,14 @@
 using UnityEngine;
 
 using UnityEngine.UI;
+using Zenject;
 
 namespace _3_LevelSelection
 {
     public class LvlButton : MonoBehaviour
     {
+        [Inject] private SoundController _soundController;
+        [Inject] private DataController _dataController;
         private Button _levelButton;
         private Text _levelText;
         private bool _unlock;
@@ -29,17 +32,17 @@ namespace _3_LevelSelection
                 if (!TutorialController.Instance.IsRightInput()) return;
             }
 
-            if (Unlock || DataController.Instance.mode == DataController.Mode.Debug)
+            if (Unlock || _dataController.mode == DataController.Mode.Debug)
             {
-                SoundController.Instance.Play(SoundController.SOUND.ui_click_next);
-                DataController.Instance.playerData.CurrentLevel = _iLevel;
+                _soundController.Play(SoundController.SOUND.ui_click_next);
+                _dataController.playerData.CurrentLevel = _iLevel;
                 LevelSelectionController.Instance.SetDifficultPopUp(true);
             }
             else
             {
-                if (_iLevel + 1 <= DataController.Instance.LevelsTotal)
+                if (_iLevel + 1 <= _dataController.LevelsTotal)
                 {
-                    SoundController.Instance.Play(SoundController.SOUND.ui_cannot);
+                    _soundController.Play(SoundController.SOUND.ui_cannot);
                     Debug.Log("LOCKED!");
                 }
             }
@@ -53,7 +56,7 @@ namespace _3_LevelSelection
             _levelText.color = Color.white;
 
 
-            if (_iLevel + 1 > DataController.Instance.LevelsTotal)
+            if (_iLevel + 1 > _dataController.LevelsTotal)
             {
                 _unlock = false;
                 _levelText.text = "";
@@ -62,7 +65,7 @@ namespace _3_LevelSelection
             {
                 _levelText.text = (_iLevel + 1).ToString();
 
-                IStar = DataController.Instance.playerData.NumOfStars(_iLevel);
+                IStar = _dataController.playerData.NumOfStars(_iLevel);
 
                 if (IStar > 0)
                 {
@@ -80,7 +83,7 @@ namespace _3_LevelSelection
                     }
                     else
                     {
-                        if (DataController.Instance.playerData.NumOfStars(_iLevel - 1) > 0)
+                        if (_dataController.playerData.NumOfStars(_iLevel - 1) > 0)
                         {
                             _levelButton.image.sprite = LevelSelectionController.Instance.LevelCurrSprite;
                             _unlock = true;

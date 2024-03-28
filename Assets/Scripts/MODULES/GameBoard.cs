@@ -2,11 +2,15 @@
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Zenject;
 
 namespace MODULES
 {
     public class GameBoard : MonoBehaviour
     {
+        [Inject] private UIController _uiController;
+        [Inject] private SoundController _soundController;
+        [Inject] private DataController _dataController;
         public enum TYPE
         {
             gem,
@@ -37,11 +41,11 @@ namespace MODULES
                 if (!TutorialController.Instance.IsRightInput()) return;
             }
 
-            SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
+            _soundController.Play(SoundController.SOUND.ui_click_next);//sound
             switch (_boardType)
             {
                 case TYPE.gem:
-                    UIController.Instance.PopUpShow(UIController.POP_UP.shop);//
+                    _uiController.PopUpShow(UIController.POP_UP.shop);//
                     break;
 
             }
@@ -53,7 +57,7 @@ namespace MODULES
             switch (_boardType)
             {
                 case TYPE.gem:
-                    _text.text = DataController.Instance.playerData.Gem.ToString();
+                    _text.text = _dataController.playerData.Gem.ToString();
                     break;
 
             }

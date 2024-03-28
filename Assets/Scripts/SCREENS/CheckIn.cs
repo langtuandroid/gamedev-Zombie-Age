@@ -3,11 +3,14 @@ using MANAGERS;
 using MODULES.Scriptobjectable;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace SCREENS
 {
     public class CheckIn : MonoBehaviour
     {
+        [Inject] private SoundController _soundController;
+        [Inject] private DataController _dataController;
         private static CheckIn Instance;
         public int iCurrentDay;
 
@@ -97,11 +100,10 @@ namespace SCREENS
             buBackPage.onClick.AddListener(() => SetButton(buBackPage));
 
         }
-        // Start is called before the first frame update
-        void OnEnable()
+
+        private void OnEnable()
         {
-       
-            iCurrentDay = DataController.Instance.playerData._day;
+            iCurrentDay = _dataController.playerData._day;
             iCurrentPage = (int)(iCurrentDay / 4.0f);
             ShowTrack(iCurrentPage);
         }
@@ -144,7 +146,7 @@ namespace SCREENS
             }
             else if (_bu == buClose)
             {
-                SoundController.Instance.Play(SoundController.SOUND.ui_click_back);//sound
+                _soundController.Play(SoundController.SOUND.ui_click_back);//sound
                 gameObject.SetActive(false);
             }
         }

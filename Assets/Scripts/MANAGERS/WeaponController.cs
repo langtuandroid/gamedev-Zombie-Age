@@ -2,11 +2,15 @@
 using MODULES.Scriptobjectable;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Zenject;
 
 namespace MANAGERS
 {
     public class WeaponController : MonoBehaviour
     {
+        [Inject] private DiContainer _diContainer;
+        [Inject] private DataController _dataController;
+   
         public static WeaponController Instance;
 
         void Awake()
@@ -80,7 +84,7 @@ namespace MANAGERS
                 _supportList[i].Init();
             }
 
-            DataController.Instance.SaveData();
+            _dataController.SaveData();
         }
     }
 }

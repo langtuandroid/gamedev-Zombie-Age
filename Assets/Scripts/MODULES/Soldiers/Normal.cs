@@ -9,7 +9,7 @@ namespace MODULES.Soldiers
     {
         private GameObject _bulletPrefab;
         private Vector2 _targetOfBullet;
-        private float _angle;
+        private float _anglee;
 
         protected override void Shoot()
         {
@@ -35,13 +35,13 @@ namespace MODULES.Soldiers
             _beam.SetActive(true);
 
             _animator.Play(_gunShakeAnimation.name, -1, 0f);//shake gun
-            SoundController.Instance.PlayGunSound(Soldier.Instance._weaponManager._gunData.DATA.eWeapon);//sound
+            SoundController.PlayGunSound(Soldier.Instance._weaponManager._gunData.DATA.eWeapon);//sound
 
             _targetOfBullet = _inputPosition + Random.insideUnitCircle * 1.3f;
-            _angle = GetRoatateZ(_beam.transform.position, _targetOfBullet);
+            _anglee = GetRoatateZ(_beam.transform.position, _targetOfBullet);
 
             _bulletPrefab = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.bullet).Get();
-            _bulletPrefab.GetComponent<Bullet>().ConstructBullet(Soldier.Instance._weaponManager._gunData.DATA.eWeapon, _beam.transform.position, _targetOfBullet, _angle, _bulletRange, _damage, _bulletSprite, _bulletScale);
+            _bulletPrefab.GetComponent<Bullet>().ConstructBullet(Soldier.Instance._weaponManager._gunData.DATA.eWeapon, _beam.transform.position, _targetOfBullet, _anglee, _bulletRange, _damage, _bulletSprite, _bulletScale);
             _bulletPrefab.SetActive(true);
             #endregion
 

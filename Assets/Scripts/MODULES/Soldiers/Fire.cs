@@ -34,7 +34,7 @@ namespace MODULES.Soldiers
 
             _beam.SetActive(true);
 
-            SoundController.Instance.PlayGunSound( EnumController.WEAPON.firegun);//sound
+            SoundController.PlayGunSound( EnumController.WEAPON.firegun);//sound
             
             _animator.Play(0);//shake gun
       

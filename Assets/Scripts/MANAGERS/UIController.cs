@@ -9,6 +9,7 @@ namespace MANAGERS
 {
     public class UIController : MonoBehaviour
     {
+        public static UIController Instance;
         #region POP UP
         public enum POP_UP
         {
@@ -35,7 +36,7 @@ namespace MANAGERS
         }
 
 
-        public static UIController Instance;
+       
 
         [FormerlySerializedAs("m_BlackCamera")] [SerializeField] private GameObject _vlackCamera;
         [FormerlySerializedAs("m_CanvasOfPopup")] [SerializeField] private Canvas _canvasPopUp;

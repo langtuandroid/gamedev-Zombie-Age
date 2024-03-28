@@ -4,11 +4,15 @@ using MODULES.Scriptobjectable;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Zenject;
 
 namespace SCREENS
 {
     public class Shop : MonoBehaviour
     {
+        [Inject] private UIController _uiController;
+        [Inject] private SoundController _soundController;
+        [Inject] private DiContainer _diContainer;
         [FormerlySerializedAs("buBack")] [SerializeField] private Button _backButton;
 
         private void Start()
@@ -23,8 +27,8 @@ namespace SCREENS
         {
             if (_bu == _backButton)
             {
-                SoundController.Instance.Play(SoundController.SOUND.ui_click_back);//sound
-                UIController.Instance.HidePopup(UIController.POP_UP.shop);
+                _soundController.Play(SoundController.SOUND.ui_click_back);//sound
+                _uiController.HidePopup(UIController.POP_UP.shop);
             }
 
         }
@@ -33,6 +37,8 @@ namespace SCREENS
         [System.Serializable]
         public class Gem
         {
+            [Inject] private SoundController _soundController;
+            [Inject] private DataController _dataController; 
             [FormerlySerializedAs("DATA")] public ShopData _shopData;
             [FormerlySerializedAs("txtName")] public Text _nametext;
             [FormerlySerializedAs("txtValue")] public Text _valueText;
@@ -58,10 +64,10 @@ namespace SCREENS
 
             private void Buy()
             {
-                SoundController.Instance.Play(SoundController.SOUND.ui_purchase);//sound
+                _soundController.Play(SoundController.SOUND.ui_purchase);//sound
 
-                DataController.Instance.playerData.Gem += _shopData.iValueToAdd;
-                DataController.Instance.SaveData(); //save                                                       
+                _dataController.playerData.Gem += _shopData.iValueToAdd;
+                _dataController.SaveData(); //save                                                       
                 EventController.OnUpdatedBoardInvoke();  //update board
 
             }
@@ -74,6 +80,7 @@ namespace SCREENS
             int _total = LIST_IAP_GEM.Count;
             for (int i = 0; i < _total; i++)
             {
+                _diContainer.Inject(LIST_IAP_GEM[i]);
                 LIST_IAP_GEM[i].Construct();
             }
         }

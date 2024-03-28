@@ -1,14 +1,19 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using _4_Gameplay;
 using MANAGERS;
 using MODULES.Scriptobjectable;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Zenject;
+using Random = UnityEngine.Random;
 
 namespace MODULES.Zombies
 {
     public class Zombie : MonoBehaviour
     {
+        [Inject] private WeaponController _weaponController;
+        [Inject] protected SoundController SoundController;
         [FormerlySerializedAs("eStatus")] public EnumController.ZOMBIE_STATUS _zombieStatus;
         [FormerlySerializedAs("DATA")] public ZombieData _zombieData;
         [FormerlySerializedAs("ITEM_SYSTEM")] public ItemsSystem _itemsSystem;
@@ -52,9 +57,10 @@ namespace MODULES.Zombies
             _gameobject = gameObject;
 
             _itemsSystem = new ItemsSystem(this);
+            _weaponController = WeaponController.Instance;
+            SoundController = SoundController.Instance;
         }
-
-
+        
         protected virtual void Construct()
         {
 
@@ -65,7 +71,7 @@ namespace MODULES.Zombies
         {
 
             int _randSound = Random.Range(0, 100);
-            if (_randSound < 50) SoundController.Instance.ZombieGruzz();//sound
+            if (_randSound < 50) SoundController.ZombieGruzz();//sound
 
             EventController.ZombieEvent_Born(this);//event
             _isAlive = true;
@@ -130,7 +136,7 @@ namespace MODULES.Zombies
                     _bloodEffect.transform.position = _transformCenter.position;
                     _bloodEffect.SetActive(true);
 
-                    SoundController.Instance.ZombieExplosion();//sound
+                    SoundController.ZombieExplosion();//sound
 
                     RemoveObjFreeze();
 
@@ -171,7 +177,7 @@ namespace MODULES.Zombies
 
             Instantiate(ObjectPoolController.Instance._explosionBossPrefab, _transformCenter.position, Quaternion.identity);//explosion
             Instantiate(ObjectPoolController.Instance._bossBloodPrefab, vCURRENT_POS, Quaternion.identity);//bloss
-            SoundController.Instance.Play(SoundController.SOUND.sfx_zombie_gruzz_boss);//sound
+            SoundController.Play(SoundController.SOUND.sfx_zombie_gruzz_boss);//sound
             EventController.ZombieEvent_Die(this);//event
             _object.SetActive(_active);
         }
@@ -221,7 +227,7 @@ namespace MODULES.Zombies
             if (IsFreezing) return;
 
             //play sound
-            if (!_zombieData.bIsFlying) SoundController.Instance.ZombieAttack();//sound
+            if (!_zombieData.bIsFlying) SoundController.ZombieAttack();//sound
             EventController.ZombieEvent_OnZombieAttack(_health.GetDamage());
         }
 
@@ -328,7 +334,6 @@ namespace MODULES.Zombies
 
         private void OnEnable()
         {
-            //  Init(transform.position);
             EventController.OnBulletCompleted += HitBullet;
             EventController.OnSupportCompleted += EffectFromSupport;
         }
@@ -353,7 +358,7 @@ namespace MODULES.Zombies
 
         public void EffectFromSupport(EnumController.SUPPORT _support, Vector2 _pos)
         {
-            _supportdata = WeaponController.Instance.Support(_support);
+            _supportdata = _weaponController.Support(_support);
             _disFromSupportPos = Vector2.Distance(vCURRENT_POS, _pos);
             _disOfSupport = _supportdata.GetRange();
 
@@ -450,11 +455,6 @@ namespace MODULES.Zombies
 
     }
 
-
-
-
-
-// BLOOD + ATTACK
     [System.Serializable]
     public class ZombieHealth
     {
@@ -478,7 +478,6 @@ namespace MODULES.Zombies
 
 
             iHP = _zombie._zombieData.GetHp(DataController.Instance.playerData.CurrentLevel + 1, LevelController.Instance.CurrentWave);
-            // if (_zombie.SPECIAL_STATUS) iHP = (int)(iHP * 0.5f);//Nếu ở trạng thái special, thì hp giảm 1 nửa
 
 
             if (_zombie._itemsSystem.eHat != EnumController.HAT_OF_ZOMBIE.NO_HAT) iItemHat_Hp = (int)(iHP * 0.3f);
@@ -491,19 +490,11 @@ namespace MODULES.Zombies
             _zombie.ShowHpBar(1.0f);
         }
 
-
-
-
         public float GetDamage()
         {
             return fDamage;
         }
 
-
-
-
-
-        //Giam mau
         GameObject _textBlood = null;
         public void ReduceHp(float _value)
         {
@@ -577,12 +568,7 @@ namespace MODULES.Zombies
             return iCurrentTotalHeath * 1.0f / iOriginalHp;
         }
     }
-
-
-
-
-
-//ITEM SUPPORT
+    
     [System.Serializable]
     public class ItemsSystem
     {

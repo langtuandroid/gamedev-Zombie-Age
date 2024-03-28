@@ -4,11 +4,14 @@ using MODULES.Scriptobjectable;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Zenject;
 
 namespace SCREENS
 {
     public class WinReward : MonoBehaviour
     {
+        [Inject] private UIController _uiController;
+        [Inject] private SoundController _soundController;
         [FormerlySerializedAs("m_tranOfRay")] [SerializeField] Transform _rayTransform;
        
         [FormerlySerializedAs("buReceive")] [SerializeField] private Button _receiveButton;
@@ -49,8 +52,8 @@ namespace SCREENS
             if (_bu == _receiveButton)
             {
                 _revard.GetReward();
-                SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
-                UIController.Instance.HidePopup(UIController.POP_UP.reward);
+                _soundController.Play(SoundController.SOUND.ui_click_next);//sound
+                _uiController.HidePopup(UIController.POP_UP.reward);
 
             }
             else if (_bu == _x2GemsButton)

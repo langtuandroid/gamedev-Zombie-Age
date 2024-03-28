@@ -1,10 +1,12 @@
 ﻿using MANAGERS;
 using UnityEngine;
+using Zenject;
 
 namespace MODULES.Zombies.Bullets
 {
     public class BulletBoss_Soldier : MonoBehaviour
     {
+        [Inject] private SoundController _soundController;
         private EnumController.ZOMBIE _zombieType;
 
         private Transform _transform;
@@ -43,7 +45,7 @@ namespace MODULES.Zombies.Bullets
                 _effect.SetActive(true);
 
                 //sound
-                SoundController.Instance.Play(SoundController.SOUND.sfx_explosion_grenade);
+                _soundController.Play(SoundController.SOUND.sfx_explosion_grenade);
 
 
                 Destroy(_gameobject);

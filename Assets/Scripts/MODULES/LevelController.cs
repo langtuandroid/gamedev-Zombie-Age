@@ -6,11 +6,14 @@ using MODULES.Scriptobjectable;
 using MODULES.Zombies;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Zenject;
 
 namespace MODULES
 {
     public class LevelController : MonoBehaviour
     {
+        [Inject] private DiContainer _diContainer;   
+        [Inject] private DataController _dataController;
         [FormerlySerializedAs("LEVEL_DATA")] public LevelData _levelData;
         [System.Serializable]
         public class UnitWave
@@ -93,7 +96,7 @@ namespace MODULES
                 Instance = this;
 
             #region LOAD DATA
-            LevelData _data = Resources.Load<LevelData>("Levels/Configs/Level_" + (DataController.Instance.playerData.CurrentLevel + 1).ToString());
+            LevelData _data = Resources.Load<LevelData>("Levels/Configs/Level_" + (_dataController.playerData.CurrentLevel + 1).ToString());
             if (_data == null) _data = Resources.Load<LevelData>("Levels/Configs/Level_default");
             _levelData = _data;
             _bgFrame.sprite = _levelData.sprBackgroundFrame;
@@ -204,8 +207,9 @@ namespace MODULES
                             ZombieController.Instance._zombiesInWave++;
                             GameObject _boss = Instantiate(_levelData.prefabBoss, _tempPos, Quaternion.identity);//boss
                             Zombie _Boss = _boss.GetComponent<Zombie>();
+                            ZombieHealth zombieHealth = new ZombieHealth(_Boss);
                             _Boss.Constuct(_tempPos);
-                            _Boss._health = new ZombieHealth(_Boss);
+                            _Boss._health = zombieHealth;
                         }
                         #endregion
 
@@ -231,8 +235,8 @@ namespace MODULES
                         if (_unitWave._zombieConfig.IsShield()) _tempZombie._itemsSystem.SetItem(_unitWave._zombieConfig.eShield);
                         else _tempZombie._itemsSystem.SetItem(EnumController.SHIELD_OF_ZOMBIE.NO_SHIELD);
 
-
-                        _tempZombie._health = new ZombieHealth(_tempZombie);
+                        ZombieHealth zombieHealthh = new ZombieHealth(_tempZombie);
+                        _tempZombie._health = zombieHealthh;
 
                         _zombieCount++;
                         GameplayController.Instance.zombieWaveBar.Update(_zombieCount * 1.0f / _zombiesTotal);
@@ -289,7 +293,7 @@ namespace MODULES
                 for (int j = 0; j < _length; j++)
                 {
                     _totalHp += _waveList[i]._waveUnits[j]._numberOfZombies * ZombieController.Instance.GetZombie(_waveList[i]._waveUnits[j]._zombieData.eZombie).GetHp(
-                        DataController.Instance.playerData.CurrentLevel + 1, i + 1
+                        _dataController.playerData.CurrentLevel + 1, i + 1
                     );
                 }
 

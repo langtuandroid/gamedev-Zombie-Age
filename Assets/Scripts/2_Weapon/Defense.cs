@@ -4,24 +4,27 @@ using SCREENS;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Zenject;
 
 namespace _2_Weapon
 {
     public class Defense : MonoBehaviour
     {
+        [Inject] private UIController _uiController;
+        [Inject] private SoundController _soundController;
+        [Inject] private DataController _dataController;
+        
         [FormerlySerializedAs("DEFENSE_DATA")] [SerializeField] private DefenseData _defenseData;
-
         [FormerlySerializedAs("imaIcon")] [SerializeField] private Image _iconImage;
         [FormerlySerializedAs("txtName")] [SerializeField] private Text _nameText;
         [FormerlySerializedAs("buEquip")] [SerializeField] private Button _equiepButton;
         [FormerlySerializedAs("buThis")] [SerializeField] private Button _thisButton;
         [FormerlySerializedAs("imaLock")] [SerializeField] private GameObject _lockImage;
-
         [FormerlySerializedAs("sprButtonGray")] [SerializeField] Sprite _grayButtonSprote;
         [FormerlySerializedAs("sprButtonEquiped")] [SerializeField] Sprite _equipedSprite;
 
         public DefenseData DefenseData => _defenseData;
-
+        
 
         private void Start()
         {
@@ -39,23 +42,23 @@ namespace _2_Weapon
 
             if (button == _thisButton)
             {
-                SoundController.Instance.Play(SoundController.SOUND.ui_wood_board);//sound
-                WeaponController.Instance.defencePanel.ViewTrack(this);
+                _soundController.Play(SoundController.SOUND.ui_wood_board);//sound
+                WeaponsManager.Instance.defencePanel.ViewTrack(this);
             }
             else if (button == _equiepButton)
             {
-                WeaponController.Instance.defencePanel.ViewTrack(this);
+                WeaponsManager.Instance.defencePanel.ViewTrack(this);
                 //equiped
                 if (!_defenseData.DATA.bEquiped)
                 {
                     _defenseData.DATA.bEquiped = true;
-                    SoundController.Instance.Play(SoundController.SOUND.ui_equiped);//sound
+                    _soundController.Play(SoundController.SOUND.ui_equiped);//sound
                     _equiepButton.image.sprite = _equipedSprite;
-                    WeaponController.Instance.defencePicked.AddTakenDefense(_defenseData);
+                    WeaponsManager.Instance.defencePicked.AddTakenDefense(_defenseData);
                 }
                 else
                 {
-                    SoundController.Instance.Play(SoundController.SOUND.ui_equiped);//sound
+                    _soundController.Play(SoundController.SOUND.ui_equiped);//sound
                 }
             }
         }
@@ -96,10 +99,10 @@ namespace _2_Weapon
         public void Unlock()
         {
             int _price = _defenseData.iPriteToUnlock;
-            if (DataController.Instance.playerData.Gem >= _price)
+            if (_dataController.playerData.Gem >= _price)
             {
-                DataController.Instance.playerData.Gem -= _price;
-                DataController.Instance.SaveData();
+                _dataController.playerData.Gem -= _price;
+                _dataController.SaveData();
                 EventController.OnUpdatedBoardInvoke();
 
                 //content
@@ -111,27 +114,27 @@ namespace _2_Weapon
                         case EnumController.DEFENSE.home:
                             break;
                         case EnumController.DEFENSE.metal:
-                            _reward = DataController.Instance.GetReward(EnumController.REWARD.unlock_defense_metal);
+                            _reward = _dataController.GetReward(EnumController.REWARD.unlock_defense_metal);
                             break;
                         case EnumController.DEFENSE.thorn:
-                            _reward = DataController.Instance.GetReward(EnumController.REWARD.unlock_defense_thorn );
+                            _reward = _dataController.GetReward(EnumController.REWARD.unlock_defense_thorn );
                             break;
                     }
-                    UIController.Instance.PopUpShow(UIController.POP_UP.reward);
+                    _uiController.PopUpShow(UIController.POP_UP.reward);
                     WinReward.LoadRevardReward(_reward);
                 }
 
 
                 _defenseData.bUNLOCKED = true;
-                WeaponController.Instance.defencePanel.ViewTrack(this);
-                SoundController.Instance.Play(SoundController.SOUND.ui_purchase);//sound
+                WeaponsManager.Instance.defencePanel.ViewTrack(this);
+                _soundController.Play(SoundController.SOUND.ui_purchase);//sound
             
             }
             else
             {
-                SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
+                _soundController.Play(SoundController.SOUND.ui_click_next);//sound
                 //khong du tien
-                UIController.Instance.PopUpShow(UIController.POP_UP.note);
+                _uiController.PopUpShow(UIController.POP_UP.note);
                 Note.AssignNote(Note.NOTE.no_gem.ToString());
             }
             Construct(_defenseData);

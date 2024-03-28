@@ -3,11 +3,14 @@ using MODULES.Scriptobjectable;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Zenject;
 
 namespace _5_Upgrade
 {
     public class UpgradeButton : MonoBehaviour
     {
+        [Inject] private SoundController _soundController;
+        [Inject] private UpgradeController _upgradeController;
         [FormerlySerializedAs("eUpgrade")] public EnumController.UpgradeType _upgradeType;
         private Button _thisButton;
 
@@ -34,8 +37,7 @@ namespace _5_Upgrade
 
         public void Construct()
         {
-            Debug.Log(UpgradeController.Instance);
-            UpgradeData _temp = UpgradeController.Instance.GetUpgrade(_upgradeType);
+            UpgradeData _temp = _upgradeController.GetUpgrade(_upgradeType);
             _valueText.text = _temp.iStar.ToString();
 
 
@@ -50,15 +52,15 @@ namespace _5_Upgrade
                 _thisButton.image.sprite = _temp.sprIcon_gray;
             }
 
-            _starImage.sprite = MainCode_Upgrade.Instance.sprStar;
+            _starImage.sprite = UpgradeManager.Instance.sprStar;
 
         }
         
         private void Click()
         {
-            SoundController.Instance.Play(SoundController.SOUND.ui_click_next);
-            MainCode_Upgrade.Instance.m_BoardInfo.Show(this);
-            MainCode_Upgrade.Instance.tranOfYellowCirle.position = transform.position;
+            _soundController.Play(SoundController.SOUND.ui_click_next);
+            UpgradeManager.Instance.m_BoardInfo.Show(this);
+            UpgradeManager.Instance.tranOfYellowCirle.position = transform.position;
         }
     }
 }

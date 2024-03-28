@@ -4,11 +4,15 @@ using MODULES.Soldiers;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Zenject;
 
 namespace _4_Gameplay
 {
     public class ChooseWeaponButton : MonoBehaviour
     {
+        [Inject] private SoundController _soundController;
+        [Inject] private WeaponController _weaponController;
+        
         [FormerlySerializedAs("GUN_DATA")] [SerializeField] private GunData _gunData;
         [FormerlySerializedAs("iIndexOfWeapon")] [SerializeField] private int _weaponIndex;
         private Transform _transform;
@@ -19,12 +23,12 @@ namespace _4_Gameplay
         private void Start()
         {
             _transform = transform;
-            if (_weaponIndex >= WeaponController.Instance.equipedWeaponList.Count)
+            if (_weaponIndex >= _weaponController.equipedWeaponList.Count)
             {
                 gameObject.SetActive(false);
                 return;
             }
-            _gunData = WeaponController.Instance.equipedWeaponList[_weaponIndex];
+            _gunData = _weaponController.equipedWeaponList[_weaponIndex];
             _chooseButton = GetComponent<Button>();
             _chooseButton.onClick.AddListener(() => Take());
 
@@ -47,7 +51,7 @@ namespace _4_Gameplay
 
         private void Take()
         {
-            SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
+            _soundController.Play(SoundController.SOUND.ui_click_next);//sound
             Soldier.Instance._weaponManager.WeaponChoose(_gunData.DATA.eWeapon);
         }
         

@@ -2,12 +2,14 @@
 using MANAGERS;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Zenject;
 
 
 namespace MODULES.Soldiers
 {
     public class HandWeapon : MonoBehaviour
     {
+        protected SoundController SoundController;
         private Camera _camera;
         [FormerlySerializedAs("objBeam")] public GameObject _beam;
         [FormerlySerializedAs("m_animator")] [SerializeField] protected Animator _animator;
@@ -27,9 +29,11 @@ namespace MODULES.Soldiers
         {
             Transform = transform;
             _camera = Camera.main;
+            
         }
         private void Start()
         {
+            SoundController = SoundController.Instance;
             Construct();
             ReloadingMagazine();
         }
@@ -61,7 +65,7 @@ namespace MODULES.Soldiers
                 _timeToReloadMagazine -= Time.deltaTime;
                 if (_timeToReloadMagazine <= 0)
                 {
-                    SoundController.Instance.Play(SoundController.SOUND.ui_cannot);//sound
+                    SoundController.Play(SoundController.SOUND.ui_cannot);//sound
                     ReloadingMagazine();
                     CancelInvoke("PlaySoundReload");
                 }
@@ -220,7 +224,7 @@ namespace MODULES.Soldiers
                 < Soldier.Instance._weaponManager._gunData.iAmmoInMagazine)
                 IsLoadingMagazine = true;
             else
-                SoundController.Instance.Play(SoundController.SOUND.ui_cannot);//sound
+                SoundController.Play(SoundController.SOUND.ui_cannot);//sound
         }
 
         public virtual void UpdateInput()
@@ -256,7 +260,7 @@ namespace MODULES.Soldiers
 
         private void PlaySoundReload()
         {
-            SoundController.Instance.Play(SoundController.SOUND.sfx_reload);//sound
+            SoundController.Play(SoundController.SOUND.sfx_reload);//sound
         }
 
 

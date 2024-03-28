@@ -1,11 +1,13 @@
 ﻿using MANAGERS;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Zenject;
 
 namespace MODULES.Zombies.Bullets
 {
     public class BulletBossFrog : MonoBehaviour
     {
+        [Inject] private SoundController _soundController;
         [FormerlySerializedAs("iDamage")] public int _damage;
         private Bezier _bezier = new ();
         private Transform _transform;
@@ -47,7 +49,7 @@ namespace MODULES.Zombies.Bullets
                 _effect.transform.position = _currentPos;
                 _effect.SetActive(true);
                 
-                SoundController.Instance.Play(SoundController.SOUND.sfx_explosion_grenade);
+                _soundController.Play(SoundController.SOUND.sfx_explosion_grenade);
 
 
                 Destroy(_gameobject);

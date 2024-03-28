@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Zenject;
 
 namespace MANAGERS
 {
     public class TutorialController : MonoBehaviour
     {
+        [Inject] private UIController _uiController;
+        [Inject] private DataController _dataController;
         public enum TUTORIAL
         {
             none,
@@ -179,7 +182,7 @@ namespace MANAGERS
             }
             else if (_popup == UIController.POP_UP.check_in)
             {
-                if (DataController.Instance.playerData._day == 0)
+                if (_dataController.playerData._day == 0)
                 {
                     SkipStep();
                     GetTutorial(TUTORIAL.check_in).Next();
@@ -187,8 +190,8 @@ namespace MANAGERS
             }
             else if (_popup == UIController.POP_UP.reward)
             {
-                if (UIController.Instance._cuurentScene == UIController.SCENE.Weapon
-                    && DataController.Instance.playerData.GetAllStars() == 0)
+                if (_uiController._cuurentScene == UIController.SCENE.Weapon
+                    && _dataController.playerData.GetAllStars() == 0)
                 {
                     SkipStep();
                     GetTutorial(TUTORIAL.weapon).Next();
@@ -200,8 +203,8 @@ namespace MANAGERS
         {
             if (_popup == UIController.POP_UP.reward)
             {
-                if (UIController.Instance._cuurentScene == UIController.SCENE.LevelSelection
-                    && DataController.Instance.playerData.GetAllStars() == 0)
+                if (_uiController._cuurentScene == UIController.SCENE.LevelSelection
+                    && _dataController.playerData.GetAllStars() == 0)
                 {
                     SkipStep();
                     GetTutorial(TUTORIAL.level_selection).Next();
@@ -222,9 +225,9 @@ namespace MANAGERS
 
         private void HandeStartNewScene()
         {
-            if (UIController.Instance._cuurentScene == UIController.SCENE.Gameplay)
+            if (_uiController._cuurentScene == UIController.SCENE.Gameplay)
             {
-                if (DataController.Instance.playerData.GetAllStars() == 0)
+                if (_dataController.playerData.GetAllStars() == 0)
                 {
                     SkipStep();
                     GetTutorial(TUTORIAL.gameplay).Next();//show level selection

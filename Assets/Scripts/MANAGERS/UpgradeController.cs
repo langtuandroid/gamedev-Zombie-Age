@@ -2,11 +2,13 @@
 using MODULES.Scriptobjectable;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Zenject;
 
 namespace MANAGERS
 {
     public class UpgradeController : MonoBehaviour
     {
+        [Inject] private DataController _dataController;
         public static UpgradeController Instance;
 
         private void Awake()
@@ -47,7 +49,7 @@ namespace MANAGERS
 
             for (int i = 0; i < length; i++)
             {
-                if (DataController.Instance.playerData.TakeUpgarde(_gemUpgradeList[i].DATA.eUpgrade).bEquiped)
+                if (_dataController.playerData.TakeUpgarde(_gemUpgradeList[i].DATA.eUpgrade).bEquiped)
 
                 {
                     _temp += _gemUpgradeList[i].iStar;

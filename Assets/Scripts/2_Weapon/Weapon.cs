@@ -4,11 +4,17 @@ using SCREENS;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Zenject;
 
 namespace _2_Weapon
 {
     public class Weapon : MonoBehaviour
     {
+        [Inject] private UIController _uiController;
+        [Inject] private SoundController _soundController;
+        [Inject] private DataController _dataController;
+        [Inject] private WeaponController _weaponController;
+        
         [FormerlySerializedAs("GUN_DATA")] [SerializeField] private GunData _gunData;
         [FormerlySerializedAs("buThis")] [SerializeField] private Button _thisButton;
         [FormerlySerializedAs("buEquip")] [SerializeField] private Button _equipButton;
@@ -70,20 +76,20 @@ namespace _2_Weapon
 
             if (_button == _thisButton)
             {
-                SoundController.Instance.Play(SoundController.SOUND.ui_wood_board);//sound
-                WeaponController.Instance.weaponPanel.VisualiseTrack(this);
+                _soundController.Play(SoundController.SOUND.ui_wood_board);//sound
+                WeaponsManager.Instance.weaponPanel.VisualiseTrack(this);
             }
             else if (_button == _equipButton)
             {
-                WeaponController.Instance.weaponPanel.VisualiseTrack(this);
+                WeaponsManager.Instance.weaponPanel.VisualiseTrack(this);
                 if (!_gunData.DATA.bEquiped)
                 {
-                    SoundController.Instance.Play(SoundController.SOUND.ui_cannot);//sound
+                    _soundController.Play(SoundController.SOUND.ui_cannot);//sound
                     // GUN_DATA.DATA.bEquiped = true;
-                    WeaponController.Instance.weaponPicked.AddTakenWeapon(_gunData);
+                    WeaponsManager.Instance.weaponPicked.AddTakenWeapon(_gunData);
                 }
                 else
-                    SoundController.Instance.Play(SoundController.SOUND.ui_cannot);//sound
+                    _soundController.Play(SoundController.SOUND.ui_cannot);//sound
             }
 
         }
@@ -91,21 +97,21 @@ namespace _2_Weapon
         public void Unlock()
         {
             int price = _gunData.iPriceToUnlock;
-            if (DataController.Instance.playerData.Gem >= price)
+            if (_dataController.playerData.Gem >= price)
             {
-                DataController.Instance.playerData.Gem -= price;
-                DataController.Instance.SaveData();//save
+                _dataController.playerData.Gem -= price;
+                _dataController.SaveData();//save
                 EventController.OnUpdatedBoardInvoke();
 
                 _gunData.bUNLOCKED = true;
-                SoundController.Instance.Play(SoundController.SOUND.ui_purchase);//sound
+                _soundController.Play(SoundController.SOUND.ui_purchase);//sound
            
             }
             else
             {
-                SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
+                _soundController.Play(SoundController.SOUND.ui_click_next);//sound
                 //khong du tien
-                UIController.Instance.PopUpShow(UIController.POP_UP.note);
+                _uiController.PopUpShow(UIController.POP_UP.note);
                 Note.AssignNote(Note.NOTE.no_gem.ToString());
             }
 
@@ -113,15 +119,16 @@ namespace _2_Weapon
 
 
             Construct(_gunData);
-            WeaponController.Instance.weaponPanel.VisualiseTrack(this);
+            WeaponsManager.Instance.weaponPanel.VisualiseTrack(this);
         }
         
         private void Equip(GunData _gun)
         {
             if (_gun != _gunData) return;
             _gunData.DATA.bEquiped = true;
-            if (!MANAGERS.WeaponController.Instance.equipedWeaponList.Contains(_gunData))
-                MANAGERS.WeaponController.Instance.equipedWeaponList.Add(_gunData);
+            Debug.Log(_weaponController);
+            if (!_weaponController.equipedWeaponList.Contains(_gunData))
+                _weaponController.equipedWeaponList.Add(_gunData);
 
             Construct(_gunData);
         }
@@ -129,8 +136,8 @@ namespace _2_Weapon
         {
             if (_gun != _gunData) return;
 
-            if (MANAGERS.WeaponController.Instance.equipedWeaponList.Contains(_gunData))
-                MANAGERS.WeaponController.Instance.equipedWeaponList.Remove(_gunData);
+            if (_weaponController.equipedWeaponList.Contains(_gunData))
+                _weaponController.equipedWeaponList.Remove(_gunData);
             _gunData.DATA.bEquiped = false;
 
             Construct(_gunData);

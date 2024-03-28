@@ -1,13 +1,16 @@
 ﻿using MANAGERS;
 using MODULES.Scriptobjectable;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Zenject;
 
 namespace _1_Menu
 {
     public class MenuController : MonoBehaviour
     {
+        [Inject] private UIController _uiController;
+        [Inject] private SoundController _soundController;
+        [Inject] private MusicController _musicController;
         [SerializeField] private float _loadingTime = 6.0f;
         [SerializeField] private Image _renderImage;
         [SerializeField] private GameObject _gameLogo;
@@ -17,8 +20,8 @@ namespace _1_Menu
         private void Start()
         {
             _playButton.onClick.AddListener(() => AssignButton(_playButton));
-            MusicManager.Instance.Play();
-            UIController.Instance.SetCameraPopup(Camera.main);//set camera       
+            _musicController.Play();
+            _uiController.SetCameraPopup(Camera.main);//set camera       
             _gameLogo.SetActive(false);
         }
 
@@ -26,8 +29,8 @@ namespace _1_Menu
         {
             if (_button == _playButton)
             {
-                SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
-                UIController.Instance.LoadScene(UIController.SCENE.LevelSelection);
+                _soundController.Play(SoundController.SOUND.ui_click_next);//sound
+                _uiController.LoadScene(UIController.SCENE.LevelSelection);
             }
         }
         private void Update()

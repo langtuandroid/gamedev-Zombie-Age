@@ -1,10 +1,12 @@
 ﻿using MODULES;
 using UnityEngine;
+using Zenject;
 
 namespace MANAGERS
 {
     public class EffectController : MonoBehaviour
     {
+        [Inject] private SoundController _soundController;
         private GameObject _bulletEffect;
         private void BulletEffect(EnumController.WEAPON _weapon, Vector2 _pos,float _range, int _damage)
         {
@@ -26,7 +28,7 @@ namespace MANAGERS
                     return;
                 case EnumController.WEAPON.bazoka:
                     CameraFX.Instance.CameraShake(CameraFX.LEVEL.level_1);//shaking camera
-                    SoundController.Instance.Play(SoundController.SOUND.sfx_explosion_grenade);//sound
+                    _soundController.Play(SoundController.SOUND.sfx_explosion_grenade);//sound
                     //effect
                     _bulletEffect = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.main_exploison).Get();
                     _bulletEffect.transform.position = _pos;
@@ -48,13 +50,13 @@ namespace MANAGERS
             {
                 case EnumController.SUPPORT.grenade:
                     _supportEffect = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.main_exploison).Get();
-                    SoundController.Instance.Play(SoundController.SOUND.sfx_explosion_grenade);//sound
+                    _soundController.Play(SoundController.SOUND.sfx_explosion_grenade);//sound
                     CameraFX.Instance.CameraShake(CameraFX.LEVEL.level_3);//shaking camera
                     break;
                 case EnumController.SUPPORT.freeze:
                     _supportEffect = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.main_exploison).Get();
-                    SoundController.Instance.Play(SoundController.SOUND.sfx_break);//sound
-                    SoundController.Instance.Play(SoundController.SOUND.sfx_explosion_freeze);//sound
+                    _soundController.Play(SoundController.SOUND.sfx_break);//sound
+                    _soundController.Play(SoundController.SOUND.sfx_explosion_freeze);//sound
                     CameraFX.Instance.CameraShake(CameraFX.LEVEL.level_1);//shaking camera
 
                     //freeze effect
@@ -64,12 +66,12 @@ namespace MANAGERS
                     break;
                 case EnumController.SUPPORT.poison:
                     _supportEffect = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.main_exploison).Get();
-                    SoundController.Instance.Play(SoundController.SOUND.sfx_break );//sound
+                    _soundController.Play(SoundController.SOUND.sfx_break );//sound
                     CameraFX.Instance.CameraShake(CameraFX.LEVEL.level_1);//shaking camera
                     break;
                 case EnumController.SUPPORT.big_bomb:
                     _supportEffect = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.main_exploison).Get();
-                    SoundController.Instance.Play(SoundController.SOUND.sfx_explosion_bigbomb);//sound
+                    _soundController.Play(SoundController.SOUND.sfx_explosion_bigbomb);//sound
                     CameraFX.Instance.CameraShake(CameraFX.LEVEL.level_6);//shaking camera
                     Instantiate(ObjectPoolController.Instance._bigExplosionPrefab);//effect
                     break;
@@ -85,12 +87,12 @@ namespace MANAGERS
                 || _zombie == EnumController.ZOMBIE.boss_soldier 
                 || _zombie == EnumController.ZOMBIE.boss_frog)
             {
-                SoundController.Instance.Play(SoundController.SOUND.sfx_explosion_grenade);//sound
+                _soundController.Play(SoundController.SOUND.sfx_explosion_grenade);//sound
                 _bulletEffect = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.main_exploison).Get();
             }
             else
             {
-                if (_zombie == EnumController.ZOMBIE.ruoi) SoundController.Instance.Play(SoundController.SOUND.sfx_zom_bullet_explosion);//sound
+                if (_zombie == EnumController.ZOMBIE.ruoi) _soundController.Play(SoundController.SOUND.sfx_zom_bullet_explosion);//sound
 
                 _bulletEffect = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.exploison_bullet).Get();
             }

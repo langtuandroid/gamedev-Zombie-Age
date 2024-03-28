@@ -3,11 +3,15 @@ using MODULES.Scriptobjectable;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Zenject;
 
 namespace SCREENS
 {
     public class Pause : MonoBehaviour
     {
+        [Inject] private UIController _uiController;
+        [Inject] private SoundController _soundController;
+        [Inject] private MusicController _musicController;
         [FormerlySerializedAs("buBack")] [SerializeField] private Button _backButton;
         [FormerlySerializedAs("buReplay")] [SerializeField] private Button _replayButton;
         [FormerlySerializedAs("buLevelSelection")] [SerializeField] private Button _buttonLevelSelection;
@@ -23,28 +27,27 @@ namespace SCREENS
         {
             if (_bu == _backButton)
             {
-                SoundController.Instance.Play(SoundController.SOUND.ui_click_back);//sound
-                MusicManager.Instance.Play();
-                UIController.Instance.HidePopup(UIController.POP_UP.pause);
+                _soundController.Play(SoundController.SOUND.ui_click_back);//sound
+                _musicController.Play();
+                _uiController.HidePopup(UIController.POP_UP.pause);
             }
             else if (_bu == _replayButton)
             {
-                SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
-                // MusicManager.Instance.Play();
-                UIController.Instance.LoadScene(UIController.SCENE.Gameplay);
+                _soundController.Play(SoundController.SOUND.ui_click_next);//sound
+                _uiController.LoadScene(UIController.SCENE.Gameplay);
             }
             else if (_bu == _buttonLevelSelection)
             {
-                SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
-                MusicManager.Instance.Play();
-                UIController.Instance.LoadScene(UIController.SCENE.LevelSelection);
-                UIController.Instance.HidePopup(UIController.POP_UP.pause);
+                _soundController.Play(SoundController.SOUND.ui_click_next);//sound
+                _musicController.Play();
+                _uiController.LoadScene(UIController.SCENE.LevelSelection);
+                _uiController.HidePopup(UIController.POP_UP.pause);
             }
         }
 
         private void OnEnable()
         {
-            MusicManager.Instance.Stop();
+            _musicController.Stop();
         }
     }
 }

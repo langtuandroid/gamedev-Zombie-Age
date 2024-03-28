@@ -1,11 +1,13 @@
 ﻿using MANAGERS;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Zenject;
 
 namespace MODULES
 {
     public class StartLevel : MonoBehaviour
     {
+        [Inject] private SoundController _soundController;
         private int _hp = 20;
         private float _distance;
 
@@ -16,7 +18,7 @@ namespace MODULES
         private void PrepareWave()
         {
             LevelController.Instance.LoadLevel();
-            SoundController.Instance.Play(SoundController.SOUND.sfx_explosion_grenade);//sound
+            _soundController.Play(SoundController.SOUND.sfx_explosion_grenade);//sound
             GameObject _effect = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.main_exploison).Get();
             _effect.transform.position = transform.position;
             _effect.SetActive(true);
