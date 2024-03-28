@@ -1,14 +1,16 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace MODULES
 {
     public class TextValue : MonoBehaviour
     {
-        [SerializeField] TextMesh m_TextMesh;
+        [FormerlySerializedAs("m_TextMesh")] [SerializeField]
+        private TextMesh _textMesh;
 
-        public  void SetValue(int _value)
+        public  void SetText(int _value)
         {
-            m_TextMesh.text = "-" + _value.ToString();
+            _textMesh.text = "-" + _value.ToString();
         }
     }
 }

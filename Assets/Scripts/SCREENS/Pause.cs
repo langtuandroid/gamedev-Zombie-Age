@@ -1,38 +1,39 @@
 ﻿using MANAGERS;
 using MODULES.Scriptobjectable;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace SCREENS
 {
     public class Pause : MonoBehaviour
     {
-        [SerializeField]
-        private Button buBack, buReplay, buLevelSelection;
+        [FormerlySerializedAs("buBack")] [SerializeField] private Button _backButton;
+        [FormerlySerializedAs("buReplay")] [SerializeField] private Button _replayButton;
+        [FormerlySerializedAs("buLevelSelection")] [SerializeField] private Button _buttonLevelSelection;
 
         void Start()
         {
-            buBack.onClick.AddListener(() => SetButton(buBack));
-            buReplay.onClick.AddListener(() => SetButton(buReplay));
-            buLevelSelection.onClick.AddListener(() => SetButton(buLevelSelection));
+            _backButton.onClick.AddListener(() => AssignButton(_backButton));
+            _replayButton.onClick.AddListener(() => AssignButton(_replayButton));
+            _buttonLevelSelection.onClick.AddListener(() => AssignButton(_buttonLevelSelection));
         }
-
-        //SET BUTTON
-        private void SetButton(Button _bu)
+        
+        private void AssignButton(Button _bu)
         {
-            if (_bu == buBack)
+            if (_bu == _backButton)
             {
                 SoundController.Instance.Play(SoundController.SOUND.ui_click_back);//sound
                 MusicManager.Instance.Play();
                 UIController.Instance.HidePopup(UIController.POP_UP.pause);
             }
-            else if (_bu == buReplay)
+            else if (_bu == _replayButton)
             {
                 SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
                 // MusicManager.Instance.Play();
                 UIController.Instance.LoadScene(UIController.SCENE.Gameplay);
             }
-            else if (_bu == buLevelSelection)
+            else if (_bu == _buttonLevelSelection)
             {
                 SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
                 MusicManager.Instance.Play();

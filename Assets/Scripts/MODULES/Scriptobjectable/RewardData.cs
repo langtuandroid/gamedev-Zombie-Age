@@ -34,7 +34,7 @@ namespace MODULES.Scriptobjectable
 
                 int _gem = GetVictoryGem();
 
-                if (VictoryReward.Instance.bX2Gem)
+                if (WinReward.Instance._isX2Gems)
                     DataController.Instance.playerData.Gem += 2 * _gem;
                 else
                     DataController.Instance.playerData.Gem += _gem;

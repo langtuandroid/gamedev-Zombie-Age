@@ -25,7 +25,7 @@ namespace MANAGERS
                 case EnumController.WEAPON.firegun:
                     return;
                 case EnumController.WEAPON.bazoka:
-                    EffectCamera.Instance.ShakingCamera(EffectCamera.LEVEL.level_1);//shaking camera
+                    CameraFX.Instance.CameraShake(CameraFX.LEVEL.level_1);//shaking camera
                     SoundController.Instance.Play(SoundController.SOUND.sfx_explosion_grenade);//sound
                     //effect
                     _bulletEffect = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.main_exploison).Get();
@@ -49,13 +49,13 @@ namespace MANAGERS
                 case EnumController.SUPPORT.grenade:
                     _supportEffect = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.main_exploison).Get();
                     SoundController.Instance.Play(SoundController.SOUND.sfx_explosion_grenade);//sound
-                    EffectCamera.Instance.ShakingCamera(EffectCamera.LEVEL.level_3);//shaking camera
+                    CameraFX.Instance.CameraShake(CameraFX.LEVEL.level_3);//shaking camera
                     break;
                 case EnumController.SUPPORT.freeze:
                     _supportEffect = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.main_exploison).Get();
                     SoundController.Instance.Play(SoundController.SOUND.sfx_break);//sound
                     SoundController.Instance.Play(SoundController.SOUND.sfx_explosion_freeze);//sound
-                    EffectCamera.Instance.ShakingCamera(EffectCamera.LEVEL.level_1);//shaking camera
+                    CameraFX.Instance.CameraShake(CameraFX.LEVEL.level_1);//shaking camera
 
                     //freeze effect
                     _freezeEffect = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.freeze_range).Get();
@@ -65,12 +65,12 @@ namespace MANAGERS
                 case EnumController.SUPPORT.poison:
                     _supportEffect = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.main_exploison).Get();
                     SoundController.Instance.Play(SoundController.SOUND.sfx_break );//sound
-                    EffectCamera.Instance.ShakingCamera(EffectCamera.LEVEL.level_1);//shaking camera
+                    CameraFX.Instance.CameraShake(CameraFX.LEVEL.level_1);//shaking camera
                     break;
                 case EnumController.SUPPORT.big_bomb:
                     _supportEffect = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.main_exploison).Get();
                     SoundController.Instance.Play(SoundController.SOUND.sfx_explosion_bigbomb);//sound
-                    EffectCamera.Instance.ShakingCamera(EffectCamera.LEVEL.level_6);//shaking camera
+                    CameraFX.Instance.CameraShake(CameraFX.LEVEL.level_6);//shaking camera
                     Instantiate(ObjectPoolController.Instance._bigExplosionPrefab);//effect
                     break;
             }

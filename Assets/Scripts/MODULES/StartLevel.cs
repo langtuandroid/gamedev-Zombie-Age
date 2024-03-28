@@ -1,65 +1,58 @@
 ﻿using MANAGERS;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace MODULES
 {
     public class StartLevel : MonoBehaviour
     {
+        private int _hp = 20;
+        private float _distance;
 
-        private int iHp = 20;
-        private float _dis = 0;
+        Vector3 _hpScale = new (1, 0.9f, 1);
+        [FormerlySerializedAs("_tranOfHpBar")] [SerializeField] Transform _hpBarTransform;
 
-        Vector3 vHpScale = new Vector3(1, 0.9f, 1);
-        [SerializeField] Transform _tranOfHpBar;
-
-
-        //LOAD WAVE
-        private void LoadWave()
+        
+        private void PrepareWave()
         {
-            TheLevel.Instance.LoadWave();//load wave
-
+            LevelController.Instance.LoadLevel();
             SoundController.Instance.Play(SoundController.SOUND.sfx_explosion_grenade);//sound
-            //effect
             GameObject _effect = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.main_exploison).Get();
             _effect.transform.position = transform.position;
             _effect.SetActive(true);
             gameObject.SetActive(false);
         }
+        
 
-
-
-        private void BeginLevel(EnumController.WEAPON _weapon, Vector2 _pos,float _range, int _dam)
+        private void StartGame(EnumController.WEAPON _weapon, Vector2 _pos,float _range, int _dam)
         {
-            _dis = Vector2.Distance(transform.position, _pos);
-            if (_dis > 2.0f) return;
+            _distance = Vector2.Distance(transform.position, _pos);
+            if (_distance > 2.0f) return;
 
-            iHp -= _dam;
-            ShowHpBar();
+            _hp -= _dam;
+            DisplayHPBar();
 
-            LoadWave();//load wave
+            PrepareWave();//load wave
         }
 
-        private void ShowHpBar()
+        private void DisplayHPBar()
         {
-            vHpScale.x = iHp * 1.0f / 20;
-            _tranOfHpBar.localScale = vHpScale;
+            _hpScale.x = _hp * 1.0f / 20;
+            _hpBarTransform.localScale = _hpScale;
         }
-
-
-
-
+        
         private void TheEventManager_OnSupportCompleted(EnumController.SUPPORT _support, Vector2 _pos)
         {
             if(_support== EnumController.SUPPORT.big_bomb)
             {
-                LoadWave();//load wave
+                PrepareWave();//load wave
             }
 
             if (_support == EnumController.SUPPORT.grenade)
             {
-                _dis = Vector2.Distance(transform.position, _pos);
-                if (_dis > 4.0f) return;
-                LoadWave();//load wave
+                _distance = Vector2.Distance(transform.position, _pos);
+                if (_distance > 4.0f) return;
+                PrepareWave();//load wave
             }
 
        
@@ -67,15 +60,13 @@ namespace MODULES
 
         private void OnEnable()
         {
-            EventController.OnBulletCompleted += BeginLevel;
+            EventController.OnBulletCompleted += StartGame;
             EventController.OnSupportCompleted += TheEventManager_OnSupportCompleted;
         }
 
-   
-
         private void OnDisable()
         {
-            EventController.OnBulletCompleted -= BeginLevel;
+            EventController.OnBulletCompleted -= StartGame;
             EventController.OnSupportCompleted -= TheEventManager_OnSupportCompleted;
         }
     }

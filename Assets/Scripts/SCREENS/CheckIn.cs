@@ -63,7 +63,7 @@ namespace SCREENS
                 if (Instance.iCurrentDay != iDay) return;
 
                 UIController.Instance.PopUpShow(UIController.POP_UP.reward);
-                VictoryReward.SetReward(m_reward);
+                WinReward.LoadRevardReward(m_reward);
                 Instance.gameObject.SetActive(false);
                 Debug.Log("Get reward me!");
             }

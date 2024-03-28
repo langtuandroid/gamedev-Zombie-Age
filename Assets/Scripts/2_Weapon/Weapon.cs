@@ -106,7 +106,7 @@ namespace _2_Weapon
                 SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
                 //khong du tien
                 UIController.Instance.PopUpShow(UIController.POP_UP.note);
-                Note.SetNote(Note.NOTE.no_gem.ToString());
+                Note.AssignNote(Note.NOTE.no_gem.ToString());
             }
 
 

@@ -50,7 +50,7 @@ namespace MODULES.Soldiers
             _targetOfBullet.z = -40.0f;
 
 
-            _lineRenderer.Shot(_vPosStart,_targetOfBullet);
+            _lineRenderer.ShootElectric(_vPosStart,_targetOfBullet);
 
             EventController.OnBulletCompletedInvoke(EnumController.WEAPON.stun_gun, _targetOfBullet, _bulletRange, _damage);
             #endregion

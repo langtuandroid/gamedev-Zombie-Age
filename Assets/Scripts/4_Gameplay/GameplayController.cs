@@ -268,10 +268,10 @@ namespace _4_Gameplay
         private void HandleShowTextWave()
         {
        
-            if (TheLevel.Instance && TheLevel.Instance.iCurrentWave == -1)
-                _waveText.text = "WAVE: 0/" + TheLevel.Instance.LEVEL_DATA.iTotalWave;
+            if (LevelController.Instance && LevelController.Instance.CurrentWave == -1)
+                _waveText.text = "WAVE: 0/" + LevelController.Instance._levelData.iTotalWave;
 
-            else if (TheLevel.Instance && TheLevel.Instance.iCurrentWave == TheLevel.Instance.LEVEL_DATA.iTotalWave - 1)
+            else if (LevelController.Instance && LevelController.Instance.CurrentWave == LevelController.Instance._levelData.iTotalWave - 1)
             {
                 // last wave
                 SoundController.Instance.Play(SoundController.SOUND.sfx_drum);//sound
@@ -280,11 +280,11 @@ namespace _4_Gameplay
                 MusicManager.Instance.Stop();
                 MusicManager.Instance.Play();
 
-                _waveText.text = "WAVE: " + (TheLevel.Instance.iCurrentWave + 1) + "/" + TheLevel.Instance.LEVEL_DATA.iTotalWave;
+                _waveText.text = "WAVE: " + (LevelController.Instance.CurrentWave + 1) + "/" + LevelController.Instance._levelData.iTotalWave;
             }
             else
             {
-                _waveText.text = "WAVE: " + (TheLevel.Instance.iCurrentWave + 1) + "/" + TheLevel.Instance.LEVEL_DATA.iTotalWave;
+                _waveText.text = "WAVE: " + (LevelController.Instance.CurrentWave + 1) + "/" + LevelController.Instance._levelData.iTotalWave;
             }
         }
         

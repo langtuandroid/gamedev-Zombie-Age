@@ -1,96 +1,100 @@
 ﻿using MANAGERS;
 using MODULES.Scriptobjectable;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace SCREENS
 {
     public class Setting : MonoBehaviour
     {
-        [SerializeField]
-        private Button buBack, buMusic, buSound, buFacebook, buLikeUs, buReport, buAbout,buMoregame;
+        [FormerlySerializedAs("buBack")] [SerializeField] private Button _backButton;
+        [FormerlySerializedAs("buMusic")] [SerializeField] private Button _musicButton;
+        [FormerlySerializedAs("buSound")] [SerializeField] private Button _soundButton;
+        [FormerlySerializedAs("buFacebook")] [SerializeField] private Button _facebookButton;
+        [FormerlySerializedAs("buLikeUs")] [SerializeField] private Button _likeUsButton;
+        [FormerlySerializedAs("buReport")] [SerializeField] private Button _bugReportButton;
+        [FormerlySerializedAs("buAbout")] [SerializeField] private Button _aboutButton;
+        [FormerlySerializedAs("buMoregame")] [SerializeField] private Button _buttonMoreGame;
 
-        // Start is called before the first frame update
         void Start()
         {
-            buBack.onClick.AddListener(() => SetButton(buBack));
-            buMusic.onClick.AddListener(() => SetButton(buMusic));
-            buSound.onClick.AddListener(() => SetButton(buSound));
-            buFacebook.onClick.AddListener(() => SetButton(buFacebook));
-            buLikeUs.onClick.AddListener(() => SetButton(buLikeUs));
-            buReport.onClick.AddListener(() => SetButton(buReport));
-            buAbout.onClick.AddListener(() => SetButton(buAbout));
-            buMoregame.onClick.AddListener(() => SetButton(buMoregame));
+            _backButton.onClick.AddListener(() => AssignButton(_backButton));
+            _musicButton.onClick.AddListener(() => AssignButton(_musicButton));
+            _soundButton.onClick.AddListener(() => AssignButton(_soundButton));
+            _facebookButton.onClick.AddListener(() => AssignButton(_facebookButton));
+            _likeUsButton.onClick.AddListener(() => AssignButton(_likeUsButton));
+            _bugReportButton.onClick.AddListener(() => AssignButton(_bugReportButton));
+            _aboutButton.onClick.AddListener(() => AssignButton(_aboutButton));
+            _buttonMoreGame.onClick.AddListener(() => AssignButton(_buttonMoreGame));
         }
 
-        private void Init()
+        private void Construct()
         {
             if (MusicManager.Instance.Mute)
             {
-                buMusic.image.color = Color.gray;
-                buMusic.GetComponentInChildren<Text>().text = "MUSIC OFF";
+                _musicButton.image.color = Color.gray;
+                _musicButton.GetComponentInChildren<Text>().text = "MUSIC OFF";
             }
             else
             {
-                buMusic.image.color = Color.white;
-                buMusic.GetComponentInChildren<Text>().text = "MUSIC ON";
+                _musicButton.image.color = Color.white;
+                _musicButton.GetComponentInChildren<Text>().text = "MUSIC ON";
             }
 
             if (SoundController.Instance.Mute)
             {
-                buSound.image.color = Color.gray;
-                buSound.GetComponentInChildren<Text>().text = "SOUND OFF";
+                _soundButton.image.color = Color.gray;
+                _soundButton.GetComponentInChildren<Text>().text = "SOUND OFF";
             }
             else
             {
-                buSound.image.color = Color.white;
-                buSound.GetComponentInChildren<Text>().text = "SOUND ON";
+                _soundButton.image.color = Color.white;
+                _soundButton.GetComponentInChildren<Text>().text = "SOUND ON";
             }
         }
-
-
-        //SET BUTTON
-        private void SetButton(Button _bu)
+        
+        private void AssignButton(Button button)
         {
-            if (_bu == buBack)
+            if (button == _backButton)
             {
                 SoundController.Instance.Play(SoundController.SOUND.ui_click_back );//sound
                 UIController.Instance.HidePopup(UIController.POP_UP.setting);
             }
-            else if (_bu == buMusic)
+            else if (button == _musicButton)
             {
                 SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
                 MusicManager.Instance.Mute = !MusicManager.Instance.Mute;
-                Init();
+                Construct();
             }
-            else if (_bu == buSound)
+            else if (button == _soundButton)
             {
                 SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
                 SoundController.Instance.Mute = !SoundController.Instance.Mute;
-                Init();
+                Construct();
             }
-            else if (_bu == buFacebook)
+            else if (button == _facebookButton)
             {
                 SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
                 
             }
 
-            else if (_bu == buLikeUs)
+            else if (button == _likeUsButton)
             {
                 SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
                 
             }
-            else if (_bu == buReport)
+            else if (button == _bugReportButton)
             {
                 SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
                 
             }
-            else if (_bu == buAbout)
+            else if (button == _aboutButton)
             {
                 SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
                 UIController.Instance.PopUpShow(UIController.POP_UP.about_us);
             }
-            else if (_bu == buMoregame)
+            else if (button == _buttonMoreGame)
             {
                 SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
                 
@@ -99,7 +103,7 @@ namespace SCREENS
 
         private void OnEnable()
         {
-            Init();
+            Construct();
         }
     }
 }

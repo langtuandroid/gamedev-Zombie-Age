@@ -1,48 +1,52 @@
 ﻿using MANAGERS;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace SCREENS
 {
     public class VideoReward : MonoBehaviour
     {
-        public Button buClose;
-        public Button buWacthAds1, buWacthAds2, buWacthAds3, buWacthAds4;
-        public static int iIndex = 1;
+        [FormerlySerializedAs("buClose")] public Button _closeButton;
+        [FormerlySerializedAs("buWacthAds1")] public Button _watchAdd1;
+        [FormerlySerializedAs("buWacthAds2")] public Button _watchAdd2;
+        [FormerlySerializedAs("buWacthAds3")] public Button _watchAdd3;
+        [FormerlySerializedAs("buWacthAds4")] public Button _watchAdd4;
+        private static int _index = 1;
 
         private void Start()
         {
-            buClose.onClick.AddListener(() => SetButton(buClose));
+            _closeButton.onClick.AddListener(() => AssignButton(_closeButton));
 
-            buWacthAds1.onClick.AddListener(() => SetButton(buWacthAds1));
-            buWacthAds2.onClick.AddListener(() => SetButton(buWacthAds2));
-            buWacthAds3.onClick.AddListener(() => SetButton(buWacthAds3));
-            buWacthAds4.onClick.AddListener(() => SetButton(buWacthAds4));
+            _watchAdd1.onClick.AddListener(() => AssignButton(_watchAdd1));
+            _watchAdd2.onClick.AddListener(() => AssignButton(_watchAdd2));
+            _watchAdd3.onClick.AddListener(() => AssignButton(_watchAdd3));
+            _watchAdd4.onClick.AddListener(() => AssignButton(_watchAdd4));
         }
 
-        private void SetButton(Button _bu)
+        private void AssignButton(Button _bu)
         {
-            if (_bu == buClose)
+            if (_bu == _closeButton)
             {
                 SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
                 UIController.Instance.HidePopup(UIController.POP_UP.video_reward);
             }
-            else if (_bu == buWacthAds1)
+            else if (_bu == _watchAdd1)
             {
                 SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
                 ButtonWatchAds(1);
             }
-            else if (_bu == buWacthAds2)
+            else if (_bu == _watchAdd2)
             {
                 SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
                 ButtonWatchAds(2);
             }
-            else if (_bu == buWacthAds3)
+            else if (_bu == _watchAdd3)
             {
                 SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
                 ButtonWatchAds(3);
             }
-            else if (_bu == buWacthAds4)
+            else if (_bu == _watchAdd4)
             {
                 SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
                 ButtonWatchAds(4);
@@ -52,7 +56,7 @@ namespace SCREENS
 
         private void ButtonWatchAds(int _index)
         {
-            if (iIndex != _index) return;
+            if (VideoReward._index != _index) return;
             UIController.Instance.HidePopup(UIController.POP_UP.video_reward);
         }
 
@@ -62,84 +66,84 @@ namespace SCREENS
             if (false)
             {
 
-                if (iIndex == 1)
+                if (_index == 1)
                 {
-                    buWacthAds1.image.color = Color.white;
-                    buWacthAds2.image.color = Color.gray;
-                    buWacthAds3.image.color = Color.gray;
-                    buWacthAds4.image.color = Color.gray;
+                    _watchAdd1.image.color = Color.white;
+                    _watchAdd2.image.color = Color.gray;
+                    _watchAdd3.image.color = Color.gray;
+                    _watchAdd4.image.color = Color.gray;
 
-                    buWacthAds1.transform.GetChild(0).GetComponent<Image>().color = Color.white * 1.0f;
-                    buWacthAds2.transform.GetChild(0).GetComponent<Image>().color = Color.white * 0.0f;
-                    buWacthAds3.transform.GetChild(0).GetComponent<Image>().color = Color.white * 0.0f;
-                    buWacthAds4.transform.GetChild(0).GetComponent<Image>().color = Color.white * 0.0f;
+                    _watchAdd1.transform.GetChild(0).GetComponent<Image>().color = Color.white * 1.0f;
+                    _watchAdd2.transform.GetChild(0).GetComponent<Image>().color = Color.white * 0.0f;
+                    _watchAdd3.transform.GetChild(0).GetComponent<Image>().color = Color.white * 0.0f;
+                    _watchAdd4.transform.GetChild(0).GetComponent<Image>().color = Color.white * 0.0f;
                 }
-                else if (iIndex == 2)
+                else if (_index == 2)
                 {
-                    buWacthAds1.image.color = Color.gray;
-                    buWacthAds2.image.color = Color.white;
-                    buWacthAds3.image.color = Color.gray;
-                    buWacthAds4.image.color = Color.gray;
+                    _watchAdd1.image.color = Color.gray;
+                    _watchAdd2.image.color = Color.white;
+                    _watchAdd3.image.color = Color.gray;
+                    _watchAdd4.image.color = Color.gray;
 
-                    buWacthAds1.transform.GetChild(0).GetComponent<Image>().color = Color.white * 0.0f;
-                    buWacthAds2.transform.GetChild(0).GetComponent<Image>().color = Color.white * 1.0f;
-                    buWacthAds3.transform.GetChild(0).GetComponent<Image>().color = Color.white * 0.0f;
-                    buWacthAds4.transform.GetChild(0).GetComponent<Image>().color = Color.white * 0.0f;
-
-                }
-                else if (iIndex == 3)
-                {
-                    buWacthAds1.image.color = Color.gray;
-                    buWacthAds2.image.color = Color.gray;
-                    buWacthAds3.image.color = Color.white;
-                    buWacthAds4.image.color = Color.gray;
-
-                    buWacthAds1.transform.GetChild(0).GetComponent<Image>().color = Color.white * 0.0f;
-                    buWacthAds2.transform.GetChild(0).GetComponent<Image>().color = Color.white * 0.0f;
-                    buWacthAds3.transform.GetChild(0).GetComponent<Image>().color = Color.white * 1.0f;
-                    buWacthAds4.transform.GetChild(0).GetComponent<Image>().color = Color.white * 0.0f;
-
+                    _watchAdd1.transform.GetChild(0).GetComponent<Image>().color = Color.white * 0.0f;
+                    _watchAdd2.transform.GetChild(0).GetComponent<Image>().color = Color.white * 1.0f;
+                    _watchAdd3.transform.GetChild(0).GetComponent<Image>().color = Color.white * 0.0f;
+                    _watchAdd4.transform.GetChild(0).GetComponent<Image>().color = Color.white * 0.0f;
 
                 }
-                else if (iIndex == 4)
+                else if (_index == 3)
                 {
-                    buWacthAds1.image.color = Color.gray;
-                    buWacthAds2.image.color = Color.gray;
-                    buWacthAds3.image.color = Color.gray;
-                    buWacthAds4.image.color = Color.white;
+                    _watchAdd1.image.color = Color.gray;
+                    _watchAdd2.image.color = Color.gray;
+                    _watchAdd3.image.color = Color.white;
+                    _watchAdd4.image.color = Color.gray;
 
-                    buWacthAds1.transform.GetChild(0).GetComponent<Image>().color = Color.white * 0.0f;
-                    buWacthAds2.transform.GetChild(0).GetComponent<Image>().color = Color.white * 0.0f;
-                    buWacthAds3.transform.GetChild(0).GetComponent<Image>().color = Color.white * 0.0f;
-                    buWacthAds4.transform.GetChild(0).GetComponent<Image>().color = Color.white * 1.0f;
+                    _watchAdd1.transform.GetChild(0).GetComponent<Image>().color = Color.white * 0.0f;
+                    _watchAdd2.transform.GetChild(0).GetComponent<Image>().color = Color.white * 0.0f;
+                    _watchAdd3.transform.GetChild(0).GetComponent<Image>().color = Color.white * 1.0f;
+                    _watchAdd4.transform.GetChild(0).GetComponent<Image>().color = Color.white * 0.0f;
+
+
+                }
+                else if (_index == 4)
+                {
+                    _watchAdd1.image.color = Color.gray;
+                    _watchAdd2.image.color = Color.gray;
+                    _watchAdd3.image.color = Color.gray;
+                    _watchAdd4.image.color = Color.white;
+
+                    _watchAdd1.transform.GetChild(0).GetComponent<Image>().color = Color.white * 0.0f;
+                    _watchAdd2.transform.GetChild(0).GetComponent<Image>().color = Color.white * 0.0f;
+                    _watchAdd3.transform.GetChild(0).GetComponent<Image>().color = Color.white * 0.0f;
+                    _watchAdd4.transform.GetChild(0).GetComponent<Image>().color = Color.white * 1.0f;
 
 
                 }
                 else
                 {
-                    buWacthAds1.image.color = Color.gray;
-                    buWacthAds2.image.color = Color.gray;
-                    buWacthAds3.image.color = Color.gray;
-                    buWacthAds4.image.color = Color.gray;
+                    _watchAdd1.image.color = Color.gray;
+                    _watchAdd2.image.color = Color.gray;
+                    _watchAdd3.image.color = Color.gray;
+                    _watchAdd4.image.color = Color.gray;
 
-                    buWacthAds1.transform.GetChild(0).GetComponent<Image>().color = Color.white * 0.0f;
-                    buWacthAds2.transform.GetChild(0).GetComponent<Image>().color = Color.white * 0.0f;
-                    buWacthAds3.transform.GetChild(0).GetComponent<Image>().color = Color.white * 0.0f;
-                    buWacthAds4.transform.GetChild(0).GetComponent<Image>().color = Color.white * 0.0f;
+                    _watchAdd1.transform.GetChild(0).GetComponent<Image>().color = Color.white * 0.0f;
+                    _watchAdd2.transform.GetChild(0).GetComponent<Image>().color = Color.white * 0.0f;
+                    _watchAdd3.transform.GetChild(0).GetComponent<Image>().color = Color.white * 0.0f;
+                    _watchAdd4.transform.GetChild(0).GetComponent<Image>().color = Color.white * 0.0f;
 
                 }
             }
             else
             {
-                buWacthAds1.image.color = Color.gray;
-                buWacthAds2.image.color = Color.gray;
-                buWacthAds3.image.color = Color.gray;
-                buWacthAds4.image.color = Color.gray;
+                _watchAdd1.image.color = Color.gray;
+                _watchAdd2.image.color = Color.gray;
+                _watchAdd3.image.color = Color.gray;
+                _watchAdd4.image.color = Color.gray;
 
-                buWacthAds1.transform.GetChild(0).GetComponent<Image>().color = Color.white * 0.0f;
-                buWacthAds2.transform.GetChild(0).GetComponent<Image>().color = Color.white * 0.0f;
-                buWacthAds3.transform.GetChild(0).GetComponent<Image>().color = Color.white * 0.0f;
-                buWacthAds4.transform.GetChild(0).GetComponent<Image>().color = Color.white * 0.0f;
+                _watchAdd1.transform.GetChild(0).GetComponent<Image>().color = Color.white * 0.0f;
+                _watchAdd2.transform.GetChild(0).GetComponent<Image>().color = Color.white * 0.0f;
+                _watchAdd3.transform.GetChild(0).GetComponent<Image>().color = Color.white * 0.0f;
+                _watchAdd4.transform.GetChild(0).GetComponent<Image>().color = Color.white * 0.0f;
             }
         }
 

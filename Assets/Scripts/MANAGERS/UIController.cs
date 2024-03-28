@@ -148,7 +148,7 @@ namespace MANAGERS
         private IEnumerator LoadSceneRoutine(SCENE _scene)
         {
             PopUpShow(POP_UP.loading);
-            Loading.Instance.Setup(Loading.FADE.fade_in);//loading 
+            Loading.Instance.Configure(Loading.FADE.fade_in);//loading 
 
             Time.timeScale = 1;
             yield return new WaitForSecondsRealtime(0.5f);
@@ -158,7 +158,7 @@ namespace MANAGERS
             yield return new WaitForSecondsRealtime(0.1f);
             
             PopUpShow(POP_UP.loading);
-            Loading.Instance.Setup(Loading.FADE.face_out);//loading 
+            Loading.Instance.Configure(Loading.FADE.face_out);//loading 
             _isOnLoadingScene = false;
             EventController.OnStartNewSceneInvoke();
 

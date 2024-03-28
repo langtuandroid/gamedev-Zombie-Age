@@ -1,56 +1,48 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace MODULES
 {
     public class ElectricLine : MonoBehaviour
     {
-        public LineRenderer line_renderer;
-        [SerializeField] Material maThunder1, maThunder2;
-   
+        [FormerlySerializedAs("line_renderer")] public LineRenderer _lineRenderer;
+        [FormerlySerializedAs("maThunder1")] [SerializeField] private Material _thunderMaterial1;
+        [FormerlySerializedAs("maThunder2")] [SerializeField] private Material _thunderMaterial2;
 
-        public  void Shot(Vector3 _start,Vector3 _target)
+        public  void ShootElectric(Vector3 _start,Vector3 _target)
         {
-
-            #region SHOT
-            //animation of body
-
-            //--------------------
-      
-
-            ShowThunder();
-            line_renderer.positionCount = 2;
-            line_renderer.SetPosition(0, _start);
-            line_renderer.SetPosition(1, _target);
-            Invoke("HideThunder", 0.05f);
-            #endregion
-
+            ThunderStart();
+            _lineRenderer.positionCount = 2;
+            _lineRenderer.SetPosition(0, _start);
+            _lineRenderer.SetPosition(1, _target);
+            Invoke("ThunderRemove", 0.05f);
         }
+        
+        private int _materialID = 1;
 
-
-        private int iIndexOfMaterial = 1;
-        public void ShowThunder()
+        private void ThunderStart()
         {
-            if (iIndexOfMaterial == 1)
+            if (_materialID == 1)
             {
-                line_renderer.material = maThunder1;
-                iIndexOfMaterial = 2;
+                _lineRenderer.material = _thunderMaterial1;
+                _materialID = 2;
             }
             else
             {
-                line_renderer.material = maThunder2;
-                iIndexOfMaterial = 1;
+                _lineRenderer.material = _thunderMaterial2;
+                _materialID = 1;
             }
-            line_renderer.enabled = true;
+            _lineRenderer.enabled = true;
         }
 
-        public void HideThunder()
+        public void ThunderRemove()
         {
-            line_renderer.enabled = false;
+            _lineRenderer.enabled = false;
         }
 
         private void OnEnable()
         {
-            HideThunder();
+            ThunderRemove();
         }
     }
 }

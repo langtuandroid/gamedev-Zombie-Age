@@ -2,28 +2,26 @@
 using MANAGERS;
 using MODULES.Scriptobjectable;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace SCREENS
 {
     public class Shop : MonoBehaviour
     {
-        [SerializeField]
-        private Button buBack;
+        [FormerlySerializedAs("buBack")] [SerializeField] private Button _backButton;
 
-        // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
-            buBack.onClick.AddListener(() => SetButton(buBack));
+            _backButton.onClick.AddListener(() => AssignButton(_backButton));
 
-            Init_ListIapGem();
+            LoadListAddGems();
 
         }
 
-        //SET BUTTON
-        private void SetButton(Button _bu)
+        private void AssignButton(Button _bu)
         {
-            if (_bu == buBack)
+            if (_bu == _backButton)
             {
                 SoundController.Instance.Play(SoundController.SOUND.ui_click_back);//sound
                 UIController.Instance.HidePopup(UIController.POP_UP.shop);
@@ -33,36 +31,36 @@ namespace SCREENS
 
         #region CLASS IAP GEM
         [System.Serializable]
-        public class IAP_GEM
+        public class Gem
         {
-            public ShopData DATA;
-            public Text txtName;
-            public Text txtValue;
-            public Text txtPrice;
-            public Text txtSale;
+            [FormerlySerializedAs("DATA")] public ShopData _shopData;
+            [FormerlySerializedAs("txtName")] public Text _nametext;
+            [FormerlySerializedAs("txtValue")] public Text _valueText;
+            [FormerlySerializedAs("txtPrice")] public Text _priceText;
+            [FormerlySerializedAs("txtSale")] public Text _scaleText;
 
-            public Button buBuy;
+            [FormerlySerializedAs("buBuy")] public Button _buyButton;
 
 
-            public void Init()
+            public void Construct()
             {
-                txtName.text = DATA.strProductName;
+                _nametext.text = _shopData.strProductName;
 
-                txtPrice.text = DATA.fPriceDollar.ToString() + " $";
+                _priceText.text = _shopData.fPriceDollar + " $";
             
 
-                txtValue.text = "+" + DATA.iValueToAdd.ToString();
-                buBuy.onClick.AddListener(() => Buy());
+                _valueText.text = "+" + _shopData.iValueToAdd;
+                _buyButton.onClick.AddListener(() => Buy());
 
-                if (txtSale)
-                    txtSale.text = "+" + DATA.iPrecentSale + "%";
+                if (_scaleText)
+                    _scaleText.text = "+" + _shopData.iPrecentSale + "%";
             }
 
             private void Buy()
             {
                 SoundController.Instance.Play(SoundController.SOUND.ui_purchase);//sound
 
-                DataController.Instance.playerData.Gem += DATA.iValueToAdd;
+                DataController.Instance.playerData.Gem += _shopData.iValueToAdd;
                 DataController.Instance.SaveData(); //save                                                       
                 EventController.OnUpdatedBoardInvoke();  //update board
 
@@ -70,17 +68,15 @@ namespace SCREENS
 
         }
 
-        public List<IAP_GEM> LIST_IAP_GEM;
-        private void Init_ListIapGem()
+        public List<Gem> LIST_IAP_GEM;
+        private void LoadListAddGems()
         {
             int _total = LIST_IAP_GEM.Count;
             for (int i = 0; i < _total; i++)
             {
-                LIST_IAP_GEM[i].Init();
+                LIST_IAP_GEM[i].Construct();
             }
         }
         #endregion
-
-
     }
 }

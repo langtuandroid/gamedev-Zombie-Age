@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace MODULES
 {
@@ -9,23 +10,22 @@ namespace MODULES
     }
     public class TimeLife : MonoBehaviour
     {
-        public TYPE eType;
-        public float fTimeLife;
-        private float fCountTime;
+        [FormerlySerializedAs("eType")] public TYPE _timeLifeType;
+        [FormerlySerializedAs("fTimeLife")] public float _timeLife;
+        private float _timeCount;
         private GameObject _gameobject;
 
         private void Awake()
         {
             _gameobject = gameObject;
         }
-        // Update is called once per frame
-        void Update()
+        private void Update()
         {
-            fCountTime -= Time.deltaTime;
-            if(fCountTime<=0)
+            _timeCount -= Time.deltaTime;
+            if(_timeCount<=0)
             {
-                fCountTime = fTimeLife;
-                switch(eType)
+                _timeCount = _timeLife;
+                switch(_timeLifeType)
                 {
                     case TYPE.Active:
                         _gameobject.SetActive(false);
@@ -39,7 +39,7 @@ namespace MODULES
 
         private void OnEnable()
         {
-            fCountTime = fTimeLife;
+            _timeCount = _timeLife;
         }
 
     }

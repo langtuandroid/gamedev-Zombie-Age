@@ -1,33 +1,35 @@
 ﻿using MANAGERS;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace MODULES
 {
-    public class Board : MonoBehaviour
+    public class GameBoard : MonoBehaviour
     {
         public enum TYPE
         {
             gem,
         }
-        public TYPE eType;
+        [FormerlySerializedAs("eType")] public TYPE _boardType;
 
-        private Button buButtonThis;
-        private Text txtValue;
+        private Button _thisButton;
+        private Text _text;
         
         private void Awake()
         {
 
-            buButtonThis = GetComponent<Button>();
-            txtValue = this.GetComponentInChildren<Text>();
+            _thisButton = GetComponent<Button>();
+            _text = this.GetComponentInChildren<Text>();
         }
-        void Start()
+
+        private void Start()
         {
-            buButtonThis.onClick.AddListener(() => SetButton());
+            _thisButton.onClick.AddListener(() => AssignButton());
         }
 
 
-        private void SetButton()
+        private void AssignButton()
         {
             //for tutorial
             if (TutorialController.Instance)
@@ -36,7 +38,7 @@ namespace MODULES
             }
 
             SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
-            switch (eType)
+            switch (_boardType)
             {
                 case TYPE.gem:
                     UIController.Instance.PopUpShow(UIController.POP_UP.shop);//
@@ -45,13 +47,13 @@ namespace MODULES
             }
         }
 
-        private void ShowValue()
+        private void ViewValue()
         {
 
-            switch (eType)
+            switch (_boardType)
             {
                 case TYPE.gem:
-                    txtValue.text = DataController.Instance.playerData.Gem.ToString();
+                    _text.text = DataController.Instance.playerData.Gem.ToString();
                     break;
 
             }
@@ -59,13 +61,13 @@ namespace MODULES
 
         private void OnEnable()
         {
-            ShowValue();
-            EventController.OnUpdatedBoard += ShowValue;
+            ViewValue();
+            EventController.OnUpdatedBoard += ViewValue;
 
         }
         private void OnDisable()
         {
-            EventController.OnUpdatedBoard -= ShowValue;
+            EventController.OnUpdatedBoard -= ViewValue;
         }
     }
 }

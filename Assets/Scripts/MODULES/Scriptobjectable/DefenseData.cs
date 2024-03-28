@@ -67,7 +67,7 @@ namespace MODULES.Scriptobjectable
 
                     }
                     UIController.Instance.PopUpShow(UIController.POP_UP.reward);
-                    VictoryReward.SetReward(_reward);
+                    WinReward.LoadRevardReward(_reward);
                 }
                 DATA.bUnlocked = value;
             }

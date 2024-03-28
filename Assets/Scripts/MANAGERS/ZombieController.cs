@@ -133,7 +133,7 @@ namespace MANAGERS
             _zombiesInWave--;
             if (_zombiesInWave <= 0)
             {
-                TheLevel.Instance.LoadWave();
+                LevelController.Instance.LoadLevel();
             }
         }
 

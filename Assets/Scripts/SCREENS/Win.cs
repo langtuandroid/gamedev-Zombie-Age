@@ -3,57 +3,53 @@ using System.Collections.Generic;
 using MANAGERS;
 using MODULES.Scriptobjectable;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace SCREENS
 {
-    public class Victory : MonoBehaviour
+    public class Win : MonoBehaviour
     {
+        [FormerlySerializedAs("buContinue")] [SerializeField] Button _continueButton;
+        [FormerlySerializedAs("buRate")] [SerializeField] Button _buttonRate;
+        [FormerlySerializedAs("txtLevel")] [SerializeField] Text _levelText;
 
-        [SerializeField] Button buContinue, buRate;  
-        [SerializeField] Text txtLevel;
+        [FormerlySerializedAs("LIST_STAR")] [SerializeField] List<Image> _starList;
 
-        [SerializeField] List<Image> LIST_STAR;
-
+        
         [Space(20)]
-        [SerializeField] Transform m_tranOfRay;
-        private Vector3 vEuler;
-        private bool bShowRate;
+        [FormerlySerializedAs("m_tranOfRay")][SerializeField] Transform _rayTransform;
+        private Vector3 _euler;
+        private bool _showRate;
 
-
-        // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
-            buContinue.onClick.AddListener(() => SetButton(buContinue));
-            buRate.onClick.AddListener(() => SetButton(buRate));
+            _continueButton.onClick.AddListener(() => SetButton(_continueButton));
+            _buttonRate.onClick.AddListener(() => SetButton(_buttonRate));
         }
 
         private void Update()
         {
-            vEuler.z -= 0.2f;
-            m_tranOfRay.eulerAngles = vEuler;
+            _euler.z -= 0.2f;
+            _rayTransform.eulerAngles = _euler;
         }
-
-
-        //SET BUTTON
+        
         private void SetButton(Button _bu)
         {
-            if (_bu == buContinue)
+            if (_bu == _continueButton)
             {
-                if (buContinue.image.color != Color.white) return;
+                if (_continueButton.image.color != Color.white) return;
 
                 MusicManager.Instance.Play();
                 SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound         
              
-                //============================
-
                 #region RATE
                 if (DataController.Instance.playerData.CurrentLevel > 0
                     && (DataController.Instance.playerData.CurrentLevel + 1) % 4 == 0)
                 {
-                    if (!bShowRate)
+                    if (!_showRate)
                     {
-                        bShowRate = true;
+                        _showRate = true;
                         UIController.Instance.PopUpShow(UIController.POP_UP.rate);
                         return;
                     }
@@ -72,19 +68,19 @@ namespace SCREENS
 
             }
 
-            else if (_bu == buRate)
+            else if (_bu == _buttonRate)
             {
                 SoundController.Instance.Play(SoundController.SOUND.ui_click_next);//sound
             }
         }
 
 
-        private IEnumerator IeWin()
+        private IEnumerator WinRoutine()
         {
-            buContinue.image.color = Color.gray;
+            _continueButton.image.color = Color.gray;
             int _star = DataController.Instance.GetStars();//get star
             int _level = DataController.Instance.playerData.CurrentLevel;
-            txtLevel.text = "LEVEL " + (_level + 1).ToString();
+            _levelText.text = "LEVEL " + (_level + 1).ToString();
 
             if (DataController.Instance.mode == DataController.Mode.Release)
             {
@@ -97,9 +93,9 @@ namespace SCREENS
             #region STAR ENIMATION        
             RewardData _reward = null;
 
-            LIST_STAR[0].gameObject.SetActive(false);
-            LIST_STAR[1].gameObject.SetActive(false);
-            LIST_STAR[2].gameObject.SetActive(false);
+            _starList[0].gameObject.SetActive(false);
+            _starList[1].gameObject.SetActive(false);
+            _starList[2].gameObject.SetActive(false);
 
 
 
@@ -122,17 +118,17 @@ namespace SCREENS
             {
                 case 1:
                     yield return new WaitForSecondsRealtime(0.5f);             
-                    LIST_STAR[0].gameObject.SetActive(true);
+                    _starList[0].gameObject.SetActive(true);
 
                     SoundController.Instance.Play(SoundController.SOUND.sfx_gun_ak);//sound
                     break;
                 case 2:
                     yield return new WaitForSecondsRealtime(0.5f);
-                    LIST_STAR[0].gameObject.SetActive(true);
+                    _starList[0].gameObject.SetActive(true);
                     SoundController.Instance.Play(SoundController.SOUND.sfx_gun_ak);//sound
 
                     yield return new WaitForSecondsRealtime(0.5f);
-                    LIST_STAR[1].gameObject.SetActive(true);
+                    _starList[1].gameObject.SetActive(true);
                     SoundController.Instance.Play(SoundController.SOUND.sfx_gun_ar15);//sound
 
 
@@ -140,15 +136,15 @@ namespace SCREENS
                     break;
                 case 3:
                     yield return new WaitForSecondsRealtime(0.5f);
-                    LIST_STAR[0].gameObject.SetActive(true);
+                    _starList[0].gameObject.SetActive(true);
                     SoundController.Instance.Play(SoundController.SOUND.sfx_gun_ak);//sound
 
                     yield return new WaitForSecondsRealtime(0.5f);
-                    LIST_STAR[1].gameObject.SetActive(true);
+                    _starList[1].gameObject.SetActive(true);
                     SoundController.Instance.Play(SoundController.SOUND.sfx_gun_ar15);//sound
 
                     yield return new WaitForSecondsRealtime(0.5f);
-                    LIST_STAR[2].gameObject.SetActive(true);
+                    _starList[2].gameObject.SetActive(true);
                     SoundController.Instance.Play(SoundController.SOUND.sfx_gun_shotgun);//sound
                     break;
 
@@ -157,11 +153,11 @@ namespace SCREENS
             #endregion
 
             yield return new WaitForSecondsRealtime(1.2f);
-            buContinue.image.color = Color.white;
+            _continueButton.image.color = Color.white;
 
             SoundController.Instance.Play(SoundController.SOUND.ui_wood_board);//sound
             UIController.Instance.PopUpShow(UIController.POP_UP.reward);
-            VictoryReward.SetReward(_reward);
+            WinReward.LoadRevardReward(_reward);
 
 
         
@@ -170,11 +166,11 @@ namespace SCREENS
 
         private void OnEnable()
         {
-            bShowRate = false;
+            _showRate = false;
             SoundController.Instance.Play(SoundController.SOUND.ui_wood_board);//sound
             MusicManager.Instance.Stop();
             SoundController.Instance.Play(SoundController.SOUND.ui_victory);//sound
-            StartCoroutine(IeWin());
+            StartCoroutine(WinRoutine());
 
         }
 

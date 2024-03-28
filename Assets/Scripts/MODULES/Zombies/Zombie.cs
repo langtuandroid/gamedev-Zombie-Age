@@ -477,7 +477,7 @@ namespace MODULES.Zombies
 
 
 
-            iHP = _zombie._zombieData.GetHp(DataController.Instance.playerData.CurrentLevel + 1, TheLevel.Instance.iCurrentWave);
+            iHP = _zombie._zombieData.GetHp(DataController.Instance.playerData.CurrentLevel + 1, LevelController.Instance.CurrentWave);
             // if (_zombie.SPECIAL_STATUS) iHP = (int)(iHP * 0.5f);//Nếu ở trạng thái special, thì hp giảm 1 nửa
 
 
@@ -509,7 +509,7 @@ namespace MODULES.Zombies
         {
             //show text
             _textBlood = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.text_blood).Get();
-            _textBlood.GetComponent<TextValue>().SetValue((int)_value);
+            _textBlood.GetComponent<TextValue>().SetText((int)_value);
             _textBlood.transform.position = ZOMBIE._transformCenter.position;
             _textBlood.SetActive(true);
 
@@ -683,7 +683,7 @@ namespace MODULES.Zombies
             //effect
             _effect = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.remove_item).Get();
             _effect.transform.position = sprItem_Hat.transform.position;
-            _effect.GetComponent<RemoveItem>().SetItem(sprItem_Hat.sprite);//add sprite
+            _effect.GetComponent<TakeOffItem>().SetSprite(sprItem_Hat.sprite);//add sprite
             _effect.SetActive(true);
 
         }
@@ -697,7 +697,7 @@ namespace MODULES.Zombies
             //explosion
             _effect = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.remove_item).Get();
             _effect.transform.position = sprItem_Shield.transform.position;
-            _effect.GetComponent<RemoveItem>().SetItem(sprItem_Shield.sprite);//add sprite
+            _effect.GetComponent<TakeOffItem>().SetSprite(sprItem_Shield.sprite);//add sprite
             _effect.SetActive(true);
 
         }

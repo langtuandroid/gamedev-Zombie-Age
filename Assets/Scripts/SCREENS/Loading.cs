@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace SCREENS
@@ -19,53 +20,53 @@ namespace SCREENS
         }
 
 
-        public FADE eFace;
-        [SerializeField] Image imaLoading;
-        private bool bAllowAnimation;
-        [SerializeField] float fSetTime = 1.0f;
-        private float fCountTime;
-        private Color clCurrentColor = Color.black;
+        [FormerlySerializedAs("eFace")] public FADE _fadeType;
+        [FormerlySerializedAs("imaLoading")] [SerializeField] Image _loadingImage;
+        private bool _isAnimte;
+        private float _setTime = 4.0f;
+        private float _timeCount;
+        private Color _thisColor = Color.black;
 
 
-        public void Setup(FADE _fade)
+        public void Configure(FADE _fade)
         {
-            Instance.eFace = _fade;
+            Instance._fadeType = _fade;
             switch (_fade)
             {
                 case FADE.fade_in:
-                    clCurrentColor = Color.black;
-                    clCurrentColor.a = 0.0f;
+                    _thisColor = Color.black;
+                    _thisColor.a = 0.0f;
 
                     break;
                 case FADE.face_out:
-                    clCurrentColor = Color.black;
-                    clCurrentColor.a = 1.0f;
+                    _thisColor = Color.black;
+                    _thisColor.a = 1.0f;
                     break;
             }
-            imaLoading.color = clCurrentColor;
-            fCountTime = fSetTime;
-            bAllowAnimation = true;
+            _loadingImage.color = _thisColor;
+            _timeCount = _setTime;
+            _isAnimte = true;
         }
 
         private void Update()
         {
-            if (!bAllowAnimation) return;
-            imaLoading.color = clCurrentColor;
-            switch (eFace)
+            if (!_isAnimte) return;
+            _loadingImage.color = _thisColor;
+            switch (_fadeType)
             {
                 case FADE.fade_in:
-                    clCurrentColor.a += Time.deltaTime * fCountTime;
-                    if (clCurrentColor.a >= 1)
+                    _thisColor.a += Time.deltaTime * _timeCount;
+                    if (_thisColor.a >= 1)
                     {
-                        bAllowAnimation = false;
+                        _isAnimte = false;
                    
                     }
                     break;
                 case FADE.face_out:
-                    clCurrentColor.a -= Time.deltaTime * fCountTime;
-                    if (clCurrentColor.a <= 0)
+                    _thisColor.a -= Time.deltaTime * _timeCount;
+                    if (_thisColor.a <= 0)
                     {
-                        bAllowAnimation = false;
+                        _isAnimte = false;
                    
                     }
                     break;

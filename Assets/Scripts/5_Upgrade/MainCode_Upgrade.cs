@@ -106,7 +106,7 @@ namespace _5_Upgrade
                             {
                                 SoundController.Instance.Play(SoundController.SOUND.ui_cannot);//sound
                                 UIController.Instance.PopUpShow(UIController.POP_UP.note);
-                                Note.SetNote(Note.NOTE.no_enought_star_to_upgrade.ToString());
+                                Note.AssignNote(Note.NOTE.no_enought_star_to_upgrade.ToString());
                                 return;
                             }
                         }

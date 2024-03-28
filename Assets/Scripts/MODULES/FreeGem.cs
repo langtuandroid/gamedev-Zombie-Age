@@ -1,24 +1,24 @@
 ﻿using MANAGERS;
 using MODULES.Scriptobjectable;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace MODULES
 {
     public class FreeGem : MonoBehaviour
     {
-        private Button buThis;
-        [SerializeField] Text txtValue;
+        private Button _thisButton;
+        [FormerlySerializedAs("txtValue")] [SerializeField] private Text _valueText;
 
-        // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
             RewardData _reward = DataController.Instance.GetReward(EnumController.REWARD.ads_free_gem);
 
-            buThis = GetComponent<Button>();
+            _thisButton = GetComponent<Button>();
 
-            buThis.onClick.AddListener(() => SetButton(buThis));
-            txtValue.text = "+" + _reward.iValue;
+            _thisButton.onClick.AddListener(() => AssignButton(_thisButton));
+            _valueText.text = "+" + _reward.iValue;
         }
 
         private void OnEnable()
@@ -26,20 +26,17 @@ namespace MODULES
             gameObject.SetActive(false);
         }
 
-        private void SetButton(Button _bu)
+        private void AssignButton(Button _bu)
         {
-            //for tutorial
             if (TutorialController.Instance)
             {
                 if (!TutorialController.Instance.IsRightInput()) return;
             }
-
-
-            if (_bu == buThis)
+            
+            if (_bu == _thisButton)
             {
             
             }
-
         }
     }
 }

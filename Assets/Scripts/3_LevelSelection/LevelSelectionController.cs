@@ -165,7 +165,7 @@ namespace _3_LevelSelection
                     {
                         SoundController.Instance.Play(SoundController.SOUND.ui_cannot);//sound
                         UIController.Instance.PopUpShow(UIController.POP_UP.note);
-                        Note.SetNote(Note.NOTE.no_enought_star.ToString());
+                        Note.AssignNote(Note.NOTE.no_enought_star.ToString());
                         Debug.Log("LOCKED");
                     }
 
@@ -184,7 +184,7 @@ namespace _3_LevelSelection
                     {
                         SoundController.Instance.Play(SoundController.SOUND.ui_cannot);//sound
                         UIController.Instance.PopUpShow(UIController.POP_UP.note);
-                        Note.SetNote(Note.NOTE.no_enought_star.ToString());
+                        Note.AssignNote(Note.NOTE.no_enought_star.ToString());
                         Debug.Log("LOCKED");
                     }
 
