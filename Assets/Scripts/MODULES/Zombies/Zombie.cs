@@ -12,9 +12,11 @@ namespace MODULES.Zombies
 {
     public class Zombie : MonoBehaviour
     {
+        [Inject] private DiContainer _diContainer;    
         [Inject] private WeaponController _weaponController;
         [Inject] protected SoundController SoundController;
         [Inject] private GameplayController _gameplayController;
+        [Inject] protected ObjectPoolController _objectPoolController;
         [FormerlySerializedAs("eStatus")] public EnumController.ZOMBIE_STATUS _zombieStatus;
         [FormerlySerializedAs("DATA")] public ZombieData _zombieData;
         [FormerlySerializedAs("ITEM_SYSTEM")] public ItemsSystem _itemsSystem;
@@ -58,6 +60,7 @@ namespace MODULES.Zombies
             _gameobject = gameObject;
 
             _itemsSystem = new ItemsSystem(this);
+            _diContainer.Inject(_itemsSystem);
             _weaponController = WeaponController.Instance;
             SoundController = SoundController.Instance;
         }
@@ -127,13 +130,13 @@ namespace MODULES.Zombies
                     if (!_zombieData.bIsFlying)
                     {
                         //blood
-                        _bloodEffect = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.blood_of_zombie).Get();
+                        _bloodEffect = _objectPoolController.GetObjectPool(EnumController.POOLING_OBJECT.blood_of_zombie).Get();
                         _bloodEffect.transform.position = _Transform.position;
                         _bloodEffect.SetActive(true);
 
                     }
 
-                    _bloodEffect = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.zombie_blood_exploison).Get();
+                    _bloodEffect = _objectPoolController.GetObjectPool(EnumController.POOLING_OBJECT.zombie_blood_exploison).Get();
                     _bloodEffect.transform.position = _transformCenter.position;
                     _bloodEffect.SetActive(true);
 
@@ -145,7 +148,7 @@ namespace MODULES.Zombies
                     if (_zombieData.bIsBoss)
                     {
                         Animator.speed = 0.0f;
-                        Instantiate(ObjectPoolController.Instance._bigBloodPrefab, _transformCenter.position, Quaternion.identity);//eff blood    
+                        Instantiate(_objectPoolController._bigBloodPrefab, _transformCenter.position, Quaternion.identity);//eff blood    
                         ActivateBoss(_gameobject, false, 3.0f);
                         return;
                     }
@@ -176,8 +179,8 @@ namespace MODULES.Zombies
         {
             yield return new WaitForSeconds(_timedelay);
 
-            Instantiate(ObjectPoolController.Instance._explosionBossPrefab, _transformCenter.position, Quaternion.identity);//explosion
-            Instantiate(ObjectPoolController.Instance._bossBloodPrefab, vCURRENT_POS, Quaternion.identity);//bloss
+            Instantiate(_objectPoolController._explosionBossPrefab, _transformCenter.position, Quaternion.identity);//explosion
+            Instantiate(_objectPoolController._bossBloodPrefab, vCURRENT_POS, Quaternion.identity);//bloss
             SoundController.Play(SoundController.SOUND.sfx_zombie_gruzz_boss);//sound
             EventController.ZombieEvent_Die(this);//event
             _object.SetActive(_active);
@@ -275,7 +278,7 @@ namespace MODULES.Zombies
             _hitFire = true;
 
             //EFFECT
-            _fire = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.fire_of_enemies).Get();
+            _fire = _objectPoolController.GetObjectPool(EnumController.POOLING_OBJECT.fire_of_enemies).Get();
             _fire.transform.localScale = _scaleFire;
             if (_isSpecial)
                 _fire.transform.localScale *= 1.3f;
@@ -411,7 +414,7 @@ namespace MODULES.Zombies
                 IsFreezing = true;
 
                 //EFFECT
-                _effectFreeze = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.effect_freeze).Get();
+                _effectFreeze = _objectPoolController.GetObjectPool(EnumController.POOLING_OBJECT.effect_freeze).Get();
                 _effectFreeze.transform.localScale = _scaleFree;
 
                 if (_isSpecial)
@@ -573,6 +576,8 @@ namespace MODULES.Zombies
     [System.Serializable]
     public class ItemsSystem
     {
+        [Inject] private ObjectPoolController _objectPoolController;
+        [Inject] private SpriteController _spriteController;
         public ItemsSystem(Zombie _zombie)
         {
             ZOMBIE = _zombie;
@@ -612,7 +617,7 @@ namespace MODULES.Zombies
             }
             if (sprItem_Hat != null)
             {
-                sprItem_Hat.sprite = SpriteController.Instance._zombieItem.TakeHat(_item)._sprite;
+                sprItem_Hat.sprite = _spriteController._zombieItem.TakeHat(_item)._sprite;
                 sprItem_Hat.gameObject.SetActive(true);
             }
         }
@@ -632,7 +637,7 @@ namespace MODULES.Zombies
             }
             if (sprItem_Weapon != null)
             {
-                sprItem_Weapon.sprite = SpriteController.Instance._zombieItem.TakeWeapon(_item)._sprite;
+                sprItem_Weapon.sprite = _spriteController._zombieItem.TakeWeapon(_item)._sprite;
                 sprItem_Weapon.gameObject.SetActive(true);
             }
         }
@@ -653,7 +658,7 @@ namespace MODULES.Zombies
             };
             if (sprItem_Shield != null)
             {
-                sprItem_Shield.sprite = SpriteController.Instance._zombieItem.TakeShield(_item)._sprite;
+                sprItem_Shield.sprite = _spriteController._zombieItem.TakeShield(_item)._sprite;
                 sprItem_Shield.gameObject.SetActive(true);
             }
         }
@@ -668,7 +673,7 @@ namespace MODULES.Zombies
 
             sprItem_Hat.gameObject.SetActive(false);
             //effect
-            _effect = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.remove_item).Get();
+            _effect = _objectPoolController.GetObjectPool(EnumController.POOLING_OBJECT.remove_item).Get();
             _effect.transform.position = sprItem_Hat.transform.position;
             _effect.GetComponent<TakeOffItem>().SetSprite(sprItem_Hat.sprite);//add sprite
             _effect.SetActive(true);
@@ -682,7 +687,7 @@ namespace MODULES.Zombies
 
             sprItem_Shield.gameObject.SetActive(false);
             //explosion
-            _effect = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.remove_item).Get();
+            _effect = _objectPoolController.GetObjectPool(EnumController.POOLING_OBJECT.remove_item).Get();
             _effect.transform.position = sprItem_Shield.transform.position;
             _effect.GetComponent<TakeOffItem>().SetSprite(sprItem_Shield.sprite);//add sprite
             _effect.SetActive(true);

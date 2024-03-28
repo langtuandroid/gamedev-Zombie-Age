@@ -9,6 +9,7 @@ namespace MODULES.Soldiers.Bullets
     public class BulletBazoka : MonoBehaviour
     {
         [Inject] private GameplayController _gameplayController;
+        [Inject] private ObjectPoolController _objectPoolController;
         private GameObject _gameobject;
         private Transform _transform;
         private List<Vector2> _path = new();
@@ -106,7 +107,7 @@ namespace MODULES.Soldiers.Bullets
         {
             if (_time <= 0)
             {
-                _smock = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.smock_of_bazoka).Get();
+                _smock = _objectPoolController.GetObjectPool(EnumController.POOLING_OBJECT.smock_of_bazoka).Get();
                 _smock.transform.position = _currentPos;
                 _smock.SetActive(true);
                 _time = 0.03f;

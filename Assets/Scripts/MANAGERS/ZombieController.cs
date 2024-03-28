@@ -4,13 +4,13 @@ using MODULES.Scriptobjectable;
 using MODULES.Zombies;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Zenject;
 
 namespace MANAGERS
 {
     public class ZombieController : MonoBehaviour
     {
-        public static ZombieController Instance;
-        
+        [Inject] private DiContainer _diContainer;
         [Header("*** Zombie")]
         [Space(20)]
         private int _zombiesTotalNum;
@@ -25,14 +25,13 @@ namespace MANAGERS
             return null;
         }
 
-
-        //WAVE
         [FormerlySerializedAs("iTotalZombieInWave")] public int _zombiesInWave; 
 
-        //POOL ZOMBIE FOR LEVEL
         [System.Serializable]
         public class UnitZombie
         {
+            [Inject] private DiContainer _diContainer;
+            [Inject] private ZombieController _zombieController;
             [FormerlySerializedAs("_zombie")] public EnumController.ZOMBIE _zombieType;
             private GameObject _zombiePrefab;
 
@@ -40,11 +39,11 @@ namespace MANAGERS
             private int _zombieNum = 10;
             public void Init()
             {
-
-                _zombiePrefab = Instance.GetZombie(_zombieType).objPrefab;
+                _zombiePrefab = _zombieController.GetZombie(_zombieType).objPrefab;
                 for (int i = 0; i < _zombieNum; i++)
                 {
-                    GameObject _zombie = Instantiate(_zombiePrefab, new Vector2(100, 100), Quaternion.identity);
+                    Debug.Log(_zombiePrefab);
+                    GameObject _zombie = _diContainer.InstantiatePrefab(_zombiePrefab, new Vector2(100, 100), Quaternion.identity, null);
                     _zombie.SetActive(false);
                     _zombiesList.Add(_zombie.GetComponent<Zombie>());
                 }
@@ -90,6 +89,7 @@ namespace MANAGERS
             {
                 UnitZombie _groupZombie = new UnitZombie();
                 _groupZombie._zombieType = _listOfLevel[i].eZombie;
+                _diContainer.Inject(_groupZombie);
                 _groupZombie.Init();
                 _poolsOfZombies.Add(_groupZombie);
             }
@@ -118,9 +118,6 @@ namespace MANAGERS
 
         private void Awake()
         {
-            if (Instance == null)
-                Instance = this;
-
             _zombiesTotalNum = _zombieList.Count;
         }
 

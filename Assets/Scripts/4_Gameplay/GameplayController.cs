@@ -16,6 +16,7 @@ namespace _4_Gameplay
         [Inject] private SoundController _soundController;
         [Inject] private MusicController _musicController;
         [Inject] private DataController _dataController;
+        [Inject] private TutorialController _tutorialController;
         public enum INPUT_TYPE
         {
             shooting,
@@ -230,9 +231,9 @@ namespace _4_Gameplay
 
         private void AssignButton(Button button)
         { //for tutorial
-            if (TutorialController.Instance)
+            if (_tutorialController)
             {
-                if (!TutorialController.Instance.IsRightInput()) return;
+                if (!_tutorialController.IsRightInput()) return;
             }
 
             if (button == _pauseButton)

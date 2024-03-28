@@ -15,6 +15,7 @@ namespace _2_Weapon
         [Inject] private DataController _dataController;
         [Inject] private WeaponController _weaponController;
         [Inject] private WeaponsManager _weaponsManager;
+        [Inject] private TutorialController _tutorialController;
         
         [FormerlySerializedAs("GUN_DATA")] [SerializeField] private GunData _gunData;
         [FormerlySerializedAs("buThis")] [SerializeField] private Button _thisButton;
@@ -42,10 +43,8 @@ namespace _2_Weapon
             this._gunData.CheckUnlockWithLevel();
             txtName.text = this._gunData.strNAME;
             _equipButton.image.sprite = _grayButtonSprite;
-
-            //UNLOCK
-            //if (GUN_DATA.bUNLOCKED) 
-            if(true) //TODO Remove test only
+            
+            if (_gunData.bUNLOCKED) 
             {
                 imaLock.color = Color.white * 0.0f;
                 imaIcon.sprite = this._gunData.sprIcon;
@@ -70,9 +69,9 @@ namespace _2_Weapon
         
         private void ButtonSet(Button _button)
         {
-            if (TutorialController.Instance)
+            if (_tutorialController)
             {
-                if (!TutorialController.Instance.IsRightInput()) return;
+                if (!_tutorialController.IsRightInput()) return;
             }
 
             if (_button == _thisButton)
@@ -124,7 +123,6 @@ namespace _2_Weapon
         {
             if (_gun != _gunData) return;
             _gunData.DATA.bEquiped = true;
-            Debug.Log(_weaponController);
             if (!_weaponController.equipedWeaponList.Contains(_gunData))
                 _weaponController.equipedWeaponList.Add(_gunData);
 

@@ -15,6 +15,7 @@ namespace MODULES
         [Inject] private DiContainer _diContainer;   
         [Inject] private DataController _dataController;
         [Inject] private GameplayController _gameplayController;
+        [Inject] private ZombieController _zombieController;
         [FormerlySerializedAs("LEVEL_DATA")] public LevelData _levelData;
         [System.Serializable]
         public class UnitWave
@@ -107,7 +108,7 @@ namespace MODULES
         private void Start()
         {
             AssignAllZombies();
-            ZombieController.Instance.ConstructPool(_zombiesInLevel);
+            _zombieController.ConstructPool(_zombiesInLevel);
             ConfigureWave();
         }
         private void OnDisable()
@@ -120,8 +121,8 @@ namespace MODULES
             int _total = _levelData.LIST_ZOMBIE_IN_LEVEL.Count;
             for (int i = 0; i < _total; i++)
             {
-                if (!ZombieController.Instance.GetZombie(_levelData.LIST_ZOMBIE_IN_LEVEL[i].ZOMBIE).bIsBoss)
-                    _zombiesInLevel.Add(ZombieController.Instance.GetZombie(_levelData.LIST_ZOMBIE_IN_LEVEL[i].ZOMBIE));
+                if (!_zombieController.GetZombie(_levelData.LIST_ZOMBIE_IN_LEVEL[i].ZOMBIE).bIsBoss)
+                    _zombiesInLevel.Add(_zombieController.GetZombie(_levelData.LIST_ZOMBIE_IN_LEVEL[i].ZOMBIE));
             }
 
         }
@@ -179,7 +180,7 @@ namespace MODULES
 
                 Wave _wave = _waveList[CurrentWave];
                 int _totalGroup = _wave.GetAllZombiesGroups();
-                ZombieController.Instance._zombiesInWave = _wave.AllZOmbies();
+                _zombieController._zombiesInWave = _wave.AllZOmbies();
                 Vector3 _tempPos = new Vector3();
 
                 float _specialStatusForZombie = 0;
@@ -205,7 +206,7 @@ namespace MODULES
                             && _wave == _waveList[_waveList.Count - 1])//WAVE CUOI CUNG
                         {
                             IsBossComming = true;
-                            ZombieController.Instance._zombiesInWave++;
+                            _zombieController._zombiesInWave++;
                             GameObject _boss = Instantiate(_levelData.prefabBoss, _tempPos, Quaternion.identity);//boss
                             Zombie _Boss = _boss.GetComponent<Zombie>();
                             ZombieHealth zombieHealth = new ZombieHealth(_Boss);
@@ -216,7 +217,7 @@ namespace MODULES
 
 
                         //ZOMBIE
-                        _tempZombie = ZombieController.Instance.GetZombieInPool(_zombie);
+                        _tempZombie = _zombieController.GetZombieInPool(_zombie);
 
                         _specialStatusForZombie = Random.Range(0, 100);
                         if (_specialStatusForZombie <= _levelData.iConfigSpecialStatus)
@@ -293,7 +294,7 @@ namespace MODULES
                 int _length = _waveList[i]._waveUnits.Count;
                 for (int j = 0; j < _length; j++)
                 {
-                    _totalHp += _waveList[i]._waveUnits[j]._numberOfZombies * ZombieController.Instance.GetZombie(_waveList[i]._waveUnits[j]._zombieData.eZombie).GetHp(
+                    _totalHp += _waveList[i]._waveUnits[j]._numberOfZombies * _zombieController.GetZombie(_waveList[i]._waveUnits[j]._zombieData.eZombie).GetHp(
                         _dataController.playerData.CurrentLevel + 1, i + 1
                     );
                 }

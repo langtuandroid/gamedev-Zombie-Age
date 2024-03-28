@@ -7,6 +7,7 @@ namespace MODULES
 {
     public class BloodBigFX : MonoBehaviour
     {
+        [Inject] private ObjectPoolController _objectPoolController;
         [Inject] private SoundController _soundController;
         private Vector2 _thisPos;
         private Vector2 _tempPos;
@@ -30,7 +31,7 @@ namespace MODULES
         {
             for (int i = 0; i < _loop; i++)
             {
-                _bloodPrefab = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.zombie_blood_exploison).Get();
+                _bloodPrefab = _objectPoolController.GetObjectPool(EnumController.POOLING_OBJECT.zombie_blood_exploison).Get();
                 if(_bloodPrefab)
                 {
                     _tempPos = _thisPos + Random.insideUnitCircle*2.0f;

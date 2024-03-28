@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
+using Zenject;
 
 namespace MANAGERS
 {
     public class TutorialPage : MonoBehaviour
     {
-       
+        [Inject] private TutorialController _tutorialController;
         [SerializeField] private TutorialController.TUTORIAL eTutorial;
         [SerializeField] private float fTimeDelay;
         private RaycastHit2D _ray;
@@ -22,7 +23,7 @@ namespace MANAGERS
 
         private void OnEnable()
         {
-            TutorialController.Instance._currentStep = this;
+            _tutorialController._currentStep = this;
         }
     }
 }

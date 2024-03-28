@@ -7,6 +7,7 @@ namespace MODULES.Zombies.Bullets
 {
     public class BulletBossFrog : MonoBehaviour
     {
+        [Inject] private ObjectPoolController _objectPoolController;
         [Inject] private SoundController _soundController;
         [FormerlySerializedAs("iDamage")] public int _damage;
         private Bezier _bezier = new ();
@@ -45,7 +46,7 @@ namespace MODULES.Zombies.Bullets
             {
 
                 EventController.ZombieEvent_OnZombieAttack(_damage);//attack
-                _effect = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.main_exploison).Get();
+                _effect = _objectPoolController.GetObjectPool(EnumController.POOLING_OBJECT.main_exploison).Get();
                 _effect.transform.position = _currentPos;
                 _effect.SetActive(true);
                 
@@ -63,7 +64,7 @@ namespace MODULES.Zombies.Bullets
         {
             if (_time <= 0)
             {
-                _smockEffect = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.smock_of_bazoka).Get();
+                _smockEffect = _objectPoolController.GetObjectPool(EnumController.POOLING_OBJECT.smock_of_bazoka).Get();
                 _smockEffect.transform.position = _currentPos;
                 _smockEffect.SetActive(true);
                 _time = 0.03f;

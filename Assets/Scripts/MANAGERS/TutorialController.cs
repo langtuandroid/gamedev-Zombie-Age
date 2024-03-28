@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -10,6 +11,7 @@ namespace MANAGERS
     {
         [Inject] private UIController _uiController;
         [Inject] private DataController _dataController;
+        public static TutorialController Instance;
         public enum TUTORIAL
         {
             none,
@@ -20,7 +22,7 @@ namespace MANAGERS
             equip_fn90,
         }
         
-        public static TutorialController Instance;
+       
         private Camera _mainCamera;
 
         [FormerlySerializedAs("CURRENT_STEP_TUTORIAL")] public TutorialPage _currentStep;
@@ -129,12 +131,21 @@ namespace MANAGERS
         
         private void Awake()
         {
+            
             if (Instance == null) Instance = this;
 
             DontDestroyOnLoad(this.gameObject);
         }
 
-        
+        private void Start()
+        {
+            if (_dataController.playerData.GetAllStars() != 0)
+            {
+                Destroy(gameObject);
+            }
+        }
+
+
         private Vector2 _lastInputPosDown;
         private Vector2 _lastInputPosUp;
         private float _distance;
@@ -254,8 +265,6 @@ namespace MANAGERS
             EventController.OnHidePopup -= HandleHidePopup;
             EventController.OnGetReward -= HandleGetReward;
             EventController.OnStartNewScene -= HandeStartNewScene;
-
-            Instance = null;
         }
     }
 }

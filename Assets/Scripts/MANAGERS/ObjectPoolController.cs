@@ -8,6 +8,8 @@ namespace MANAGERS
     public class ObjectPoolController : MonoBehaviour
     {
         [Inject] private DiContainer _diContainer;
+        public static ObjectPoolController Instance;
+        
         #region Object on Pooler
         [System.Serializable]
         public class ObjectPool
@@ -51,7 +53,7 @@ namespace MANAGERS
         #endregion
 
 
-        public static ObjectPoolController Instance;
+       
         [FormerlySerializedAs("LIST_POOLING_OBECJT")] [SerializeField] private List<ObjectPool> _poolList;
         private int _totalPools;
 

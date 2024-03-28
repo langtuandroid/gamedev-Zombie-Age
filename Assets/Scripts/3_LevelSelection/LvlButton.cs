@@ -11,6 +11,7 @@ namespace _3_LevelSelection
         [Inject] private SoundController _soundController;
         [Inject] private DataController _dataController;
         [Inject] private LevelSelectionController _levelSelectionController;
+        [Inject] private TutorialController _tutorialController;
         private Button _levelButton;
         private Text _levelText;
         private bool _unlock;
@@ -28,9 +29,9 @@ namespace _3_LevelSelection
         
         private void AssignButton()
         {
-            if (TutorialController.Instance)
+            if (_tutorialController)
             {
-                if (!TutorialController.Instance.IsRightInput()) return;
+                if (!_tutorialController.IsRightInput()) return;
             }
 
             if (Unlock || _dataController.mode == DataController.Mode.Debug)
@@ -92,7 +93,7 @@ namespace _3_LevelSelection
                         else
                         {
                             _levelButton.image.sprite = _levelSelectionController.LockedSprite;
-                            _unlock = true; //TODO Remove for test only
+                            _unlock = true; //TODO Remove Test only
                             _levelText.color = Color.white * 0.75f;
                         }
 

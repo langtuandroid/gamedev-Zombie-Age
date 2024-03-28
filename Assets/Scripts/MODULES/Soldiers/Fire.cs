@@ -13,7 +13,7 @@ namespace MODULES.Soldiers
         protected override void Shoot()
         {
             if (_gameplayController.GameStatus != GameplayController.GAME_STATUS.playing) return;
-            if (Soldier.Instance._weaponManager._gunData.DATA.iCurrentAmmo <= 0)
+            if (_soldier._weaponManager._gunData.DATA.iCurrentAmmo <= 0)
             {
                 EventController.OnWeaponNoBulletInvoke(null);//event - thay sung
                 return;
@@ -23,11 +23,11 @@ namespace MODULES.Soldiers
 
 
             IsLoadingBullet = true;
-            Soldier.Instance._weaponManager._gunData.DATA.iCurrentAmmo--;
+            _soldier._weaponManager._gunData.DATA.iCurrentAmmo--;
             _ammoInMagazine--;
             if (_ammoInMagazine == 0) IsLoadingMagazine = true;
             
-            EventController.OnWeaponShotInvoke(Soldier.Instance._weaponManager._gunData);//event      
+            EventController.OnWeaponShotInvoke(_soldier._weaponManager._gunData);//event      
             _gameplayController.weaponShell.Show(GetFactorBullet());//show shell
             
             #region  SHOT      
@@ -40,14 +40,14 @@ namespace MODULES.Soldiers
       
             //bullet
             _targetOfBullet = _inputPosition + Random.insideUnitCircle * 1.3f;
-            _bulletPrefab = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.bullet_fire).Get();
+            _bulletPrefab = _objectPoolController.GetObjectPool(EnumController.POOLING_OBJECT.bullet_fire).Get();
             _bulletPrefab.GetComponent<Bullet>().ConstructBullet( EnumController.WEAPON.firegun,_beam.transform.position, _targetOfBullet, 0.0f, _bulletRange, _damage);
             _bulletPrefab.SetActive(true);
 
             #endregion
         
             //THAY SUNG
-            if (Soldier.Instance._weaponManager._gunData.DATA.iCurrentAmmo == 0)
+            if (_soldier._weaponManager._gunData.DATA.iCurrentAmmo == 0)
                 EventController.OnWeaponNoBulletInvoke(null);//event - thay sung
 
         }

@@ -12,6 +12,7 @@ namespace _2_Weapon
         [Inject] private WeaponController _weaponController;
         [Inject] private SoundController _soundController;
         [Inject] private WeaponsManager _weaponsManager;
+        [Inject] private TutorialController _tutorialController;
         
         [FormerlySerializedAs("eSupport")] [SerializeField] private EnumController.SUPPORT _eSupport;
         [FormerlySerializedAs("SUPPORT_DATA")] [SerializeField] private SupportData _supportData;
@@ -37,9 +38,9 @@ namespace _2_Weapon
 
         private void ButtonAssign()
         { 
-            if (TutorialController.Instance)
+            if (_tutorialController)
             {
-                if (!TutorialController.Instance.IsRightInput()) return;
+                if (!_tutorialController.IsRightInput()) return;
             }
 
             _soundController.Play(SoundController.SOUND.ui_wood_board);//sound

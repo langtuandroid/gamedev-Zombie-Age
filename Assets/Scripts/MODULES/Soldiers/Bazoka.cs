@@ -61,7 +61,7 @@ namespace MODULES.Soldiers
         private void NoShoot()
         {
             if (_gameplayController.GameStatus != GameplayController.GAME_STATUS.playing) return;
-            if (Soldier.Instance._weaponManager._gunData.DATA.iCurrentAmmo <= 0)
+            if (_soldier._weaponManager._gunData.DATA.iCurrentAmmo <= 0)
             {
                 EventController.OnWeaponNoBulletInvoke(null);//event - thay sung
                 return;
@@ -71,9 +71,9 @@ namespace MODULES.Soldiers
 
             IsLoadingBullet = true;
 
-            Soldier.Instance._weaponManager._gunData.DATA.iCurrentAmmo--;
+            _soldier._weaponManager._gunData.DATA.iCurrentAmmo--;
 
-            EventController.OnWeaponShotInvoke(Soldier.Instance._weaponManager._gunData);//event
+            EventController.OnWeaponShotInvoke(_soldier._weaponManager._gunData);//event
             _ammoInMagazine--;
             if (_ammoInMagazine == 0 ) IsLoadingMagazine = true;
             
@@ -89,7 +89,7 @@ namespace MODULES.Soldiers
 
 
             //EFFECT---------------
-            _bullet = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.bullet_of_bazoka).Get();
+            _bullet = _objectPoolController.GetObjectPool(EnumController.POOLING_OBJECT.bullet_of_bazoka).Get();
             _bullet.GetComponent<BulletBazoka>().SetupBullet(_listPath, _bulletRange, _damage);
             _bullet.transform.position = _listPath[0];
             _bullet.transform.eulerAngles = Transform.eulerAngles;
@@ -97,7 +97,7 @@ namespace MODULES.Soldiers
             #endregion
 
             //THAY SUNG
-            if (Soldier.Instance._weaponManager._gunData.DATA.iCurrentAmmo == 0)
+            if (_soldier._weaponManager._gunData.DATA.iCurrentAmmo == 0)
                 EventController.OnWeaponNoBulletInvoke(null);//event - thay sung
 
         }

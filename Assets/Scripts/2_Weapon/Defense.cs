@@ -14,6 +14,7 @@ namespace _2_Weapon
         [Inject] private SoundController _soundController;
         [Inject] private DataController _dataController;
         [Inject] private WeaponsManager _weaponsManager;
+        [Inject] private TutorialController _tutorialController;
         
         [FormerlySerializedAs("DEFENSE_DATA")] [SerializeField] private DefenseData _defenseData;
         [FormerlySerializedAs("imaIcon")] [SerializeField] private Image _iconImage;
@@ -36,9 +37,9 @@ namespace _2_Weapon
 
         private void ButtonAssign(Button button)
         { 
-            if (TutorialController.Instance)
+            if (_tutorialController)
             {
-                if (!TutorialController.Instance.IsRightInput()) return;
+                if (!_tutorialController.IsRightInput()) return;
             }
 
             if (button == _thisButton)

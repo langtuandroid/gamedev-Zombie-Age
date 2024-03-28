@@ -11,6 +11,7 @@ namespace MODULES
         [Inject] private UIController _uiController;
         [Inject] private SoundController _soundController;
         [Inject] private DataController _dataController;
+        [Inject] private TutorialController _tutorialController;
         public enum TYPE
         {
             gem,
@@ -36,9 +37,9 @@ namespace MODULES
         private void AssignButton()
         {
             //for tutorial
-            if (TutorialController.Instance)
+            if (_tutorialController)
             {
-                if (!TutorialController.Instance.IsRightInput()) return;
+                if (!_tutorialController.IsRightInput()) return;
             }
 
             _soundController.Play(SoundController.SOUND.ui_click_next);//sound

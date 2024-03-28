@@ -10,6 +10,7 @@ namespace MODULES
     public class FreeGem : MonoBehaviour
     {
         [Inject] private DataController _dataController;
+        [Inject] private TutorialController _tutorialController;
         private Button _thisButton;
         [FormerlySerializedAs("txtValue")] [SerializeField] private Text _valueText;
 
@@ -30,9 +31,9 @@ namespace MODULES
 
         private void AssignButton(Button _bu)
         {
-            if (TutorialController.Instance)
+            if (_tutorialController)
             {
-                if (!TutorialController.Instance.IsRightInput()) return;
+                if (!_tutorialController.IsRightInput()) return;
             }
             
             if (_bu == _thisButton)

@@ -10,6 +10,7 @@ namespace MANAGERS
 {
     public class DataController : MonoBehaviour
     {
+        [Inject] private TutorialController _tutorialController;
         [Inject] private UIController _uiController;
         [Inject] private UpgradeController _upgradeController;
         [Inject] private DiContainer _diContainer;
@@ -298,7 +299,7 @@ namespace MANAGERS
 #if UNITY_EDITOR
             _pathOfPlayerData = Application.dataPath + "/Resources/Data/PlayerData.xml";
 #elif UNITY_ANDROID || UNITY_IOS || UNITY_IPHONE || UNITY_STANDALONE_WIN || UNITY_WEBGL
-        PATH_OF_PLAYER_DATA_XML = Application.persistentDataPath + "/PlayerData.xml";
+        _pathOfPlayerData = Application.persistentDataPath + "/PlayerData.xml";
 #endif
 
             TakePlayerData();
@@ -306,9 +307,12 @@ namespace MANAGERS
             _weaponController.Construct();
             _upgradeController.Construct();
 
-            
+
             if (playerData.GetAllStars() == 0)
-                Instantiate(_tutorialSystemPrefab, new Vector3(0, 0, -2.0f), Quaternion.identity);//TUTORIAL SYSTEM  
+            {
+                //Instantiate(_tutorialSystemPrefab, new Vector3(0, 0, -2.0f), Quaternion.identity);//TUTORIAL SYSTEM  
+            }
+                
 
         }
 
@@ -380,8 +384,8 @@ namespace MANAGERS
         //Reset game
         public void ResetAll()
         {
-            if (TutorialController.Instance)
-                Destroy(TutorialController.Instance.gameObject);
+            if (_tutorialController)
+                Destroy(_tutorialController.gameObject);
 
             PlayerPrefs.DeleteAll();
             if (System.IO.File.Exists(_pathOfPlayerData))

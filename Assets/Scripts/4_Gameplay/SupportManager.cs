@@ -15,6 +15,7 @@ namespace _4_Gameplay
         [Inject] private SoundController _soundController;
         [Inject] private GameplayController _gameplayController;
         [Inject] private DiContainer _diContainer;
+        [Inject] private ObjectPoolController _objectPoolController;
         
         [System.Serializable]
         public class SupportUI
@@ -160,20 +161,20 @@ namespace _4_Gameplay
             {
                 case EnumController.SUPPORT.grenade:
                     vStartPosOfItem = new Vector2(-4.91f, 2.54f);
-                    _item = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.support_grenade).Get();
+                    _item = _objectPoolController.GetObjectPool(EnumController.POOLING_OBJECT.support_grenade).Get();
                     break;
                 case EnumController.SUPPORT.freeze:
                     vStartPosOfItem = new Vector2(-4.91f, 2.54f);
-                    _item = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.support_freeze).Get();
+                    _item = _objectPoolController.GetObjectPool(EnumController.POOLING_OBJECT.support_freeze).Get();
                     break;
                 case EnumController.SUPPORT.poison:
                     vStartPosOfItem = new Vector2(-4.91f, 2.54f);
-                    _item = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.support_poison).Get();
+                    _item = _objectPoolController.GetObjectPool(EnumController.POOLING_OBJECT.support_poison).Get();
                     break;
                 case EnumController.SUPPORT.big_bomb:
                     vStartPosOfItem = vInputOfPlayer;
                     vStartPosOfItem.y = 8;
-                    _item = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.support_bigbom).Get();
+                    _item = _objectPoolController.GetObjectPool(EnumController.POOLING_OBJECT.support_bigbom).Get();
                     _soundController.Play(SoundController.SOUND.sfx_throw_big_bomb);//sound
                     break;
 

@@ -16,6 +16,7 @@ namespace _2_Weapon
         [Inject] private DiContainer _diContainer;
         [Inject] private DataController _dataController;
         [Inject] private WeaponController _weaponController;
+        [Inject] private TutorialController _tutorialController;
         
         private static WeaponsManager Instance;
         
@@ -79,6 +80,7 @@ namespace _2_Weapon
             [Inject] private WeaponController _weaponController;
             [Inject] private UIController _uiController;
             [Inject] private DiContainer _diContainer;
+            [Inject] private TutorialController _tutorialController;
             [FormerlySerializedAs("m_ScrollRect")] [SerializeField] private ScrollRect _scrollRect;
             [FormerlySerializedAs("objPrefab")] [SerializeField] private GameObject _weaponPrefab;
             [FormerlySerializedAs("GROUP_CONTAIN")] [SerializeField] private Transform _groupContain;
@@ -121,7 +123,7 @@ namespace _2_Weapon
                 VisualiseTrack(_trackWeapons[0]);
                 _groupContain.parent.GetComponent<ScrollRect>().verticalNormalizedPosition = 1.0f;
                 
-                if (TutorialController.Instance && !TutorialController.Instance.GetTutorial(TutorialController.TUTORIAL.weapon)._isCompleted)
+                if (_tutorialController && !_tutorialController.GetTutorial(TutorialController.TUTORIAL.weapon)._isCompleted)
                 {
                     UnlockScrollRect(false);
                 }
@@ -250,9 +252,9 @@ namespace _2_Weapon
             private void UpgradeWeapon()
             {
                 //for tutorial
-                if (TutorialController.Instance)
+                if (_tutorialController)
                 {
-                    if (!TutorialController.Instance.IsRightInput()) return;
+                    if (!_tutorialController.IsRightInput()) return;
                 }
 
                 if (!_currentTrack.GunData.bUNLOCKED)
@@ -297,9 +299,9 @@ namespace _2_Weapon
             private void BuyAmmo()
             {
                 //for tutorial
-                if (TutorialController.Instance)
+                if (_tutorialController)
                 {
-                    if (!TutorialController.Instance.IsRightInput()) return;
+                    if (!_tutorialController.IsRightInput()) return;
                 }
 
                 if (!_currentTrack.GunData.bUNLOCKED)
@@ -397,6 +399,7 @@ namespace _2_Weapon
             [Inject] private DataController _dataController;
             [Inject] private SoundController _soundController;
             [Inject] private WeaponController _weaponController;
+            [Inject] private TutorialController _tutorialController;
             [Inject] private DiContainer _diContainer;
             [FormerlySerializedAs("objPrefab")] [SerializeField] private GameObject _defencePrefab;
             [FormerlySerializedAs("GROUP_CONTAIN")] [SerializeField] private Transform _groupContain;
@@ -509,9 +512,9 @@ namespace _2_Weapon
             //UNLOCK NOW
             private void Unlock()
             { //for tutorial
-                if (TutorialController.Instance)
+                if (_tutorialController)
                 {
-                    if (!TutorialController.Instance.IsRightInput()) return;
+                    if (!_tutorialController.IsRightInput()) return;
                 }
 
                 _currentTrack.Unlock();
@@ -547,9 +550,9 @@ namespace _2_Weapon
             }
             private void Upgrade()
             { //for tutorial
-                if (TutorialController.Instance)
+                if (_tutorialController)
                 {
-                    if (!TutorialController.Instance.IsRightInput()) return;
+                    if (!_tutorialController.IsRightInput()) return;
                 }
 
 
@@ -597,9 +600,9 @@ namespace _2_Weapon
             private void Fix()
             {
                 //for tutorial
-                if (TutorialController.Instance)
+                if (_tutorialController)
                 {
-                    if (!TutorialController.Instance.IsRightInput()) return;
+                    if (!_tutorialController.IsRightInput()) return;
                 }
 
             }
@@ -613,6 +616,7 @@ namespace _2_Weapon
             [Inject] private UIController _uiController;
             [Inject] private SoundController _soundController;
             [Inject] private DataController _dataController;
+            [Inject] private TutorialController _tutorialController;
             [FormerlySerializedAs("LIST_TRACK")] [SerializeField] private List<Support> _trackList;
             [Space(30)]
             [FormerlySerializedAs("CURRENT_TRACK")][SerializeField] private Support _currentTrack;
@@ -689,9 +693,9 @@ namespace _2_Weapon
             public void Upgrade()
             {
                 //for tutorial
-                if (TutorialController.Instance)
+                if (_tutorialController)
                 {
-                    if (!TutorialController.Instance.IsRightInput()) return;
+                    if (!_tutorialController.IsRightInput()) return;
                 }
 
                 _soundController.Play(SoundController.SOUND.ui_click_next);//sound
@@ -701,9 +705,9 @@ namespace _2_Weapon
             private void Buy()
             {
                 //for tutorial
-                if (TutorialController.Instance)
+                if (_tutorialController)
                 {
-                    if (!TutorialController.Instance.IsRightInput()) return;
+                    if (!_tutorialController.IsRightInput()) return;
                 }
 
                 if (_currentTrack.SupportData.DATA.iCurrentValue >= _currentTrack.SupportData.iMaxValue)
@@ -952,7 +956,7 @@ namespace _2_Weapon
             _listPanelManager[0].Assign();
 
             //for tutorial
-            if (TutorialController.Instance && !TutorialController.Instance.GetTutorial(TutorialController.TUTORIAL.weapon)._isCompleted)
+            if (_tutorialController && !_tutorialController.GetTutorial(TutorialController.TUTORIAL.weapon)._isCompleted)
             {
                 _listPanelManager[1].PanelButton.enabled = false;
                 _listPanelManager[2].PanelButton.enabled = false;
@@ -1013,9 +1017,9 @@ namespace _2_Weapon
         
         private void ButtonInit(Button button)
         {   //for tutorial
-            if (TutorialController.Instance)
+            if (_tutorialController)
             {
-                if (!TutorialController.Instance.IsRightInput()) return;
+                if (!_tutorialController.IsRightInput()) return;
             }
 
 

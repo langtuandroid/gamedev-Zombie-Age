@@ -16,6 +16,7 @@ namespace _3_LevelSelection
         [Inject] private SoundController _soundController;
         [Inject] private DiContainer _diContainer;
         [Inject] private DataController _dataController;
+        [Inject] private TutorialController _tutorialController;
         
         [System.Serializable]
         public class DifficuftPopup
@@ -24,6 +25,7 @@ namespace _3_LevelSelection
             [Inject] private DataController _dataController;
             [Inject] private SoundController _soundController;
             [Inject] private LevelSelectionController _levelSelectionController;
+            [Inject] private TutorialController _tutorialController;
             [SerializeField]
             private Button buClose, buEasy, buNormal, buNightmare, buStart;
             [SerializeField] Transform m_tranOfButtonChoose;
@@ -143,9 +145,9 @@ namespace _3_LevelSelection
             private void SetButton(Button _bu)
             {
                 //for tutorial
-                if (TutorialController.Instance)
+                if (_tutorialController)
                 {
-                    if (!TutorialController.Instance.IsRightInput()) return;
+                    if (!_tutorialController.IsRightInput()) return;
                 }
 
 
@@ -295,9 +297,9 @@ namespace _3_LevelSelection
         private void AssignButtons(Button button)
         {
             //for tutorial
-            if (TutorialController.Instance)
+            if (_tutorialController)
             {
-                if (!TutorialController.Instance.IsRightInput()) return;
+                if (!_tutorialController.IsRightInput()) return;
             }
 
             if (button == _mapNextButton)

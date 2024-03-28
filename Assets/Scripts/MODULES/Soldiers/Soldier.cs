@@ -14,7 +14,10 @@ namespace MODULES.Soldiers
         [Inject] private WeaponController _weaponController;
         [Inject] private SoundController _soundController;
         [Inject] private DiContainer _diContainer;
+        [Inject] private SpriteController _spriteController;
+   
         public static Soldier Instance;
+        
         [FormerlySerializedAs("objHandToThrow")] [SerializeField] private GameObject _throwObject;
         [FormerlySerializedAs("m_Animator")] [SerializeField] private Animator _animator;
         private const int IDIE = 3, MOVE = 2, SHAKE = 1;
@@ -88,7 +91,7 @@ namespace MODULES.Soldiers
         [FormerlySerializedAs("sprSpriteOfItemsSupport")] [SerializeField] private SpriteRenderer _supportSpriteRenderer;
         public void PlayerThrow(EnumController.SUPPORT _support)
         {
-            _supportSpriteRenderer.sprite = SpriteController.Instance.GetSupportSprite(_support)._sprite;
+            _supportSpriteRenderer.sprite = _spriteController.GetSupportSprite(_support)._sprite;
             StartCoroutine(PlayerThrowRoutine());
         }
         private IEnumerator PlayerThrowRoutine()
@@ -138,6 +141,7 @@ namespace MODULES.Soldiers
         public class Weapon
         {
             [Inject] private DiContainer _diContainer;
+            [Inject] private Soldier _soldier;
             [FormerlySerializedAs("GUN_DATA")] public GunData _gunData;
             [FormerlySerializedAs("objHandWeapon")] public GameObject _weaponPrefab;
             
@@ -146,7 +150,7 @@ namespace MODULES.Soldiers
                 _gunData = _gundata;
                 _weaponPrefab = _diContainer.InstantiatePrefab(_gunData.objPrefabHand);
                 _weaponPrefab.SetActive(false);
-                Soldier.Instance.SetHandPositions(_weaponPrefab);//set pos
+                _soldier.SetHandPositions(_weaponPrefab);//set pos
             }
         }
 
@@ -186,6 +190,8 @@ namespace MODULES.Soldiers
     {
         [Inject] private GameplayController _gameplayController;
         [Inject] private WeaponController _weaponController;
+        [Inject] private ObjectPoolController _objectPoolController;
+        [Inject] private Soldier _soldier;
         [System.Serializable]
         public class UnitDefense
         {
@@ -284,17 +290,17 @@ namespace MODULES.Soldiers
             //FIRE
             if (GetFactorDefense() < 0.6f && homeIndex == 1)
             {
-                Soldier.Instantiate(ObjectPoolController.Instance._fireOnHomeLevel1);//fire of home
+                Soldier.Instantiate(_objectPoolController._fireOnHomeLevel1);//fire of home
                 homeIndex = 2;
             }
             if (GetFactorDefense() < 0.4f && homeIndex == 2)
             {
-                Soldier.Instantiate(ObjectPoolController.Instance._fireOnHomeLevel2);//fire of home
+                Soldier.Instantiate(_objectPoolController._fireOnHomeLevel2);//fire of home
                 homeIndex = 3;
             }
             if (GetFactorDefense() < 0.3f && homeIndex == 3)
             {
-                Soldier.Instantiate(ObjectPoolController.Instance._fireOnHomeLevel3);//fire of home
+                Soldier.Instantiate(_objectPoolController._fireOnHomeLevel3);//fire of home
                 homeIndex = 4;
             }
         }
@@ -306,7 +312,7 @@ namespace MODULES.Soldiers
 
         public void HandleZombieAttack(float _damage)
         {
-            Soldier.Instance._defenceManager.RemoveDamage(_damage);
+            _soldier._defenceManager.RemoveDamage(_damage);
         }
     }
 }

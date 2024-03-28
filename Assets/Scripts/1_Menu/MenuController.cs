@@ -44,8 +44,6 @@ namespace _1_Menu
 
                     _loadingPopUp.SetActive(false);
                     _gameLogo.SetActive(true);
-
-
                 }
             }
         }

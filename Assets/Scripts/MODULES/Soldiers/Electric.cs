@@ -21,7 +21,7 @@ namespace MODULES.Soldiers
         protected override void Shoot()
         {
             if (_gameplayController.GameStatus != GameplayController.GAME_STATUS.playing) return;
-            if (Soldier.Instance._weaponManager._gunData.DATA.iCurrentAmmo <= 0)
+            if (_soldier._weaponManager._gunData.DATA.iCurrentAmmo <= 0)
             {
                 EventController.OnWeaponNoBulletInvoke(null);//event - thay sung
                 return;
@@ -32,8 +32,8 @@ namespace MODULES.Soldiers
             IsLoadingBullet = true;
             //============ to reload 
 
-            Soldier.Instance._weaponManager._gunData.DATA.iCurrentAmmo--;
-            EventController.OnWeaponShotInvoke(Soldier.Instance._weaponManager._gunData);//event
+            _soldier._weaponManager._gunData.DATA.iCurrentAmmo--;
+            EventController.OnWeaponShotInvoke(_soldier._weaponManager._gunData);//event
             _ammoInMagazine--;
             if (_ammoInMagazine == 0) IsLoadingMagazine = true;
 
@@ -55,7 +55,7 @@ namespace MODULES.Soldiers
             EventController.OnBulletCompletedInvoke(EnumController.WEAPON.stun_gun, _targetOfBullet, _bulletRange, _damage);
             #endregion
             
-            if (Soldier.Instance._weaponManager._gunData.DATA.iCurrentAmmo == 0)
+            if (_soldier._weaponManager._gunData.DATA.iCurrentAmmo == 0)
                 EventController.OnWeaponNoBulletInvoke(null);//event - thay sung
         }
 

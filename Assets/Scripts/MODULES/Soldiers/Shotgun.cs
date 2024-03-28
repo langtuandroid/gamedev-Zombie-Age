@@ -16,7 +16,7 @@ namespace MODULES.Soldiers
             if (_gameplayController.GameStatus == GameplayController.GAME_STATUS.victory
                 || _gameplayController.GameStatus == GameplayController.GAME_STATUS.gameover) return;
 
-            if (Soldier.Instance._weaponManager._gunData.DATA.iCurrentAmmo <= 0) //het dan
+            if (_soldier._weaponManager._gunData.DATA.iCurrentAmmo <= 0) //het dan
             {
                 EventController.OnWeaponNoBulletInvoke(null);//event
                 return;
@@ -33,9 +33,9 @@ namespace MODULES.Soldiers
             
             IsLoadingBullet = true;
 
-            if (!Soldier.Instance._weaponManager._gunData.DATA.bIsDefaultGun)
-                Soldier.Instance._weaponManager._gunData.DATA.iCurrentAmmo--;
-            EventController.OnWeaponShotInvoke(Soldier.Instance._weaponManager._gunData);//event
+            if (!_soldier._weaponManager._gunData.DATA.bIsDefaultGun)
+                _soldier._weaponManager._gunData.DATA.iCurrentAmmo--;
+            EventController.OnWeaponShotInvoke(_soldier._weaponManager._gunData);//event
             _ammoInMagazine--;
             if (_ammoInMagazine == 0)
             {
@@ -55,7 +55,7 @@ namespace MODULES.Soldiers
             _targetOfBullet = _inputPosition + Random.insideUnitCircle * 1.3f;
             _angel = GetRoatateZ(_beam.transform.position, _targetOfBullet);
 
-            _bulletPrefab = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.bullet_of_shotgun).Get();
+            _bulletPrefab = _objectPoolController.GetObjectPool(EnumController.POOLING_OBJECT.bullet_of_shotgun).Get();
             _bulletPrefab.GetComponent<Bullet>().ConstructBullet(EnumController.WEAPON.shotgun, _beam.transform.position, _targetOfBullet, _angel, _bulletRange, _damage,_bulletSprite,_bulletScale);
             _bulletPrefab.SetActive(true);
 

@@ -8,7 +8,6 @@ namespace MODULES.Zombies
 {
     public class FlyingZombie : Zombie
     {
-       
         [FormerlySerializedAs("m_TranOfOriginalBulletPos")] [SerializeField] Transform _bulletPos;
         [FormerlySerializedAs("vScaleOfBullet")] [SerializeField] Vector3 _bulletScale;
         [FormerlySerializedAs("sprBullet")] [Space(20)]
@@ -54,7 +53,7 @@ namespace MODULES.Zombies
             _targetBulletPos.x = Random.Range(-8.0f, -5.0f);
             _targetBulletPos.y = _bulletPos.position.y;
 
-            _bulletPrefab = ObjectPoolController.Instance.GetObjectPool(EnumController.POOLING_OBJECT.bullet_of_zombie).Get();
+            _bulletPrefab = _objectPoolController.GetObjectPool(EnumController.POOLING_OBJECT.bullet_of_zombie).Get();
             _bulletPrefab.transform.position = _bulletPos.position;
             _bulletPrefab.GetComponent<ZombieBullet>().ConstructBullet(_zombieData.eZombie, _zombieData.GetDamage(), _targetBulletPos, _bulletScale,_bulletSprite);     
             _bulletPrefab.SetActive(true);

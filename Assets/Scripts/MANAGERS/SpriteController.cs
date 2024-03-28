@@ -6,8 +6,6 @@ namespace MANAGERS
 {
     public class SpriteController : MonoBehaviour
     {
-        public static SpriteController Instance;
-
         #region CLASS SPRITE ITEMS FOR ZOMBIE
         [System.Serializable]
         public class ItemsForZombie
@@ -96,11 +94,6 @@ namespace MANAGERS
 
         [Space(30)]
         [FormerlySerializedAs("SPRITE_OF_SUPPORT")] public List<SpriteOfSupport> _supporSprites;
-        private void Awake()
-        {
-            if (Instance == null)
-                Instance = this;
-        }
 
     }
 }

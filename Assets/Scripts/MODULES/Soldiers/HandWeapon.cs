@@ -12,6 +12,8 @@ namespace MODULES.Soldiers
         [Inject] protected SoundController SoundController;
         [Inject] protected GameplayController _gameplayController;
         [Inject] private SupportManager _supportManager;
+        [Inject] protected Soldier _soldier;
+        [Inject] protected ObjectPoolController _objectPoolController;
         private Camera _camera;
         [FormerlySerializedAs("objBeam")] public GameObject _beam;
         [FormerlySerializedAs("m_animator")] [SerializeField] protected Animator _animator;
@@ -111,12 +113,12 @@ namespace MODULES.Soldiers
                 if (_timeToShot >= 0f)
                 {
                     _timeToShot -= Time.deltaTime;
-                    if (!Soldier.Instance.IsMoving)
-                        Soldier.Instance.PlayAnimations(EnumController.SOLDIER_STATUS.idie);
+                    if (!_soldier.IsMoving)
+                        _soldier.PlayAnimations(EnumController.SOLDIER_STATUS.idie);
                     if (_timeToShot <= 0f)
                     {
-                        if (!Soldier.Instance.IsMoving)
-                            Soldier.Instance.PlayAnimations(EnumController.SOLDIER_STATUS.shooting);
+                        if (!_soldier.IsMoving)
+                            _soldier.PlayAnimations(EnumController.SOLDIER_STATUS.shooting);
 
                         Shoot();
                         _timeToShot = _loadTine;
@@ -125,9 +127,9 @@ namespace MODULES.Soldiers
             }
             else if (Input.GetMouseButtonUp(0))
             {
-                Soldier.Instance.PlayAnimations(EnumController.SOLDIER_STATUS.idie);
+                _soldier.PlayAnimations(EnumController.SOLDIER_STATUS.idie);
                 _timeToShot = 0f;
-                Soldier.Instance.IsMoving = false;
+                _soldier.IsMoving = false;
                 _isTouching = false;
                 _timeToMove = 1.0f;
 
@@ -175,7 +177,7 @@ namespace MODULES.Soldiers
                 _isLoadingBullet = value;
                 if (value)
                 {
-                    _timeToReloadBullet = Soldier.Instance._weaponManager._gunData.fTimeloadOrBullet;
+                    _timeToReloadBullet = _soldier._weaponManager._gunData.fTimeloadOrBullet;
                 }
             }
         }
@@ -203,12 +205,12 @@ namespace MODULES.Soldiers
         private void ReloadingMagazine()
         {
 
-            int _totalAmmo = Soldier.Instance._weaponManager._gunData.DATA.iCurrentAmmo;
-            _tempAmmonOnMagazine = Soldier.Instance._weaponManager._gunData.iAmmoInMagazine;
+            int _totalAmmo = _soldier._weaponManager._gunData.DATA.iCurrentAmmo;
+            _tempAmmonOnMagazine = _soldier._weaponManager._gunData.iAmmoInMagazine;
 
             if (_totalAmmo > 0)
             {
-                if (_totalAmmo >= Soldier.Instance._weaponManager._gunData.iAmmoInMagazine)
+                if (_totalAmmo >= _soldier._weaponManager._gunData.iAmmoInMagazine)
                     _ammoInMagazine = _tempAmmonOnMagazine;
                 else
                     _ammoInMagazine = _totalAmmo;
@@ -221,8 +223,8 @@ namespace MODULES.Soldiers
         }
         private void ResetMagazineBulletFromPlayer()
         {
-            if (Soldier.Instance._weaponManager._gunData.DATA.iCurrentAmmoInMagazin
-                < Soldier.Instance._weaponManager._gunData.iAmmoInMagazine)
+            if (_soldier._weaponManager._gunData.DATA.iCurrentAmmoInMagazin
+                < _soldier._weaponManager._gunData.iAmmoInMagazine)
                 IsLoadingMagazine = true;
             else
                 SoundController.Play(SoundController.SOUND.ui_cannot);//sound
@@ -239,22 +241,22 @@ namespace MODULES.Soldiers
 
         private void Move(Vector2 _input)
         {
-            _distanceY = Mathf.Abs(_input.y - Soldier.Instance._soldierTransform.position.y);
+            _distanceY = Mathf.Abs(_input.y - _soldier._soldierTransform.position.y);
             if (_distanceY > 0.5f)
             {
-                Soldier.Instance.IsMoving = true;
+                _soldier.IsMoving = true;
 
-                _targetPos = Soldier.Instance._soldierTransform.position;
+                _targetPos = _soldier._soldierTransform.position;
                 _targetPos.y = _input.y;
                 _targetPos.z = _input.y;
                 if (_targetPos.y > 1.1) _targetPos.y = 1.1f;
                 if (_targetPos.y < 0.8) _targetPos.y = -0.8f;
 
-                Soldier.Instance._soldierTransform.position = Vector3.MoveTowards(Soldier.Instance._soldierTransform.position, _targetPos, 0.01f);
+                _soldier._soldierTransform.position = Vector3.MoveTowards(_soldier._soldierTransform.position, _targetPos, 0.01f);
             }
             else
             {
-                Soldier.Instance.IsMoving = false;
+                _soldier.IsMoving = false;
 
             }
         }

@@ -14,6 +14,7 @@ namespace Installers
         [SerializeField] private SoundController _soundController;
         [SerializeField] private WeaponController _weaponController;
         [SerializeField] private UpgradeController _upgradeController;
+        [SerializeField] private TutorialController _tutorialController;
         public override void InstallBindings()
         {
             Container.Bind<UIController>().FromInstance(_uiController).AsSingle();
@@ -22,6 +23,14 @@ namespace Installers
             Container.Bind<SoundController>().FromInstance(_soundController).AsSingle();
             Container.Bind<WeaponController>().FromInstance(_weaponController).AsSingle();
             Container.Bind<UpgradeController>().FromInstance(_upgradeController).AsSingle();
+            if (_tutorialController != null)
+            {
+                Container.Bind<TutorialController>().FromInstance(_tutorialController).AsSingle();
+            }
+            else
+            {
+                Container.Bind<TutorialController>().FromInstance(null).AsSingle();
+            }
         }
     }
 }

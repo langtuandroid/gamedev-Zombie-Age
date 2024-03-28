@@ -12,6 +12,7 @@ namespace SCREENS
     {
         [Inject] private UIController _uiController;
         [Inject] private SoundController _soundController;
+        [Inject] private TutorialController _tutorialController;
         [FormerlySerializedAs("m_tranOfRay")] [SerializeField] Transform _rayTransform;
        
         [FormerlySerializedAs("buReceive")] [SerializeField] private Button _receiveButton;
@@ -44,9 +45,9 @@ namespace SCREENS
 
         private void AssignButtonButton(Button _bu)
         {
-            if (TutorialController.Instance)
+            if (_tutorialController)
             {
-                if (!TutorialController.Instance.IsRightInput()) return;
+                if (!_tutorialController.IsRightInput()) return;
             }
 
             if (_bu == _receiveButton)

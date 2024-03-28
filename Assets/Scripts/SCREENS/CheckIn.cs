@@ -11,6 +11,7 @@ namespace SCREENS
     {
         [Inject] private SoundController _soundController;
         [Inject] private DataController _dataController;
+        [Inject] private TutorialController _tutorialController;
         private static CheckIn Instance;
         public int iCurrentDay;
 
@@ -121,9 +122,9 @@ namespace SCREENS
         private void SetButton(Button _bu)
         {
             //for tutorial
-            if (TutorialController.Instance)
+            if (_tutorialController)
             {
-                if (!TutorialController.Instance.IsRightInput()) return;
+                if (!_tutorialController.IsRightInput()) return;
             }
 
 
