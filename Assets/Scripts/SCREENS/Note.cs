@@ -1,4 +1,5 @@
 ﻿using MANAGERS;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -24,7 +25,7 @@ namespace SCREENS
 
         [FormerlySerializedAs("buBack")] [SerializeField] private Button _backButton;
         [FormerlySerializedAs("buDone")] [SerializeField] private Button _doneButton;
-        [FormerlySerializedAs("txtContent")] [SerializeField] private Text _contentText;
+        [FormerlySerializedAs("txtContent")] [SerializeField] private TMP_Text _contentText;
 
         private void Start()
         {

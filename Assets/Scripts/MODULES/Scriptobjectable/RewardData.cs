@@ -33,13 +33,7 @@ namespace MODULES.Scriptobjectable
                 SoundController.Instance.Play(SoundController.SOUND.ui_purchase);//sound
 
                 int _gem = GetVictoryGem();
-
-                if (WinReward.Instance._isX2Gems)
-                    DataController.Instance.playerData.Gem += 2 * _gem;
-                else
-                    DataController.Instance.playerData.Gem += _gem;
-
-
+                DataController.Instance.playerData.Gem += _gem;
                 DataController.Instance.SaveData();//save)
                 return;
             }

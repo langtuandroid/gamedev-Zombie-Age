@@ -1,4 +1,5 @@
 ﻿using MANAGERS;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -19,18 +20,18 @@ namespace MODULES
         [FormerlySerializedAs("eType")] public TYPE _boardType;
 
         private Button _thisButton;
-        private Text _text;
+        private TMP_Text _text;
         
         private void Awake()
         {
 
             _thisButton = GetComponent<Button>();
-            _text = this.GetComponentInChildren<Text>();
+            _text = GetComponentInChildren<TMP_Text>();
         }
 
         private void Start()
         {
-            _thisButton.onClick.AddListener(() => AssignButton());
+            _thisButton.onClick.AddListener(AssignButton);
         }
 
 

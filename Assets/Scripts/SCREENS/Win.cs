@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using MANAGERS;
 using MODULES.Scriptobjectable;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -16,12 +17,9 @@ namespace SCREENS
         [Inject] private MusicController _musicController;
         [Inject] private DataController _dataController;
         [FormerlySerializedAs("buContinue")] [SerializeField] Button _continueButton;
-        [FormerlySerializedAs("buRate")] [SerializeField] Button _buttonRate;
-        [FormerlySerializedAs("txtLevel")] [SerializeField] Text _levelText;
-
+        [FormerlySerializedAs("txtLevel")] [SerializeField] TMP_Text _levelText;
         [FormerlySerializedAs("LIST_STAR")] [SerializeField] List<Image> _starList;
-
-        
+        [SerializeField] private Sprite _starEmpty, _starFilled;
         [Space(20)]
         [FormerlySerializedAs("m_tranOfRay")][SerializeField] Transform _rayTransform;
         private Vector3 _euler;
@@ -30,7 +28,6 @@ namespace SCREENS
         private void Start()
         {
             _continueButton.onClick.AddListener(() => SetButton(_continueButton));
-            _buttonRate.onClick.AddListener(() => SetButton(_buttonRate));
         }
 
         private void Update()
@@ -41,40 +38,32 @@ namespace SCREENS
         
         private void SetButton(Button _bu)
         {
-            if (_bu == _continueButton)
-            {
-                if (_continueButton.image.color != Color.white) return;
+            if (_bu != _continueButton) return;
+            if (_continueButton.image.color != Color.white) return;
 
-                _musicController.Play();
-                _soundController.Play(SoundController.SOUND.ui_click_next);//sound         
+            _musicController.Play();
+            _soundController.Play(SoundController.SOUND.ui_click_next);//sound         
              
-                #region RATE
-                if (_dataController.playerData.CurrentLevel > 0
-                    && (_dataController.playerData.CurrentLevel + 1) % 4 == 0)
-                {
-                    if (!_showRate)
-                    {
-                        _showRate = true;
-                        _uiController.PopUpShow(UIController.POP_UP.rate);
-                        return;
-                    }
-                    else
-                    {
-                        goto HERE;
-                    }
-                }
-                #endregion
-
-                HERE:
-                
-                _uiController.LoadScene(UIController.SCENE.LevelSelection);
-
-            }
-
-            else if (_bu == _buttonRate)
+            #region RATE
+            if (_dataController.playerData.CurrentLevel > 0
+                && (_dataController.playerData.CurrentLevel + 1) % 4 == 0)
             {
-                _soundController.Play(SoundController.SOUND.ui_click_next);//sound
+                if (!_showRate)
+                {
+                    _showRate = true;
+                    _uiController.PopUpShow(UIController.POP_UP.rate);
+                    return;
+                }
+                else
+                {
+                    goto HERE;
+                }
             }
+            #endregion
+
+            HERE:
+                
+            _uiController.LoadScene(UIController.SCENE.LevelSelection);
         }
 
 
@@ -95,9 +84,9 @@ namespace SCREENS
             #region STAR ENIMATION        
             RewardData _reward = null;
 
-            _starList[0].gameObject.SetActive(false);
-            _starList[1].gameObject.SetActive(false);
-            _starList[2].gameObject.SetActive(false);
+            _starList[0].sprite = _starEmpty;
+            _starList[1].sprite = _starEmpty;
+            _starList[2].sprite = _starEmpty;
 
 
 
@@ -120,17 +109,16 @@ namespace SCREENS
             {
                 case 1:
                     yield return new WaitForSecondsRealtime(0.5f);             
-                    _starList[0].gameObject.SetActive(true);
-
+                    _starList[0].sprite = _starFilled;
                     _soundController.Play(SoundController.SOUND.sfx_gun_ak);//sound
                     break;
                 case 2:
                     yield return new WaitForSecondsRealtime(0.5f);
-                    _starList[0].gameObject.SetActive(true);
+                    _starList[0].sprite = _starFilled;
                     _soundController.Play(SoundController.SOUND.sfx_gun_ak);//sound
 
                     yield return new WaitForSecondsRealtime(0.5f);
-                    _starList[1].gameObject.SetActive(true);
+                    _starList[1].sprite = _starFilled;
                     _soundController.Play(SoundController.SOUND.sfx_gun_ar15);//sound
 
 
@@ -138,15 +126,15 @@ namespace SCREENS
                     break;
                 case 3:
                     yield return new WaitForSecondsRealtime(0.5f);
-                    _starList[0].gameObject.SetActive(true);
+                    _starList[0].sprite = _starFilled;
                     _soundController.Play(SoundController.SOUND.sfx_gun_ak);//sound
 
                     yield return new WaitForSecondsRealtime(0.5f);
-                    _starList[1].gameObject.SetActive(true);
+                    _starList[1].sprite = _starFilled;
                     _soundController.Play(SoundController.SOUND.sfx_gun_ar15);//sound
 
                     yield return new WaitForSecondsRealtime(0.5f);
-                    _starList[2].gameObject.SetActive(true);
+                    _starList[2].sprite = _starFilled;
                     _soundController.Play(SoundController.SOUND.sfx_gun_shotgun);//sound
                     break;
 

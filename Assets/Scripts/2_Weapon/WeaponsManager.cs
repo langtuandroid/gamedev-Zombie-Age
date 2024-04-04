@@ -25,12 +25,12 @@ namespace _2_Weapon
         {
             [FormerlySerializedAs("buPanel")] [SerializeField] private Button _panelButton;
             [SerializeField] private GameObject objPanel;
-            [SerializeField] private Vector3 vOriginalPosOfButton;
+            private Vector3 _vOriginalPosOfButton;
 
             public Button PanelButton => _panelButton;
             public void Construct()
             {
-                vOriginalPosOfButton = _panelButton.transform.position;
+                _vOriginalPosOfButton = _panelButton.transform.position;
                 _panelButton.onClick.AddListener(() => Assign());
             }
 
@@ -43,13 +43,13 @@ namespace _2_Weapon
                     if (_panelButton == Instance._listPanelManager[i]._panelButton)
                     {
                         _panelButton.image.color = Color.white;
-                        _panelButton.transform.position = vOriginalPosOfButton;
+                        _panelButton.transform.position = _vOriginalPosOfButton;
                     }
                     else
                     {
                         Instance._listPanelManager[i]._panelButton.image.color = new Color32(160, 160, 160, 255);
                         Instance._listPanelManager[i]._panelButton.transform.position
-                            = Instance._listPanelManager[i].vOriginalPosOfButton + new Vector3(0, 0.15f, 0);
+                            = Instance._listPanelManager[i]._vOriginalPosOfButton + new Vector3(0, 0.15f, 0);
                     }
                 }
 
@@ -88,7 +88,7 @@ namespace _2_Weapon
             
             
             [Space(30)]
-            [FormerlySerializedAs("CURRENT_TRACK")] [SerializeField] private Weapon _currentTrack;
+            private Weapon _currentTrack;
             [FormerlySerializedAs("buUpgrade")] [SerializeField] private Button _upgradeButton;
             [FormerlySerializedAs("buBuyAmmo")] [SerializeField] private Button _ammoBuyButton;
             [FormerlySerializedAs("buUnlockNow")] [SerializeField] private Button _unlockButton;
@@ -406,7 +406,7 @@ namespace _2_Weapon
             [FormerlySerializedAs("LIST_TRACK")] [SerializeField] private List<Defense> _trackList;
             
             [Space(30)]
-            [FormerlySerializedAs("CURRENT_TRACK")] [SerializeField] private Defense _currentTrack;
+            private Defense _currentTrack;
             [FormerlySerializedAs("buUpgrade")] [SerializeField] private Button _upgradeButton;
             [FormerlySerializedAs("buFix")] [SerializeField] private Button _fixButton;
             [FormerlySerializedAs("buUnlockNow")] [SerializeField] private Button _unlockButton;
@@ -619,7 +619,7 @@ namespace _2_Weapon
             [Inject] private TutorialController _tutorialController;
             [FormerlySerializedAs("LIST_TRACK")] [SerializeField] private List<Support> _trackList;
             [Space(30)]
-            [FormerlySerializedAs("CURRENT_TRACK")][SerializeField] private Support _currentTrack;
+            private Support _currentTrack;
             [FormerlySerializedAs("buBuy")] [SerializeField] private Button _buyButton;
             [FormerlySerializedAs("buUpgrade")] [SerializeField] private Button _upgradeButton;
 

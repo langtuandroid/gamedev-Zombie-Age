@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using MANAGERS;
-using MODULES.Scriptobjectable;
 using SCREENS;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -26,37 +26,27 @@ namespace _3_LevelSelection
             [Inject] private SoundController _soundController;
             [Inject] private LevelSelectionController _levelSelectionController;
             [Inject] private TutorialController _tutorialController;
-            [SerializeField]
-            private Button buClose, buEasy, buNormal, buNightmare, buStart;
+            [SerializeField] private Button buClose, buEasy, buNormal, buNightmare, buStart;
             [SerializeField] Transform m_tranOfButtonChoose;
-
-
-            [SerializeField] Image imaStarOfLevel;
-
+            [SerializeField] private Image[] _starsImages;
+            [SerializeField] private Sprite _starComplitedSprite;
+            
+            /*
             [Space(30)]
-            [SerializeField] Image sprBackgroundLevel, sprFrameBackground;
-
             [SerializeField] Sprite sprButton_Easy;
-
             [SerializeField] Sprite sprButton_Normal;
             [SerializeField] Sprite sprButton_Normal_lock;
 
             [SerializeField] Sprite sprButton_Nightmare;
             [SerializeField] Sprite sprButton_Nightmare_lock;
-
+            */
 
             [Space(20)]
             [SerializeField]
-            private Text txtLevel;
+            private TMP_Text txtLevel;
 
             [Header(" ***SPRITE OF DIFFICUFT BUTTON***")]
             [Space(30)]
-
-            [SerializeField]
-            private Sprite sprButtonDifficuft_Current;
-            [SerializeField]
-            private Sprite sprButtonDifficuft_Unlocked;
-
 
             [Header(" ***SPRITE OF STAR***")]
             [Space(30)]
@@ -82,8 +72,6 @@ namespace _3_LevelSelection
             public void ShowInfo()
             {
                 txtLevel.text = "LEVEL " + (_dataController.playerData.CurrentLevel + 1).ToString();
-
-
                 int _level = _dataController.playerData.CurrentLevel;
                 iCurrentStar = _dataController.playerData.NumOfStars(_level);
 
@@ -103,41 +91,36 @@ namespace _3_LevelSelection
                     _dataController.playerData.Difficuft = EnumController.DIFFICUFT.easy;
                     m_tranOfButtonChoose.position = buEasy.transform.position;
                 }
-
-                //show star          
-                imaStarOfLevel.sprite = GetSpriteOfStar(iCurrentStar);
-
-                //-------------------- ICON BACKGROUND
-                LevelData _leveldata = Resources.Load<LevelData>("Levels/Configs/Level_" + (_dataController.playerData.CurrentLevel + 1));
-                sprBackgroundLevel.sprite = _leveldata.sprBackground;
-                sprFrameBackground.sprite = _leveldata.sprBackgroundFrame;
-
+                
+                for (int i = 0; i < iCurrentStar; i++)
+                {
+                    _starsImages[i].sprite = _starComplitedSprite;
+                }
             }
-
-            //STATE OF DIFFICUFT BUTTON
+            
             private void StateOfDifficuftButton()
             {
-                if (iCurrentStar == 1)
+                switch (iCurrentStar)
                 {
-                    buNormal.image.sprite = sprButton_Normal;
-                    buNightmare.image.sprite = sprButton_Nightmare_lock;
+                    case 1:
+                        //buNormal.image.sprite = sprButton_Normal;
+                        //buNightmare.image.sprite = sprButton_Nightmare_lock;
+                        buNormal.interactable = true;
+                        buNightmare.interactable = false;
+                        break;
+                    case 2 or 3:
+                        //buNormal.image.sprite = sprButton_Normal;
+                        //buNightmare.image.sprite = sprButton_Nightmare;
+                        buNormal.interactable = true;
+                        buNightmare.interactable = true;
+                        break;
+                    case <= 0:
+                        //buNormal.image.sprite = sprButton_Normal_lock;
+                        //buNightmare.image.sprite = sprButton_Nightmare_lock;
+                        buNormal.interactable = false;
+                        buNightmare.interactable = false;
+                        break;
                 }
-                else if (iCurrentStar == 2)
-                {
-                    buNormal.image.sprite = sprButton_Normal;
-                    buNightmare.image.sprite = sprButton_Nightmare;
-                }
-                else if (iCurrentStar == 3)
-                {
-                    buNormal.image.sprite = sprButton_Normal;
-                    buNightmare.image.sprite = sprButton_Nightmare;
-                }
-                else if (iCurrentStar <= 0)
-                {
-                    buNormal.image.sprite = sprButton_Normal_lock;
-                    buNightmare.image.sprite = sprButton_Nightmare_lock;
-                }
-
             }
 
 
@@ -219,24 +202,16 @@ namespace _3_LevelSelection
         [FormerlySerializedAs("POPUP_DIFFICUFT")] [SerializeField] private GameObject _popupDifficult;
         [FormerlySerializedAs("m_DifficuftPopup")] [SerializeField] private DifficuftPopup _difficultPopup;
         [FormerlySerializedAs("m_animatorOfLevelBoard")] [SerializeField] private Animator _animatorOfLevelBoard;
-
         
         [Space(30)]
         [FormerlySerializedAs("buMapNext")] [SerializeField] private Button _mapNextButton;
         [FormerlySerializedAs("buMapBack")] [SerializeField] private Button _backMapButton;
-        [FormerlySerializedAs("buShop")] [SerializeField] private Button _shopButton;
-        [FormerlySerializedAs("buVideoReward")] [SerializeField] private Button _vireoRevardButton;
         [FormerlySerializedAs("buSetting")] [SerializeField] private Button _settingsButton;
         [FormerlySerializedAs("buUpgrade")] [SerializeField] private Button _upgradeButton;
-        [FormerlySerializedAs("buBugReport")] [SerializeField] private Button _bugSupportButton;
-
-
         
         [Space(20)]
-        [FormerlySerializedAs("txtCountMap")] [SerializeField] private Text _countMapText;
-        [FormerlySerializedAs("txtTotalStar")] [SerializeField] private Text _totalStarText;
-
-
+        [FormerlySerializedAs("txtCountMap")] [SerializeField] private TMP_Text _countMapText;
+        [FormerlySerializedAs("txtTotalStar")] [SerializeField] private TMP_Text _totalStarText;
         
         [Header("*** CONFIG SPRITE ***")]
         [Space(30)]
@@ -252,16 +227,13 @@ namespace _3_LevelSelection
         private int iIndexOfMap;
         private int iTotalLevelButton;
         private int iTotalMap = 3;
-
-        public Sprite LevelCurrSprite => _levelSprites;
-        public Sprite LockedSprite => _lockedLevelSprite;
-        public List<Sprite> SpriteOfLevels => _spriteOfLevel;
+        
         private void Awake()
         {
             _uiController.SetCameraPopup(Camera.main);//set camera
 
-            iTotalMap = Mathf.CeilToInt(_dataController.LevelsTotal / 15.0f);
-            iIndexOfMap = (int)(_dataController.playerData.StarList.Count / 15.0f);
+            iTotalMap = Mathf.CeilToInt(_dataController.LevelsTotal / 10.0f);
+            iIndexOfMap = (int)(_dataController.playerData.StarList.Count / 10.0f);
         }
         
         private void Start()
@@ -270,9 +242,6 @@ namespace _3_LevelSelection
             _backMapButton.onClick.AddListener(() => AssignButtons(_backMapButton));
 
             _settingsButton.onClick.AddListener(() => AssignButtons(_settingsButton));
-            _shopButton.onClick.AddListener(() => AssignButtons(_shopButton));
-            _vireoRevardButton.onClick.AddListener(() => AssignButtons(_vireoRevardButton));
-            _bugSupportButton.onClick.AddListener(() => AssignButtons(_bugSupportButton));
             _upgradeButton.onClick.AddListener(() => AssignButtons(_upgradeButton));
 
 
@@ -321,16 +290,6 @@ namespace _3_LevelSelection
 
                 ConstructMap(iIndexOfMap);
             }
-            else if (button == _shopButton)
-            {
-                _soundController.Play(SoundController.SOUND.ui_click_next);//sound
-                _uiController.PopUpShow(UIController.POP_UP.shop);
-            }
-            else if (button == _vireoRevardButton)
-            {
-                _soundController.Play(SoundController.SOUND.ui_click_next);
-                _uiController.PopUpShow(UIController.POP_UP.video_reward);
-            }
             else if (button == _settingsButton)
             {
                 _soundController.Play(SoundController.SOUND.ui_click_next);
@@ -341,14 +300,8 @@ namespace _3_LevelSelection
                 _soundController.Play(SoundController.SOUND.ui_click_next);
                 _uiController.LoadScene(UIController.SCENE.Upgrade);
             }
-            else if (button == _bugSupportButton)
-            {
-                _soundController.Play(SoundController.SOUND.ui_click_next);
-                
-            }
         }
         
-        //SHOT INDEX LEVEL BUTTON
         private void ConstructMap(int _index)
         {
             tranRay.position = Vector3.one * 1000;

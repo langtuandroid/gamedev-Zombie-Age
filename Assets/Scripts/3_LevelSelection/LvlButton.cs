@@ -1,6 +1,6 @@
 ﻿using MANAGERS;
+using TMPro;
 using UnityEngine;
-
 using UnityEngine.UI;
 using Zenject;
 
@@ -8,23 +8,26 @@ namespace _3_LevelSelection
 {
     public class LvlButton : MonoBehaviour
     {
+        [SerializeField] private Image[] _starsImages;
+        [SerializeField] private Sprite _starComplitedSprite;
+        [SerializeField] private GameObject _lockedImage;
+        [SerializeField] private TMP_Text _levelText;
         [Inject] private SoundController _soundController;
         [Inject] private DataController _dataController;
         [Inject] private LevelSelectionController _levelSelectionController;
         [Inject] private TutorialController _tutorialController;
         private Button _levelButton;
-        private Text _levelText;
-        private bool _unlock;
+
         private int _iLevel;
 
-        public bool Unlock => _unlock;
+        public bool Unlock { get; private set; }
+
         public int IStar { get; private set; }
 
-        void Awake()
+        private void Awake()
         {
             _levelButton = GetComponent<Button>();
-            _levelText = GetComponentInChildren<Text>();
-            _levelButton.onClick.AddListener(() => AssignButton());
+            _levelButton.onClick.AddListener(AssignButton);
         }
         
         private void AssignButton()
@@ -53,54 +56,54 @@ namespace _3_LevelSelection
 
         public void Consruct(int lvl)
         {
-
             _iLevel = lvl;
-            _levelText.color = Color.white;
-
-
+            
             if (_iLevel + 1 > _dataController.LevelsTotal)
             {
-                _unlock = false;
+                Unlock = false;
                 _levelText.text = "";
             }
             else
             {
                 _levelText.text = (_iLevel + 1).ToString();
-
                 IStar = _dataController.playerData.NumOfStars(_iLevel);
-
+                for (int i = 0; i < IStar; i++)
+                {
+                    _starsImages[i].sprite = _starComplitedSprite;
+                }
+                
                 if (IStar > 0)
                 {
-                    _unlock = true;
-
-                    if (IStar > 0)
-                        _levelButton.image.sprite = _levelSelectionController.SpriteOfLevels[IStar - 1];
+                    UnlockButton();
                 }
                 else
                 {
                     if (lvl == 0)
                     {
-                        _levelButton.image.sprite = _levelSelectionController.LevelCurrSprite;
-                        _unlock = true;
+                        UnlockButton();
                     }
                     else
                     {
                         if (_dataController.playerData.NumOfStars(_iLevel - 1) > 0)
                         {
-                            _levelButton.image.sprite = _levelSelectionController.LevelCurrSprite;
-                            _unlock = true;
+                            UnlockButton();
                         }
                         else
                         {
-                            _levelButton.image.sprite = _levelSelectionController.LockedSprite;
-                            _unlock = true; //TODO Remove Test only
-                            _levelText.color = Color.white * 0.75f;
+                            UnlockButton(); //TODO Remove Test only
                         }
 
                     }
 
                 }
             }
+        }
+
+        private void UnlockButton()
+        {
+            Unlock = true;
+            _levelText.gameObject.SetActive(true);
+            _lockedImage.SetActive(false);
         }
     }
 }

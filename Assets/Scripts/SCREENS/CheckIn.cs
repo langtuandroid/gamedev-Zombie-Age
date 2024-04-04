@@ -12,86 +12,22 @@ namespace SCREENS
         [Inject] private SoundController _soundController;
         [Inject] private DataController _dataController;
         [Inject] private TutorialController _tutorialController;
-        private static CheckIn Instance;
-        public int iCurrentDay;
-
-        [System.Serializable]
-        public class Track
-        {
-            public int iDay;
-            public RewardData m_reward;
-            public GameObject objNote;
-            public GameObject objRay;
-            public Image imaIcon;
-            public Text txtValue;
-            public Text txtDay;
-            public Button buGetReward;
-
-
-            public void Init(int _day)
-            {
-                buGetReward.onClick.RemoveAllListeners();
-                buGetReward.onClick.AddListener(() => GetReward());
-                iDay = _day;
-                m_reward = Instance.LIST_REWARD[iDay];
-
-                if (Instance.iCurrentDay == iDay)
-                {
-                    objNote.SetActive(true);
-                    imaIcon.color = Color.white;
-                    objRay.SetActive(true);
-                    buGetReward.transform.localScale = Vector3.one * 1.1f;
-                }
-                else
-                {
-                    objNote.SetActive(false);
-                    imaIcon.color = Color.gray;
-                    objRay.SetActive(false);
-                    buGetReward.transform.localScale = Vector3.one * 0.98f;
-                }
-
-                txtDay.text = "Day " + (iDay + 1);
-                txtValue.text = "+" + m_reward.iValue;
-                imaIcon.sprite = m_reward.sprIcon;
-            }
-
-            private void GetReward()
-            {
-                //tutorial
-                if (TutorialController.Instance)
-                {                
-                    if (!TutorialController.Instance.IsRightInput()) return;
-                }
-
-
-                if (Instance.iCurrentDay != iDay) return;
-
-                UIController.Instance.PopUpShow(UIController.POP_UP.reward);
-                WinReward.LoadRevardReward(m_reward);
-                Instance.gameObject.SetActive(false);
-                Debug.Log("Get reward me!");
-            }
-        }
-
         [SerializeField] Text txtCountPage;
         [SerializeField] Button buClose, buNextPage, buBackPage;
         [SerializeField] Animator m_animator;
-
         [Space(20)]
         public List<RewardData> LIST_REWARD;
-
         [Space(30)]
-        private int iTotalTrack;
         public List<Track> LIST_TRACK;
-        Vector3 vEuler = new Vector3();
-        public int iTotalReward;
+        
+        private int iTotalTrack;
+        private Vector3 vEuler;
+        private int iTotalReward;
         private int iMaxPage;
         private int iCurrentPage;
+        public int _currentDay { get; private set; }
         private void Awake()
         {
-            if (Instance == null)
-                Instance = this;
-
             iTotalTrack = LIST_TRACK.Count;
             iTotalReward = LIST_REWARD.Count;
             iMaxPage = iTotalReward / 4;
@@ -99,13 +35,12 @@ namespace SCREENS
             buClose.onClick.AddListener(() => SetButton(buClose));
             buNextPage.onClick.AddListener(() => SetButton(buNextPage));
             buBackPage.onClick.AddListener(() => SetButton(buBackPage));
-
         }
 
         private void OnEnable()
         {
-            iCurrentDay = _dataController.playerData._day;
-            iCurrentPage = (int)(iCurrentDay / 4.0f);
+            _currentDay = _dataController.playerData._day;
+            iCurrentPage = (int)(_currentDay / 4.0f);
             ShowTrack(iCurrentPage);
         }
 
@@ -159,11 +94,9 @@ namespace SCREENS
             int _totalTrack = LIST_TRACK.Count;
             for (int i = 0; i < _totalTrack; i++)
             {
-                LIST_TRACK[i].Init(4 * _page + i);
+                LIST_TRACK[i].Init(4 * _page + i, this);
             }
         }
-
-
 
     }
 }
