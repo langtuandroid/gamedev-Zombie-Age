@@ -4914,7 +4914,7 @@ PrefabInstance:
     - target: {fileID: 3543493407272901059, guid: 2535ebddbbd9af4418032a598106277a,
         type: 3}
       propertyPath: m_text
-      value: SOUND
+      value: TERMS OF USE
       objectReference: {fileID: 0}
     - target: {fileID: 3543493407272901059, guid: 2535ebddbbd9af4418032a598106277a,
         type: 3}

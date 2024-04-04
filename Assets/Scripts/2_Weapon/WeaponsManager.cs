@@ -83,7 +83,7 @@ namespace _2_Weapon
             [FormerlySerializedAs("m_ScrollRect")] [SerializeField] private ScrollRect _scrollRect;
             [FormerlySerializedAs("objPrefab")] [SerializeField] private GameObject _weaponPrefab;
             [FormerlySerializedAs("GROUP_CONTAIN")] [SerializeField] private Transform _groupContain;
-            private List<Weapon> _trackWeapons;
+            private List<Weapon> _trackWeapons = new();
             
             [Space(30)]
             private Weapon _currentTrack;
@@ -212,24 +212,24 @@ namespace _2_Weapon
                 {
                     if (_track.GunData.DATA.eLevel == EnumController.ITEM_LEVEL.level_7)
                     {
-                        _upgradeButton.GetComponentInChildren<Text>().text = "MAX LEVEL";
+                        _upgradeButton.GetComponentInChildren<TMP_Text>().text = "MAX LEVEL";
                         _upgradeButton.image.color = Color.gray;
                     }
                     else
                     {
-                        _upgradeButton.GetComponentInChildren<Text>().text = "UPGRADE";
+                        _upgradeButton.GetComponentInChildren<TMP_Text>().text = "UPGRADE";
                         _upgradeButton.image.color = Color.white;
                     }
 
                     if (_track.GunData.DATA.iCurrentAmmo < _track.GunData.iMaxAmmo)
                     {
 
-                        _ammoBuyButton.GetComponentInChildren<Text>().text = "BUY AMMO";
+                        _ammoBuyButton.GetComponentInChildren<TMP_Text>().text = "BUY AMMO";
                         _ammoBuyButton.image.color = Color.white;
                     }
                     else
                     {
-                        _ammoBuyButton.GetComponentInChildren<Text>().text = "MAX";
+                        _ammoBuyButton.GetComponentInChildren<TMP_Text>().text = "MAX";
                         _ammoBuyButton.image.color = Color.gray;
                     }
 
@@ -398,7 +398,7 @@ namespace _2_Weapon
             [Inject] private DiContainer _diContainer;
             [FormerlySerializedAs("objPrefab")] [SerializeField] private GameObject _defencePrefab;
             [FormerlySerializedAs("GROUP_CONTAIN")] [SerializeField] private Transform _groupContain;
-            private List<Defense> _trackList;
+            private List<Defense> _trackList = new();
             
             [Space(30)]
             private Defense _currentTrack;
@@ -530,12 +530,12 @@ namespace _2_Weapon
 
                 if (_track.DefenseData.DATA.eLevel == EnumController.ITEM_LEVEL.level_7)
                 {
-                    _upgradeButton.GetComponentInChildren<Text>().text = "MAX";
+                    _upgradeButton.GetComponentInChildren<TMP_Text>().text = "MAX";
                     _upgradeButton.image.color = Color.gray;
                 }
                 else
                 {
-                    _upgradeButton.GetComponentInChildren<Text>().text = "UPGRADE";
+                    _upgradeButton.GetComponentInChildren<TMP_Text>().text = "UPGRADE";
                     _upgradeButton.image.color = Color.white;
                 }
 
@@ -659,21 +659,18 @@ namespace _2_Weapon
 
                 ButtonStates(_currentTrack);
             }
-
-            //STATE OF BUTTONS (Upgrade + buy amoom)
+            
             private void ButtonStates(Support _track)
             {
-
-
                 if (_track.SupportData.DATA.iCurrentValue >= _track.SupportData.iMaxValue)
                 {
-                    _buyButton.GetComponentInChildren<Text>().text = "MAX";
+                    _buyButton.GetComponentInChildren<TMP_Text>().text = "MAX";
                     _buyButton.image.color = Color.gray;
                     _valueText.text = _currentTrack.SupportData.DATA.iCurrentValue.ToString();
                 }
                 else
                 {
-                    _buyButton.GetComponentInChildren<Text>().text = "BUY";
+                    _buyButton.GetComponentInChildren<TMP_Text>().text = "BUY";
                     _buyButton.image.color = Color.white;
                 }
 

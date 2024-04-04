@@ -37,13 +37,14 @@ namespace SCREENS
         
         private void SetButton(Button _bu)
         {
-            if (_bu != _continueButton) return;
-            if (_continueButton.image.color != Color.white) return;
+            if (_bu == _continueButton)
+            {
+                _musicController.Play();
+                _soundController.Play(SoundController.SOUND.ui_click_next); //sound         
 
-            _musicController.Play();
-            _soundController.Play(SoundController.SOUND.ui_click_next);//sound         
-            
-            _uiController.LoadScene(UIController.SCENE.LevelSelection);
+                _uiController.LoadScene(UIController.SCENE.LevelSelection);
+                _uiController.HidePopup(UIController.POP_UP.victory);
+            }
         }
 
 
@@ -57,9 +58,7 @@ namespace SCREENS
             if (_dataController.mode == DataController.Mode.Release)
             {
                 _dataController.playerData.SetStar(_level, _star);
-
             }
-
 
             #region STAR ENIMATION        
             RewardData _reward = null;

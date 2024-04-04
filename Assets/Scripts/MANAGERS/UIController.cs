@@ -148,11 +148,12 @@ namespace MANAGERS
             Time.timeScale = 1;
             yield return new WaitForSecondsRealtime(0.5f);
             HideAll();
-
+            PopUpShow(POP_UP.loading);
+            
             SceneManager.LoadScene(_scene.ToString(), LoadSceneMode.Single);
             yield return new WaitForSecondsRealtime(0.1f);
             
-            PopUpShow(POP_UP.loading);
+            
             Loading.Instance.Configure(Loading.FADE.face_out);//loading 
             _isOnLoadingScene = false;
             EventController.OnStartNewSceneInvoke();

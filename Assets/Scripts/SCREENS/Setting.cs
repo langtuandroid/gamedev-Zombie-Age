@@ -1,5 +1,6 @@
 ﻿using MANAGERS;
 using MODULES.Scriptobjectable;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -19,7 +20,6 @@ namespace SCREENS
         {
             _backButton.onClick.AddListener(() => AssignButton(_backButton));
             _soundButton.onClick.AddListener(() => AssignButton(_soundButton));
-            _soundButton.onClick.AddListener(() => AssignButton(_soundButton));
         }
 
         private void Construct()
@@ -27,12 +27,12 @@ namespace SCREENS
             if (_soundController.Mute)
             {
                 _soundButton.image.color = Color.gray;
-                _soundButton.GetComponentInChildren<Text>().text = "SOUND OFF";
+                _soundButton.GetComponentInChildren<TMP_Text>().text = "SOUND OFF";
             }
             else
             {
                 _soundButton.image.color = Color.white;
-                _soundButton.GetComponentInChildren<Text>().text = "SOUND ON";
+                _soundButton.GetComponentInChildren<TMP_Text>().text = "SOUND ON";
             }
         }
         

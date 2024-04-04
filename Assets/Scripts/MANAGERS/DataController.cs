@@ -39,7 +39,7 @@ namespace MANAGERS
                 set => CURRENT_DIFFICUFT = value;
             }
             [FormerlySerializedAs("_currentLevel")] [FormerlySerializedAs("iCurrentLevel")] public int CurrentLevel;
-            [FormerlySerializedAs("iGem")] public int Gem = 200;
+            [FormerlySerializedAs("iGem")] public int Gem = 2000000; //TODO Make 200
 
             #region STAR
             
