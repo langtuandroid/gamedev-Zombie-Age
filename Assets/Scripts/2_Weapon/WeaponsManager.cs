@@ -2,6 +2,7 @@
 using MANAGERS;
 using MODULES.Scriptobjectable;
 using SCREENS;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -69,9 +70,7 @@ namespace _2_Weapon
             }
 
         }
-
-
-        //MAIN PANEL WEAPON
+        
         [System.Serializable]
         public class WeaponPanel
         {
@@ -84,28 +83,26 @@ namespace _2_Weapon
             [FormerlySerializedAs("m_ScrollRect")] [SerializeField] private ScrollRect _scrollRect;
             [FormerlySerializedAs("objPrefab")] [SerializeField] private GameObject _weaponPrefab;
             [FormerlySerializedAs("GROUP_CONTAIN")] [SerializeField] private Transform _groupContain;
-            [FormerlySerializedAs("LIST_TRACK")] [SerializeField] private List<Weapon> _trackWeapons;
-            
+            private List<Weapon> _trackWeapons;
             
             [Space(30)]
             private Weapon _currentTrack;
-            [FormerlySerializedAs("buUpgrade")] [SerializeField] private Button _upgradeButton;
-            [FormerlySerializedAs("buBuyAmmo")] [SerializeField] private Button _ammoBuyButton;
-            [FormerlySerializedAs("buUnlockNow")] [SerializeField] private Button _unlockButton;
-            [FormerlySerializedAs("txtUnlocked")] [SerializeField] private Text _unlockedText;
-            [FormerlySerializedAs("txtWeaponName")] [SerializeField] private Text _weaponNameText;
-            [FormerlySerializedAs("txtAmmo")] [SerializeField] private Text _ammoText;
-            [FormerlySerializedAs("txtPriceToUpgrade")] [SerializeField] private Text _upgradeCostText;
-            [FormerlySerializedAs("txtPriceToBuyAmmo")] [SerializeField] private Text _ammoPriceText;
-            [FormerlySerializedAs("txtPriceToUnlock")] [SerializeField] private Text _unlockPriceText;
-            [FormerlySerializedAs("imaWeaponIcon")] [SerializeField] private Image _weaponImage;
-
+            [SerializeField] private Button _upgradeButton;
+            [SerializeField] private Button _ammoBuyButton;
+            [SerializeField] private Button _unlockButton;
+            [SerializeField] private TMP_Text _unlockedText;
+            [SerializeField] private TMP_Text _weaponNameText;
+            [SerializeField] private TMP_Text _ammoText;
+            [SerializeField] private TMP_Text _upgradeCostText;
+            [SerializeField] private TMP_Text _ammoPriceText;
+            [SerializeField] private TMP_Text _unlockPriceText;
+            [SerializeField] private Image _weaponImage;
             
             [Space(20)]
-            [FormerlySerializedAs("imaBarOfDamage")][SerializeField] private Image _damageBar;
-            [FormerlySerializedAs("imaBarOfDamage_NextLevel")] [SerializeField] private Image _damageBarNextLvl;
-            [FormerlySerializedAs("imaBarOfFireRate")] [SerializeField] private Image _fireBar;
-            [FormerlySerializedAs("imaLevelOfWeapon")] [SerializeField] private Image _levelOfWeaponImage;
+            [SerializeField] private Image _damageBar;
+            [SerializeField] private Image _damageBarNextLvl;
+            [SerializeField] private Image _fireBar;
+            [SerializeField] private LevelBar _levelBar;
 
             public void Construct()
             {
@@ -199,7 +196,7 @@ namespace _2_Weapon
 
 
                 _fireBar.fillAmount = (1.0f / _currentTrack.GunData.fTimeloadOrBullet) / 80f;
-                _levelOfWeaponImage.sprite = WeaponsManager.Instance._listStarSpriteForWeaponLevel[(int)_currentTrack.GunData.DATA.eLevel];
+                _levelBar.SetLevel((int)_currentTrack.GunData.DATA.eLevel);
 
                 _upgradeCostText.text = _currentTrack.GunData.GetPriceToUpgrade(_currentTrack.GunData.DATA.eLevel).ToString();
                 _ammoPriceText.text = _currentTrack.GunData.iPriceToBuyAmmo.ToString();
@@ -390,8 +387,6 @@ namespace _2_Weapon
             }
         }
 
-        
-        //MAIN PANEL DEFENSE
         [System.Serializable]
         public class DefencePanel
         {
@@ -403,27 +398,24 @@ namespace _2_Weapon
             [Inject] private DiContainer _diContainer;
             [FormerlySerializedAs("objPrefab")] [SerializeField] private GameObject _defencePrefab;
             [FormerlySerializedAs("GROUP_CONTAIN")] [SerializeField] private Transform _groupContain;
-            [FormerlySerializedAs("LIST_TRACK")] [SerializeField] private List<Defense> _trackList;
+            private List<Defense> _trackList;
             
             [Space(30)]
             private Defense _currentTrack;
             [FormerlySerializedAs("buUpgrade")] [SerializeField] private Button _upgradeButton;
             [FormerlySerializedAs("buFix")] [SerializeField] private Button _fixButton;
             [FormerlySerializedAs("buUnlockNow")] [SerializeField] private Button _unlockButton;
-            [FormerlySerializedAs("txtWeaponName")] [SerializeField] private Text _nameText;
-            [FormerlySerializedAs("txtPriceToUpgrade")] [SerializeField] private Text _upgradePriceText;
-            [FormerlySerializedAs("txtUnlockState")] [SerializeField] private Text _unlockStateText;
-            [FormerlySerializedAs("txtPriteToUnlock")] [SerializeField] private Text _priceToUnlockPrice;
+            [FormerlySerializedAs("txtWeaponName")] [SerializeField] private TMP_Text _nameText;
+            [FormerlySerializedAs("txtPriceToUpgrade")] [SerializeField] private TMP_Text _upgradePriceText;
+            [FormerlySerializedAs("txtUnlockState")] [SerializeField] private TMP_Text _unlockStateText;
+            [FormerlySerializedAs("txtPriteToUnlock")] [SerializeField] private TMP_Text _priceToUnlockPrice;
             [FormerlySerializedAs("imaWeaponIcon")] [SerializeField] private Image _icon;
-
             
-            [Space(20)]
-            [FormerlySerializedAs("imaBarOfDefense")][SerializeField] private Image _defenceBar;
-            [FormerlySerializedAs("imaBarOfDefenseNextLevel")] [SerializeField] private Image _nextLevelBar;
-            [FormerlySerializedAs("imaLevelOfDefense")] [SerializeField] private Image _defenceLevelImage;
-
-
-            //INIT
+            [Space(20)] 
+            [SerializeField] private Image _defenceBar;
+            [SerializeField] private Image _nextLevelBar;
+            [SerializeField] private LevelBar _defenceLevel;
+            
             public void Construct()
             {
                 int length = _weaponController._defenceList.Count;
@@ -502,7 +494,7 @@ namespace _2_Weapon
 
 
 
-                _defenceLevelImage.sprite = WeaponsManager.Instance._listStarSpriteForWeaponLevel[(int)_currentTrack.DefenseData.DATA.eLevel];
+                _defenceLevel.SetLevel((int)_currentTrack.DefenseData.DATA.eLevel);
                 _upgradePriceText.text = _currentTrack.DefenseData.GetPriceToUpgrade(_currentTrack.DefenseData.DATA.eLevel).ToString();
                 _priceToUnlockPrice.text = _currentTrack.DefenseData.iPriteToUnlock.ToString();
                 ButtonStates(_currentTrack);
@@ -608,8 +600,6 @@ namespace _2_Weapon
             }
         }
 
-
-        //MAIN PANEL: SUPPORT
         [System.Serializable]
         public class SupportPanel
         {
@@ -623,10 +613,10 @@ namespace _2_Weapon
             [FormerlySerializedAs("buBuy")] [SerializeField] private Button _buyButton;
             [FormerlySerializedAs("buUpgrade")] [SerializeField] private Button _upgradeButton;
 
-            [FormerlySerializedAs("txtName")] [SerializeField] private Text _nameText;
-            [FormerlySerializedAs("txtValue")] [SerializeField] private Text _valueText;
-            [FormerlySerializedAs("txtContent")] [SerializeField] private Text _contentText;
-            [FormerlySerializedAs("txtPriceToBuy")] [SerializeField] private Text _priceText;
+            [SerializeField] private TMP_Text _nameText;
+            [SerializeField] private TMP_Text _valueText;
+            [SerializeField] private TMP_Text _contentText;
+            [SerializeField] private TMP_Text _priceText;
             [FormerlySerializedAs("imaMainIcon")] [SerializeField] private Image _iconImage;
 
             public void Construct()
@@ -741,7 +731,6 @@ namespace _2_Weapon
             }
         }
 
-        //WEAPON EQUIPED CLASS
         [System.Serializable]
         public class WeaponPicked
         {
@@ -840,8 +829,6 @@ namespace _2_Weapon
             }
         }
 
-
-        //WEAPON EQUIPED CLASS
         [System.Serializable]
         public class DefencePicked
         {
@@ -936,13 +923,8 @@ namespace _2_Weapon
 
             }
         }
-
-
-
+        
         //==============================================================================================//
-         
-        
-        
         
         [Space(30)]
         [FormerlySerializedAs("LIST_PANEL_MANAGER")] [SerializeField] private List<PanelManager> _listPanelManager;

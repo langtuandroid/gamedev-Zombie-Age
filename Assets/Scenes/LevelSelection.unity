@@ -3600,6 +3600,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stars
       objectReference: {fileID: 0}
+    - target: {fileID: 8167788038403878009, guid: 92aa24ed01e1eb243a7b2e2cc4a3610c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3556858439051097292, guid: 92aa24ed01e1eb243a7b2e2cc4a3610c, type: 3}
     m_RemovedGameObjects: []

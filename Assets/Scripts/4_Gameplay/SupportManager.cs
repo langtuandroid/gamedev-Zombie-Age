@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using MANAGERS;
 using MODULES.Scriptobjectable;
 using MODULES.Soldiers;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -28,15 +29,15 @@ namespace _4_Gameplay
                 [Inject] private SupportManager _supportManager;
                 [Inject] private GameplayController _gameplayController;
                 [FormerlySerializedAs("eSupport")] [SerializeField] private EnumController.SUPPORT _supportType;
-                [FormerlySerializedAs("DATA")] [SerializeField] private SupportData _data;
                 [FormerlySerializedAs("buUse")] [SerializeField] private Button _useButton;
-                private Text _valueText;
-               
+                private TMP_Text _valueText;
+                private SupportData _data;
+                
                 public EnumController.SUPPORT SupportType => _supportType;
                 public void Construct()
                 {
                     _data = WeaponController.Instance.Support(_supportType);
-                    _valueText = _useButton.GetComponentInChildren<Text>();
+                    _valueText = _useButton.GetComponentInChildren<TMP_Text>();
                     SetStatus();
                 }
 

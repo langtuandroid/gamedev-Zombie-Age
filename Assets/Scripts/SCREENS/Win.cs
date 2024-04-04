@@ -23,7 +23,6 @@ namespace SCREENS
         [Space(20)]
         [FormerlySerializedAs("m_tranOfRay")][SerializeField] Transform _rayTransform;
         private Vector3 _euler;
-        private bool _showRate;
 
         private void Start()
         {
@@ -43,26 +42,7 @@ namespace SCREENS
 
             _musicController.Play();
             _soundController.Play(SoundController.SOUND.ui_click_next);//sound         
-             
-            #region RATE
-            if (_dataController.playerData.CurrentLevel > 0
-                && (_dataController.playerData.CurrentLevel + 1) % 4 == 0)
-            {
-                if (!_showRate)
-                {
-                    _showRate = true;
-                    _uiController.PopUpShow(UIController.POP_UP.rate);
-                    return;
-                }
-                else
-                {
-                    goto HERE;
-                }
-            }
-            #endregion
-
-            HERE:
-                
+            
             _uiController.LoadScene(UIController.SCENE.LevelSelection);
         }
 
@@ -148,15 +128,10 @@ namespace SCREENS
             _soundController.Play(SoundController.SOUND.ui_wood_board);//sound
             _uiController.PopUpShow(UIController.POP_UP.reward);
             WinReward.LoadRevardReward(_reward);
-
-
-        
-
         }
 
         private void OnEnable()
         {
-            _showRate = false;
             _soundController.Play(SoundController.SOUND.ui_wood_board);//sound
             _musicController.Stop();
             _soundController.Play(SoundController.SOUND.ui_victory);//sound

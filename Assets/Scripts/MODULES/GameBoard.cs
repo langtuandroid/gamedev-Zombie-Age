@@ -47,7 +47,7 @@ namespace MODULES
             switch (_boardType)
             {
                 case TYPE.gem:
-                    _uiController.PopUpShow(UIController.POP_UP.shop);//
+                    //_uiController.PopUpShow(UIController.POP_UP.shop);//
                     break;
 
             }

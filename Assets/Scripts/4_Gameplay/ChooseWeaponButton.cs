@@ -1,6 +1,7 @@
 ﻿using MANAGERS;
 using MODULES.Scriptobjectable;
 using MODULES.Soldiers;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -12,12 +13,11 @@ namespace _4_Gameplay
     {
         [Inject] private SoundController _soundController;
         [Inject] private WeaponController _weaponController;
-        
-        [FormerlySerializedAs("GUN_DATA")] [SerializeField] private GunData _gunData;
+        private GunData _gunData;
         [FormerlySerializedAs("iIndexOfWeapon")] [SerializeField] private int _weaponIndex;
         private Transform _transform;
         private Button _chooseButton;
-        private Text _ammoText;
+        private TMP_Text _ammoText;
         private Image _image;
         
         private void Start()
@@ -32,7 +32,7 @@ namespace _4_Gameplay
             _chooseButton = GetComponent<Button>();
             _chooseButton.onClick.AddListener(() => Take());
 
-            _ammoText = transform.GetChild(1).GetComponent<Text>();
+            _ammoText = transform.GetChild(1).GetComponent<TMP_Text>();
             _image = transform.GetChild(0).GetComponent<Image>();
 
             if (!_gunData.DATA.bIsDefaultGun)

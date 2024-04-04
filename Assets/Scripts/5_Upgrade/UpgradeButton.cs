@@ -1,5 +1,6 @@
 ﻿using MANAGERS;
 using MODULES.Scriptobjectable;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -13,15 +14,12 @@ namespace _5_Upgrade
         [Inject] private UpgradeController _upgradeController;
         [Inject] private UpgradeManager _upgradeManager;
         [FormerlySerializedAs("eUpgrade")] public EnumController.UpgradeType _upgradeType;
-        private Button _thisButton;
-
-       
+        
         [Space(20)]
-        [FormerlySerializedAs("DATA")] [SerializeField] private UpgradeData _data;
-        [FormerlySerializedAs("imaStar")] [SerializeField] private Image _starImage;
-        [FormerlySerializedAs("txtValue")] [SerializeField] private Text _valueText;
-
-
+        [SerializeField] private Image _starImage;
+        [SerializeField] private TMP_Text _valueText;
+        private UpgradeData _data;
+        private Button _thisButton;
         private void Start()
         {
             _thisButton = this.GetComponent<Button>();

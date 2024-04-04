@@ -3,6 +3,7 @@ using MODULES;
 using MODULES.Scriptobjectable;
 using MODULES.Soldiers;
 using MODULES.Zombies;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -92,16 +93,15 @@ namespace _4_Gameplay
         [FormerlySerializedAs("eInputType")] [SerializeField] private INPUT_TYPE _inputType;
 
         [Space(30)]
-        [FormerlySerializedAs("buPause")] [SerializeField] private Button _pauseButton;
-        [FormerlySerializedAs("buResetGun")] [SerializeField] private Button _resetGunButton; 
-        [FormerlySerializedAs("buCallSupport")] [SerializeField] private Button _callSupportButton;
+        [SerializeField] private Button _pauseButton;
+        [SerializeField] private Button _resetGunButton; 
+        [SerializeField] private Button _callSupportButton;
         [FormerlySerializedAs("PANEL_SUPPORT")] [SerializeField] private GameObject _supportPanel;
         [FormerlySerializedAs("PANEL_WEAPON")] [SerializeField] private GameObject _weaponPanel;
         
         [Space(20)]
-        [FormerlySerializedAs("txtWave")] [SerializeField] private Text _waveText;
-        [FormerlySerializedAs("txtTestMode")] [SerializeField] private Text _testModeText;
-        [FormerlySerializedAs("txtHp")] [SerializeField] private Text _hpText;
+        [SerializeField] private TMP_Text _waveText;
+        [SerializeField] private TMP_Text _hpText;
         
         [Space(20)]
         [FormerlySerializedAs("imaHpBar")][SerializeField] private Image _hpBar;
@@ -134,10 +134,6 @@ namespace _4_Gameplay
 
             _bossHpBar.Construct();
             _zombieWaveBar.Construct();
-
-
-            if (_dataController.mode == DataController.Mode.Release)
-                _testModeText.gameObject.SetActive(false);
         }
 
 

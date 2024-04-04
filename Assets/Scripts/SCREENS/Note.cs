@@ -52,7 +52,7 @@ namespace SCREENS
 
                 if (_note.Equals(NOTE.no_gem.ToString()))
                 {
-                    _uiController.PopUpShow(UIController.POP_UP.shop);
+                    //_uiController.PopUpShow(UIController.POP_UP.shop);
                 }
                 else if (_note.Equals(NOTE.reset_game.ToString()))
                 {

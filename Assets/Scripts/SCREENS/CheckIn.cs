@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using MANAGERS;
 using MODULES.Scriptobjectable;
 using UnityEngine;
@@ -39,9 +40,13 @@ namespace SCREENS
 
         private void OnEnable()
         {
-            _currentDay = _dataController.playerData._day;
             iCurrentPage = (int)(_currentDay / 4.0f);
             ShowTrack(iCurrentPage);
+        }
+
+        private void Start()
+        {
+            _currentDay = _dataController.playerData._day;
         }
 
 

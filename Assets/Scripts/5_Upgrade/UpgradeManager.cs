@@ -1,7 +1,9 @@
 ﻿using MANAGERS;
 using MODULES.Scriptobjectable;
 using SCREENS;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Zenject;
 
@@ -23,52 +25,53 @@ namespace _5_Upgrade
             [Inject] private UpgradeController _upgradeController;
             [Inject] private UIController _uiController;
             [Inject] private UpgradeManager _upgradeManager;
-            [SerializeField] UpgradeData DATA;
-            [SerializeField] UpgradeButton m_ButtonUpgrade;
             
-            [SerializeField] Image imaIcon;
-            [SerializeField] Image imaStar;
-
+            private UpgradeData _data;
+            private UpgradeButton _upgradeButton;
+            
+            [SerializeField] private Image imaIcon;
+            [SerializeField] private Image imaStar;
+            
             [Space(20)]
-            [SerializeField] Text txtValueStar;
-            [SerializeField] Text txtName;
-            [SerializeField] Text txtContent;
+            [SerializeField] private TMP_Text _starValue;
+            [SerializeField] private TMP_Text _nameText;
+            [SerializeField] private TMP_Text _contentText;
 
-            [SerializeField] Button buReset;
-            [SerializeField] Button buUpgrade;
+            [SerializeField] private Button _resetButton;
+            [SerializeField] private Button _upgradeB;
             
             public void Show(UpgradeButton _ButtonUpgrade)
             {
-                m_ButtonUpgrade = _ButtonUpgrade;
+                _upgradeButton = _ButtonUpgrade;
 
-                buReset.onClick.RemoveAllListeners();
-                buUpgrade.onClick.RemoveAllListeners();
+                _resetButton.onClick.RemoveAllListeners();
+                _upgradeB.onClick.RemoveAllListeners();
 
-                DATA = _upgradeController.GetUpgrade(m_ButtonUpgrade._upgradeType);
-                buReset.onClick.AddListener(() => SetButton(buReset));
-                buUpgrade.onClick.AddListener(() => SetButton(buUpgrade));
+                _data = _upgradeController.GetUpgrade(_upgradeButton._upgradeType);
+                _resetButton.onClick.AddListener(() => SetButton(_resetButton));
+                _upgradeB.onClick.AddListener(() => SetButton(_upgradeB));
 
 
 
-                txtValueStar.text = DATA.iStar.ToString();
-                txtName.text = DATA.strName;
-                txtContent.text = DATA.strContent;
+                _starValue.text = _data.iStar.ToString();
+                _nameText.text = _data.strName;
+                _contentText.text = _data.strContent;
 
                 imaStar.sprite = _upgradeManager.sprStar;
                 
-                if (DATA.bEQUIPED)
+                if (_data.bEQUIPED)
                 {
-                    imaIcon.sprite = DATA.sprIcon;
-                    buUpgrade.image.color = Color.gray;
-                    buReset.image.color = Color.white;
+                    imaIcon.sprite = _data.sprIcon;
+                    _upgradeB.image.color = Color.gray;
+                    _resetButton.image.color = Color.white;
 
 
                 }
                 else
                 {
-                    imaIcon.sprite = DATA.sprIcon_gray;
-                    buUpgrade.image.color = Color.white;
-                    buReset.image.color = Color.gray;
+                    imaIcon.sprite = _data.sprIcon_gray;
+                    _upgradeB.image.color = Color.white;
+                    _resetButton.image.color = Color.gray;
                 }
 
 
@@ -77,14 +80,14 @@ namespace _5_Upgrade
 
             private void SetButton(Button _bu)
             {
-                if (_bu == buReset)
+                if (_bu == _resetButton)
                 {
-                    if (DATA.bEQUIPED)
+                    if (_data.bEQUIPED)
                     {
                         _soundController.Play(SoundController.SOUND.ui_click_next);//s
-                        DATA.Remove();
-                        Show(m_ButtonUpgrade);
-                        m_ButtonUpgrade.Construct();
+                        _data.Remove();
+                        Show(_upgradeButton);
+                        _upgradeButton.Construct();
                         _upgradeManager.UpdateTextStar();
 
                         _dataController.SaveData();//save
@@ -92,9 +95,9 @@ namespace _5_Upgrade
                     else
                         _soundController.Play(SoundController.SOUND.ui_cannot);//s
                 }
-                else if (_bu == buUpgrade)
+                else if (_bu == _upgradeB)
                 {
-                    if (!DATA.bEQUIPED)
+                    if (!_data.bEQUIPED)
                     {
                         int _star = 0;
 
@@ -104,7 +107,7 @@ namespace _5_Upgrade
 
                         if (_dataController.mode == DataController.Mode.Release)
                         {
-                            if (_star < DATA.iStar)
+                            if (_star < _data.iStar)
                             {
                                 _soundController.Play(SoundController.SOUND.ui_cannot);//sound
                                 _uiController.PopUpShow(UIController.POP_UP.note);
@@ -114,9 +117,9 @@ namespace _5_Upgrade
                         }
 
                         _soundController.Play(SoundController.SOUND.ui_click_next);//s
-                        DATA.Upgrade();
-                        Show(m_ButtonUpgrade);
-                        m_ButtonUpgrade.Construct();
+                        _data.Upgrade();
+                        Show(_upgradeButton);
+                        _upgradeButton.Construct();
                         _upgradeManager.UpdateTextStar();
 
                         _dataController.SaveData();//save
@@ -128,17 +131,9 @@ namespace _5_Upgrade
         }
         
         public BoardInfo m_BoardInfo;
-
-        [SerializeField] Button buBack;
-
-        [Space(20)]  
-        [SerializeField] Text txtStar_Yellow;
-
-
-        [Space(20)]
+        [SerializeField] private Button _backButton;
+        [SerializeField] private TMP_Text _starsText;
         public Sprite sprStar;
-
-        [Space(20)]
         public Transform tranOfYellowCirle;
 
 
@@ -150,14 +145,14 @@ namespace _5_Upgrade
 
         private void Start()
         {
-            buBack.onClick.AddListener(() => SetButton(buBack));
+            _backButton.onClick.AddListener(() => SetButton(_backButton));
             UpdateTextStar();
         }
 
 
         private void SetButton(Button bu)
         {
-            if (bu == buBack)
+            if (bu == _backButton)
             {
                 _soundController.Play(SoundController.SOUND.ui_click_next);//sound
                 _uiController.LoadScene(UIController.SCENE.LevelSelection);
@@ -166,7 +161,7 @@ namespace _5_Upgrade
         
         private void UpdateTextStar()
         {
-            txtStar_Yellow.text = _upgradeController.GetTotalStarEquied()
+            _starsText.text = _upgradeController.GetTotalStarEquied()
                                   + "/" + _dataController.playerData.GetAllStars();
 
         }

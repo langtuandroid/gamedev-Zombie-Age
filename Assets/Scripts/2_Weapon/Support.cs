@@ -1,5 +1,6 @@
 ﻿using MANAGERS;
 using MODULES.Scriptobjectable;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -13,14 +14,11 @@ namespace _2_Weapon
         [Inject] private SoundController _soundController;
         [Inject] private WeaponsManager _weaponsManager;
         [Inject] private TutorialController _tutorialController;
-        
         [FormerlySerializedAs("eSupport")] [SerializeField] private EnumController.SUPPORT _eSupport;
-        [FormerlySerializedAs("SUPPORT_DATA")] [SerializeField] private SupportData _supportData;
-
-        [FormerlySerializedAs("txtName")] [SerializeField] private Text _nameText;
-        [FormerlySerializedAs("txtCurrentValue")] [SerializeField] private Text _valueText;
+        [SerializeField] private TMP_Text _nameText;
+        [SerializeField] private TMP_Text _valueText;
         private Button _thisButton;
-
+        private SupportData _supportData;
         public SupportData SupportData => _supportData;
         void Awake()
         {

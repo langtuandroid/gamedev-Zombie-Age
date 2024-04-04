@@ -333,7 +333,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1010151964
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3175,18 +3175,10 @@ MonoBehaviour:
     _popUpObject: {fileID: 5982127341714142747}
   - _popUpType: 2
     _popUpObject: {fileID: 5982127340413772240}
-  - _popUpType: 3
-    _popUpObject: {fileID: 0}
-  - _popUpType: 4
-    _popUpObject: {fileID: 0}
   - _popUpType: 5
     _popUpObject: {fileID: 1107003842}
   - _popUpType: 6
     _popUpObject: {fileID: 891201638}
-  - _popUpType: 7
-    _popUpObject: {fileID: 0}
-  - _popUpType: 8
-    _popUpObject: {fileID: 0}
   - _popUpType: 9
     _popUpObject: {fileID: 8567771605569295681}
   - _popUpType: 10

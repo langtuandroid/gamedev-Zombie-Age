@@ -1,6 +1,7 @@
 ﻿using MANAGERS;
 using MODULES.Scriptobjectable;
 using SCREENS;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -17,20 +18,15 @@ namespace _2_Weapon
         [Inject] private WeaponsManager _weaponsManager;
         [Inject] private TutorialController _tutorialController;
         
-        [FormerlySerializedAs("GUN_DATA")] [SerializeField] private GunData _gunData;
+        private GunData _gunData;
         [FormerlySerializedAs("buThis")] [SerializeField] private Button _thisButton;
         [FormerlySerializedAs("buEquip")] [SerializeField] private Button _equipButton;
         [FormerlySerializedAs("sprButtonGray")] [SerializeField] private Sprite _grayButtonSprite;
         [FormerlySerializedAs("sprButtonEquiped")] [SerializeField] private Sprite _equpedButtonSprite;
-
+        [SerializeField] private TMP_Text _name;
+        [SerializeField] private Image imaIcon, imaLock;
         public GunData GunData => _gunData;
-
-        [SerializeField]
-        private Text txtName;
-
-        [SerializeField]
-        private Image imaIcon, imaLock;
-
+        
         private void Start()
         {
             _thisButton.onClick.AddListener(() => ButtonSet(_thisButton));
@@ -41,7 +37,7 @@ namespace _2_Weapon
         {
             this._gunData = _gunData;
             this._gunData.CheckUnlockWithLevel();
-            txtName.text = this._gunData.strNAME;
+            _name.text = this._gunData.strNAME;
             _equipButton.image.sprite = _grayButtonSprite;
             
             if (_gunData.bUNLOCKED) 
