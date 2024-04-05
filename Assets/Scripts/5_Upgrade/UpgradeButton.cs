@@ -59,7 +59,7 @@ namespace _5_Upgrade
         {
             _soundController.Play(SoundController.SOUND.ui_click_next);
             _upgradeManager.m_BoardInfo.Show(this);
-            _upgradeManager.tranOfYellowCirle.position = transform.position;
+            
         }
     }
 }

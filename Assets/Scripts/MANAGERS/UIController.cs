@@ -104,7 +104,11 @@ namespace MANAGERS
         {
             for (int i = 0; i < _totalPopUps; i++)
             {
-                if (_popUpList[i]._popUpType != POP_UP.loading && _popUpList[i]._popUpObject.activeInHierarchy) return true;
+                if (_popUpList[i]._popUpType != POP_UP.loading && _popUpList[i]._popUpObject.activeInHierarchy)
+                {
+                    Debug.Log(_popUpList[i]._popUpObject);
+                    return true;
+                }
             }
             return false;
         }

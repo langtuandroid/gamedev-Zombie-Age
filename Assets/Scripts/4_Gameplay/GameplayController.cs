@@ -194,13 +194,13 @@ namespace _4_Gameplay
                 case GAME_STATUS.victory:
 
                     Debug.Log("VICTORY");
-                    EventController.OnGameWinInvoke(); //event firebase
+                    EventController.OnGameWinInvoke();
                     _uiController.PopUpShow(UIController.POP_UP.victory, 1.5f);
                     break;
                 case GAME_STATUS.gameover:
 
                     Debug.Log("GAME OVER");
-                    EventController.OnGameoverInvoke(); //event firebase
+                    EventController.OnGameoverInvoke();
                     _uiController.PopUpShow(UIController.POP_UP.gameover, 1.0f);
                     break;
             }
@@ -301,8 +301,9 @@ namespace _4_Gameplay
         
         private void HandleResumeGame(UIController.POP_UP _popup)
         {
+            Debug.Log(20);
             if (_uiController.IsShowing()) return;
-
+            Debug.Log(10);
             Time.timeScale = 1;
             SetStatusOfGame(GAME_STATUS.resume);
 

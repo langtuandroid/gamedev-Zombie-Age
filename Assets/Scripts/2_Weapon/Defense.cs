@@ -1,6 +1,7 @@
 ﻿using MANAGERS;
 using MODULES.Scriptobjectable;
 using SCREENS;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -15,19 +16,15 @@ namespace _2_Weapon
         [Inject] private DataController _dataController;
         [Inject] private WeaponsManager _weaponsManager;
         [Inject] private TutorialController _tutorialController;
-        
-        [FormerlySerializedAs("DEFENSE_DATA")] [SerializeField] private DefenseData _defenseData;
         [FormerlySerializedAs("imaIcon")] [SerializeField] private Image _iconImage;
-        [FormerlySerializedAs("txtName")] [SerializeField] private Text _nameText;
-        [FormerlySerializedAs("buEquip")] [SerializeField] private Button _equiepButton;
+        [SerializeField] private TMP_Text _nameText;
+       
         [FormerlySerializedAs("buThis")] [SerializeField] private Button _thisButton;
+        [SerializeField] private Button _equiepButton;
         [FormerlySerializedAs("imaLock")] [SerializeField] private GameObject _lockImage;
-        [FormerlySerializedAs("sprButtonGray")] [SerializeField] Sprite _grayButtonSprote;
-        [FormerlySerializedAs("sprButtonEquiped")] [SerializeField] Sprite _equipedSprite;
-
+        [SerializeField] private GameObject _equpedButton;
         public DefenseData DefenseData => _defenseData;
-        
-
+        private DefenseData _defenseData;
         private void Start()
         {
             _equiepButton.onClick.AddListener(() => ButtonAssign(_equiepButton));
@@ -50,12 +47,13 @@ namespace _2_Weapon
             else if (button == _equiepButton)
             {
                 _weaponsManager.defencePanel.ViewTrack(this);
-                //equiped
+                
                 if (!_defenseData.DATA.bEquiped)
                 {
                     _defenseData.DATA.bEquiped = true;
                     _soundController.Play(SoundController.SOUND.ui_equiped);//sound
-                    _equiepButton.image.sprite = _equipedSprite;
+                    _equiepButton.gameObject.SetActive(false);
+                    _equpedButton.SetActive(true);
                     _weaponsManager.defencePicked.AddTakenDefense(_defenseData);
                 }
                 else
@@ -69,35 +67,32 @@ namespace _2_Weapon
         public void Construct(DefenseData defenseData)
         {
             if (defenseData == null) return;
-            this._defenseData = defenseData;
-            this._defenseData.CheckUnlockWithLevel();
+            _defenseData = defenseData;
+            _defenseData.CheckUnlockWithLevel();
 
 
-            _nameText.text = this._defenseData.strName;
-            _iconImage.sprite = this._defenseData.sprIcon;
-            //UNLOCK
-            if (this._defenseData.bUNLOCKED)
+            _nameText.text = _defenseData.strName;
+            _iconImage.sprite = _defenseData.sprIcon;
+            
+            _equpedButton.SetActive(false);
+            if (_defenseData.bUNLOCKED)
             {
                 _lockImage.SetActive(false);
                 _equiepButton.gameObject.SetActive(true);
-                _equiepButton.image.sprite = _grayButtonSprote;
             }
             else
             {
                 _lockImage.SetActive(true);
                 _equiepButton.gameObject.SetActive(false);
             }
-
-            //EQUIPED
-            if (this._defenseData.DATA.bEquiped)
+            
+            if (_defenseData.DATA.bEquiped)
             {
-                _equiepButton.image.sprite = _equipedSprite;
+                _equiepButton.gameObject.SetActive(false);
+                _equpedButton.SetActive(true);
             }
-
-
         }
 
-        //UNLOCK NOW
         public void Unlock()
         {
             int _price = _defenseData.iPriteToUnlock;

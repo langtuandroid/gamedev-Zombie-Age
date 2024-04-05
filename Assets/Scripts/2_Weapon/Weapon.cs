@@ -21,10 +21,10 @@ namespace _2_Weapon
         private GunData _gunData;
         [FormerlySerializedAs("buThis")] [SerializeField] private Button _thisButton;
         [FormerlySerializedAs("buEquip")] [SerializeField] private Button _equipButton;
-        [FormerlySerializedAs("sprButtonGray")] [SerializeField] private Sprite _grayButtonSprite;
-        [FormerlySerializedAs("sprButtonEquiped")] [SerializeField] private Sprite _equpedButtonSprite;
+        [SerializeField] private GameObject _equpedButton;
+        [SerializeField] private GameObject _lockIcon;
         [SerializeField] private TMP_Text _name;
-        [SerializeField] private Image imaIcon, imaLock;
+        [SerializeField] private Image imaIcon;
         public GunData GunData => _gunData;
         
         private void Start()
@@ -38,25 +38,25 @@ namespace _2_Weapon
             this._gunData = _gunData;
             this._gunData.CheckUnlockWithLevel();
             _name.text = this._gunData.strNAME;
-            _equipButton.image.sprite = _grayButtonSprite;
             
+            _equipButton.gameObject.SetActive(true);
+            _equpedButton.gameObject.SetActive(false);
+            
+            _lockIcon.SetActive(!_gunData.bUNLOCKED);
             if (_gunData.bUNLOCKED) 
             {
-                imaLock.color = Color.white * 0.0f;
                 imaIcon.sprite = this._gunData.sprIcon;
-                _equipButton.gameObject.SetActive(true);
-                _equipButton.image.sprite = _grayButtonSprite;
             }
             else
             {
-                imaLock.color = Color.white;
                 imaIcon.sprite = this._gunData.sprIcon_gray;
                 _equipButton.gameObject.SetActive(false);
             }
             
             if (this._gunData.DATA.bEquiped)
             {
-                _equipButton.image.sprite = _equpedButtonSprite;
+                _equipButton.gameObject.SetActive(false);
+                _equpedButton.gameObject.SetActive(true);
             }
 
         }

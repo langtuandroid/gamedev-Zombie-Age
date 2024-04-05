@@ -43,7 +43,7 @@ namespace _5_Upgrade
             public void Show(UpgradeButton _ButtonUpgrade)
             {
                 _upgradeButton = _ButtonUpgrade;
-
+                _upgradeManager.tranOfYellowCirle.position = _upgradeButton.transform.position;
                 _resetButton.onClick.RemoveAllListeners();
                 _upgradeB.onClick.RemoveAllListeners();
 
@@ -64,8 +64,6 @@ namespace _5_Upgrade
                     imaIcon.sprite = _data.sprIcon;
                     _upgradeB.image.color = Color.gray;
                     _resetButton.image.color = Color.white;
-
-
                 }
                 else
                 {

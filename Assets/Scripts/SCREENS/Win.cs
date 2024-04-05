@@ -26,7 +26,7 @@ namespace SCREENS
 
         private void Start()
         {
-            _continueButton.onClick.AddListener(() => SetButton(_continueButton));
+            
         }
 
         private void Update()
@@ -123,7 +123,8 @@ namespace SCREENS
 
             yield return new WaitForSecondsRealtime(1.2f);
             _continueButton.image.color = Color.white;
-
+            _continueButton.onClick.AddListener(() => SetButton(_continueButton));
+            
             _soundController.Play(SoundController.SOUND.ui_wood_board);//sound
             _uiController.PopUpShow(UIController.POP_UP.reward);
             WinReward.LoadRevardReward(_reward);

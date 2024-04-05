@@ -3175,15 +3175,15 @@ MonoBehaviour:
     _popUpObject: {fileID: 5982127341714142747}
   - _popUpType: 2
     _popUpObject: {fileID: 5982127340413772240}
-  - _popUpType: 5
+  - _popUpType: 3
     _popUpObject: {fileID: 1107003842}
-  - _popUpType: 6
+  - _popUpType: 4
     _popUpObject: {fileID: 891201638}
-  - _popUpType: 9
+  - _popUpType: 5
     _popUpObject: {fileID: 8567771605569295681}
-  - _popUpType: 10
+  - _popUpType: 6
     _popUpObject: {fileID: 1689041913}
-  - _popUpType: 11
+  - _popUpType: 7
     _popUpObject: {fileID: 1010151963}
   _cuurentScene: 0
 --- !u!1 &7047624084326255145

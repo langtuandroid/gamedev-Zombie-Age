@@ -60,9 +60,7 @@ namespace MODULES.Zombies
             _gameobject = gameObject;
 
             _itemsSystem = new ItemsSystem(this);
-            _diContainer.Inject(_itemsSystem);
-            _weaponController = WeaponController.Instance;
-            SoundController = SoundController.Instance;
+            
         }
         
         protected virtual void Construct()
@@ -73,7 +71,7 @@ namespace MODULES.Zombies
 
         public void Constuct(Vector2 _startingPos, bool _specialStatus = false)
         {
-
+            _diContainer.Inject(_itemsSystem);
             int _randSound = Random.Range(0, 100);
             if (_randSound < 50) SoundController.ZombieGruzz();//sound
 
