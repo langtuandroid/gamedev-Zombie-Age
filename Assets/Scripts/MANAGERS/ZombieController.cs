@@ -59,9 +59,8 @@ namespace MANAGERS
                         return _zombiesList[i];
                     }
                 }
-
-                //---add more
-                GameObject _zombie = Instantiate(_zombiePrefab, new Vector2(100, 100), Quaternion.identity);
+                
+                GameObject _zombie = _diContainer.InstantiatePrefab(_zombiePrefab, new Vector2(100, 100), Quaternion.identity, null);
                 _zombie.SetActive(false);
                 _zombiesList.Add(_zombie.GetComponent<Zombie>());
                 _zombieNum++;
