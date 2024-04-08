@@ -170,7 +170,7 @@ namespace MODULES
             if (_gameplayController.GameStatus != GameplayController.GAME_STATUS.playing) yield break;
 
             CurrentWave++;
-            if (CurrentWave == _levelData.iTotalWave)
+            if (CurrentWave == _levelData.iTotalWave) 
             {
                 _gameplayController.SetStatusOfGame(GameplayController.GAME_STATUS.victory);
             }
@@ -203,11 +203,11 @@ namespace MODULES
                         if (j == 2
                             && _levelData.prefabBoss != null
                             && !IsBossComming
-                            && _wave == _waveList[_waveList.Count - 1])//WAVE CUOI CUNG
+                            && _wave == _waveList[_waveList.Count - 1])
                         {
                             IsBossComming = true;
                             _zombieController._zombiesInWave++;
-                            GameObject _boss = Instantiate(_levelData.prefabBoss, _tempPos, Quaternion.identity);//boss
+                            GameObject _boss = _diContainer.InstantiatePrefab(_levelData.prefabBoss, _tempPos, Quaternion.identity, null);
                             Zombie _Boss = _boss.GetComponent<Zombie>();
                             ZombieHealth zombieHealth = new ZombieHealth(_Boss);
                             _Boss.Constuct(_tempPos);

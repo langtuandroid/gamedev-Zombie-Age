@@ -96,33 +96,33 @@ namespace MODULES.Zombies
                 case EnumController.ZOMBIE.boss_frog:
                 {
                     if (IsFreezing) goto RESET;
-                    Instantiate(_bulletPrefab, _originalBulletPos.position, Quaternion.identity);
+                    _diContainer.InstantiatePrefab(_bulletPrefab, _originalBulletPos.position, Quaternion.identity, null);
 
                     yield return _shootCooldown;
                     if (IsFreezing) goto RESET;
-                    Instantiate(_bulletPrefab, _originalBulletPos.position, Quaternion.identity);
+                    _diContainer.InstantiatePrefab(_bulletPrefab, _originalBulletPos.position, Quaternion.identity, null);
 
                     yield return _shootCooldown;
                     if (IsFreezing) goto RESET;
-                    Instantiate(_bulletPrefab, _originalBulletPos.position, Quaternion.identity);
+                    _diContainer.InstantiatePrefab(_bulletPrefab, _originalBulletPos.position, Quaternion.identity, null);
                     break;
                 }
                 case EnumController.ZOMBIE.boss_mug:
                 {
                     // yield return _waitToShot;
                     if (IsFreezing) goto RESET;
-                    Instantiate(_bulletPrefab, _originalBulletPos.position, Quaternion.identity);
+                    _diContainer.InstantiatePrefab(_bulletPrefab, _originalBulletPos.position, Quaternion.identity, null);
 
                     yield return _shootCooldown;
                     if (IsFreezing) goto RESET;
-                    Instantiate(_bulletPrefab, _originalBulletPos.position, Quaternion.identity);
+                    _diContainer.InstantiatePrefab(_bulletPrefab, _originalBulletPos.position, Quaternion.identity, null);
                     break;
                 }
                 case EnumController.ZOMBIE.boss_soldier:
                 {
                     //yield return _waitToShot;
                     if (IsFreezing) goto RESET;
-                    Instantiate(_bulletPrefab, _originalBulletPos.position, Quaternion.identity);
+                    _diContainer.InstantiatePrefab(_bulletPrefab, _originalBulletPos.position, Quaternion.identity, null);
                     break;
                 }
             }

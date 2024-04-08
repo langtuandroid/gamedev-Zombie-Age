@@ -30,16 +30,7 @@ namespace _3_LevelSelection
             [SerializeField] Transform m_tranOfButtonChoose;
             [SerializeField] private Image[] _starsImages;
             [SerializeField] private Sprite _starComplitedSprite;
-            
-            /*
-            [Space(30)]
-            [SerializeField] Sprite sprButton_Easy;
-            [SerializeField] Sprite sprButton_Normal;
-            [SerializeField] Sprite sprButton_Normal_lock;
-
-            [SerializeField] Sprite sprButton_Nightmare;
-            [SerializeField] Sprite sprButton_Nightmare_lock;
-            */
+            [SerializeField] private Sprite _starEmptySprite;
 
             [Space(20)]
             [SerializeField]
@@ -75,6 +66,11 @@ namespace _3_LevelSelection
                 int _level = _dataController.playerData.CurrentLevel;
                 iCurrentStar = _dataController.playerData.NumOfStars(_level);
 
+                for (int i = 0; i < 3; i++)
+                {
+                    _starsImages[i].sprite = _starEmptySprite;
+                }
+                
                 StateOfDifficuftButton();
                 if (iCurrentStar == 2 || iCurrentStar == 3)
                 {

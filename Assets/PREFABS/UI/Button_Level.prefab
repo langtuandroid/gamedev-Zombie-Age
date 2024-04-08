@@ -294,6 +294,7 @@ MonoBehaviour:
   - {fileID: 4894417633994284750}
   _starComplitedSprite: {fileID: 21300000, guid: faa39cb17ac27e242951033642bbdb63,
     type: 3}
+  _emptyStar: {fileID: 21300000, guid: e926eb8bc07fdf7449f8230a91d2126d, type: 3}
   _lockedImage: {fileID: 541875108853956282}
   _levelText: {fileID: 1945313809362823543}
 --- !u!1 &8023750918296708299

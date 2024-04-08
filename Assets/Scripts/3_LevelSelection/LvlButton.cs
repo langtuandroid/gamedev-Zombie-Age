@@ -10,6 +10,7 @@ namespace _3_LevelSelection
     {
         [SerializeField] private Image[] _starsImages;
         [SerializeField] private Sprite _starComplitedSprite;
+        [SerializeField] private Sprite _emptyStar;
         [SerializeField] private GameObject _lockedImage;
         [SerializeField] private TMP_Text _levelText;
         [Inject] private SoundController _soundController;
@@ -56,6 +57,10 @@ namespace _3_LevelSelection
 
         public void Consruct(int lvl)
         {
+            for (int i = 0; i < 3; i++)
+            {
+                _starsImages[i].sprite = _emptyStar;
+            }
             _iLevel = lvl;
             
             if (_iLevel + 1 > _dataController.LevelsTotal)

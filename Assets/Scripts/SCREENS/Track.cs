@@ -41,7 +41,7 @@ namespace SCREENS
                 buGetReward.transform.localScale = Vector3.one * 0.98f;
             }
 
-            txtDay.text = "Day " + (iDay + 1);
+            txtDay.text = "HOUR " + (iDay + 1);
             txtValue.text = "+" + m_reward.iValue;
             imaIcon.sprite = m_reward.sprIcon;
         }

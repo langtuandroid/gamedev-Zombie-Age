@@ -5056,6 +5056,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Button_Continue
       objectReference: {fileID: 0}
+    - target: {fileID: 7662255472697469712, guid: 4c0f1ce3ea1eae84bbd4fe450ae8a203,
+        type: 3}
+      propertyPath: m_Colors.m_DisabledColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662255472697469712, guid: 4c0f1ce3ea1eae84bbd4fe450ae8a203,
+        type: 3}
+      propertyPath: m_Colors.m_DisabledColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662255472697469712, guid: 4c0f1ce3ea1eae84bbd4fe450ae8a203,
+        type: 3}
+      propertyPath: m_Colors.m_DisabledColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662255472697469712, guid: 4c0f1ce3ea1eae84bbd4fe450ae8a203,
+        type: 3}
+      propertyPath: m_Colors.m_DisabledColor.r
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7167,12 +7187,12 @@ PrefabInstance:
     - target: {fileID: 86847861744646500, guid: cb9daf1b37e70a748afc80d0aa14777f,
         type: 3}
       propertyPath: m_text
-      value: GAMEOVER
+      value: GAME OVER
       objectReference: {fileID: 0}
     - target: {fileID: 86847861744646500, guid: cb9daf1b37e70a748afc80d0aa14777f,
         type: 3}
       propertyPath: m_fontSize
-      value: 83.05
+      value: 79.9
       objectReference: {fileID: 0}
     - target: {fileID: 1202594171398470822, guid: cb9daf1b37e70a748afc80d0aa14777f,
         type: 3}

@@ -12,7 +12,7 @@ namespace MODULES.Zombies
 {
     public class Zombie : MonoBehaviour
     {
-        [Inject] private DiContainer _diContainer;    
+        [Inject] protected DiContainer _diContainer;    
         [Inject] private WeaponController _weaponController;
         [Inject] protected SoundController SoundController;
         [Inject] private GameplayController _gameplayController;
@@ -71,6 +71,8 @@ namespace MODULES.Zombies
 
         public void Constuct(Vector2 _startingPos, bool _specialStatus = false)
         {
+            Debug.LogWarning(_diContainer);
+            Debug.LogWarning(_itemsSystem);
             _diContainer.Inject(_itemsSystem);
             int _randSound = Random.Range(0, 100);
             if (_randSound < 50) SoundController.ZombieGruzz();//sound
@@ -146,7 +148,7 @@ namespace MODULES.Zombies
                     if (_zombieData.bIsBoss)
                     {
                         Animator.speed = 0.0f;
-                        Instantiate(_objectPoolController._bigBloodPrefab, _transformCenter.position, Quaternion.identity);//eff blood    
+                        _diContainer.InstantiatePrefab(_objectPoolController._bigBloodPrefab, _transformCenter.position, Quaternion.identity, null);//eff blood    
                         ActivateBoss(_gameobject, false, 3.0f);
                         return;
                     }

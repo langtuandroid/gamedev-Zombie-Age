@@ -26,7 +26,7 @@ namespace SCREENS
 
         private void Start()
         {
-            
+            _continueButton.onClick.AddListener(() => SetButton(_continueButton));
         }
 
         private void Update()
@@ -51,6 +51,7 @@ namespace SCREENS
         private IEnumerator WinRoutine()
         {
             _continueButton.image.color = Color.gray;
+            _continueButton.interactable = false;
             int _star = _dataController.GetStars();//get star
             int _level = _dataController.playerData.CurrentLevel;
             _levelText.text = "LEVEL " + (_level + 1).ToString();
@@ -66,9 +67,7 @@ namespace SCREENS
             _starList[0].sprite = _starEmpty;
             _starList[1].sprite = _starEmpty;
             _starList[2].sprite = _starEmpty;
-
-
-
+            
             if (_dataController.playerData.Difficuft == EnumController.DIFFICUFT.easy)
             {          
                 _reward = _dataController.GetReward(EnumController.REWARD.victory_gem_easy);//
@@ -81,8 +80,11 @@ namespace SCREENS
             {         
                 _reward = _dataController.GetReward(EnumController.REWARD.victory_gem_nightmate);//
             }
-
-
+            
+            Debug.Log(_dataController.GetReward(EnumController.REWARD.victory_gem_easy));
+            Debug.Log(_dataController.playerData.Difficuft);
+            Debug.Log(_reward);
+            
             yield return new WaitForSecondsRealtime(1.0f);
             switch (_star)
             {
@@ -123,7 +125,7 @@ namespace SCREENS
 
             yield return new WaitForSecondsRealtime(1.2f);
             _continueButton.image.color = Color.white;
-            _continueButton.onClick.AddListener(() => SetButton(_continueButton));
+            _continueButton.interactable = true;
             
             _soundController.Play(SoundController.SOUND.ui_wood_board);//sound
             _uiController.PopUpShow(UIController.POP_UP.reward);

@@ -111,9 +111,7 @@ namespace MANAGERS
                 return false;
             }
             #endregion
-
-             
-
+            
             #region UNLOCK GUN           
             [FormerlySerializedAs("LIST_WEAPON")] public List<GunData.WeData> _weaponList = new ();
             public GunData.WeData TakeWeapon(EnumController.WEAPON _weapon)
@@ -128,10 +126,7 @@ namespace MANAGERS
             }
 
             #endregion
-
-
-
-
+            
             #region DEFENSE
             [FormerlySerializedAs("LIST_DEFENSE")] public List<DefenseData.DeData> _defenseList = new ();
             public DefenseData.DeData TakeDefense(EnumController.DEFENSE _defense)
@@ -145,10 +140,7 @@ namespace MANAGERS
                 return null;
             }
             #endregion
-
-
-
-
+            
             #region UPGRADE
             [FormerlySerializedAs("LIST_UPGRADE")] public List<UpgradeData.Updata> _upgradeList = new ();
             public UpgradeData.Updata TakeUpgarde(EnumController.UpgradeType _upgrade)
@@ -162,9 +154,7 @@ namespace MANAGERS
                 return null;
             }
             #endregion
-
-
-
+            
             #region SUPPORT
             [FormerlySerializedAs("LIST_SUPPORT")] public List<SupportData.SuData> _supportList = new ();
             public SupportData.SuData TakeSupport(EnumController.SUPPORT _support)
@@ -184,8 +174,9 @@ namespace MANAGERS
             #region CHECK IN
 
             [FormerlySerializedAs("iCurrentDay")] public int _day = -1;
+            public int _checkHour;
             [FormerlySerializedAs("iCheckInDay")] public int _checkDay;
-            [FormerlySerializedAs("iCheckInMonth")] public int checkDay;
+            [FormerlySerializedAs("iCheckInMonth")] public int _checkInMonth;
             [FormerlySerializedAs("iCheckInYear")] public int checkYear;
 
             public bool CheckInReady()
@@ -195,17 +186,19 @@ namespace MANAGERS
                 if (ThisYear() > checkYear)
                 {
                     _day++;
+                    _checkHour = ThisHour();
                     _checkDay = ThisDay();
-                    checkDay = ThisMonth();
+                    _checkInMonth = ThisMonth();
                     checkYear = ThisYear();
                     return true;
                 }
 
-                if (ThisMonth() > checkDay)
+                if (ThisMonth() > _checkInMonth)
                 {
                     _day++;
+                    _checkHour = ThisHour();
                     _checkDay = ThisDay();
-                    checkDay = ThisMonth();
+                    _checkInMonth = ThisMonth();
                     checkYear = ThisYear();
                     return true;
                 }
@@ -213,17 +206,31 @@ namespace MANAGERS
                 if (ThisDay() > _checkDay)
                 {
                     _day++;
+                    _checkHour = ThisHour();
                     _checkDay = ThisDay();
-                    checkDay = ThisMonth();
+                    _checkInMonth = ThisMonth();
+                    checkYear = ThisYear();
+                    return true;
+                }
+                
+                if (ThisHour() > _checkHour)
+                {
+                    _day++;
+                    _checkHour = ThisHour();
+                    _checkDay = ThisDay();
+                    _checkInMonth = ThisMonth();
                     checkYear = ThisYear();
                     return true;
                 }
 
-
                 return false;
             }
 
-
+            private int ThisHour()
+            {
+                System.DateTime _today = System.DateTime.Today;
+                return _today.Hour;
+            }
             private int ThisDay()
             {
                 System.DateTime _today = System.DateTime.Today;
@@ -306,14 +313,6 @@ namespace MANAGERS
 
             _weaponController.Construct();
             _upgradeController.Construct();
-
-
-            if (playerData.GetAllStars() == 0)
-            {
-                //Instantiate(_tutorialSystemPrefab, new Vector3(0, 0, -2.0f), Quaternion.identity);//TUTORIAL SYSTEM  
-            }
-                
-
         }
 
         

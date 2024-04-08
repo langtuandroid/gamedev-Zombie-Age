@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eb2f0b00e4716b4bb647ff260f60f64, type: 3}
   m_Name: CheckIn_day_22_gem
   m_EditorClassIdentifier: 
-  eReward: 41
-  sprIcon: {fileID: 2831623268682530260, guid: 18b605eebed2d954ab3ae314b9026f0c, type: 3}
+  eReward: 0
+  sprIcon: {fileID: 21300000, guid: a595a507ea9efc54f850d371177141e7, type: 3}
   iValue: 450
   strContent: Get +450 gems now!

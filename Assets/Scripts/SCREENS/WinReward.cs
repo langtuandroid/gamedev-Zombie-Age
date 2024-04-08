@@ -71,7 +71,7 @@ namespace SCREENS
                 || _reward.eReward == EnumController.REWARD.victory_gem_normal
                 || _reward.eReward == EnumController.REWARD.victory_gem_nightmate)
             {
-                Instance._revard.strContent = "Get +" + _reward.GetVictoryGem() + " gems now! ";
+                Instance._revard.strContent = "Get +" + _reward.GetVictoryGem() + " Gems now! ";
             }
             else
             {

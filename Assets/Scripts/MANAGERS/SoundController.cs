@@ -120,7 +120,7 @@ namespace MANAGERS
         
         private bool MuteDataSaved()
         {
-            if (PlayerPrefs.GetString("Sound") == "off")
+            if (PlayerPrefs.GetString("Sound") == "off") 
                 return transform;
             else return false;
         }
