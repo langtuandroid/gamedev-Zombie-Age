@@ -57,6 +57,7 @@ namespace _3_LevelSelection
 
         public void Consruct(int lvl)
         {
+            LockButton();
             for (int i = 0; i < 3; i++)
             {
                 _starsImages[i].sprite = _emptyStar;
@@ -93,11 +94,6 @@ namespace _3_LevelSelection
                         {
                             UnlockButton();
                         }
-                        else
-                        {
-                            UnlockButton(); //TODO Remove Test only
-                        }
-
                     }
 
                 }
@@ -109,6 +105,13 @@ namespace _3_LevelSelection
             Unlock = true;
             _levelText.gameObject.SetActive(true);
             _lockedImage.SetActive(false);
+        }
+
+        private void LockButton()
+        {
+            Unlock = false;
+            _levelText.gameObject.SetActive(false);
+            _lockedImage.SetActive(true);
         }
     }
 }

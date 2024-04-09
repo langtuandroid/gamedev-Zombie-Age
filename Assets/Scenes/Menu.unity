@@ -975,7 +975,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48d9572616798c641a2101f39c3ffee3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadingTime: 1
+  _loadingTime: 3
   _renderImage: {fileID: 365424009}
   _gameLogo: {fileID: 1242377885}
   _loadingPopUp: {fileID: 1793260709}

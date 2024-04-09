@@ -71,8 +71,6 @@ namespace MODULES.Zombies
 
         public void Constuct(Vector2 _startingPos, bool _specialStatus = false)
         {
-            Debug.LogWarning(_diContainer);
-            Debug.LogWarning(_itemsSystem);
             _diContainer.Inject(_itemsSystem);
             int _randSound = Random.Range(0, 100);
             if (_randSound < 50) SoundController.ZombieGruzz();//sound
