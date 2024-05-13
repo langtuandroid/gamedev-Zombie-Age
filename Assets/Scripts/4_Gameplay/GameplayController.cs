@@ -1,4 +1,6 @@
-﻿using MANAGERS;
+﻿using GoogleMobileAds.Api;
+using Integration;
+using MANAGERS;
 using MODULES;
 using MODULES.Scriptobjectable;
 using MODULES.Soldiers;
@@ -13,11 +15,15 @@ namespace _4_Gameplay
 {
     public class GameplayController : MonoBehaviour
     {
+        [Inject] private BannerViewController _bannerViewController;
+        [Inject] private AdMobController _adMobController;
+        [Inject] private IAPService _iapService;
         [Inject] private UIController _uiController;
         [Inject] private SoundController _soundController;
         [Inject] private MusicController _musicController;
         [Inject] private DataController _dataController;
         [Inject] private TutorialController _tutorialController;
+        public static int _loadNum;
         public enum INPUT_TYPE
         {
             shooting,
@@ -139,6 +145,20 @@ namespace _4_Gameplay
 
         private void Start()
         {
+            _loadNum++;
+            _bannerViewController.ChangePosition(AdPosition.Bottom);
+            if ((_loadNum + 1) % 2 == 0)
+            {
+                _adMobController.ShowBanner(true);
+                _adMobController.ShowInterstitialAd();
+                
+            }
+            if (_loadNum % 2 == 0)
+            {
+                _iapService.ShowSubscriptionPanel();
+            }
+           
+            _bannerViewController.ChangePosition(AdPosition.Bottom);
             LoadGame(_dataController.playerData.CurrentLevel + 1);//load level
 
             _lastWaveObject.SetActive(false);
@@ -192,13 +212,13 @@ namespace _4_Gameplay
 
                     break;
                 case GAME_STATUS.victory:
-
+                    _bannerViewController.ChangePosition(AdPosition.Top);
                     Debug.Log("VICTORY");
                     EventController.OnGameWinInvoke();
                     _uiController.PopUpShow(UIController.POP_UP.victory, 1.5f);
                     break;
                 case GAME_STATUS.gameover:
-
+                    _bannerViewController.ChangePosition(AdPosition.Top);
                     Debug.Log("GAME OVER");
                     EventController.OnGameoverInvoke();
                     _uiController.PopUpShow(UIController.POP_UP.gameover, 1.0f);

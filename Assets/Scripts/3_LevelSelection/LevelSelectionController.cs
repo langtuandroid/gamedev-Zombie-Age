@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using GoogleMobileAds.Api;
+using Integration;
 using MANAGERS;
 using SCREENS;
 using TMPro;
@@ -12,6 +14,8 @@ namespace _3_LevelSelection
 {
     public class LevelSelectionController : MonoBehaviour
     {
+        [Inject] private BannerViewController _bannerViewController;
+        [Inject] private AdMobController _adMobController;
         [Inject] private UIController _uiController;
         [Inject] private SoundController _soundController;
         [Inject] private DiContainer _diContainer;
@@ -204,6 +208,7 @@ namespace _3_LevelSelection
         [FormerlySerializedAs("buMapBack")] [SerializeField] private Button _backMapButton;
         [FormerlySerializedAs("buSetting")] [SerializeField] private Button _settingsButton;
         [FormerlySerializedAs("buUpgrade")] [SerializeField] private Button _upgradeButton;
+        [SerializeField] private Button _gemButtons;
         
         [Space(20)]
         [FormerlySerializedAs("txtCountMap")] [SerializeField] private TMP_Text _countMapText;
@@ -234,12 +239,15 @@ namespace _3_LevelSelection
         
         private void Start()
         {
+            _adMobController.ShowBanner(true);
+            _bannerViewController.ChangePosition(AdPosition.Top);
+            
             _mapNextButton.onClick.AddListener(() => AssignButtons(_mapNextButton));
             _backMapButton.onClick.AddListener(() => AssignButtons(_backMapButton));
 
             _settingsButton.onClick.AddListener(() => AssignButtons(_settingsButton));
             _upgradeButton.onClick.AddListener(() => AssignButtons(_upgradeButton));
-
+            _gemButtons.onClick.AddListener((() => AssignButtons(_gemButtons)));
 
 
             iTotalLevelButton = _levelButtonGroup.childCount;
@@ -295,6 +303,11 @@ namespace _3_LevelSelection
             {
                 _soundController.Play(SoundController.SOUND.ui_click_next);
                 _uiController.LoadScene(UIController.SCENE.Upgrade);
+            }
+            else if(button == _gemButtons)
+            {
+                _soundController.Play(SoundController.SOUND.ui_click_next);
+                _uiController.PopUpShow(UIController.POP_UP.gems);
             }
         }
         

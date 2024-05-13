@@ -21,6 +21,7 @@ namespace MANAGERS
             loading,
             reward,
             check_in,
+            gems
         }
 
 

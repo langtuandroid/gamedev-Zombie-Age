@@ -173,7 +173,7 @@ namespace MANAGERS
 
             #region CHECK IN
 
-            [FormerlySerializedAs("iCurrentDay")] public int _day = -1;
+            [FormerlySerializedAs("_day")] [FormerlySerializedAs("iCurrentDay")] public int _hour = -1;
             public int _checkHour;
             [FormerlySerializedAs("iCheckInDay")] public int _checkDay;
             [FormerlySerializedAs("iCheckInMonth")] public int _checkInMonth;
@@ -181,11 +181,11 @@ namespace MANAGERS
 
             public bool CheckInReady()
             {
-                if (_day > Instance._revardList.Count) return false;
+                if (_hour > Instance._revardList.Count) return false;
 
                 if (ThisYear() > checkYear)
                 {
-                    _day++;
+                    _hour++;
                     _checkHour = ThisHour();
                     _checkDay = ThisDay();
                     _checkInMonth = ThisMonth();
@@ -195,7 +195,7 @@ namespace MANAGERS
 
                 if (ThisMonth() > _checkInMonth)
                 {
-                    _day++;
+                    _hour++;
                     _checkHour = ThisHour();
                     _checkDay = ThisDay();
                     _checkInMonth = ThisMonth();
@@ -205,7 +205,7 @@ namespace MANAGERS
 
                 if (ThisDay() > _checkDay)
                 {
-                    _day++;
+                    _hour++;
                     _checkHour = ThisHour();
                     _checkDay = ThisDay();
                     _checkInMonth = ThisMonth();
@@ -215,15 +215,14 @@ namespace MANAGERS
                 
                 if (ThisHour() > _checkHour)
                 {
-                    _day++;
+                    _hour++;
                     _checkHour = ThisHour();
                     _checkDay = ThisDay();
                     _checkInMonth = ThisMonth();
                     checkYear = ThisYear();
                     return true;
                 }
-
-                return false;
+                return false; 
             }
 
             private int ThisHour()

@@ -26,9 +26,10 @@ namespace SCREENS
         private int iTotalReward;
         private int iMaxPage;
         private int iCurrentPage;
-        public int _currentDay { get; private set; }
+        public int _currentHour { get; private set; }
         private void Awake()
         {
+            _currentHour = _dataController.playerData._hour;
             iTotalTrack = LIST_TRACK.Count;
             iTotalReward = LIST_REWARD.Count;
             iMaxPage = iTotalReward / 4;
@@ -40,15 +41,10 @@ namespace SCREENS
 
         private void OnEnable()
         {
-            iCurrentPage = (int)(_currentDay / 4.0f);
+            iCurrentPage = (int)(_currentHour / 4.0f);
             ShowTrack(iCurrentPage);
         }
-
-        private void Start()
-        {
-            _currentDay = _dataController.playerData._day;
-        }
-
+        
 
         private void Update()
         {

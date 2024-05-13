@@ -1,4 +1,6 @@
-﻿using MANAGERS;
+﻿using GoogleMobileAds.Api;
+using Integration;
+using MANAGERS;
 using MODULES.Scriptobjectable;
 using SCREENS;
 using TMPro;
@@ -11,6 +13,8 @@ namespace _5_Upgrade
 {
     public class UpgradeManager : MonoBehaviour
     {
+        [Inject] private BannerViewController _bannerViewController;
+        [Inject] private AdMobController _adMobController;
         [Inject] private SoundController _soundController;
         [Inject] private UpgradeController _upgradeController;
         [Inject] private DiContainer _diContainer;
@@ -130,6 +134,7 @@ namespace _5_Upgrade
         
         public BoardInfo m_BoardInfo;
         [SerializeField] private Button _backButton;
+        
         [SerializeField] private TMP_Text _starsText;
         public Sprite sprStar;
         public Transform tranOfYellowCirle;
@@ -139,11 +144,14 @@ namespace _5_Upgrade
         private void Awake()
         {
             _diContainer.Inject(m_BoardInfo);
+            _adMobController.ShowBanner(true);
+            _bannerViewController.ChangePosition(AdPosition.Top);
         }
 
         private void Start()
         {
             _backButton.onClick.AddListener(() => SetButton(_backButton));
+            
             UpdateTextStar();
         }
 
@@ -155,6 +163,7 @@ namespace _5_Upgrade
                 _soundController.Play(SoundController.SOUND.ui_click_next);//sound
                 _uiController.LoadScene(UIController.SCENE.LevelSelection);
             }
+            
         }
         
         private void UpdateTextStar()

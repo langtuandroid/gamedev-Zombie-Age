@@ -193,7 +193,7 @@ namespace MANAGERS
             }
             else if (_popup == UIController.POP_UP.check_in)
             {
-                if (_dataController.playerData._day == 0)
+                if (_dataController.playerData._hour == 0)
                 {
                     SkipStep();
                     GetTutorial(TUTORIAL.check_in).Next();

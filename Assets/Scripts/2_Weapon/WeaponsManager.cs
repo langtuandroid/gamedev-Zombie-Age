@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Integration;
 using MANAGERS;
 using MODULES.Scriptobjectable;
 using SCREENS;
@@ -12,6 +13,7 @@ namespace _2_Weapon
 {
     public class WeaponsManager : MonoBehaviour
     {
+        [Inject] private AdMobController _adMobController;
         [Inject] private UIController _uiController;
         [Inject] private SoundController _soundController;
         [Inject] private DiContainer _diContainer;
@@ -963,6 +965,7 @@ namespace _2_Weapon
         [Space(30)]
         [FormerlySerializedAs("buBack")][SerializeField] private Button _backButton;
         [FormerlySerializedAs("buStart")] [SerializeField] private Button _startButton;
+        [SerializeField] private Button _gemButtons;
         [FormerlySerializedAs("LIST_STAR_SPRITE_FOR_WEAPON_LEVEL")] [SerializeField] private List<Sprite> _listStarSpriteForWeaponLevel;
 
 
@@ -976,12 +979,13 @@ namespace _2_Weapon
 
         private void Start()
         {
-
+            _adMobController.ShowBanner(false);
             Construct();
 
             _backButton.onClick.AddListener(() => ButtonInit(_backButton));
             _startButton.onClick.AddListener(() => ButtonInit(_startButton));
-
+            _gemButtons.onClick.AddListener((() => ButtonInit(_gemButtons)));
+            
             _diContainer.Inject(_weaponPanel);
             _diContainer.Inject(_defencePanel);
             _diContainer.Inject(_supportPanel);
@@ -1012,6 +1016,11 @@ namespace _2_Weapon
                 _soundController.Play(SoundController.SOUND.ui_click_next);//sound
                 _soundController.Play(SoundController.SOUND.sfx_zombie_gruzz_boss);
                 _uiController.LoadScene(UIController.SCENE.Gameplay);
+            }
+            else if(button == _gemButtons)
+            {
+                _soundController.Play(SoundController.SOUND.ui_click_next);
+                _uiController.PopUpShow(UIController.POP_UP.gems);
             }
         }
 
